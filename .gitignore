@@ -194,6 +194,12 @@ $RECYCLE.BIN/
 
 *.py[co]
 
+Debug
+x86
+WindowsDX
+obj
+packages
+
 # Packages
 *.egg
 *.egg-info
@@ -220,45 +226,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-
-JoyResources/
-
-#HS Joystick Control ################################
-
-HSJoyStick/DSJoyStickExample.Windows/obj/
-HSJoyStick/DSJoyStickExample.Windows/bin/
-HSJoyStick/DSJoyStickExample.WP8/obj/
-HSJoyStick/DSJoyStickExample.WP8/bin/
-
-#Ripple control #######################################
-
-Ripple/RippleExample.Windows/obj/
-Ripple/RippleExample.Windows/bin/
-
-#AppWarp - Multiplayer #######################################
-
-AppWarp/AppWarpExample.Android/HelloM4A/bin/
-AppWarp/AppWarpExample.Android/HelloM4A/obj/
-#AppWarp/AppWarpExample.iPhone/HelloWorld_iPhone/
-#AppWarp/AppWarpExample.iPhone/HelloWorld_iPhone/
-AppWarp/AppWarpExample.Windows/bin/
-AppWarp/AppWarpExample.Windows/obj/
-AppWarp/AppWarpExample.WP8/
-
-#CCTextBox control #######################################
-CCTextBox/old/
-CCTextBox/TextBoxLayerExample.Windows/bin/
-CCTextBox/TextBoxLayerExample.Windows/obj/
-CCTextBox/TextBoxLayerExample.WP8/bin/
-CCTextBox/TextBoxLayerExample.WP8/obj/
-CCTextBox/SourceIOS/
-
-#SneakyJoy control #######################################
-
-SneakyJoystick/SneakyJoystickExample.Windows/obj/
-SneakyJoystick/SneakyJoystickExample.Windows/bin/
-SneakyJoystick/SneakyJoystickExample.WP8/obj/
-SneakyJoystick/SneakyJoystickExample.WP8/bin/
 
 
 
