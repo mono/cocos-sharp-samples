@@ -25,7 +25,7 @@ namespace SneakyJoystickExample.Common
         public IntroLayer()
         {
 
-            winSize = CCDirector.SharedDirector.WinSize;
+            winSize = Director.WindowSizeInPixels;
 
             InitializeJoyPanel();
 
@@ -58,7 +58,8 @@ namespace SneakyJoystickExample.Common
         public void InitializeJoyPanel()
         {
 
-            JoyPanel = new SneakyPanelControl(this);
+            JoyPanel = new SneakyPanelControl();
+
             JoyPanel.StartMovement += () =>
             {
                 IsWalking = true;
@@ -74,6 +75,10 @@ namespace SneakyJoystickExample.Common
                 CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
             };
 
+            JoyPanel.IsDebug = true;
+
+            AddChild(JoyPanel);
+
         }
 
         public override void Update(float dt)
@@ -83,17 +88,17 @@ namespace SneakyJoystickExample.Common
 
             if (JoyPanel != null)
             {
-                JoyPanel.Update(dt);
+                bear.Position = JoyPanel.GetPlayerPosition(bear, dt);
 
                 if (JoyPanel.HasAnyDirection)
                 {
                     bear.FlipX = (JoyPanel.JoyControl.IsRight);
                 }
 
-                if (IsWalking && bear.NumberOfRunningActions() == 0)
+                if (IsWalking && bear.NumberOfRunningActions == 0)
                     bear.RunAction(action);
 
-                if (!IsWalking && bear.NumberOfRunningActions() > 0)
+                if (!IsWalking && bear.NumberOfRunningActions > 0)
                     bear.StopAllActions();
 
 

@@ -135,10 +135,6 @@ namespace CocosSharp.IO.SneakyJoystick
         public SneakyJoystickControl(CCRect rect)
         {
 
-            IsDebug = false;
-
-            //TouchEnabled = true;
-
             Degrees = 0.0f;
             Velocity = CCPoint.Zero;
             AutoCenter = true;
@@ -161,15 +157,6 @@ namespace CocosSharp.IO.SneakyJoystick
             StickPosition = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
 
             Center = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2); ;
-
-            var listener1 = new CCEventListenerTouchAllAtOnce();
-            //listener1.IsSwallowTouches = true;
-            listener1.OnTouchesBegan = JoyTouchesBegan;
-            listener1.OnTouchesMoved = JoyTouchesMoved;
-            listener1.OnTouchesCancelled = JoyTouchesCancelled;
-            listener1.OnTouchesEnded = JoyTouchesEnded;
-
-            EventDispatcher.AddEventListener(listener1, this);
 
         }
 
@@ -220,14 +207,14 @@ namespace CocosSharp.IO.SneakyJoystick
 
         }
 
-        void JoyTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
+        public virtual void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
 
             //base.TouchesBegan(touches, touchEvent);
 
             CCTouch touch = touches.First();
 
-            CCPoint location = CCDirector.SharedDirector.ConvertToGl(touch.LocationInView);
+            CCPoint location = Director.ConvertToGl(touch.LocationInView);
 
             //if([background containsPoint:[background convertToNodeSpace:location]]){
             location = ConvertToNodeSpace(location);
@@ -255,7 +242,7 @@ namespace CocosSharp.IO.SneakyJoystick
 
         }
 
-        void JoyTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
+        public virtual void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
             //base.TouchesMoved(touches, touchEvent);
 
@@ -264,7 +251,7 @@ namespace CocosSharp.IO.SneakyJoystick
 
             CCTouch touch = touches.First();
 
-            CCPoint location = CCDirector.SharedDirector.ConvertToGl(touch.LocationInView);
+            CCPoint location = Director.ConvertToGl(touch.LocationInView);
             location = ConvertToNodeSpace(location);
 
             //Check direction
@@ -284,14 +271,14 @@ namespace CocosSharp.IO.SneakyJoystick
 
         }
 
-        void JoyTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
+        public virtual void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
         {
             //base.TouchesCancelled(touches, touchEvent);
 
-            JoyTouchesEnded(touches, touchEvent);
+            OnTouchesEnded(touches, touchEvent);
         }
 
-        void JoyTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+        public virtual void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             //base.TouchesEnded(touches, touchEvent);
 
@@ -307,7 +294,7 @@ namespace CocosSharp.IO.SneakyJoystick
             CCPoint location = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
             if (!AutoCenter)
             {
-                location = CCDirector.SharedDirector.ConvertToGl(touch.LocationInView);
+                location = Director.ConvertToGl(touch.LocationInView);
                 location = ConvertToNodeSpace(location);
             }
 
@@ -330,43 +317,21 @@ namespace CocosSharp.IO.SneakyJoystick
 
         public CCPoint GetNextPositionFromImage(CCNode node, float dt)
         {
-            return GetPositionFromVelocity(Velocity, node, dt);
+            return GetPositionFromVelocity(Velocity, node, dt, Director.WindowSizeInPixels);
         }
 
         public void RefreshImagePosition(CCNode node, float dt)
         {
             if (node != null)
-                node.Position = GetPositionFromVelocity(Velocity, node, dt);
+                node.Position = GetPositionFromVelocity(Velocity, node, dt, Director.WindowSizeInPixels);
         }
 
-        protected override void Draw()
-        {
-            base.Draw();
-
-            if (!IsDebug)
-                return;
-
-            CCRect rect = new CCRect(0, 0, ContentSize.Width, ContentSize.Height);
-
-            CCPoint[] vertices = new CCPoint[] {
-        new CCPoint(rect.Origin.X,rect.Origin.Y),
-        new CCPoint(rect.Origin.X+rect.Size.Width,rect.Origin.Y),
-        new CCPoint(rect.Origin.X+rect.Size.Width,rect.Origin.Y+rect.Size.Height),
-        new CCPoint(rect.Origin.X,rect.Origin.Y+rect.Size.Height),
-    };
-
-            CCDrawingPrimitives.Begin();
-            CCDrawingPrimitives.DrawCircle(AnchorPointInPoints, 10, 0, 8, true, CCColor4B.Blue);
-            CCDrawingPrimitives.DrawSolidPoly(vertices, 4, CCColor4B.Red, true);
-            CCDrawingPrimitives.End();
-
-        }
 
         #region Static methods
 
-        public static CCPoint GetPositionFromVelocity(CCPoint velocity, CCNode node, float dt)
+        public static CCPoint GetPositionFromVelocity(CCPoint velocity, CCNode node, float dt, CCSize winSize)
         {
-            return GetPositionFromVelocity(velocity, node.Position, node.ContentSize, CCDirector.SharedDirector.WinSize, dt);
+            return GetPositionFromVelocity(velocity, node.Position, node.ContentSize, winSize, dt);
         }
 
         public static CCPoint GetPositionFromVelocity(CCPoint velocity, CCPoint actualPosition, CCSize size, CCSize winSize, float dt)
@@ -402,6 +367,29 @@ namespace CocosSharp.IO.SneakyJoystick
 
         }
 
+
+        protected override void Draw()
+        {
+            base.Draw();
+
+            if (!IsDebug)
+                return;
+
+            CCRect rect = new CCRect(0, 0, ContentSize.Width, ContentSize.Height);
+
+            CCPoint[] vertices = new CCPoint[] {
+        new CCPoint(rect.Origin.X,rect.Origin.Y),
+        new CCPoint(rect.Origin.X+rect.Size.Width,rect.Origin.Y),
+        new CCPoint(rect.Origin.X+rect.Size.Width,rect.Origin.Y+rect.Size.Height),
+        new CCPoint(rect.Origin.X,rect.Origin.Y+rect.Size.Height),
+    };
+
+            CCDrawingPrimitives.Begin();
+            CCDrawingPrimitives.DrawCircle(AnchorPointInPoints, 10, 0, 8, true, CCColor4B.Blue);
+            CCDrawingPrimitives.DrawSolidPoly(vertices, 4, CCColor4B.Red, true);
+            CCDrawingPrimitives.End();
+
+        }
 
         #endregion
 

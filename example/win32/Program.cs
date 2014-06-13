@@ -1,6 +1,6 @@
+using CocosSharp;
 using System;
 using System.Diagnostics;
-using Microsoft.Xna.Framework;
 
 namespace SneakyJoystickExample.Windows
 {
@@ -12,10 +12,9 @@ namespace SneakyJoystickExample.Windows
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
-            {
-                game.Run();
-            }
+            CCApplication sharedApp = CCApplication.SharedApplication;
+            sharedApp.ApplicationDelegate = new AppDelegate();
+            CCApplication.SharedApplication.StartGame();
         }
     }
 

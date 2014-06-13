@@ -11,8 +11,10 @@ namespace CocosSharp.IO.SneakyJoystick
         Button1 = 1, Button2 = 2, Button3 = 3, Button4 = 4
     }
 
-    public class SneakyPanelControl
+    public class SneakyPanelControl : CCLayer
     {
+
+
 
         #region Constants
 
@@ -56,9 +58,39 @@ namespace CocosSharp.IO.SneakyJoystick
 
         public List<SneakyButtonControlSkinnedBase> Buttons;
 
-        CCNode MasterLayer;
+        //CCNode MasterLayer;
         CCNode Player;
         CCSize wSize;
+
+        public bool IsDebug
+        {
+            get
+            {
+                if (JoyControl != null)
+                    return JoyControl.IsDebug;
+
+                return false;
+
+            }
+
+            set
+            {
+
+                if (JoyControl != null)
+                    JoyControl.IsDebug = value;
+
+                if (Button1 != null)
+                    Button1.IsDebug = value;
+                if (Button2 != null)
+                    Button2.IsDebug = value;
+                if (Button3 != null)
+                    Button3.IsDebug = value;
+                if (Button4 != null)
+                    Button4.IsDebug = value;
+
+            }
+
+        }
 
         public byte Opacity
         {
@@ -155,12 +187,10 @@ namespace CocosSharp.IO.SneakyJoystick
             }
         }
 
-        public SneakyPanelControl(CCNode masterLayer)
+        public SneakyPanelControl()
         {
 
-            wSize = CCDirector.SharedDirector.WinSize;
-
-            MasterLayer = masterLayer;
+            wSize = Director.WindowSizeInPixels;
 
             Buttons = new List<SneakyButtonControlSkinnedBase>(6);
 
@@ -171,13 +201,82 @@ namespace CocosSharp.IO.SneakyJoystick
             InitializeButtons();
 
             Opacity = DEFAULT_TRANSPARENCY;
+
+            var listener1 = new CCEventListenerTouchAllAtOnce();
+            //listener1.IsSwallowTouches = true;
+            listener1.OnTouchesBegan = OnTouchesBegan;
+            listener1.OnTouchesMoved = OnTouchesMoved;
+            listener1.OnTouchesCancelled = OnTouchesCancelled;
+            listener1.OnTouchesEnded = OnTouchesEnded;
+
+            EventDispatcher.AddEventListener(listener1, this);
+
+
+
+        }
+
+        private void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+        {
+
+            JoyControl.OnTouchesEnded(touches, touchEvent);
+
+            if (Button1 != null)
+                Button1.OnTouchesEnded(touches, touchEvent);
+            if (Button2 != null)
+                Button2.OnTouchesEnded(touches, touchEvent);
+            if (Button3 != null)
+                Button3.OnTouchesEnded(touches, touchEvent);
+            if (Button4 != null)
+                Button4.OnTouchesEnded(touches, touchEvent);
+        }
+
+        private void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
+        {
+            JoyControl.OnTouchesCancelled(touches, touchEvent);
+
+            if (Button1 != null)
+                Button1.OnTouchesCancelled(touches, touchEvent);
+            if (Button2 != null)
+                Button2.OnTouchesCancelled(touches, touchEvent);
+            if (Button3 != null)
+                Button3.OnTouchesCancelled(touches, touchEvent);
+            if (Button4 != null)
+                Button4.OnTouchesCancelled(touches, touchEvent);
+        }
+
+        private void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
+        {
+            JoyControl.OnTouchesMoved(touches, touchEvent);
+            if (Button1 != null)
+                Button1.OnTouchesMoved(touches, touchEvent);
+            if (Button2 != null)
+                Button2.OnTouchesMoved(touches, touchEvent);
+            if (Button3 != null)
+                Button3.OnTouchesMoved(touches, touchEvent);
+            if (Button4 != null)
+                Button4.OnTouchesMoved(touches, touchEvent);
+        }
+
+        private void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
+        {
+
+            if (JoyControl != null)
+                JoyControl.OnTouchesBegan(touches, touchEvent);
+            if (Button1 != null)
+                Button1.OnTouchesBegan(touches, touchEvent);
+            if (Button2 != null)
+                Button2.OnTouchesBegan(touches, touchEvent);
+            if (Button3 != null)
+                Button3.OnTouchesBegan(touches, touchEvent);
+            if (Button4 != null)
+                Button4.OnTouchesBegan(touches, touchEvent);
         }
 
         public void InitializeJoyStick()
         {
+
             JoyControl = SneakyJoystickControlSkinnedBase.Create();
 
-            //
             JoyControl.StartMovement += () =>
             {
                 if (StartMovement != null)
@@ -195,8 +294,11 @@ namespace CocosSharp.IO.SneakyJoystick
                wSize.Height * 0.08f
                );
 
+            ContentSize = new CCSize(Director.WindowSizeInPixels.Width, Director.WindowSizeInPixels.Height * 0.5f);
 
-            MasterLayer.AddChild(JoyControl, JOY_Z);
+            AddChild(JoyControl, JOY_Z);
+
+            JoyControl.ContentSize = new CCSize(128, 128);
         }
 
         public void InitializeButtons()
@@ -214,7 +316,7 @@ namespace CocosSharp.IO.SneakyJoystick
 
             Buttons.Add(tmp);
 
-            MasterLayer.AddChild(tmp, JOY_Z);
+            AddChild(tmp, JOY_Z);
 
             switch (button)
             {
@@ -253,10 +355,11 @@ namespace CocosSharp.IO.SneakyJoystick
             tmp = null;
         }
 
-        public CCPoint GetPlayerPosition(float dt)
+
+        public CCPoint GetPlayerPosition(CCNode player, float dt)
         {
             if (Player != null)
-                return Player.Position = JoyControl.GetNextPositionFromImage(Player, dt);
+                return JoyControl.GetNextPositionFromImage(Player, dt);
             return CCPoint.Zero;
         }
 
@@ -318,13 +421,33 @@ namespace CocosSharp.IO.SneakyJoystick
 
         #endregion
 
+        //public void Update(float dt)
+        //{
+        //    if (JoyControl != null)
+        //        JoyControl.RefreshImagePosition(Player, dt);
 
-        public void Update(float dt)
+        //}
+
+        public override void Update(float dt)
         {
+            base.Update(dt);
+
             if (JoyControl != null)
                 JoyControl.RefreshImagePosition(Player, dt);
-
         }
+
+        public void Draw()
+        {
+
+            if (IsDebug)
+            {
+                CCDrawingPrimitives.Begin();
+                CCDrawingPrimitives.DrawRect(new CCRect(0, 0, this.ContentSize.Width, this.ContentSize.Height), CCColor4B.Blue);
+                CCDrawingPrimitives.End();
+            }
+        }
+
+
     }
 }
 

@@ -122,9 +122,14 @@ namespace CocosSharp.IO.SneakyJoystick
                 if (_backgroundSprite != null)
                 {
                     _backgroundSprite.ContentSize = value;
-                    _backgroundSprite.Position = new CCPoint(base.ContentSize.Width / 2, base.ContentSize.Height / 2);
+                    _backgroundSprite.Position = new CCPoint(value.Width * 0.5f, value.Height * 0.5f); // new CCPoint(base.ContentSize.Width / 2, base.ContentSize.Height / 2);
                 }
 
+                if (_thumbSprite != null)
+                {
+                    _thumbSprite.ContentSize = value;
+                    _thumbSprite.Position = new CCPoint(value.Width * 0.5f, value.Height * 0.5f);
+                }
 
                 JoystickRadius = value.Width / 2;
 

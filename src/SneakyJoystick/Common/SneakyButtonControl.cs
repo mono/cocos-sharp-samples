@@ -9,15 +9,16 @@ namespace CocosSharp.IO.SneakyJoystick
 
     public class SneakyButtonControl : CCNode
     {
+        public bool IsDebug { get; set; }
 
         public event SneakyStartEndActionDelegate StartPress;
         public event SneakyStartEndActionDelegate EndPress;
 
-        CCPoint center;
+        //CCPoint center;
 
         public float radiusSq;
 
-        public CCRect bounds;
+        //public CCRect bounds;
         public bool active;
         public bool status;
         public bool value;
@@ -31,8 +32,8 @@ namespace CocosSharp.IO.SneakyJoystick
         public SneakyButtonControl(CCRect rect)
         {
             //TouchEnabled = true;
-            bounds = new CCRect(0, 0, rect.Size.Width, rect.Size.Height);
-            center = new CCPoint(rect.Size.Width / 2, rect.Size.Height / 2);
+            //bounds = new CCRect(0, 0, rect.Size.Width, rect.Size.Height);
+            //center = new CCPoint(rect.Size.Width / 2, rect.Size.Height / 2);
             status = true; //defaults to enabled
             value = false;
             active = false;
@@ -41,16 +42,6 @@ namespace CocosSharp.IO.SneakyJoystick
             radius = 32.0f;
             rateLimit = 1.0f / 120.0f;
             Position = rect.Origin;
-
-            var listener1 = new CCEventListenerTouchOneByOne();
-            //listener1.IsSwallowTouches = true;
-            listener1.OnTouchBegan = TouchBegan;
-            listener1.OnTouchMoved = TouchMoved;
-            listener1.OnTouchCancelled = TouchCancelled;
-            listener1.OnTouchEnded = TouchEnded;
-
-            EventDispatcher.AddEventListener(listener1, this);
-
         }
 
         void limiter(float delta)
@@ -66,10 +57,12 @@ namespace CocosSharp.IO.SneakyJoystick
             radiusSq = r * r;
         }
 
-
-        bool TouchBegan(CCTouch touch, CCEvent touchEvent)
+        public virtual bool OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
-            CCPoint location = CCDirector.SharedDirector.ConvertToGl(touch.LocationInView);
+
+            CCTouch touch = touches.FirstOrDefault();
+
+            CCPoint location = Director.ConvertToGl(touch.LocationInView);
             location = ConvertToNodeSpace(location);
             //Do a fast rect check before doing a circle hit check:
             if (location.X < -radius || location.X > radius || location.Y < -radius || location.Y > radius)
@@ -108,13 +101,14 @@ namespace CocosSharp.IO.SneakyJoystick
 
         }
 
-        void TouchMoved(CCTouch touch, CCEvent touchEvent)
+        public virtual void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
             //base.TouchMoved(touch, touchEvent);
+            CCTouch touch = touches.FirstOrDefault();
 
             if (!active) return;
 
-            CCPoint location = CCDirector.SharedDirector.ConvertToGl(touch.LocationInView);
+            CCPoint location = Director.ConvertToGl(touch.LocationInView);
             location = ConvertToNodeSpace(location);
 
             //Do a fast rect check before doing a circle hit check:
@@ -138,11 +132,9 @@ namespace CocosSharp.IO.SneakyJoystick
             CheckSelf();
         }
 
-
-
-        void TouchEnded(CCTouch touch, CCEvent touchEvent)
+        public virtual void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
-            //base.TouchEnded(touch, touchEvent);
+            CCTouch touch = touches.FirstOrDefault();
 
             if (!active) return;
             if (isHoldable) value = false;
@@ -155,11 +147,10 @@ namespace CocosSharp.IO.SneakyJoystick
 
         }
 
-        void TouchCancelled(CCTouch touch, CCEvent touchEvent)
+        public virtual void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
         {
-            //base.TouchCancelled(touch, touchEvent);
 
-            TouchEnded(touch, touchEvent);
+            OnTouchesEnded(touches, touchEvent);
         }
 
 
@@ -170,6 +161,15 @@ namespace CocosSharp.IO.SneakyJoystick
 
 
         }
+
+        public void Draw()
+        {
+            base.Draw();
+            CCDrawingPrimitives.Begin();
+            CCDrawingPrimitives.DrawRect(new CCRect(0, 0, this.ContentSize.Width, this.ContentSize.Height), CCColor4B.Blue);
+            CCDrawingPrimitives.End();
+        }
+
 
     }
 }

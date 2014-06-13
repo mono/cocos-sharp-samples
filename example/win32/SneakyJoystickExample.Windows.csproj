@@ -43,7 +43,6 @@
       <Link>IntroLayer.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -174,6 +174,7 @@ namespace CocosSharp.IO.SneakyJoystick
                     DefaultSprite.ContentSize = value;
 
                 SetRadius(value.Width / 2);
+
                 base.ContentSize = value;
             }
         }
@@ -301,6 +302,11 @@ namespace CocosSharp.IO.SneakyJoystick
             return Create(size);
 
         }
+
+
+
+
+
 
     }
 }
