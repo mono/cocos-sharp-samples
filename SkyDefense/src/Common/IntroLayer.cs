@@ -95,7 +95,7 @@ namespace SkyDefense.Common
 
             //////////////////////////////
             //get screen size
-            _screenSize = CCDirector.SharedDirector.WinSize;
+            _screenSize = Director.WindowSizeInPixels;
 
             _running = false;
 
@@ -117,9 +117,9 @@ namespace SkyDefense.Common
 
             CCEventListenerTouchAllAtOnce tListener = new CCEventListenerTouchAllAtOnce();
             tListener.OnTouchesBegan = TouchesBegan;
-            tListener.OnTouchesCancelled = TouchesCancelled;
-            tListener.OnTouchesEnded = TouchesEnded;
-            tListener.OnTouchesMoved = TouchesMoved;
+            //tListener.OnTouchesCancelled = TouchesCancelled;
+            //tListener.OnTouchesEnded = TouchesEnded;
+            //tListener.OnTouchesMoved = TouchesMoved;
             EventDispatcher.AddEventListener(tListener, this);
 
             //create main loop
@@ -214,10 +214,10 @@ namespace SkyDefense.Common
 
         }
 
-        protected override void TouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
+        void TouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
 
-            base.TouchesBegan(touches, touchEvent);
+            // base.TouchesBegan(touches, touchEvent);
 
             if (!_running)
             {
@@ -335,6 +335,8 @@ namespace SkyDefense.Common
             //sprite animations
             CCAnimation animation;
 
+            var spriteFrameCache = CCApplication.SharedApplication.SpriteFrameCache;
+
             animation = new CCAnimation();
             CCSpriteFrame frame;
             int i;
@@ -342,9 +344,12 @@ namespace SkyDefense.Common
             for (i = 1; i <= 10; i++)
             {
 
-                frame = CCSpriteFrameCache.Instance[String.Format("boom{0}.png", i)];
+                frame = spriteFrameCache[String.Format("boom{0}.png", i)];
                 animation.AddSpriteFrame(frame);
+
             }
+
+
 
             animation.DelayPerUnit = (1 / 10.0f);
             animation.RestoreOriginalFrame = true;
@@ -359,7 +364,7 @@ namespace SkyDefense.Common
             for (i = 1; i <= 7; i++)
             {
 
-                frame = CCSpriteFrameCache.Instance[String.Format("explosion_small{0}.png", i)];
+                frame = spriteFrameCache[String.Format("explosion_small{0}.png", i)];
 
                 animation.AddSpriteFrame(frame);
             }
@@ -419,7 +424,7 @@ namespace SkyDefense.Common
             AddChild(bg);
 
             //create spritebatch node
-            CCSpriteFrameCache.Instance.AddSpriteFrames("sprite_sheet.plist");
+            CCApplication.SharedApplication.SpriteFrameCache.AddSpriteFrames("sprite_sheet.plist");
 
             _gameBatchNode = new CCSpriteBatchNode("sprite_sheet.png");
 
@@ -495,7 +500,7 @@ namespace SkyDefense.Common
             for (int i = 0; i < 4; i++)
             {
                 cloud_y = i % 2 == 0 ? _screenSize.Height * 0.4f : _screenSize.Height * 0.5f;
-                cloud = new CCSprite(CCSpriteFrameCache.Instance["cloud.png"]); // new CCSprite("cloud.png");
+                cloud = new CCSprite(CCApplication.SharedApplication.SpriteFrameCache["cloud.png"]); // new CCSprite("cloud.png");
                 ProcessSprite(cloud);
                 //cloud.BlendFunc = new CCBlendFunc(blendSrc, blendDst);
                 cloud.SetPosition(_screenSize.Width * 0.1f + i * _screenSize.Width * 0.3f, cloud_y);

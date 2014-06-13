@@ -32,8 +32,9 @@ namespace AirHockey.Common
             _player1Score = 0;
             _player2Score = 0;
 
+            
             //get screen size
-            _screenSize = CCDirector.SharedDirector.WinSize; //CCDirector::sharedDirector()->getWinSize();
+            _screenSize = Director.WindowSizeInPixels; //CCDirector::sharedDirector()->getWinSize();
 
             //1. add court image
             GameSprite court = new GameSprite("court"); // CCSprite::create("court.png");
@@ -72,7 +73,6 @@ namespace AirHockey.Common
             //listen for touches
             CCEventListenerTouchAllAtOnce tListener = new CCEventListenerTouchAllAtOnce();
             tListener.OnTouchesBegan = TouchesBegan;
-            tListener.OnTouchesCancelled = TouchesCancelled;
             tListener.OnTouchesEnded = TouchesEnded;
             tListener.OnTouchesMoved = TouchesMoved;
             EventDispatcher.AddEventListener(tListener, this);
@@ -81,9 +81,8 @@ namespace AirHockey.Common
 
         }
 
-        protected override void TouchesBegan(System.Collections.Generic.List<CCTouch> touches, CCEvent touchEvent)
+        void TouchesBegan(System.Collections.Generic.List<CCTouch> touches, CCEvent touchEvent)
         {
-            base.TouchesBegan(touches, touchEvent);
 
             CCPoint tap;
             GameSprite player;
@@ -117,9 +116,8 @@ namespace AirHockey.Common
 
         }
 
-        protected override void TouchesMoved(System.Collections.Generic.List<CCTouch> touches, CCEvent touchEvent)
+        void TouchesMoved(System.Collections.Generic.List<CCTouch> touches, CCEvent touchEvent)
         {
-            base.TouchesMoved(touches, touchEvent);
 
             CCPoint tap;
             GameSprite player;
@@ -176,9 +174,8 @@ namespace AirHockey.Common
 
         }
 
-        protected override void TouchesEnded(System.Collections.Generic.List<CCTouch> touches, CCEvent touchEvent)
+        void TouchesEnded(System.Collections.Generic.List<CCTouch> touches, CCEvent touchEvent)
         {
-            base.TouchesEnded(touches, touchEvent);
 
             GameSprite player;
 

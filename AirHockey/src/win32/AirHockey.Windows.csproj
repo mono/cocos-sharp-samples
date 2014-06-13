@@ -35,10 +35,10 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\CSExtensions\Helpers\src\CCMathExHelper.cs">
+    <Compile Include="..\..\..\..\CSExtensions\Helpers\src\CCMathExHelper.cs">
       <Link>Helpers\CCMathExHelper.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\CSExtensions\Helpers\src\CCPointExHelper.cs">
+    <Compile Include="..\..\..\..\CSExtensions\Helpers\src\CCPointExHelper.cs">
       <Link>Helpers\CCPointExHelper.cs</Link>
     </Compile>
     <Compile Include="..\Common\GameSprite.cs">
@@ -48,7 +48,6 @@
       <Link>IntroLayer.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

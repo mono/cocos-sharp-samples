@@ -145,18 +145,20 @@ namespace RocketThrought.Common
         {
             if (flag)
             {
-                DisplayFrame = CCSpriteFrameCache.Instance["rocket_on.png"];
+
+
+                DisplayFrame = CCApplication.SharedApplication.SpriteFrameCache["rocket_on.png"];
             }
             else
             {
-                DisplayFrame = CCSpriteFrameCache.Instance["rocket.png"];// CCSpriteFrameCache.SharedSpriteFrameCache.SpriteFrameByName("rocket.png");
+                DisplayFrame = CCApplication.SharedApplication.SpriteFrameCache["rocket.png"];// CCSpriteFrameCache.SharedSpriteFrameCache.SpriteFrameByName("rocket.png");
             }
         }
 
         public bool collidedWithSides()
         {
 
-            CCSize screenSize = CCDirector.SharedDirector.WinSize;
+            CCSize screenSize = Director.WindowSizeInPixels;
 
             //TODO: REPASAR
             //Rotation += _vr;

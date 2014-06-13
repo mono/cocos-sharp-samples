@@ -84,7 +84,7 @@ namespace RocketThrought.Common
             _grid = new List<CCPoint>();
 
             //init game values
-            _screenSize = CCDirector.SharedDirector.WinSize;
+            _screenSize = Director.WindowSizeInPixels;
             _drawing = false;
             _minLineLength = (int)(_screenSize.Width * 0.07f);
             _state = gamestates.kGameIntro;
@@ -269,7 +269,9 @@ namespace RocketThrought.Common
             _lineContainer = LineContainer.Create();
             AddChild(_lineContainer);
 
-            CCSpriteFrameCache.Instance.AddSpriteFrames("sprite_sheet.plist");
+
+
+            CCApplication.SharedApplication.SpriteFrameCache.AddSpriteFrames("sprite_sheet.plist");
             _gameBatchNode = new CCSpriteBatchNode("sprite_sheet.png", 100);
 
             AddChild(_gameBatchNode, kForeground);
@@ -366,7 +368,7 @@ namespace RocketThrought.Common
 
             isLoading = true;
 
-            CCSize size = CCDirector.SharedDirector.WinSize;
+            CCSize size = Director.WindowSizeInPixels;
 
             var label = new CCLabelTtf("Loading...", "MarkerFelt", 22);
             label.Position = size.Center;
@@ -380,7 +382,10 @@ namespace RocketThrought.Common
             label.RunActions(new CCDelayTime(1.0f), new CCShow());
             label.RepeatForever(scale, scale.Reverse());
 
-            CCParticleSystemCache.SharedParticleSystemCache.AddParticleSystemAsync("jet.plist",
+
+
+
+            CCApplication.SharedApplication.ParticleSystemCache.AddParticleSystemAsync("jet.plist",
 
                 (jetConfig) =>
                 {
@@ -394,7 +399,7 @@ namespace RocketThrought.Common
                     updateLoading();
                 });
 
-            CCParticleSystemCache.SharedParticleSystemCache.AddParticleSystemAsync("boom.plist",
+            CCApplication.SharedApplication.ParticleSystemCache.AddParticleSystemAsync("boom.plist",
 
                 (boomConfig) =>
                 {
@@ -405,7 +410,7 @@ namespace RocketThrought.Common
                     updateLoading();
                 });
 
-            CCParticleSystemCache.SharedParticleSystemCache.AddParticleSystemAsync("comet.plist",
+            CCApplication.SharedApplication.ParticleSystemCache.AddParticleSystemAsync("comet.plist",
 
                 (cometConfig) =>
                 {
@@ -419,7 +424,7 @@ namespace RocketThrought.Common
                 });
 
 
-            CCParticleSystemCache.SharedParticleSystemCache.AddParticleSystemAsync("star.plist",
+            CCApplication.SharedApplication.ParticleSystemCache.AddParticleSystemAsync("star.plist",
 
                (starConfig) =>
                {
@@ -431,7 +436,7 @@ namespace RocketThrought.Common
                    updateLoading();
                });
 
-            CCParticleSystemCache.SharedParticleSystemCache.AddParticleSystemAsync("plink.plist",
+            CCApplication.SharedApplication.ParticleSystemCache.AddParticleSystemAsync("plink.plist",
 
                 (plinkConfig) =>
                 {
@@ -443,7 +448,7 @@ namespace RocketThrought.Common
                 });
 
 
-            CCParticleSystemCache.SharedParticleSystemCache.AddParticleSystemAsync("warp.plist",
+            CCApplication.SharedApplication.ParticleSystemCache.AddParticleSystemAsync("warp.plist",
 
                 (warpConfig) =>
                 {
@@ -621,7 +626,7 @@ namespace RocketThrought.Common
             else if (_state == gamestates.kGamePaused)
             {
 
-                _pauseBtn.DisplayFrame = CCSpriteFrameCache.Instance["btn_pause_off.png"];
+                _pauseBtn.DisplayFrame = CCApplication.SharedApplication.SpriteFrameCache["btn_pause_off.png"];
                 _paused.Visible = false;
                 _state = gamestates.kGamePlay;
                 _running = true;
@@ -652,7 +657,7 @@ namespace RocketThrought.Common
                 {
                     _paused.Visible = true;
                     _state = gamestates.kGamePaused;
-                    _pauseBtn.DisplayFrame = CCSpriteFrameCache.Instance["btn_pause_on.png"]; // CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName ("btn_pause_on.png"));
+                    _pauseBtn.DisplayFrame = CCApplication.SharedApplication.SpriteFrameCache["btn_pause_on.png"]; // CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName ("btn_pause_on.png"));
                     _running = false;
                     return;
                 }

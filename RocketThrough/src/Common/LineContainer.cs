@@ -36,7 +36,7 @@ namespace RocketThrought.Common
             _dash = 10;
             _dashSpace = 10;
             _lineType = lineTypes.LINE_NONE;
-            _screenSize = CCDirector.SharedDirector.WinSize;
+            _screenSize = Director.WindowSizeInPixels;
             _energyLineX = _screenSize.Width * 0.96f;
             _energyHeight = _screenSize.Height * 0.8f;
 

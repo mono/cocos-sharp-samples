@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
-using Microsoft.Xna.Framework;
+
+using CocosSharp;
 
 namespace RocketThrought.Windows
 {
@@ -12,10 +13,9 @@ namespace RocketThrought.Windows
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
-            {
-                game.Run();
-            }
+            CCApplication sharedApp = CCApplication.SharedApplication;
+            sharedApp.ApplicationDelegate = new AppDelegate();
+            CCApplication.SharedApplication.StartGame();
         }
     }
 
