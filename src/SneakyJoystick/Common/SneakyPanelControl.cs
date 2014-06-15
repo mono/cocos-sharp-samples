@@ -194,22 +194,22 @@ namespace CocosSharp.IO.SneakyJoystick
 
             Buttons = new List<SneakyButtonControlSkinnedBase>(6);
 
-            //Inicializamos el joystick
-            InitializeJoyStick();
-
-            //Inicializamos los botones
-            InitializeButtons();
-
-            Opacity = DEFAULT_TRANSPARENCY;
-
-            var listener1 = new CCEventListenerTouchAllAtOnce();
-            //listener1.IsSwallowTouches = true;
-            listener1.OnTouchesBegan = OnTouchesBegan;
-            listener1.OnTouchesMoved = OnTouchesMoved;
-            listener1.OnTouchesCancelled = OnTouchesCancelled;
-            listener1.OnTouchesEnded = OnTouchesEnded;
-
-            EventDispatcher.AddEventListener(listener1, this);
+//            //Inicializamos el joystick
+//            InitializeJoyStick();
+//
+//            //Inicializamos los botones
+//            InitializeButtons();
+//
+//            Opacity = DEFAULT_TRANSPARENCY;
+//
+//            var listener1 = new CCEventListenerTouchAllAtOnce();
+//            //listener1.IsSwallowTouches = true;
+//            listener1.OnTouchesBegan = OnTouchesBegan;
+//            listener1.OnTouchesMoved = OnTouchesMoved;
+//            listener1.OnTouchesCancelled = OnTouchesCancelled;
+//            listener1.OnTouchesEnded = OnTouchesEnded;
+//
+//            EventDispatcher.AddEventListener(listener1, this);
 
 
 
@@ -275,7 +275,7 @@ namespace CocosSharp.IO.SneakyJoystick
         public void InitializeJoyStick()
         {
 
-            JoyControl = SneakyJoystickControlSkinnedBase.Create();
+            JoyControl = new SneakyJoystickControlSkinnedBase();
 
             JoyControl.StartMovement += () =>
             {
@@ -294,12 +294,32 @@ namespace CocosSharp.IO.SneakyJoystick
                wSize.Height * 0.08f
                );
 
-			ContentSize = Director.WindowSizeInPoints;
-
             AddChild(JoyControl, JOY_Z);
-
-			JoyControl.ContentSize = new CCSize(128/ Director.ContentScaleFactor, 128/ Director.ContentScaleFactor);
         }
+
+		protected override void RunningOnNewWindow(CCSize windowSize)
+		{
+			base.RunningOnNewWindow(windowSize);
+
+			//Inicializamos el joystick
+			InitializeJoyStick();
+
+			//Inicializamos los botones
+			InitializeButtons();
+
+			Opacity = DEFAULT_TRANSPARENCY;
+
+			var listener1 = new CCEventListenerTouchAllAtOnce();
+			//listener1.IsSwallowTouches = true;
+			listener1.OnTouchesBegan = OnTouchesBegan;
+			listener1.OnTouchesMoved = OnTouchesMoved;
+			listener1.OnTouchesCancelled = OnTouchesCancelled;
+			listener1.OnTouchesEnded = OnTouchesEnded;
+
+			EventDispatcher.AddEventListener(listener1, this);
+
+		}
+
 
         public void InitializeButtons()
         {
@@ -420,13 +440,6 @@ namespace CocosSharp.IO.SneakyJoystick
 
 
         #endregion
-
-        //public void Update(float dt)
-        //{
-        //    if (JoyControl != null)
-        //        JoyControl.RefreshImagePosition(Player, dt);
-
-        //}
 
         public override void Update(float dt)
         {

@@ -19,12 +19,14 @@ namespace CocosSharp.IO.SneakyJoystick
 
         #region Private properties
 
-        private bool _isDPad;
-        private float _joystickRadius;
-        private float _thumbRadius;
-        private float _deadRadius; //Size of deadzone in joystick (how far you must move before input starts). Automatically set if isDpad == YES
+		private bool isDPad;
+		private float joystickRadius;
+		private float thumbRadius;
+		private float deadRadius; //Size of deadzone in joystick (how far you must move before input starts). Automatically set if isDpad == YES
 
-        private bool _isMoving;
+		private bool isMoving;
+
+		private CCRect ControlSize { get; set; }
 
         #endregion
 
@@ -46,12 +48,12 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             get
             {
-                return _joystickRadius;
+                return joystickRadius;
             }
             set
             {
                 JoystickRadiusSq = value * value;
-                _joystickRadius = value;
+                joystickRadius = value;
 
             }
         }
@@ -60,12 +62,12 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             get
             {
-                return _thumbRadius;
+                return thumbRadius;
             }
             set
             {
                 ThumbRadiusSq = value * value;
-                _thumbRadius = value;
+                thumbRadius = value;
             }
         }
         public float ThumbRadiusSq { get; set; }
@@ -74,12 +76,12 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             get
             {
-                return _deadRadius;
+                return deadRadius;
             }
             set
             {
                 DeadRadiusSq = value * value;
-                _deadRadius = value;
+                deadRadius = value;
             }
         }
         public float DeadRadiusSq { get; set; }
@@ -93,16 +95,16 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             get
             {
-                return _isDPad;
+                return isDPad;
             }
             set
             {
 
-                _isDPad = value;
-                if (_isDPad)
+                isDPad = value;
+                if (isDPad)
                 {
                     HasDeadzone = true;
-                    _deadRadius = 10.0f;
+                    deadRadius = 10.0f;
                 }
             }
         }
@@ -142,23 +144,31 @@ namespace CocosSharp.IO.SneakyJoystick
             HasDeadzone = false;
             NumberOfDirections = 4;
 
-            _isDPad = false;
-            _joystickRadius = rect.Size.Width / 2;
+            isDPad = false;
+            joystickRadius = rect.Size.Width / 2;
 
             ThumbRadius = 32.0f;
             DeadRadius = 0.0f;
 
-            AnchorPoint = new CCPoint(0.5f, 0.5f);
+			AnchorPoint = CCPoint.AnchorMiddle;
 
-            SetPosition((rect.Size.Width - rect.Origin.X) / 2, (rect.Size.Height - rect.Origin.Y) / 2);
-
-            ContentSize = rect.Size;
-
-            StickPosition = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
-
-            Center = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2); ;
+			ControlSize = rect;
 
         }
+
+		protected override void RunningOnNewWindow(CCSize windowSize)
+		{
+			base.RunningOnNewWindow(windowSize);
+
+			var rect = ControlSize.PixelsToPoints(Director.ContentScaleFactor);
+
+			ContentSize = rect.Size;
+			Position = rect.Center;
+
+			StickPosition = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
+			Center = ContentSize.Center;
+		}
+
 
         public virtual void UpdateVelocity(CCPoint point)
         {
@@ -183,7 +193,7 @@ namespace CocosSharp.IO.SneakyJoystick
             float cosAngle;
             float sinAngle;
 
-            if (_isDPad)
+            if (isDPad)
             {
                 float anglePerSector = 360.0f / NumberOfDirections * CCMathExHelper.SJ_DEG2RAD;
                 angle = CCMathExHelper.round(angle / anglePerSector) * anglePerSector;
@@ -193,13 +203,13 @@ namespace CocosSharp.IO.SneakyJoystick
             sinAngle = CCMathHelper.Sin(angle);
 
             // NOTE: Velocity goes from -1.0 to 1.0.
-            if (dSq > JoystickRadiusSq || _isDPad)
+            if (dSq > JoystickRadiusSq || isDPad)
             {
-                dx = cosAngle * _joystickRadius;
-                dy = sinAngle * _joystickRadius;
+                dx = cosAngle * joystickRadius;
+                dy = sinAngle * joystickRadius;
             }
 
-            Velocity = new CCPoint(dx / _joystickRadius, dy / _joystickRadius);
+            Velocity = new CCPoint(dx / joystickRadius, dy / joystickRadius);
             Degrees = angle * CCMathExHelper.SJ_RAD2DEG;
 
             // Update the thumb's position
@@ -219,16 +229,16 @@ namespace CocosSharp.IO.SneakyJoystick
             //if([background containsPoint:[background convertToNodeSpace:location]]){
             location = ConvertToNodeSpace(location);
             //Do a fast rect check before doing a circle hit check:
-            if (location.X - _joystickRadius < -_joystickRadius || location.X - _joystickRadius > _joystickRadius || location.Y - _joystickRadius < -_joystickRadius || location.Y - _joystickRadius > _joystickRadius)
+            if (location.X - joystickRadius < -joystickRadius || location.X - joystickRadius > joystickRadius || location.Y - joystickRadius < -joystickRadius || location.Y - joystickRadius > joystickRadius)
             {
                 return;
             }
             else
             {
-                float dSq = (location.X - _joystickRadius) * (location.X - _joystickRadius) + (location.Y - _joystickRadius) * (location.Y - _joystickRadius);
+                float dSq = (location.X - joystickRadius) * (location.X - joystickRadius) + (location.Y - joystickRadius) * (location.Y - joystickRadius);
                 if (JoystickRadiusSq > dSq)
                 {
-                    _isMoving = true;
+                    isMoving = true;
 
                     //[self updateVelocity:location];
                     UpdateVelocity(location);
@@ -246,7 +256,7 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             //base.TouchesMoved(touches, touchEvent);
 
-            if (!_isMoving)
+            if (!isMoving)
                 return;
 
             CCTouch touch = touches.First();
@@ -282,12 +292,12 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             //base.TouchesEnded(touches, touchEvent);
 
-            if (!_isMoving)
+            if (!isMoving)
                 return;
 
             ResetDirections();
 
-            _isMoving = false;
+            isMoving = false;
 
             CCTouch touch = touches.First();
 

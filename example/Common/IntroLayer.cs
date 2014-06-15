@@ -74,7 +74,7 @@ namespace SneakyJoystickExample.Common
                 CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
             };
 
-			//JoyPanel.IsDebug = true;
+			JoyPanel.IsDebug = true;
 
 			AddChild(JoyPanel, 9999);
 

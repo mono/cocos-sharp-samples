@@ -139,10 +139,19 @@ namespace CocosSharp.IO.SneakyJoystick
 
         #endregion
 
-        public SneakyJoystickControlSkinnedBase(CCRect size)
-            : base(size)
+		#region Constructors
+        public SneakyJoystickControlSkinnedBase()
+			: this(new CCRect(0, 0, 128, 128))
         {
         }
+
+		public SneakyJoystickControlSkinnedBase(CCRect size)
+			: base(size)
+		{
+			BackgroundSprite = new CCSprite(DEFAULT_IMAGE_BACKGROUND);  //new ColoredCircleSprite( CCColor4B.Red, 100f);
+			ThumbSprite = new CCSprite(DEFAULT_IMAGE_THUMB);  //new ColoredCircleSprite(CCColor4B.Blue,30f);
+		}
+		#endregion
 
         public override void UpdateVelocity(CCPoint point)
         {
@@ -171,21 +180,6 @@ namespace CocosSharp.IO.SneakyJoystick
             RefreshBackgroundSpritePosition();
             RefreshThumbSpritePosition();
         }
-
-        public static SneakyJoystickControlSkinnedBase Create()
-        {
-            var size = new CCRect(0, 0, 128, 128);
-            return Create(size);
-        }
-
-        public static SneakyJoystickControlSkinnedBase Create(CCRect size)
-        {
-            SneakyJoystickControlSkinnedBase tmp = new SneakyJoystickControlSkinnedBase(size);
-            tmp.BackgroundSprite = new CCSprite(DEFAULT_IMAGE_BACKGROUND);  //new ColoredCircleSprite( CCColor4B.Red, 100f);
-            tmp.ThumbSprite = new CCSprite(DEFAULT_IMAGE_THUMB);  //new ColoredCircleSprite(CCColor4B.Blue,30f);
-            return tmp;
-        }
-
 
     }
 }

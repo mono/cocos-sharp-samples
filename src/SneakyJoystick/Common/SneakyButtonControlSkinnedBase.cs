@@ -19,11 +19,11 @@ namespace CocosSharp.IO.SneakyJoystick
 
         #region Private properties
 
-        private CCSprite _defaultSprite;
-        private CCSprite _activatedSprite;
-        private CCSprite _disabledSprite;
-        private CCSprite _pressSprite;
-        private byte _opacity;
+		private CCSprite defaultSprite;
+		private CCSprite activatedSprite;
+		private CCSprite disabledSprite;
+		private CCSprite pressSprite;
+		private byte opacity;
 
         #endregion
 
@@ -33,26 +33,26 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             get
             {
-                return _defaultSprite;
+                return defaultSprite;
             }
             set
             {
 
-                if (_defaultSprite != null)
+                if (defaultSprite != null)
                 {
-                    if (_defaultSprite.Parent != null)
-                        _defaultSprite.Parent.RemoveChild(_defaultSprite, true);
+                    if (defaultSprite.Parent != null)
+                        defaultSprite.Parent.RemoveChild(defaultSprite, true);
                 }
 
-                _defaultSprite = value;
+                defaultSprite = value;
 
                 if (value != null)
                 {
                     //[self addChild:defaultSprite z:0];
-                    AddChild(_defaultSprite, 0);
-                    ContentSize = _defaultSprite.ContentSize;
+                    AddChild(defaultSprite, 0);
+                    ContentSize = defaultSprite.ContentSize;
 
-                    SetRadius(_defaultSprite.ContentSize.Width / 2);
+                    SetRadius(defaultSprite.ContentSize.Width / 2);
                     //[self setContentSize:defaultSprite.contentSize];
                 }
 
@@ -63,24 +63,24 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             get
             {
-                return _activatedSprite;
+                return activatedSprite;
             }
             set
             {
 
-                if (_activatedSprite != null)
+                if (activatedSprite != null)
                 {
-                    if (_activatedSprite.Parent != null)
-                        _activatedSprite.Parent.RemoveChild(_activatedSprite, true);
+                    if (activatedSprite.Parent != null)
+                        activatedSprite.Parent.RemoveChild(activatedSprite, true);
                     //[activatedSprite release];
                 }
 
-                _activatedSprite = value;
+                activatedSprite = value;
 
                 if (value != null)
                 {
-                    AddChild(_activatedSprite, 1);
-                    ContentSize = _activatedSprite.ContentSize;
+                    AddChild(activatedSprite, 1);
+                    ContentSize = activatedSprite.ContentSize;
                 }
 
 
@@ -89,22 +89,22 @@ namespace CocosSharp.IO.SneakyJoystick
 
         public CCSprite DisabledSprite
         {
-            get { return _disabledSprite; }
+            get { return disabledSprite; }
             set
             {
 
-                if (_disabledSprite != null)
+                if (disabledSprite != null)
                 {
-                    if (_disabledSprite.Parent != null)
-                        _disabledSprite.Parent.RemoveChild(_disabledSprite, true);
+                    if (disabledSprite.Parent != null)
+                        disabledSprite.Parent.RemoveChild(disabledSprite, true);
                     //[activatedSprite release];
                 }
-                _disabledSprite = value;
+                disabledSprite = value;
                 if (value != null)
                 {
-                    AddChild(_disabledSprite, 2);
+                    AddChild(disabledSprite, 2);
                     //[self addChild:activatedSprite z:1];
-                    ContentSize = _disabledSprite.ContentSize;
+                    ContentSize = disabledSprite.ContentSize;
                     //[self setContentSize:activatedSprite.contentSize];
                 }
 
@@ -113,23 +113,23 @@ namespace CocosSharp.IO.SneakyJoystick
 
         public CCSprite PressSprite
         {
-            get { return _pressSprite; }
+            get { return pressSprite; }
             set
             {
-                if (_pressSprite != null)
+                if (pressSprite != null)
                 {
-                    if (_pressSprite.Parent != null)
-                        _pressSprite.Parent.RemoveChild(_pressSprite, true);
+                    if (pressSprite.Parent != null)
+                        pressSprite.Parent.RemoveChild(pressSprite, true);
                     //[activatedSprite release];
                 }
 
-                _pressSprite = value;
+                pressSprite = value;
 
                 if (value != null)
                 {
-                    AddChild(_pressSprite, 3);
+                    AddChild(pressSprite, 3);
                     //[self addChild:activatedSprite z:1];
-                    ContentSize = _pressSprite.ContentSize;
+                    ContentSize = pressSprite.ContentSize;
                     //[self setContentSize:activatedSprite.contentSize];
                 }
 
@@ -140,7 +140,7 @@ namespace CocosSharp.IO.SneakyJoystick
         {
             get
             {
-                return _opacity;
+                return opacity;
             }
 
             set
@@ -157,7 +157,7 @@ namespace CocosSharp.IO.SneakyJoystick
                 if (PressSprite != null)
                     PressSprite.Opacity = value;
 
-                _opacity = value;
+                opacity = value;
             }
         }
 
