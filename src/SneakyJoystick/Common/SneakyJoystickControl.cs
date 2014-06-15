@@ -10,10 +10,10 @@ namespace CocosSharp.IO.SneakyJoystick
     public class SneakyJoystickControl : CCLayer
     {
 
-        #region Delegates
+        #region Custom Events
 
-        public event SneakyStartEndActionDelegate StartMovement;
-        public event SneakyStartEndActionDelegate EndMovement;
+		CCEventCustom startMovement = new CCEventCustom(SneakyPanelControl.START_MOVEMENT);
+		CCEventCustom endMovement = new CCEventCustom(SneakyPanelControl.END_MOVEMENT);
 
         #endregion
 
@@ -217,6 +217,7 @@ namespace CocosSharp.IO.SneakyJoystick
 
         }
 
+
         public virtual void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
 
@@ -243,8 +244,8 @@ namespace CocosSharp.IO.SneakyJoystick
                     //[self updateVelocity:location];
                     UpdateVelocity(location);
 
-                    if (StartMovement != null)
-                        StartMovement();
+					// Fire off our event to notify that movement was started
+					EventDispatcher.DispatchEvent(startMovement);
 
                     return;
                 }
@@ -310,9 +311,8 @@ namespace CocosSharp.IO.SneakyJoystick
 
             UpdateVelocity(location);
 
-            if (EndMovement != null)
-                EndMovement();
-
+			// Fire off our event to notify that movement has ended.
+			EventDispatcher.DispatchEvent(endMovement);
         }
 
         public void ResetDirections()

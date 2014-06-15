@@ -183,17 +183,20 @@ namespace CocosSharp.IO.SneakyJoystick
 
         #region Contructor
 
-        public SneakyButtonControlSkinnedBase(CCRect rect)
-            : base(rect)
-        {
-            CheckSelf();
-        }
+		public SneakyButtonControlSkinnedBase()
+			:this(new CCRect(0, 0, 64, 64))
+		{}
+
+
+		public SneakyButtonControlSkinnedBase(CCRect size)
+			:this (size, "control/button_release.png", "control/button_pressed.png", "control/button_pressed.png")
+		{}
+
+
 
         public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite, string disabledSprite)
             : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite), new CCSprite(disabledSprite))
-        {
-
-        }
+        {}
 
         public SneakyButtonControlSkinnedBase(CCRect rect,
             CCSprite defaultSprite,
@@ -287,25 +290,6 @@ namespace CocosSharp.IO.SneakyJoystick
 
 
         }
-
-        internal static SneakyButtonControlSkinnedBase Create(CCRect size)
-        {
-            var tmp = new SneakyButtonControlSkinnedBase(size,
-              "control/button_release.png", "control/button_pressed.png", "control/button_pressed.png"
-              );
-            return tmp;
-        }
-
-        internal static SneakyButtonControlSkinnedBase Create()
-        {
-            CCRect size = new CCRect(0, 0, 64, 64);
-            return Create(size);
-
-        }
-
-
-
-
 
 
     }

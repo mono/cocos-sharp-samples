@@ -11,8 +11,8 @@ namespace CocosSharp.IO.SneakyJoystick
     {
         public bool IsDebug { get; set; }
 
-        public event SneakyStartEndActionDelegate StartPress;
-        public event SneakyStartEndActionDelegate EndPress;
+        internal event SneakyStartEndActionDelegate StartPress;
+        internal event SneakyStartEndActionDelegate EndPress;
 
         //CCPoint center;
 
