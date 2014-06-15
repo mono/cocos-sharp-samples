@@ -10,8 +10,7 @@ namespace SneakyJoystickExample.Common
 {
     public class IntroLayer : CCLayerColor
     {
-
-        //SneakyPanelControl JoyPanel;
+	
         SneakyPanelControl JoyPanel;
 
         CCSize winSize;
@@ -20,12 +19,12 @@ namespace SneakyJoystickExample.Common
 
         CCSprite bear;
 
-        private bool IsWalking = false;
+		private bool IsWalking = false;
 
         public IntroLayer()
         {
 
-            winSize = Director.WindowSizeInPixels;
+            winSize = Director.WindowSizeInPoints;
 
             InitializeJoyPanel();
 
@@ -33,7 +32,7 @@ namespace SneakyJoystickExample.Common
 
             JoyPanel.SetPlayer(bear);
 
-            Schedule(Update);
+            Schedule();
         }
 
         public void ReadKeys(float f)
@@ -50,7 +49,7 @@ namespace SneakyJoystickExample.Common
             action = new CCRepeatForever(new CCAnimate(walkAnim));
 
             bear = new CCSprite(spriteSheet.Frames.FirstOrDefault());
-            bear.Position = new CCPoint(winSize.Width / 2, winSize.Height / 2);
+			bear.Position = winSize.Center;
 
             AddChild(bear);
         }
@@ -75,9 +74,9 @@ namespace SneakyJoystickExample.Common
                 CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
             };
 
-            JoyPanel.IsDebug = true;
+			//JoyPanel.IsDebug = true;
 
-            AddChild(JoyPanel);
+			AddChild(JoyPanel, 9999);
 
         }
 

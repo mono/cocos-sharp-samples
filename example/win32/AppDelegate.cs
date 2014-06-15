@@ -44,15 +44,16 @@ namespace SneakyJoystickExample.Windows
             director.DisplayStats = true;
             director.AnimationInterval = 1.0 / 60;
 
-            CCSize designSize = new CCSize(preferredWidth, preferredHeight);
+			//CCSize designSize = new CCSize(preferredWidth, preferredHeight);
+			CCSize designSize = new CCSize(480, 320);
 
-            if (CCDrawManager.FrameSize.Height > preferredHeight)
+			if (CCDrawManager.FrameSize.Height > designSize.Height)
             {
                 CCSize resourceSize = new CCSize(preferredWidth, preferredHeight);
                 //CCSize resourceSize = new CCSize(preferredWidth, preferredHeight);
                 application.ContentSearchPaths.Add("hd");
                 director.ContentScaleFactor = resourceSize.Height / designSize.Height;
-            }
+			}
 
             CCDrawManager.SetDesignResolutionSize(designSize.Width, designSize.Height, CCResolutionPolicy.ShowAll);
 

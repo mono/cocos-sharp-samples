@@ -190,7 +190,7 @@ namespace CocosSharp.IO.SneakyJoystick
         public SneakyPanelControl()
         {
 
-            wSize = Director.WindowSizeInPixels;
+			wSize = Director.WindowSizeInPoints;
 
             Buttons = new List<SneakyButtonControlSkinnedBase>(6);
 
@@ -294,11 +294,11 @@ namespace CocosSharp.IO.SneakyJoystick
                wSize.Height * 0.08f
                );
 
-            ContentSize = new CCSize(Director.WindowSizeInPixels.Width, Director.WindowSizeInPixels.Height * 0.5f);
+			ContentSize = Director.WindowSizeInPoints;
 
             AddChild(JoyControl, JOY_Z);
 
-            JoyControl.ContentSize = new CCSize(128, 128);
+			JoyControl.ContentSize = new CCSize(128/ Director.ContentScaleFactor, 128/ Director.ContentScaleFactor);
         }
 
         public void InitializeButtons()
