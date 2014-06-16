@@ -14,8 +14,8 @@ namespace SneakyJoystickExample.Common
 
         CCEventListenerCustom startMovement;
         CCEventListenerCustom endMovement;
+        CCEventListenerCustom buttonEnded;
 
-        List<CCEventListenerCustom> listener_buttons;
 
         SneakyPanelControl JoyPanel;
 
@@ -80,22 +80,22 @@ namespace SneakyJoystickExample.Common
 
             EventDispatcher.AddEventListener(endMovement, 1);
 
-            listener_buttons = new List<CCEventListenerCustom>();
-            CCEventListenerCustom tmp;
-
-            foreach (var item in JoyPanel.Buttons)
+            buttonEnded = new CCEventListenerCustom(SneakyPanelControl.END_PRESS_BUTTON, (customEvent) =>
             {
-                tmp = new CCEventListenerCustom(item.EVENT_END_PRESS_ID, (customEvent) =>
-                {
-                    Console.WriteLine("PRESSED: " + item.ID);
 
-                    if (item.ID == 1)
+                var button = customEvent.UserData as SneakyButtonControl;
+                if (button != null)
+                {
+                    if (button.ID == 1)
                         CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
 
-                });
-                EventDispatcher.AddEventListener(tmp, 1);
-                listener_buttons.Add(tmp);
-            }
+                    Console.WriteLine("BUTTON {0} PRESSED", button.ID);
+                }
+            });
+
+            EventDispatcher.AddEventListener(buttonEnded, 1);
+
+
         }
 
         public override void Update(float dt)
@@ -129,11 +129,9 @@ namespace SneakyJoystickExample.Common
 
             this.EventDispatcher.RemoveEventListener(startMovement);
             this.EventDispatcher.RemoveEventListener(endMovement);
+            this.EventDispatcher.RemoveEventListener(buttonEnded);
 
-            foreach (var item in listener_buttons)
-            {
-                this.EventDispatcher.RemoveEventListener(item);
-            }
+
         }
 
         public static CCScene Scene

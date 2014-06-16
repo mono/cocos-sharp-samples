@@ -25,6 +25,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #region Custom Events
 
+        public static string START_PRESS_BUTTON = "SneakyJoystick_StartPressButton";
+        public static string END_PRESS_BUTTON = "SneakyJoystick_EndPressButton";
+
         public const string START_MOVEMENT = "SneakyJoystick_StartMovement";
         public const string END_MOVEMENT = "SneakyJoystick_EndMovement";
 
@@ -40,7 +43,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         //public const string BUTTON_4_END_PRESS = "SneakyJoystick_Button4EndPress";
 
         #endregion
-
 
         #region Private properties
 
@@ -66,9 +68,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
             {
                 if (JoyControl != null)
                     return JoyControl.IsDebug;
-
                 return false;
-
             }
 
             set
@@ -379,6 +379,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 CCDrawingPrimitives.End();
             }
         }
+
+
+
+
 
 
     }
