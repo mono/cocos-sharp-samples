@@ -23,22 +23,37 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #endregion
 
-        #region Delegates
+		#region Custom Events
 
-        public event SneakyStartEndActionDelegate Button1StartPress;
-        public event SneakyStartEndActionDelegate Button1EndPress;
+		public const string START_MOVEMENT = "SneakyJoystick_StartMovement";
+		public const string END_MOVEMENT = "SneakyJoystick_EndMovement";
 
-        public event SneakyStartEndActionDelegate Button2StartPress;
-        public event SneakyStartEndActionDelegate Button2EndPress;
+		public const string BUTTON_1_START_PRESS = "SneakyJoystick_Button1StartPress";
+		public const string BUTTON_2_START_PRESS = "SneakyJoystick_Button3StartPress";
+		public const string BUTTON_3_START_PRESS = "SneakyJoystick_Button4StartPress";
+		public const string BUTTON_4_START_PRESS = "SneakyJoystick_Button5StartPress";
 
-        public event SneakyStartEndActionDelegate Button3StartPress;
-        public event SneakyStartEndActionDelegate Button3EndPress;
+		public const string BUTTON_1_END_PRESS = "SneakyJoystick_Button1EndPress";
+		public const string BUTTON_2_END_PRESS = "SneakyJoystick_Button2EndPress";
+		public const string BUTTON_3_END_PRESS = "SneakyJoystick_Button3EndPress";
+		public const string BUTTON_4_END_PRESS = "SneakyJoystick_Button4EndPress";
 
-        public event SneakyStartEndActionDelegate Button4StartPress;
-        public event SneakyStartEndActionDelegate Button4EndPress;
 
-        public event SneakyStartEndActionDelegate StartMovement;
-        public event SneakyStartEndActionDelegate EndMovement;
+		#endregion
+
+        #region Custom Events
+
+		CCEventCustom button1StartPress = new CCEventCustom(BUTTON_1_START_PRESS);
+		CCEventCustom button1EndPress = new CCEventCustom(BUTTON_1_END_PRESS);
+
+		CCEventCustom button2StartPress = new CCEventCustom(BUTTON_2_START_PRESS);
+		CCEventCustom button2EndPress = new CCEventCustom(BUTTON_2_END_PRESS);
+
+		CCEventCustom button3StartPress = new CCEventCustom(BUTTON_3_START_PRESS);
+		CCEventCustom button3EndPress = new CCEventCustom(BUTTON_3_END_PRESS);
+
+		CCEventCustom button4StartPress = new CCEventCustom(BUTTON_4_START_PRESS);
+		CCEventCustom button4EndPress = new CCEventCustom(BUTTON_4_END_PRESS);
 
         #endregion
 
@@ -192,28 +207,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public SneakyPanelControl()
         {
 
-            wSize = Director.WindowSizeInPixels;
+			wSize = Director.WindowSizeInPoints;
 
             Buttons = new List<SneakyButtonControlSkinnedBase>(6);
-
-            //Inicializamos el joystick
-            InitializeJoyStick();
-
-            //Inicializamos los botones
-            InitializeButtons();
-
-            Opacity = DEFAULT_TRANSPARENCY;
-
-            var listener1 = new CCEventListenerTouchAllAtOnce();
-            //listener1.IsSwallowTouches = true;
-            listener1.OnTouchesBegan = OnTouchesBegan;
-            listener1.OnTouchesMoved = OnTouchesMoved;
-            listener1.OnTouchesCancelled = OnTouchesCancelled;
-            listener1.OnTouchesEnded = OnTouchesEnded;
-
-            EventDispatcher.AddEventListener(listener1, this);
-
-
 
         }
 
@@ -277,44 +273,53 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public void InitializeJoyStick()
         {
 
-            JoyControl = SneakyJoystickControlSkinnedBase.Create();
+            JoyControl = new SneakyJoystickControlSkinnedBase();
 
-            JoyControl.StartMovement += () =>
-            {
-                if (StartMovement != null)
-                    StartMovement();
-            };
-
-            JoyControl.EndMovement += () =>
-            {
-                if (EndMovement != null)
-                    EndMovement();
-            };
 
             JoyControl.Position = new CCPoint(
                wSize.Width * 0.08f,
                wSize.Height * 0.08f
                );
 
-            ContentSize = new CCSize(Director.WindowSizeInPixels.Width, Director.WindowSizeInPixels.Height * 0.5f);
-
             AddChild(JoyControl, JOY_Z);
-
-            JoyControl.ContentSize = new CCSize(128, 128);
         }
+
+		protected override void RunningOnNewWindow(CCSize windowSize)
+		{
+			base.RunningOnNewWindow(windowSize);
+
+			//Inicializamos el joystick
+			InitializeJoyStick();
+
+			//Inicializamos los botones
+			InitializeButtons();
+
+			Opacity = DEFAULT_TRANSPARENCY;
+
+			var listener1 = new CCEventListenerTouchAllAtOnce();
+			//listener1.IsSwallowTouches = true;
+			listener1.OnTouchesBegan = OnTouchesBegan;
+			listener1.OnTouchesMoved = OnTouchesMoved;
+			listener1.OnTouchesCancelled = OnTouchesCancelled;
+			listener1.OnTouchesEnded = OnTouchesEnded;
+
+			EventDispatcher.AddEventListener(listener1, this);
+
+		}
+
 
         public void InitializeButtons()
         {
             InitializeButton(ButtonType.Button1);
             InitializeButton(ButtonType.Button2);
-            //InitializeButton(ButtonType.Button3);
-            //InitializeButton(ButtonType.Button4);
+            InitializeButton(ButtonType.Button3);
+            InitializeButton(ButtonType.Button4);
         }
 
         public void InitializeButton(ButtonType button)
         {
 
-            SneakyButtonControlSkinnedBase tmp = SneakyButtonControlSkinnedBase.Create();
+            SneakyButtonControlSkinnedBase tmp = new SneakyButtonControlSkinnedBase();
 
             Buttons.Add(tmp);
 
@@ -387,61 +392,47 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         void Button1_EndPress()
         {
-            if (Button1EndPress != null)
-                Button1EndPress();
+			EventDispatcher.DispatchEvent(button1EndPress);
         }
 
         void Button2_EndPress()
         {
-            if (Button2EndPress != null)
-                Button2EndPress();
+			EventDispatcher.DispatchEvent(button2EndPress);
         }
 
         void Button3_EndPress()
         {
-            if (Button3EndPress != null)
-                Button3EndPress();
+			EventDispatcher.DispatchEvent(button3EndPress);
         }
 
         void Button4_EndPress()
         {
-            if (Button4EndPress != null)
-                Button4EndPress();
+			EventDispatcher.DispatchEvent(button4EndPress);
         }
+
 
         void Button1_StartPress()
         {
-            if (Button1StartPress != null)
-                Button1StartPress();
+			EventDispatcher.DispatchEvent(button1StartPress);
         }
 
         void Button2_StartPress()
         {
-            if (Button2StartPress != null)
-                Button2StartPress();
+			EventDispatcher.DispatchEvent(button2StartPress);
         }
 
         void Button3_StartPress()
         {
-            if (Button3StartPress != null)
-                Button3StartPress();
+			EventDispatcher.DispatchEvent(button3StartPress);
         }
 
         void Button4_StartPress()
         {
-            if (Button4StartPress != null)
-                Button4StartPress();
+			EventDispatcher.DispatchEvent(button4StartPress);
         }
 
 
         #endregion
-
-        //public void Update(float dt)
-        //{
-        //    if (JoyControl != null)
-        //        JoyControl.RefreshImagePosition(Player, dt);
-
-        //}
 
         public override void Update(float dt)
         {

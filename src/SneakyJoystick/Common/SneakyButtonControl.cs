@@ -11,8 +11,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
     {
         public bool IsDebug { get; set; }
 
-        public event SneakyStartEndActionDelegate StartPress;
-        public event SneakyStartEndActionDelegate EndPress;
+        internal event SneakyStartEndActionDelegate StartPress;
+        internal event SneakyStartEndActionDelegate EndPress;
 
         //CCPoint center;
 
@@ -31,9 +31,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public SneakyButtonControl(CCRect rect)
         {
-            //TouchEnabled = true;
-            //bounds = new CCRect(0, 0, rect.Size.Width, rect.Size.Height);
-            //center = new CCPoint(rect.Size.Width / 2, rect.Size.Height / 2);
             status = true; //defaults to enabled
             value = false;
             active = false;
