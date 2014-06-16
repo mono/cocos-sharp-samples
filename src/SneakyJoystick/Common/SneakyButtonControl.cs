@@ -9,12 +9,19 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
     public class SneakyButtonControl : CCNode
     {
+
+        #region Custom Events
+
+        CCEventCustom startPress;
+        CCEventCustom endPress;
+
+        #endregion
+
+        public string EVENT_START_PRESS_ID { get { return string.Format("SneakyJoystick_Button{0}StartPress", ID); } }
+        public string EVENT_END_PRESS_ID { get { return string.Format("SneakyJoystick_Button{0}EndPress", ID); } }
+        public int ID { get; set; }
+
         public bool IsDebug { get; set; }
-
-        internal event SneakyStartEndActionDelegate StartPress;
-        internal event SneakyStartEndActionDelegate EndPress;
-
-        //CCPoint center;
 
         public float radiusSq;
 
@@ -29,7 +36,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         //Optimizations (keep Squared values of all radii for faster calculations) (updated internally when changing radii)
         float radius;
 
-        public SneakyButtonControl(CCRect rect)
+        public SneakyButtonControl(CCRect rect, int id)
         {
             status = true; //defaults to enabled
             value = false;
@@ -39,6 +46,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
             radius = 32.0f;
             rateLimit = 1.0f / 120.0f;
             Position = rect.Origin;
+            ID = id;
+
+            startPress = new CCEventCustom(EVENT_START_PRESS_ID);
+            endPress = new CCEventCustom(EVENT_END_PRESS_ID);
         }
 
         void limiter(float delta)
@@ -83,8 +94,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
                     CheckSelf();
 
-                    if (StartPress != null)
-                        StartPress();
+                    // Fire off our event to notify that movement was started
+                    EventDispatcher.DispatchEvent(startPress);
 
                     return true;
                 }
@@ -139,8 +150,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             CheckSelf();
 
-            if (EndPress != null)
-                EndPress();
+            // Fire off our event to notify that movement was started
+            EventDispatcher.DispatchEvent(endPress);
 
         }
 

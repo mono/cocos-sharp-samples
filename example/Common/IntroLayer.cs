@@ -4,13 +4,19 @@ using System.Collections.Generic;
 using CocosDenshion;
 using System.Linq;
 using CocosSharp;
-using CocosSharp.IO.SneakyJoystick;
+using CocosSharp.Extensions.SneakyJoystick;
+using SneakyJoystickExample.Windows;
 
 namespace SneakyJoystickExample.Common
 {
     public class IntroLayer : CCLayerColor
     {
-	
+
+        CCEventListenerCustom startMovement;
+        CCEventListenerCustom endMovement;
+
+        List<CCEventListenerCustom> listener_buttons;
+
         SneakyPanelControl JoyPanel;
 
         CCSize winSize;
@@ -19,7 +25,7 @@ namespace SneakyJoystickExample.Common
 
         CCSprite bear;
 
-		private bool IsWalking = false;
+        private bool IsWalking = false;
 
         public IntroLayer()
         {
@@ -35,10 +41,6 @@ namespace SneakyJoystickExample.Common
             Schedule();
         }
 
-        public void ReadKeys(float f)
-        {
-
-        }
 
         public void InitializeBear()
         {
@@ -49,105 +51,51 @@ namespace SneakyJoystickExample.Common
             action = new CCRepeatForever(new CCAnimate(walkAnim));
 
             bear = new CCSprite(spriteSheet.Frames.FirstOrDefault());
-			bear.Position = winSize.Center;
+            bear.Position = winSize.Center;
 
             AddChild(bear);
         }
 
-		CCEventListenerCustom startMovement;
-		CCEventListenerCustom endMovement;
 
-		CCEventListenerCustom button1StartPress;
-		CCEventListenerCustom button1EndPress;
-		CCEventListenerCustom button2StartPress;
-		CCEventListenerCustom button2EndPress;
-		CCEventListenerCustom button3StartPress;
-		CCEventListenerCustom button3EndPress;
-		CCEventListenerCustom button4StartPress;
-		CCEventListenerCustom button4EndPress;
 
         public void InitializeJoyPanel()
         {
 
             JoyPanel = new SneakyPanelControl();
+            JoyPanel.IsDebug = true;
+            AddChild(JoyPanel, 9999);
 
-			startMovement = new CCEventListenerCustom(SneakyPanelControl.START_MOVEMENT, (customEvent) =>
-				{
-					IsWalking = true;
-				});
+            startMovement = new CCEventListenerCustom(SneakyPanelControl.START_MOVEMENT, (customEvent) =>
+            {
+                IsWalking = true;
+                Console.WriteLine("Walking: " + IsWalking);
+            });
+            EventDispatcher.AddEventListener(startMovement, 1);
 
-			EventDispatcher.AddEventListener(startMovement, 1);
+            endMovement = new CCEventListenerCustom(SneakyPanelControl.END_MOVEMENT, (customEvent) =>
+                {
+                    IsWalking = false;
+                    Console.WriteLine("Walking: " + IsWalking);
+                });
 
-			endMovement = new CCEventListenerCustom(SneakyPanelControl.END_MOVEMENT, (customEvent) =>
-				{
-					IsWalking = false;
-				});
+            EventDispatcher.AddEventListener(endMovement, 1);
 
-			EventDispatcher.AddEventListener(endMovement, 1);
+            listener_buttons = new List<CCEventListenerCustom>();
+            CCEventListenerCustom tmp;
 
+            foreach (var item in JoyPanel.Buttons)
+            {
+                tmp = new CCEventListenerCustom(item.EVENT_END_PRESS_ID, (customEvent) =>
+                {
+                    Console.WriteLine("PRESSED: " + item.ID);
 
-			button1StartPress = new CCEventListenerCustom(SneakyPanelControl.BUTTON_1_START_PRESS, (customEvent) =>
-				{
-					Console.WriteLine("Button 1 Start Press");
-					//CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
-				});
+                    if (item.ID == 1)
+                        CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
 
-
-			button1EndPress = new CCEventListenerCustom(SneakyPanelControl.BUTTON_1_END_PRESS, (customEvent) =>
-				{
-					Console.WriteLine("Button 1 End Press");
-				});
-
-
-			button2StartPress = new CCEventListenerCustom(SneakyPanelControl.BUTTON_2_START_PRESS, (customEvent) =>
-				{
-					Console.WriteLine("Button 2 Start Press");
-				});
-
-
-			button2EndPress = new CCEventListenerCustom(SneakyPanelControl.BUTTON_2_END_PRESS, (customEvent) =>
-				{
-					Console.WriteLine("Button 2 End Press");
-				});
-
-
-			button3StartPress = new CCEventListenerCustom(SneakyPanelControl.BUTTON_3_START_PRESS, (customEvent) =>
-				{
-					Console.WriteLine("Button 3 Start Press");
-				});
-
-
-			button3EndPress = new CCEventListenerCustom(SneakyPanelControl.BUTTON_3_END_PRESS, (customEvent) =>
-				{
-					Console.WriteLine("Button 3 End Press");
-				});
-
-
-			button4StartPress = new CCEventListenerCustom(SneakyPanelControl.BUTTON_4_START_PRESS, (customEvent) =>
-				{
-					Console.WriteLine("Button 4 Start Press");
-				});
-
-
-			button4EndPress = new CCEventListenerCustom(SneakyPanelControl.BUTTON_4_END_PRESS, (customEvent) =>
-				{
-					Console.WriteLine("Button 4 End Press");
-				});
-
-			EventDispatcher.AddEventListener(button1StartPress, 1);
-			EventDispatcher.AddEventListener(button1EndPress, 1);
-			EventDispatcher.AddEventListener(button2StartPress, 1);
-			EventDispatcher.AddEventListener(button2EndPress, 1);
-			EventDispatcher.AddEventListener(button3StartPress, 1);
-			EventDispatcher.AddEventListener(button3EndPress, 1);
-			EventDispatcher.AddEventListener(button4StartPress, 1);
-			EventDispatcher.AddEventListener(button4EndPress, 1);
-
-
-			JoyPanel.IsDebug = true;
-
-			AddChild(JoyPanel, 9999);
-
+                });
+                EventDispatcher.AddEventListener(tmp, 1);
+                listener_buttons.Add(tmp);
+            }
         }
 
         public override void Update(float dt)
@@ -157,7 +105,7 @@ namespace SneakyJoystickExample.Common
 
             if (JoyPanel != null)
             {
-                bear.Position = JoyPanel.GetPlayerPosition(bear, dt);
+                bear.Position = JoyPanel.GetPlayerPosition(dt);
 
                 if (JoyPanel.HasAnyDirection)
                 {
@@ -175,24 +123,18 @@ namespace SneakyJoystickExample.Common
 
         }
 
-		public override void OnExit()
-		{
-			// Don't forget to remove the fixed priority Event listeners yourself.
-			this.EventDispatcher.RemoveEventListener(startMovement);
-			this.EventDispatcher.RemoveEventListener(endMovement);
+        public override void OnExit()
+        {
+            base.OnExit();
 
-			this.EventDispatcher.RemoveEventListener(button1StartPress);
-			this.EventDispatcher.RemoveEventListener(button1EndPress);
-			this.EventDispatcher.RemoveEventListener(button2StartPress);
-			this.EventDispatcher.RemoveEventListener(button2EndPress);
-			this.EventDispatcher.RemoveEventListener(button3StartPress);
-			this.EventDispatcher.RemoveEventListener(button3EndPress);
-			this.EventDispatcher.RemoveEventListener(button4StartPress);
-			this.EventDispatcher.RemoveEventListener(button4EndPress);
+            this.EventDispatcher.RemoveEventListener(startMovement);
+            this.EventDispatcher.RemoveEventListener(endMovement);
 
-
-			base.OnExit();
-		}
+            foreach (var item in listener_buttons)
+            {
+                this.EventDispatcher.RemoveEventListener(item);
+            }
+        }
 
         public static CCScene Scene
         {

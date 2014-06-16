@@ -19,11 +19,11 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #region Private properties
 
-		private CCSprite defaultSprite;
-		private CCSprite activatedSprite;
-		private CCSprite disabledSprite;
-		private CCSprite pressSprite;
-		private byte opacity;
+        private CCSprite defaultSprite;
+        private CCSprite activatedSprite;
+        private CCSprite disabledSprite;
+        private CCSprite pressSprite;
+        private byte opacity;
 
         #endregion
 
@@ -183,27 +183,27 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #region Contructor
 
-		public SneakyButtonControlSkinnedBase()
-			:this(new CCRect(0, 0, 64, 64))
-		{}
+        public SneakyButtonControlSkinnedBase(int ID)
+            : this(new CCRect(0, 0, 64, 64), ID)
+        { }
 
 
-		public SneakyButtonControlSkinnedBase(CCRect size)
-			:this (size, "control/button_release.png", "control/button_pressed.png", "control/button_pressed.png")
-		{}
+        public SneakyButtonControlSkinnedBase(CCRect size, int ID)
+            : this(size, "control/button_release.png", "control/button_pressed.png", "control/button_pressed.png", ID)
+        { }
 
 
 
-        public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite, string disabledSprite)
-            : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite), new CCSprite(disabledSprite))
-        {}
+        public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite, string disabledSprite, int ID)
+            : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite), new CCSprite(disabledSprite), ID)
+        { }
 
         public SneakyButtonControlSkinnedBase(CCRect rect,
             CCSprite defaultSprite,
             CCSprite activatedSprite,
             CCSprite pressSprite,
-            CCSprite disabledSprite)
-            : base(rect)
+            CCSprite disabledSprite, int ID)
+            : base(rect, ID)
         {
 
             DefaultSprite = defaultSprite;
@@ -214,8 +214,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             CheckSelf();
         }
 
-        public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite)
-            : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite))
+        public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite, int ID)
+            : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite), ID)
         {
 
         }
@@ -223,9 +223,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public SneakyButtonControlSkinnedBase(CCRect rect,
             CCSprite defaultSprite,
             CCSprite activatedSprite,
-            CCSprite pressSprite
+            CCSprite pressSprite, int ID
           )
-            : base(rect)
+            : base(rect, ID)
         {
 
             DefaultSprite = defaultSprite;

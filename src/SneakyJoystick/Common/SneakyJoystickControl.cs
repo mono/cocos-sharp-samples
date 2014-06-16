@@ -10,23 +10,24 @@ namespace CocosSharp.Extensions.SneakyJoystick
     public class SneakyJoystickControl : CCLayer
     {
 
+
         #region Custom Events
 
-		CCEventCustom startMovement = new CCEventCustom(SneakyPanelControl.START_MOVEMENT);
-		CCEventCustom endMovement = new CCEventCustom(SneakyPanelControl.END_MOVEMENT);
+        CCEventCustom startMovement = new CCEventCustom(SneakyPanelControl.START_MOVEMENT);
+        CCEventCustom endMovement = new CCEventCustom(SneakyPanelControl.END_MOVEMENT);
 
         #endregion
 
         #region Private properties
 
-		private bool isDPad;
-		private float joystickRadius;
-		private float thumbRadius;
-		private float deadRadius; //Size of deadzone in joystick (how far you must move before input starts). Automatically set if isDpad == YES
+        private bool isDPad;
+        private float joystickRadius;
+        private float thumbRadius;
+        private float deadRadius; //Size of deadzone in joystick (how far you must move before input starts). Automatically set if isDpad == YES
 
-		private bool isMoving;
+        private bool isMoving;
 
-		private CCRect ControlSize { get; set; }
+        private CCRect ControlSize { get; set; }
 
         #endregion
 
@@ -150,24 +151,24 @@ namespace CocosSharp.Extensions.SneakyJoystick
             ThumbRadius = 32.0f;
             DeadRadius = 0.0f;
 
-			AnchorPoint = CCPoint.AnchorMiddle;
+            AnchorPoint = CCPoint.AnchorMiddle;
 
-			ControlSize = rect;
+            ControlSize = rect;
 
         }
 
-		protected override void RunningOnNewWindow(CCSize windowSize)
-		{
-			base.RunningOnNewWindow(windowSize);
+        protected override void RunningOnNewWindow(CCSize windowSize)
+        {
+            base.RunningOnNewWindow(windowSize);
 
-			var rect = ControlSize.PixelsToPoints(Director.ContentScaleFactor);
+            var rect = ControlSize.PixelsToPoints(Director.ContentScaleFactor);
 
-			ContentSize = rect.Size;
-			Position = rect.Center;
+            ContentSize = rect.Size;
+            Position = rect.Center;
 
-			StickPosition = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
-			Center = ContentSize.Center;
-		}
+            StickPosition = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
+            Center = ContentSize.Center;
+        }
 
 
         public virtual void UpdateVelocity(CCPoint point)
@@ -244,8 +245,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
                     //[self updateVelocity:location];
                     UpdateVelocity(location);
 
-					// Fire off our event to notify that movement was started
-					EventDispatcher.DispatchEvent(startMovement);
+                    // Fire off our event to notify that movement was started
+                    EventDispatcher.DispatchEvent(startMovement);
 
                     return;
                 }
@@ -311,8 +312,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             UpdateVelocity(location);
 
-			// Fire off our event to notify that movement has ended.
-			EventDispatcher.DispatchEvent(endMovement);
+            // Fire off our event to notify that movement has ended.
+            EventDispatcher.DispatchEvent(endMovement);
         }
 
         public void ResetDirections()
