@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CocosSharp.IO.SneakyJoystick
+namespace CocosSharp.Extensions.SneakyJoystick
 {
 
 
@@ -35,7 +35,7 @@ namespace CocosSharp.IO.SneakyJoystick
         public CCPoint Center { get; set; }
 
         public CCPoint StickPreviousPosition { get; set; }
-        public CCPoint Velocity { get; set; }
+        public static CCPoint Velocity { get; set; }
 
         public float Degrees { get; set; }
         public bool AutoCenter { get; set; }

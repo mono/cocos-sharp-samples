@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CocosSharp.IO.SneakyJoystick
+namespace CocosSharp.Extensions.SneakyJoystick
 {
     public class SneakyButtonControlSkinnedBase : SneakyButtonControl
     {
 
         #region Static properties
 
-        public static string DEFAULT_IMAGE_BUTTON_RELEASE { get { return "control/button_release.png"; } }
-        public static string DEFAULT_IMAGE_BUTTON_PRESSED { get { return "control/button_pressed.png"; } }
+        public static string DEFAULT_IMAGE_BUTTON_RELEASE { get { return "control/button_release"; } }
+        public static string DEFAULT_IMAGE_BUTTON_PRESSED { get { return "control/button_pressed"; } }
         public static string DEFAULT_IMAGE_BUTTON_DISABLED { get { return DEFAULT_IMAGE_BUTTON_PRESSED; } }
 
         #endregion

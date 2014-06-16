@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CocosSharp.IO.SneakyJoystick
+namespace CocosSharp.Extensions.SneakyJoystick
 {
     public delegate void SneakyStartEndActionDelegate();
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CocosSharp.IO.SneakyJoystick
+namespace CocosSharp.Extensions.SneakyJoystick
 {
 
     public enum ButtonType
@@ -13,7 +13,6 @@ namespace CocosSharp.IO.SneakyJoystick
 
     public class SneakyPanelControl : CCLayer
     {
-
 
 
         #region Constants
@@ -121,6 +120,9 @@ namespace CocosSharp.IO.SneakyJoystick
         }
 
         //DIRECTION =====================================
+
+
+        public bool HasPlayer { get { return Player != null; } }
 
         public bool HasAnyDirection
         {
@@ -356,12 +358,25 @@ namespace CocosSharp.IO.SneakyJoystick
         }
 
 
-        public CCPoint GetPlayerPosition(CCNode player, float dt)
+        public static CCPoint GetPlayerPosition(CCNode player, float dt, CCSize wSize)
+        {
+            if (player != null)
+                return SneakyJoystickControl.GetPositionFromVelocity(SneakyJoystickControl.Velocity, player, dt, wSize);
+
+            return CCPoint.Zero;
+        }
+
+
+        public CCPoint GetPlayerPosition(float dt)
         {
             if (Player != null)
                 return JoyControl.GetNextPositionFromImage(Player, dt);
+
+            Console.WriteLine("SNEAKYCONTROL > GETPLAYERPOSITION() : ERROR. NOT PLAYER ASSIGNED");
             return CCPoint.Zero;
         }
+
+
 
         public void SetPlayer(CCNode user)
         {
@@ -447,7 +462,7 @@ namespace CocosSharp.IO.SneakyJoystick
             }
         }
 
-
+        
     }
 }
 
