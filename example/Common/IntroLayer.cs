@@ -23,39 +23,66 @@ namespace SneakyJoystickExample.Common
         CCAnimation walkAnim;
         CCAction action;
 
-        CCSprite bear;
+		CCSprite avitar;
 
         private bool IsWalking = false;
 
         public IntroLayer()
         {
 
-            winSize = Director.WindowSizeInPoints;
-
-            InitializeJoyPanel();
-
-            InitializeBear();
-
-            JoyPanel.SetPlayer(bear);
 
             Schedule();
         }
+
+		protected override void RunningOnNewWindow(CCSize windowSize)
+		{
+			base.RunningOnNewWindow(windowSize);
+
+			winSize = windowSize;
+
+			InitializeJoyPanel();
+
+			InitializeBear();
+			//InitializeMonkey();
+
+			JoyPanel.SetPlayer(avitar);
+		}
 
 
         public void InitializeBear()
         {
 
-            CCSpriteSheet spriteSheet = new CCSpriteSheet("magic-beard.plist");
+            //var spriteSheet = new CCSpriteSheet("magic-beard.plist");
+			var spriteSheet = new CCSpriteSheet("animations/AnimBear.plist");
 
             walkAnim = new CCAnimation(spriteSheet.Frames, 0.1f);
             action = new CCRepeatForever(new CCAnimate(walkAnim));
+			var frame = spriteSheet.Frames[0];
+			avitar = new CCSprite(frame);
+            avitar.Position = winSize.Center;
 
-            bear = new CCSprite(spriteSheet.Frames.FirstOrDefault());
-            bear.Position = winSize.Center;
-
-            AddChild(bear);
+            AddChild(avitar);
         }
 
+		public void InitializeMonkey()
+		{
+
+			var spriteSheet = new CCSpriteSheet("animations/monkey.plist");
+
+			// Load the frames using the Frames property which
+			var animationFrames = spriteSheet.Frames.FindAll ((x) =>
+				{
+					return x.TextureFilename.StartsWith ("frame");
+				});
+
+			walkAnim = new CCAnimation(animationFrames, 0.1f);
+			action = new CCRepeatForever(new CCAnimate(walkAnim));
+			avitar = new CCSprite(animationFrames.First());
+			avitar.Scale = 0.5f;
+			avitar.Position = winSize.Center;
+
+			AddChild(avitar);
+		}
 
 
         public void InitializeJoyPanel()
@@ -105,18 +132,18 @@ namespace SneakyJoystickExample.Common
 
             if (JoyPanel != null)
             {
-                bear.Position = JoyPanel.GetPlayerPosition(dt);
+                avitar.Position = JoyPanel.GetPlayerPosition(dt);
 
                 if (JoyPanel.HasAnyDirection)
                 {
-                    bear.FlipX = (JoyPanel.JoyControl.IsRight);
+                    avitar.FlipX = (JoyPanel.JoyControl.IsRight);
                 }
 
-                if (IsWalking && bear.NumberOfRunningActions == 0)
-                    bear.RunAction(action);
+                if (IsWalking && avitar.NumberOfRunningActions == 0)
+                    avitar.RunAction(action);
 
-                if (!IsWalking && bear.NumberOfRunningActions > 0)
-                    bear.StopAllActions();
+                if (!IsWalking && avitar.NumberOfRunningActions > 0)
+                    avitar.StopAllActions();
 
 
             }

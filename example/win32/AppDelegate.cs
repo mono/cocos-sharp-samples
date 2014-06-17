@@ -44,18 +44,23 @@ namespace SneakyJoystickExample.Windows
             director.DisplayStats = true;
             director.AnimationInterval = 1.0 / 60;
 
-			//CCSize designSize = new CCSize(preferredWidth, preferredHeight);
+			var resPolicy = CCResolutionPolicy.ShowAll; // This will letterbox your game
+
+			application.ContentSearchPaths.Add("SD");
+
 			CCSize designSize = new CCSize(480, 320);
 
-			if (CCDrawManager.FrameSize.Height > designSize.Height)
-            {
-                CCSize resourceSize = new CCSize(preferredWidth, preferredHeight);
-                //CCSize resourceSize = new CCSize(preferredWidth, preferredHeight);
-                application.ContentSearchPaths.Add("hd");
-                director.ContentScaleFactor = resourceSize.Height / designSize.Height;
+			if (CCDrawManager.FrameSize.Height > 320)
+			{
+				//CCSize resourceSize = new CCSize(960, 640);
+				CCSize resourceSize = new CCSize(1280, 768);
+				application.ContentSearchPaths.Insert(0,"HD");
+				director.ContentScaleFactor = resourceSize.Height / designSize.Height;
 			}
 
-            CCDrawManager.SetDesignResolutionSize(designSize.Width, designSize.Height, CCResolutionPolicy.ShowAll);
+			CCDrawManager.SetDesignResolutionSize(designSize.Width, designSize.Height, resPolicy);
+
+
 
             // turn on display FPS
             director.DisplayStats = true;

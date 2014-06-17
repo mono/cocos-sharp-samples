@@ -91,6 +91,8 @@
   <ItemGroup>
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\control\" />
+    <Folder Include="Content\HD\" />
+    <Folder Include="Content\SD\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\SneakyJoystick\win32\SneakyJoystick.csproj">
@@ -122,6 +124,30 @@
     </Content>
     <Content Include="..\Content\sound_oso.xnb">
       <Link>Content\sound_oso.xnb</Link>
+    </Content>
+    <Content Include="..\Content\SD\animations\AnimBear.plist">
+      <Link>Content\SD\animations\AnimBear.plist</Link>
+    </Content>
+    <Content Include="..\Content\SD\animations\AnimBear.png">
+      <Link>Content\SD\animations\AnimBear.png</Link>
+    </Content>
+    <Content Include="..\Content\SD\animations\monkey.plist">
+      <Link>Content\SD\animations\monkey.plist</Link>
+    </Content>
+    <Content Include="..\Content\SD\animations\monkey.png">
+      <Link>Content\SD\animations\monkey.png</Link>
+    </Content>
+    <Content Include="..\Content\HD\animations\AnimBear.plist">
+      <Link>Content\HD\animations\AnimBear.plist</Link>
+    </Content>
+    <Content Include="..\Content\HD\animations\AnimBear.png">
+      <Link>Content\HD\animations\AnimBear.png</Link>
+    </Content>
+    <Content Include="..\Content\HD\animations\monkey.plist">
+      <Link>Content\HD\animations\monkey.plist</Link>
+    </Content>
+    <Content Include="..\Content\HD\animations\monkey.png">
+      <Link>Content\HD\animations\monkey.png</Link>
     </Content>
   </ItemGroup>
 </Project>
