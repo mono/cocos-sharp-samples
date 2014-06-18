@@ -42,8 +42,8 @@ namespace SneakyJoystickExample.Common
 
 			InitializeJoyPanel();
 
-			InitializeBear();
-			//InitializeMonkey();
+			//InitializeBear();
+			InitializeMonkey();
 
 			JoyPanel.SetPlayer(avitar);
 		}

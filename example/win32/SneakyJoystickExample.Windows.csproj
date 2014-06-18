@@ -51,6 +51,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Content\HD\animations\AnimBear.png">
+      <Link>Content\HD\animations\AnimBear.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Content\HD\animations\monkey.png">
+      <Link>Content\HD\animations\monkey.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Content\SD\animations\AnimBear.png">
+      <Link>Content\SD\animations\AnimBear.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Content\SD\animations\monkey.png">
+      <Link>Content\SD\animations\monkey.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Game.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -70,12 +86,20 @@
       <Link>Content\control\joystick_thumb.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\Content\magic-beard.plist">
-      <Link>Content\magic-beard.plist</Link>
+    <None Include="..\Content\HD\animations\AnimBear.plist">
+      <Link>Content\HD\animations\AnimBear.plist</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\Content\magic-beard.xnb">
-      <Link>Content\magic-beard.xnb</Link>
+    <None Include="..\Content\HD\animations\monkey.plist">
+      <Link>Content\HD\animations\monkey.plist</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\SD\animations\AnimBear.plist">
+      <Link>Content\SD\animations\AnimBear.plist</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\SD\animations\monkey.plist">
+      <Link>Content\SD\animations\monkey.plist</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\Content\sound_oso.xnb">
