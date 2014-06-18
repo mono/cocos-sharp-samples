@@ -42,12 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\Helpers\src\CCMathExHelper.cs">
-      <Link>Helpers\CCMathExHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Helpers\src\CCPointExHelper.cs">
-      <Link>Helpers\CCPointExHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Common\ColoredCircleSprite.cs">
       <Link>ColoredCircleSprite.cs</Link>
     </Compile>
