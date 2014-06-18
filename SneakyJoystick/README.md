@@ -16,3 +16,6 @@ The example directory contains examples for various platforms using the SneakyJo
 + Playing a sound when a button control is pressed.
 + Moving the avitar loaded around the screen.
 + Animating the avitar while moving.
+
+
+![SneakyMonkey](screenshots/SneakyMonkey-Mac.png?raw=true "Sneaky Monkey")
