@@ -30,8 +30,13 @@ namespace SneakyJoystickExample.Common
         public IntroLayer()
         {
 
+			InitializeJoyPanel();
 
-            Schedule();
+			//InitializeBear();
+			InitializeMonkey();
+
+			JoyPanel.SetPlayer(avitar);
+
         }
 
 		protected override void RunningOnNewWindow(CCSize windowSize)
@@ -40,12 +45,39 @@ namespace SneakyJoystickExample.Common
 
 			winSize = windowSize;
 
-			InitializeJoyPanel();
+			avitar.Position = winSize.Center;
 
-			//InitializeBear();
-			InitializeMonkey();
+			startMovement = new CCEventListenerCustom(SneakyPanelControl.START_MOVEMENT, (customEvent) =>
+				{
+					IsWalking = true;
+					Console.WriteLine("Walking: " + IsWalking);
+				});
+			EventDispatcher.AddEventListener(startMovement, 1);
 
-			JoyPanel.SetPlayer(avitar);
+			endMovement = new CCEventListenerCustom(SneakyPanelControl.END_MOVEMENT, (customEvent) =>
+				{
+					IsWalking = false;
+					Console.WriteLine("Walking: " + IsWalking);
+				});
+
+			EventDispatcher.AddEventListener(endMovement, 1);
+
+			buttonEnded = new CCEventListenerCustom(SneakyPanelControl.END_PRESS_BUTTON, (customEvent) =>
+				{
+
+					var button = customEvent.UserData as SneakyButtonControl;
+					if (button != null)
+					{
+						if (button.ID == 1)
+							CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
+
+						Console.WriteLine("BUTTON {0} PRESSED", button.ID);
+					}
+				});
+
+			EventDispatcher.AddEventListener(buttonEnded, 1);
+
+			Schedule();
 		}
 
 
@@ -57,9 +89,7 @@ namespace SneakyJoystickExample.Common
 
             walkAnim = new CCAnimation(spriteSheet.Frames, 0.1f);
             action = new CCRepeatForever(new CCAnimate(walkAnim));
-			var frame = spriteSheet.Frames[0];
-			avitar = new CCSprite(frame);
-            avitar.Position = winSize.Center;
+			avitar = new CCSprite(spriteSheet.Frames.First());
 
             AddChild(avitar);
         }
@@ -79,7 +109,6 @@ namespace SneakyJoystickExample.Common
 			action = new CCRepeatForever(new CCAnimate(walkAnim));
 			avitar = new CCSprite(animationFrames.First());
 			avitar.Scale = 0.5f;
-			avitar.Position = winSize.Center;
 
 			AddChild(avitar);
 		}
@@ -91,37 +120,6 @@ namespace SneakyJoystickExample.Common
             JoyPanel = new SneakyPanelControl();
             JoyPanel.IsDebug = true;
             AddChild(JoyPanel, 9999);
-
-            startMovement = new CCEventListenerCustom(SneakyPanelControl.START_MOVEMENT, (customEvent) =>
-            {
-                IsWalking = true;
-                Console.WriteLine("Walking: " + IsWalking);
-            });
-            EventDispatcher.AddEventListener(startMovement, 1);
-
-            endMovement = new CCEventListenerCustom(SneakyPanelControl.END_MOVEMENT, (customEvent) =>
-                {
-                    IsWalking = false;
-                    Console.WriteLine("Walking: " + IsWalking);
-                });
-
-            EventDispatcher.AddEventListener(endMovement, 1);
-
-            buttonEnded = new CCEventListenerCustom(SneakyPanelControl.END_PRESS_BUTTON, (customEvent) =>
-            {
-
-                var button = customEvent.UserData as SneakyButtonControl;
-                if (button != null)
-                {
-                    if (button.ID == 1)
-                        CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
-
-                    Console.WriteLine("BUTTON {0} PRESSED", button.ID);
-                }
-            });
-
-            EventDispatcher.AddEventListener(buttonEnded, 1);
-
 
         }
 

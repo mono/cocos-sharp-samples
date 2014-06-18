@@ -186,18 +186,18 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 return;
             }
 
-            float angle = CCMathExHelper.atan2(dy, dx); // in radians
+			float angle = (float)Math.Atan2(dy, dx); // in radians
             if (angle < 0)
             {
-                angle += CCMathExHelper.PI_X_2;
+                angle +=  CCMathHelper.TwoPi;
             }
             float cosAngle;
             float sinAngle;
 
             if (isDPad)
             {
-                float anglePerSector = 360.0f / NumberOfDirections * CCMathExHelper.SJ_DEG2RAD;
-                angle = CCMathExHelper.round(angle / anglePerSector) * anglePerSector;
+				float anglePerSector = 360.0f / CCMathHelper.ToRadians(NumberOfDirections); //  NumberOfDirections * ((float)Math.PI / 180.0f);
+				angle = (float)Math.Round(angle / anglePerSector) * anglePerSector;
             }
 
             cosAngle = CCMathHelper.Cos(angle);
@@ -211,9 +211,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
 
             Velocity = new CCPoint(dx / joystickRadius, dy / joystickRadius);
-            Degrees = angle * CCMathExHelper.SJ_RAD2DEG;
+			Degrees = CCMathHelper.ToDegrees(angle);
 
-            // Update the thumb's position
+			// Update the thumb's position
             StickPosition = new CCPoint(dx + ContentSize.Width / 2, dy + ContentSize.Height / 2);
 
         }
@@ -353,7 +353,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public static CCPoint GetPositionFromVelocity(CCPoint velocity, CCPoint actualPosition, float Width, float Height, float maxWindowWidth, float maxWindowHeight, float dt)
         {
 
-            CCPoint scaledVelocity = CCPointExHelper.b2Mul(velocity, 240);
+            CCPoint scaledVelocity = velocity * 240;
             CCPoint newPosition = new CCPoint(actualPosition.X + scaledVelocity.X * dt, actualPosition.Y + scaledVelocity.Y * dt);
 
             if (newPosition.Y > maxWindowHeight - Height / 2)
