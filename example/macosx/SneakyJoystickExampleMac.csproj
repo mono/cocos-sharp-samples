@@ -122,9 +122,6 @@
     <Content Include="..\Content\magic-beard.xnb">
       <Link>Content\magic-beard.xnb</Link>
     </Content>
-    <Content Include="..\Content\sound_oso.xnb">
-      <Link>Content\sound_oso.xnb</Link>
-    </Content>
     <Content Include="..\Content\SD\animations\AnimBear.plist">
       <Link>Content\SD\animations\AnimBear.plist</Link>
     </Content>
@@ -148,6 +145,9 @@
     </Content>
     <Content Include="..\Content\HD\animations\monkey.png">
       <Link>Content\HD\animations\monkey.png</Link>
+    </Content>
+    <Content Include="..\Content\sound_oso.mp3">
+      <Link>Content\sound_oso.mp3</Link>
     </Content>
   </ItemGroup>
 </Project>
