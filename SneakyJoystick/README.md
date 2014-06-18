@@ -1,7 +1,7 @@
 SneakyJoystick: Famous Joycontrol on screen
 -------------------------------------------
 
-Ported to CocosSharp by Jose Mendez.
+Ported to CocosSharp by José Medrano.
 
 The src directory contains the ported code of SneakyJoystick to C# to be used within CocosSharp
 + Uses CustomEvents dispatched by the EventDispatcher of CocosSharp to :
