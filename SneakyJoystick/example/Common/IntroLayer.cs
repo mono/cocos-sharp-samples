@@ -12,9 +12,8 @@ namespace SneakyJoystickExample.Common
     public class IntroLayer : CCLayerColor
     {
 
-        CCEventListenerCustom startMovement;
-        CCEventListenerCustom endMovement;
-        CCEventListenerCustom buttonEnded;
+        CCEventListenerCustom joystickListener;
+        CCEventListenerCustom buttonListener;
 
 
         SneakyPanelControl JoyPanel;
@@ -23,101 +22,110 @@ namespace SneakyJoystickExample.Common
         CCAnimation walkAnim;
         CCAction action;
 
-		CCSprite avitar;
+        CCSprite avitar;
 
         private bool IsWalking = false;
 
         public IntroLayer()
         {
 
-			InitializeJoyPanel();
+            InitializeJoyPanel();
 
-			//InitializeBear();
-			InitializeMonkey();
+            InitializeMonkey();
 
-			JoyPanel.SetPlayer(avitar);
+            JoyPanel.SetPlayer(avitar);
 
         }
 
-		protected override void RunningOnNewWindow(CCSize windowSize)
-		{
-			base.RunningOnNewWindow(windowSize);
+        protected override void RunningOnNewWindow(CCSize windowSize)
+        {
+            base.RunningOnNewWindow(windowSize);
 
-			winSize = windowSize;
+            CCSimpleAudioEngine.SharedEngine.PreloadEffect("sound_oso");
 
-			avitar.Position = winSize.Center;
+            winSize = windowSize;
 
-			startMovement = new CCEventListenerCustom(SneakyPanelControl.START_MOVEMENT, (customEvent) =>
-				{
-					IsWalking = true;
-					Console.WriteLine("Walking: " + IsWalking);
-				});
-			EventDispatcher.AddEventListener(startMovement, 1);
+            avitar.Position = winSize.Center;
 
-			endMovement = new CCEventListenerCustom(SneakyPanelControl.END_MOVEMENT, (customEvent) =>
-				{
-					IsWalking = false;
-					Console.WriteLine("Walking: " + IsWalking);
-				});
+            joystickListener = new CCEventListenerCustom(SneakyPanelControl.JOY_LISTENER_ID, (customEvent) =>
+                {
+                    var response = customEvent.UserData as SneakyJoystickEventResponse;
+                    if (response != null)
+                    {
 
-			EventDispatcher.AddEventListener(endMovement, 1);
+                        switch (response.ResponseType)
+                        {
+                            case SneakyJoystickMovementStatus.Start:
+                                IsWalking = true;
+                                Console.WriteLine("Start walk.");
+                                break;
+                            case SneakyJoystickMovementStatus.End:
+                                IsWalking = false;
+                                Console.WriteLine("Stop walk.");
+                                break;
+                            default:
+                                break;
+                        }
 
-			buttonEnded = new CCEventListenerCustom(SneakyPanelControl.END_PRESS_BUTTON, (customEvent) =>
-				{
+                    }
 
-					var button = customEvent.UserData as SneakyButtonControl;
-					if (button != null)
-					{
-						if (button.ID == 1)
-							CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
+                });
+            EventDispatcher.AddEventListener(joystickListener, 1);
 
-						Console.WriteLine("BUTTON {0} PRESSED", button.ID);
-					}
-				});
+            buttonListener = new CCEventListenerCustom(SneakyPanelControl.BUTTON_LISTENER_ID, (customEvent) =>
+                {
+                    var response = customEvent.UserData as SneakyButtonEventResponse;
+                    if (response != null)
+                    {
+                        if (response.ID == 1)
+                            CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
 
-			EventDispatcher.AddEventListener(buttonEnded, 1);
+                        Console.WriteLine("BUTTON {0} {1}", response.ID, response.ResponseType == SneakyButtonStatus.Press ? "PRESED" : "UNPRESSED");
+                    }
+                });
 
-			Schedule();
-		}
+            EventDispatcher.AddEventListener(buttonListener, 1);
+
+            Schedule();
+        }
 
 
         public void InitializeBear()
         {
-
             //var spriteSheet = new CCSpriteSheet("magic-beard.plist");
-			var spriteSheet = new CCSpriteSheet("animations/AnimBear.plist");
+            var spriteSheet = new CCSpriteSheet("animations/AnimBear.plist");
 
             walkAnim = new CCAnimation(spriteSheet.Frames, 0.1f);
             action = new CCRepeatForever(new CCAnimate(walkAnim));
-			avitar = new CCSprite(spriteSheet.Frames.First());
+            avitar = new CCSprite(spriteSheet.Frames.First());
 
             AddChild(avitar);
         }
 
-		public void InitializeMonkey()
-		{
+        public void InitializeMonkey()
+        {
 
-			var spriteSheet = new CCSpriteSheet("animations/monkey.plist");
+            var spriteSheet = new CCSpriteSheet("animations/monkey.plist");
 
-			// Load the frames using the Frames property which
-			var animationFrames = spriteSheet.Frames.FindAll ((x) =>
-				{
-					return x.TextureFilename.StartsWith ("frame");
-				});
+            // Load the frames using the Frames property which
+            var animationFrames = spriteSheet.Frames.FindAll((x) =>
+                {
+                    return x.TextureFilename.StartsWith("frame");
+                });
 
-			walkAnim = new CCAnimation(animationFrames, 0.1f);
-			action = new CCRepeatForever(new CCAnimate(walkAnim));
-			avitar = new CCSprite(animationFrames.First());
-			avitar.Scale = 0.5f;
+            walkAnim = new CCAnimation(animationFrames, 0.1f);
+            action = new CCRepeatForever(new CCAnimate(walkAnim));
+            avitar = new CCSprite(animationFrames.First());
+            avitar.Scale = 0.5f;
 
-			AddChild(avitar);
-		}
+            AddChild(avitar);
+        }
 
 
         public void InitializeJoyPanel()
         {
 
-            JoyPanel = new SneakyPanelControl();
+            JoyPanel = new SneakyPanelControl(6);
             JoyPanel.IsDebug = true;
             AddChild(JoyPanel, 9999);
 
@@ -152,10 +160,8 @@ namespace SneakyJoystickExample.Common
         {
             base.OnExit();
 
-            this.EventDispatcher.RemoveEventListener(startMovement);
-            this.EventDispatcher.RemoveEventListener(endMovement);
-            this.EventDispatcher.RemoveEventListener(buttonEnded);
-
+            this.EventDispatcher.RemoveEventListener(joystickListener);
+            this.EventDispatcher.RemoveEventListener(buttonListener);
 
         }
 

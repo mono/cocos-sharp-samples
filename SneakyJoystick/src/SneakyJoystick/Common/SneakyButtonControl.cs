@@ -12,8 +12,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #region Custom Events
 
-        CCEventCustom startPress;
-        CCEventCustom endPress;
+        CCEventCustom buttonEvent;
 
         #endregion
 
@@ -47,8 +46,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             Position = rect.Origin;
             ID = id;
 
-            startPress = new CCEventCustom(SneakyPanelControl.START_PRESS_BUTTON);
-            endPress = new CCEventCustom(SneakyPanelControl.END_PRESS_BUTTON);
+            buttonEvent = new CCEventCustom(SneakyPanelControl.BUTTON_LISTENER_ID);
+
         }
 
         void limiter(float delta)
@@ -93,9 +92,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
                     CheckSelf();
 
+
                     // Fire off our event to notify that movement was started
-                    startPress.UserData = this;
-                    EventDispatcher.DispatchEvent(startPress);
+                    buttonEvent.UserData = new SneakyButtonEventResponse(SneakyButtonStatus.Press, ID, this);
+                    EventDispatcher.DispatchEvent(buttonEvent);
 
                     return true;
                 }
@@ -151,8 +151,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             CheckSelf();
 
             // Fire off our event to notify that movement was started
-            endPress.UserData = this;
-            EventDispatcher.DispatchEvent(endPress);
+            buttonEvent.UserData = new SneakyButtonEventResponse(SneakyButtonStatus.Release, ID, this);
+            EventDispatcher.DispatchEvent(buttonEvent);
 
         }
 

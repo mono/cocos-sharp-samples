@@ -13,8 +13,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #region Custom Events
 
-        CCEventCustom startMovement = new CCEventCustom(SneakyPanelControl.START_MOVEMENT);
-        CCEventCustom endMovement = new CCEventCustom(SneakyPanelControl.END_MOVEMENT);
+        CCEventCustom joystickEvent = new CCEventCustom(SneakyPanelControl.JOY_LISTENER_ID);
 
         #endregion
 
@@ -25,6 +24,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
         private float thumbRadius;
         private float deadRadius; //Size of deadzone in joystick (how far you must move before input starts). Automatically set if isDpad == YES
 
+
+
         private bool isMoving;
 
         private CCRect ControlSize { get; set; }
@@ -34,6 +35,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
         #region Public properties
 
         public CCPoint StickPosition { get; set; }
+
+        public CCPoint StickDirection { get; set; }
 
         public CCPoint Center { get; set; }
 
@@ -124,14 +127,79 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
         }
 
-        public bool IsUp { get; set; }
-        public bool IsRight { get; set; }
-        public bool IsLeft { get; set; }
-        public bool IsDown { get; set; }
-        public bool IsUpLeft { get; set; }
-        public bool IsUpRight { get; set; }
-        public bool IsDownLeft { get; set; }
-        public bool IsDownRight { get; set; }
+        public bool IsUp
+        {
+            get
+            {
+                if (StickDirection == null)
+                    return false;
+                return StickDirection.Y == 1;
+            }
+        }
+        public bool IsRight
+        {
+            get
+            {
+                if (StickDirection == null)
+                    return false;
+
+                return StickDirection.X == 1;
+            }
+        }
+        public bool IsLeft
+        {
+            get
+            {
+                if (StickDirection == null)
+                    return false;
+                return StickDirection.X == -1;
+            }
+        }
+        public bool IsDown
+        {
+            get
+            {
+                if (StickDirection == null)
+                    return false;
+                return StickDirection.Y == -1;
+            }
+        }
+        public bool IsUpLeft
+        {
+            get
+            {
+                if (StickDirection == null)
+                    return false;
+                return StickDirection.Y == 1 && StickDirection.X == -1;
+            }
+        }
+        public bool IsUpRight
+        {
+            get
+            {
+                if (StickDirection == null)
+                    return false;
+                return StickDirection.Y == 1 && StickDirection.X == 1;
+            }
+        }
+        public bool IsDownLeft
+        {
+            get
+            {
+                if (StickDirection == null)
+                    return false;
+                return StickDirection.Y == -1 && StickDirection.X == -1;
+            }
+        }
+        public bool IsDownRight
+        {
+            get
+            {
+                if (StickDirection == null)
+                    return false;
+                return StickDirection.Y == 1 && StickDirection.X == 1;
+            }
+        }
 
         #endregion
 
@@ -186,18 +254,18 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 return;
             }
 
-			float angle = (float)Math.Atan2(dy, dx); // in radians
+            float angle = (float)Math.Atan2(dy, dx); // in radians
             if (angle < 0)
             {
-                angle +=  CCMathHelper.TwoPi;
+                angle += CCMathHelper.TwoPi;
             }
             float cosAngle;
             float sinAngle;
 
             if (isDPad)
             {
-				float anglePerSector = 360.0f / CCMathHelper.ToRadians(NumberOfDirections); //  NumberOfDirections * ((float)Math.PI / 180.0f);
-				angle = (float)Math.Round(angle / anglePerSector) * anglePerSector;
+                float anglePerSector = 360.0f / CCMathHelper.ToRadians(NumberOfDirections); //  NumberOfDirections * ((float)Math.PI / 180.0f);
+                angle = (float)Math.Round(angle / anglePerSector) * anglePerSector;
             }
 
             cosAngle = CCMathHelper.Cos(angle);
@@ -211,9 +279,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
 
             Velocity = new CCPoint(dx / joystickRadius, dy / joystickRadius);
-			Degrees = CCMathHelper.ToDegrees(angle);
+            Degrees = CCMathHelper.ToDegrees(angle);
 
-			// Update the thumb's position
+            // Update the thumb's position
             StickPosition = new CCPoint(dx + ContentSize.Width / 2, dy + ContentSize.Height / 2);
 
         }
@@ -245,8 +313,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
                     //[self updateVelocity:location];
                     UpdateVelocity(location);
 
+                    joystickEvent.UserData = new SneakyJoystickEventResponse(SneakyJoystickMovementStatus.Start, null);
+
                     // Fire off our event to notify that movement was started
-                    EventDispatcher.DispatchEvent(startMovement);
+                    EventDispatcher.DispatchEvent(joystickEvent);
 
                     return;
                 }
@@ -257,7 +327,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public virtual void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
             //base.TouchesMoved(touches, touchEvent);
-
             if (!isMoving)
                 return;
 
@@ -267,17 +336,17 @@ namespace CocosSharp.Extensions.SneakyJoystick
             location = ConvertToNodeSpace(location);
 
             //Check direction
-            IsRight = (location.X > Center.X);
-            IsLeft = !IsRight;
-            IsUp = (location.Y > Center.Y);
-            IsDown = !IsUp;
-
-            IsDownLeft = IsDown && IsLeft;
-            IsDownRight = IsDown && IsRight;
-            IsUpLeft = IsUp && IsLeft;
-            IsUpRight = IsUp && IsRight;
+            StickDirection = new CCPoint(
+                (location.X > Center.X) ? 1 : (location.X < Center.X) ? -1 : 0,
+                (location.Y > Center.Y) ? 1 : (location.Y < Center.Y) ? -1 : 0
+                );
 
             StickPreviousPosition = location;
+
+            joystickEvent.UserData = new SneakyJoystickEventResponse(SneakyJoystickMovementStatus.OnMove, StickDirection);
+            // Fire off our event to notify that movement was started
+            EventDispatcher.DispatchEvent(joystickEvent);
+
 
             UpdateVelocity(location);
 
@@ -286,14 +355,12 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public virtual void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
         {
             //base.TouchesCancelled(touches, touchEvent);
-
             OnTouchesEnded(touches, touchEvent);
         }
 
         public virtual void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             //base.TouchesEnded(touches, touchEvent);
-
             if (!isMoving)
                 return;
 
@@ -312,13 +379,14 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             UpdateVelocity(location);
 
+            joystickEvent.UserData = new SneakyJoystickEventResponse(SneakyJoystickMovementStatus.End, null);
             // Fire off our event to notify that movement has ended.
-            EventDispatcher.DispatchEvent(endMovement);
+            EventDispatcher.DispatchEvent(joystickEvent);
         }
 
         public void ResetDirections()
         {
-            IsLeft = IsRight = IsUp = IsDown = IsDownLeft = IsDownRight = IsUpLeft = IsUpRight = false;
+            StickDirection = CCPoint.Zero;
         }
 
         public void ForceCenter()
