@@ -192,6 +192,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public SneakyPanelControl(int buttons)
         {
+
             wSize = Director.WindowSizeInPoints;
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
         }
@@ -200,13 +201,13 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             base.RunningOnNewWindow(windowSize);
 
-            Opacity = DEFAULT_TRANSPARENCY;
-
             //Joystick Init
             InitializeJoyStick();
 
             //Buttons init
             InitializeButtons(Buttons.Capacity);
+
+            Opacity = DEFAULT_TRANSPARENCY;
 
             var listener1 = new CCEventListenerTouchAllAtOnce();
             listener1.OnTouchesBegan = OnTouchesBegan;
