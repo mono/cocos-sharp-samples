@@ -70,7 +70,7 @@ namespace SneakyJoystickExample.Common
                     }
 
                 });
-            EventDispatcher.AddEventListener(joystickListener, 1);
+            AddEventListener(joystickListener, 1);
 
             buttonListener = new CCEventListenerCustom(SneakyPanelControl.BUTTON_LISTENER_ID, (customEvent) =>
                 {
@@ -84,7 +84,7 @@ namespace SneakyJoystickExample.Common
                     }
                 });
 
-            EventDispatcher.AddEventListener(buttonListener, 1);
+            AddEventListener(buttonListener, 1);
 
             Schedule();
         }
@@ -160,8 +160,8 @@ namespace SneakyJoystickExample.Common
         {
             base.OnExit();
 
-            this.EventDispatcher.RemoveEventListener(joystickListener);
-            this.EventDispatcher.RemoveEventListener(buttonListener);
+            RemoveEventListener(joystickListener);
+            RemoveEventListener(buttonListener);
 
         }
 

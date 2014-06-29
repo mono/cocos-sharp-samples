@@ -95,7 +95,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
                     // Fire off our event to notify that movement was started
                     buttonEvent.UserData = new SneakyButtonEventResponse(SneakyButtonStatus.Press, ID, this);
-                    EventDispatcher.DispatchEvent(buttonEvent);
+                    DispatchEvent(buttonEvent);
 
                     return true;
                 }
@@ -152,7 +152,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             // Fire off our event to notify that movement was started
             buttonEvent.UserData = new SneakyButtonEventResponse(SneakyButtonStatus.Release, ID, this);
-            EventDispatcher.DispatchEvent(buttonEvent);
+            DispatchEvent(buttonEvent);
 
         }
 

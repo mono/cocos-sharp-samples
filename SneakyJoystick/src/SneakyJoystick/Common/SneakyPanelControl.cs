@@ -214,7 +214,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
             listener1.OnTouchesMoved = OnTouchesMoved;
             listener1.OnTouchesCancelled = OnTouchesCancelled;
             listener1.OnTouchesEnded = OnTouchesEnded;
-            EventDispatcher.AddEventListener(listener1, this);
+            AddEventListener(listener1, this);
         }
 
         public void InitializeJoyStick()
