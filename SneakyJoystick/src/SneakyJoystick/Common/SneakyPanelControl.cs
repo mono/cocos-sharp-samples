@@ -340,11 +340,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             return CCPoint.Zero;
         }
 
-        public void SetPlayer(CCNode user)
-        {
-            Player = user;
-        }
-
         protected override void Draw()
         {
 
