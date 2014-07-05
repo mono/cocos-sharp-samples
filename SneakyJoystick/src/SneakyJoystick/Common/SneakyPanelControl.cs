@@ -59,7 +59,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public SneakyJoystickControlSkinnedBase JoyControl;
         public List<SneakyButtonControlSkinnedBase> Buttons;
 
-        CCNode Player;
+		public CCNode Player { get; set; }
         CCSize wSize;
 
         public bool IsDebug
@@ -331,11 +331,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             Console.WriteLine("SNEAKYCONTROL > GETPLAYERPOSITION() : ERROR. NOT PLAYER ASSIGNED");
             return CCPoint.Zero;
-        }
-
-        public void SetPlayer(CCNode user)
-        {
-            Player = user;
         }
 
         protected override void Draw()
