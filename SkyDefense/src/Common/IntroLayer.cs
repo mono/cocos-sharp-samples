@@ -120,7 +120,7 @@ namespace SkyDefense.Common
             //tListener.OnTouchesCancelled = TouchesCancelled;
             //tListener.OnTouchesEnded = TouchesEnded;
             //tListener.OnTouchesMoved = TouchesMoved;
-            EventDispatcher.AddEventListener(tListener, this);
+            AddEventListener(tListener, this);
 
             //create main loop
             Schedule(Update);

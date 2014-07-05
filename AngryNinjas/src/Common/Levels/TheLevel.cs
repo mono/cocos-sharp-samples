@@ -173,7 +173,7 @@ namespace AngryNinjas
             tListener.OnTouchesEnded = TouchesEnded;
             tListener.OnTouchesMoved = TouchesMoved;
 
-            EventDispatcher.AddEventListener(tListener, this);
+            AddEventListener(tListener, this);
 
 #endif
 

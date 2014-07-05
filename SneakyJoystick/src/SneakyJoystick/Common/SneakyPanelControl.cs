@@ -59,7 +59,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public SneakyJoystickControlSkinnedBase JoyControl { get; set; }
         public List<SneakyButtonControlSkinnedBase> Buttons { get; set; }
 
-        CCNode Player { get; set; }
+        public CCNode Player { get; set; }
         CCSize wSize { get; set; }
 
         CCEventListenerTouchAllAtOnce tListener { get; set; }

@@ -80,8 +80,8 @@ namespace SneakyJoystickExample.Common
                         if (response.ID == 1)
                             CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
 
-						if (response.ID == 0 && response.ResponseType == SneakyButtonStatus.Release)
-							SwitchAvitar();
+                        if (response.ID == 0 && response.ResponseType == SneakyButtonStatus.Release)
+                            SwitchAvitar();
 
                         Console.WriteLine("BUTTON {0} {1}", response.ID, response.ResponseType == SneakyButtonStatus.Press ? "PRESED" : "UNPRESSED");
                     }
@@ -100,7 +100,7 @@ namespace SneakyJoystickExample.Common
 
             walkAnim = new CCAnimation(spriteSheet.Frames, 0.1f);
             action = new CCRepeatForever(new CCAnimate(walkAnim));
-			avitar = new CCSprite(spriteSheet.Frames.First()) { Name = "Bear"};
+            avitar = new CCSprite(spriteSheet.Frames.First()) { Name = "Bear" };
 
             AddChild(avitar);
         }
@@ -118,41 +118,41 @@ namespace SneakyJoystickExample.Common
 
             walkAnim = new CCAnimation(animationFrames, 0.1f);
             action = new CCRepeatForever(new CCAnimate(walkAnim));
-			avitar = new CCSprite(animationFrames.First()) { Name = "Monkey"};
+            avitar = new CCSprite(animationFrames.First()) { Name = "Monkey" };
             avitar.Scale = 0.5f;
 
             AddChild(avitar);
         }
 
 
-		void SwitchAvitar()
-		{
-			if (avitar !=null)
-			{
-				var position = avitar.Position;
-				var flipX = avitar.FlipX;
+        void SwitchAvitar()
+        {
+            if (avitar != null)
+            {
+                var position = avitar.Position;
+                var flipX = avitar.FlipX;
 
-				RemoveChild(avitar, true);
-				if (avitar.Name == "Monkey")
-				{
-					InitializeBear();
-				}
-				else
-				{
-					InitializeMonkey();
-				}
-				avitar.Position = position;
-				avitar.FlipX = flipX;
-				JoyPanel.Player = avitar;
-			}
+                RemoveChild(avitar, true);
+                if (avitar.Name == "Monkey")
+                {
+                    InitializeBear();
+                }
+                else
+                {
+                    InitializeMonkey();
+                }
+                avitar.Position = position;
+                avitar.FlipX = flipX;
+                JoyPanel.Player = avitar;
+            }
 
-		}
+        }
 
 
         public void InitializeJoyPanel()
         {
 
-            JoyPanel = new SneakyPanelControl(6);
+            JoyPanel = new SneakyPanelControl(2);
             JoyPanel.IsDebug = true;
             AddChild(JoyPanel, 9999);
 
@@ -165,7 +165,7 @@ namespace SneakyJoystickExample.Common
 
             if (JoyPanel != null)
             {
-                avitar.Position = JoyPanel.GetPlayerPosition(dt);
+                avitar.Position = JoyPanel.GetPlayerPosition(dt, Director.WindowSizeInPixels);
 
                 if (JoyPanel.HasAnyDirection)
                 {

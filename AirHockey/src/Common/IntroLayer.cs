@@ -32,7 +32,7 @@ namespace AirHockey.Common
             _player1Score = 0;
             _player2Score = 0;
 
-            
+
             //get screen size
             _screenSize = Director.WindowSizeInPixels; //CCDirector::sharedDirector()->getWinSize();
 
@@ -75,7 +75,7 @@ namespace AirHockey.Common
             tListener.OnTouchesBegan = TouchesBegan;
             tListener.OnTouchesEnded = TouchesEnded;
             tListener.OnTouchesMoved = TouchesMoved;
-            EventDispatcher.AddEventListener(tListener, this);
+            AddEventListener(tListener, this);
 
             Schedule(Update);
 
