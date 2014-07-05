@@ -316,7 +316,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                     joystickEvent.UserData = new SneakyJoystickEventResponse(SneakyJoystickMovementStatus.Start, null);
 
                     // Fire off our event to notify that movement was started
-                    EventDispatcher.DispatchEvent(joystickEvent);
+                    DispatchEvent(joystickEvent);
 
                     return;
                 }
@@ -345,7 +345,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             joystickEvent.UserData = new SneakyJoystickEventResponse(SneakyJoystickMovementStatus.OnMove, StickDirection);
             // Fire off our event to notify that movement was started
-            EventDispatcher.DispatchEvent(joystickEvent);
+            DispatchEvent(joystickEvent);
 
 
             UpdateVelocity(location);
@@ -381,7 +381,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             joystickEvent.UserData = new SneakyJoystickEventResponse(SneakyJoystickMovementStatus.End, null);
             // Fire off our event to notify that movement has ended.
-            EventDispatcher.DispatchEvent(joystickEvent);
+            DispatchEvent(joystickEvent);
         }
 
         public void ResetDirections()
@@ -394,15 +394,15 @@ namespace CocosSharp.Extensions.SneakyJoystick
             StickPosition = new CCPoint(Center.X, Center.Y);
         }
 
-        public CCPoint GetNextPositionFromImage(CCNode node, float dt)
+        public CCPoint GetNextPositionFromImage(CCNode node, float dt, CCSize wSize)
         {
-            return GetPositionFromVelocity(Velocity, node, dt, Director.WindowSizeInPixels);
+            return GetPositionFromVelocity(Velocity, node, dt, wSize);
         }
 
-        public void RefreshImagePosition(CCNode node, float dt)
+        public void RefreshImagePosition(CCNode node, float dt, CCSize wSize)
         {
             if (node != null)
-                node.Position = GetPositionFromVelocity(Velocity, node, dt, Director.WindowSizeInPixels);
+                node.Position = GetPositionFromVelocity(Velocity, node, dt, wSize);
         }
 
 

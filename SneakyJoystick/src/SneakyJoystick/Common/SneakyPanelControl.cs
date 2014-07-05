@@ -56,11 +56,15 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #endregion
 
-        public SneakyJoystickControlSkinnedBase JoyControl;
-        public List<SneakyButtonControlSkinnedBase> Buttons;
+        public SneakyJoystickControlSkinnedBase JoyControl { get; set; }
+        public List<SneakyButtonControlSkinnedBase> Buttons { get; set; }
 
-        CCNode Player;
-        CCSize wSize;
+        CCNode Player { get; set; }
+        CCSize wSize { get; set; }
+
+        CCEventListenerTouchAllAtOnce tListener { get; set; }
+        public bool IsListenerDisabled { get; set; }
+
 
         public bool IsDebug
         {
@@ -197,6 +201,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
         }
 
+
         protected override void RunningOnNewWindow(CCSize windowSize)
         {
             base.RunningOnNewWindow(windowSize);
@@ -209,12 +214,15 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             Opacity = DEFAULT_TRANSPARENCY;
 
-            var listener1 = new CCEventListenerTouchAllAtOnce();
-            listener1.OnTouchesBegan = OnTouchesBegan;
-            listener1.OnTouchesMoved = OnTouchesMoved;
-            listener1.OnTouchesCancelled = OnTouchesCancelled;
-            listener1.OnTouchesEnded = OnTouchesEnded;
-            EventDispatcher.AddEventListener(listener1, this);
+            if (!IsListenerDisabled)
+            {
+                tListener = new CCEventListenerTouchAllAtOnce();
+                tListener.OnTouchesBegan = OnTouchesBegan;
+                tListener.OnTouchesMoved = OnTouchesMoved;
+                tListener.OnTouchesCancelled = OnTouchesCancelled;
+                tListener.OnTouchesEnded = OnTouchesEnded;
+                AddEventListener(tListener, this);
+            }
         }
 
         public void InitializeJoyStick()
@@ -244,7 +252,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         }
 
 
-        private void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+        public void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             JoyControl.OnTouchesEnded(touches, touchEvent);
 
@@ -252,7 +260,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 button.OnTouchesEnded(touches, touchEvent);
         }
 
-        private void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
+        public void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
         {
             JoyControl.OnTouchesCancelled(touches, touchEvent);
 
@@ -260,7 +268,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 button.OnTouchesCancelled(touches, touchEvent);
         }
 
-        private void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
+        public void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
             JoyControl.OnTouchesMoved(touches, touchEvent);
 
@@ -268,7 +276,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 button.OnTouchesMoved(touches, touchEvent);
         }
 
-        private void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
+        public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
             if (JoyControl != null)
                 JoyControl.OnTouchesBegan(touches, touchEvent);
@@ -298,17 +306,16 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
             else
             {
-
-                x = 1f;
+                y = .15f;
+                x = wSize.Width;
                 for (int i = 0; i < Buttons.Count; i++)
                 {
 
-                    y = (i % 2 == 0) ? 0.1f : 0.21f;
+                    Buttons[i].Position = new CCPoint(x, wSize.Height * y);
 
-                    if (i % 2 == 0)
-                        x -= 0.12f;
+                    x -= (Buttons[i].DefaultSprite.Texture.ContentSizeInPixels.Width + 20f);
 
-                    Buttons[i].Position = new CCPoint(wSize.Width * x, wSize.Height * y);
+
 
                 }
 
@@ -324,10 +331,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
         }
 
 
-        public CCPoint GetPlayerPosition(float dt)
+        public CCPoint GetPlayerPosition(float dt, CCSize wSize)
         {
             if (Player != null)
-                return JoyControl.GetNextPositionFromImage(Player, dt);
+                return JoyControl.GetNextPositionFromImage(Player, dt, wSize);
 
             Console.WriteLine("SNEAKYCONTROL > GETPLAYERPOSITION() : ERROR. NOT PLAYER ASSIGNED");
             return CCPoint.Zero;
@@ -349,7 +356,19 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
         }
 
+
+        public override void OnExit()
+        {
+            base.OnExit();
+
+            if (!IsListenerDisabled)
+                RemoveEventListener(tListener);
+
+        }
+
     }
+
+
 
     #region RESPONSE CLASSES
     public class SneakyJoystickEventResponse
@@ -378,6 +397,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
     }
 
     #endregion
+
+
 
 }
 
