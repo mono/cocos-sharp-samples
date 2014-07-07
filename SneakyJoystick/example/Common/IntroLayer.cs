@@ -41,6 +41,10 @@ namespace SneakyJoystickExample.Common
         {
             base.RunningOnNewWindow(windowSize);
 
+
+			//JoyPanel.IsDebug = true;
+			JoyPanel.Orientation = ButtonsOrientation.Vertical;
+
             CCSimpleAudioEngine.SharedEngine.PreloadEffect("sound_oso");
 
             winSize = windowSize;
@@ -153,7 +157,6 @@ namespace SneakyJoystickExample.Common
         {
 
             JoyPanel = new SneakyPanelControl(2);
-            JoyPanel.IsDebug = true;
             AddChild(JoyPanel, 9999);
 
         }
@@ -165,7 +168,7 @@ namespace SneakyJoystickExample.Common
 
             if (JoyPanel != null)
             {
-                avitar.Position = JoyPanel.GetPlayerPosition(dt, Director.WindowSizeInPixels);
+                avitar.Position = JoyPanel.GetPlayerPosition(dt, Director.WindowSizeInPoints);
 
                 if (JoyPanel.HasAnyDirection)
                 {

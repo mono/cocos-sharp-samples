@@ -197,7 +197,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public SneakyPanelControl(int buttons)
         {
 
-            wSize = Director.WindowSizeInPoints;
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
         }
 
@@ -206,7 +205,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             base.RunningOnNewWindow(windowSize);
 
-            //Joystick Init
+			wSize = windowSize;
+
+			//Joystick Init
             InitializeJoyStick();
 
             //Buttons init
@@ -300,7 +301,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                         y += 0.12f;
 
                     Buttons[i].Position = new CCPoint(wSize.Width * x, wSize.Height * y);
-
+					Buttons[i].AnchorPoint = CCPoint.AnchorLowerLeft;
                 }
 
             }
@@ -312,8 +313,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 {
 
                     Buttons[i].Position = new CCPoint(x, wSize.Height * y);
-
-                    x -= (Buttons[i].DefaultSprite.Texture.ContentSizeInPixels.Width + 20f);
+					Buttons[i].AnchorPoint = CCPoint.AnchorLowerRight;
+					x -= (Buttons[i].DefaultSprite.BoundingBox.Size.Width + 20f);
 
 
 

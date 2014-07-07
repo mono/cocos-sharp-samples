@@ -229,7 +229,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             base.RunningOnNewWindow(windowSize);
 
-            var rect = ControlSize.PixelsToPoints(Director.ContentScaleFactor);
+			var rect = ControlSize.PixelsToPoints(Director.ContentScaleFactor);
 
             ContentSize = rect.Size;
             Position = rect.Center;
@@ -410,7 +410,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public static CCPoint GetPositionFromVelocity(CCPoint velocity, CCNode node, float dt, CCSize winSize)
         {
-            return GetPositionFromVelocity(velocity, node.Position, node.ContentSize, winSize, dt);
+			return GetPositionFromVelocity(velocity, node.Position, node.BoundingBox.Size, winSize, dt);
         }
 
         public static CCPoint GetPositionFromVelocity(CCPoint velocity, CCPoint actualPosition, CCSize size, CCSize winSize, float dt)
@@ -422,7 +422,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
 
             CCPoint scaledVelocity = velocity * 240;
-            CCPoint newPosition = new CCPoint(actualPosition.X + scaledVelocity.X * dt, actualPosition.Y + scaledVelocity.Y * dt);
+			CCPoint newPosition = new CCPoint(actualPosition.X + scaledVelocity.X * dt, actualPosition.Y + scaledVelocity.Y * dt);
 
             if (newPosition.Y > maxWindowHeight - Height / 2)
             {
