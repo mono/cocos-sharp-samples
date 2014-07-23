@@ -65,11 +65,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public virtual bool OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
-
             CCTouch touch = touches.FirstOrDefault();
 
-            CCPoint location = Director.ConvertToGl(touch.LocationInView);
-            location = ConvertToNodeSpace(location);
+            CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
+            location = WorldToParentspace(location);
             //Do a fast rect check before doing a circle hit check:
             if (location.X < -radius || location.X > radius || location.Y < -radius || location.Y > radius)
             {
@@ -116,8 +115,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             if (!active) return;
 
-            CCPoint location = Director.ConvertToGl(touch.LocationInView);
-            location = ConvertToNodeSpace(location);
+            CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
+            location = WorldToParentspace(location);
 
             //Do a fast rect check before doing a circle hit check:
             if (location.X < -radius || location.X > radius || location.Y < -radius || location.Y > radius)

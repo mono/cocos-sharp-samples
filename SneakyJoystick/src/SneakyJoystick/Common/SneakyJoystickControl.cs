@@ -225,11 +225,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         }
 
-        protected override void RunningOnNewWindow(CCSize windowSize)
+        protected override void VisibleBoundsChanged ()
         {
-            base.RunningOnNewWindow(windowSize);
-
-			var rect = ControlSize.PixelsToPoints(Director.ContentScaleFactor);
+            var rect = ControlSize;
 
             ContentSize = rect.Size;
             Position = rect.Center;
@@ -237,7 +235,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             StickPosition = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
             Center = ContentSize.Center;
         }
-
 
         public virtual void UpdateVelocity(CCPoint point)
         {
@@ -294,10 +291,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             CCTouch touch = touches.First();
 
-            CCPoint location = Director.ConvertToGl(touch.LocationInView);
+            CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
+            location = WorldToParentspace(location);
 
-            //if([background containsPoint:[background convertToNodeSpace:location]]){
-            location = ConvertToNodeSpace(location);
             //Do a fast rect check before doing a circle hit check:
             if (location.X - joystickRadius < -joystickRadius || location.X - joystickRadius > joystickRadius || location.Y - joystickRadius < -joystickRadius || location.Y - joystickRadius > joystickRadius)
             {
@@ -332,8 +328,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             CCTouch touch = touches.First();
 
-            CCPoint location = Director.ConvertToGl(touch.LocationInView);
-            location = ConvertToNodeSpace(location);
+            CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
+            location = WorldToParentspace(location);
 
             //Check direction
             StickDirection = new CCPoint(
@@ -373,8 +369,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             CCPoint location = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
             if (!AutoCenter)
             {
-                location = Director.ConvertToGl(touch.LocationInView);
-                location = ConvertToNodeSpace(location);
+                location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
+                location = WorldToParentspace(location);
             }
 
             UpdateVelocity(location);

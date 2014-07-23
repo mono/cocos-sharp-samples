@@ -1,6 +1,5 @@
 using System.Reflection;
 using Microsoft.Xna.Framework;
-using CocosDenshion;
 using SneakyJoystickExample.Common;
 using CocosSharp;
 
@@ -8,8 +7,6 @@ namespace SneakyJoystickExample.Windows
 {
     public class AppDelegate : CCApplicationDelegate
     {
-
-
 
         int preferredWidth;
         int preferredHeight;
@@ -23,8 +20,6 @@ namespace SneakyJoystickExample.Windows
         /// </returns>
         public override void ApplicationDidFinishLaunching(CCApplication application)
         {
-
-
             //1280 x 768
 #if WINDOWS_PHONE
             preferredWidth = 1280;
@@ -34,43 +29,25 @@ namespace SneakyJoystickExample.Windows
             preferredHeight = 768;
 #endif
 
-            application.PreferredBackBufferWidth = preferredWidth;
-            application.PreferredBackBufferHeight = preferredHeight;
-
-            application.PreferMultiSampling = true;
             application.ContentRootDirectory = "Content";
+            application.ContentSearchPaths.Add("SD");
 
-            CCDirector director = CCApplication.SharedApplication.MainWindowDirector;
-            director.DisplayStats = true;
-            director.AnimationInterval = 1.0 / 60;
+            CCRect boundsRect = new CCRect(0.0f, 0.0f, 960, 640);
 
-			var resPolicy = CCResolutionPolicy.ShowAll; // This will letterbox your game
+            CCViewport viewport = new CCViewport(new CCRect (0.0f, 0.0f, 1.0f, 1.0f));
+            CCWindow window = application.MainWindow;
+            CCCamera camera = new CCCamera(boundsRect.Size, new CCPoint3(boundsRect.Center, 100.0f), new CCPoint3(boundsRect.Center, 0.0f));
+            CCDirector director = new CCDirector();
 
-			application.ContentSearchPaths.Add("SD");
+            window.AddSceneDirector(director);
 
-			CCSize designSize = new CCSize(480, 320);
+            CCScene scene = new CCScene(window, viewport, director);
+            CCLayer layer = new IntroLayer();
+            layer.Camera = camera;
 
-			if (CCDrawManager.FrameSize.Height > 320)
-			{
-				//CCSize resourceSize = new CCSize(960, 640);
-				CCSize resourceSize = new CCSize(1280, 768);
-				application.ContentSearchPaths.Insert(0,"HD");
-				director.ContentScaleFactor = resourceSize.Height / designSize.Height;
-			}
+            scene.AddChild(layer);
 
-			CCDrawManager.SetDesignResolutionSize(designSize.Width, designSize.Height, resPolicy);
-
-
-
-            // turn on display FPS
-            director.DisplayStats = true;
-
-            // set FPS. the default value is 1.0/60 if you don't call this
-            director.AnimationInterval = 1.0 / 60;
-
-            CCScene pScene = IntroLayer.Scene;
-
-            director.RunWithScene(pScene);
+            director.RunWithScene(scene);
         }
 
 

@@ -37,19 +37,23 @@ namespace SneakyJoystickExample.Common
 
         }
 
-        protected override void RunningOnNewWindow(CCSize windowSize)
+        protected override void VisibleBoundsChanged ()
         {
-            base.RunningOnNewWindow(windowSize);
+            base.VisibleBoundsChanged();
 
+            winSize = VisibleBoundsWorldspace.Size;
 
-			//JoyPanel.IsDebug = true;
-			JoyPanel.Orientation = ButtonsOrientation.Vertical;
+            avitar.Position = winSize.Center;
+        }
+
+        protected override void AddedToNewScene ()
+        {
+            base.AddedToNewScene();
+
+            JoyPanel.Orientation = ButtonsOrientation.Vertical;
 
             CCSimpleAudioEngine.SharedEngine.PreloadEffect("sound_oso");
 
-            winSize = windowSize;
-
-            avitar.Position = winSize.Center;
 
             joystickListener = new CCEventListenerCustom(SneakyPanelControl.JOY_LISTENER_ID, (customEvent) =>
                 {
@@ -168,7 +172,7 @@ namespace SneakyJoystickExample.Common
 
             if (JoyPanel != null)
             {
-                avitar.Position = JoyPanel.GetPlayerPosition(dt, Director.WindowSizeInPoints);
+                avitar.Position = JoyPanel.GetPlayerPosition(dt, VisibleBoundsWorldspace.Size);
 
                 if (JoyPanel.HasAnyDirection)
                 {
@@ -194,28 +198,6 @@ namespace SneakyJoystickExample.Common
             RemoveEventListener(buttonListener);
 
         }
-
-        public static CCScene Scene
-        {
-            get
-            {
-                // 'scene' is an autorelease object.
-                var scene = new CCScene();
-
-
-                // 'layer' is an autorelease object.
-                var layer = new IntroLayer();
-
-                // add layer as a child to scene
-                scene.AddChild(layer);
-
-                // return the scene
-                return scene;
-
-            }
-
-        }
-
     }
 }
 

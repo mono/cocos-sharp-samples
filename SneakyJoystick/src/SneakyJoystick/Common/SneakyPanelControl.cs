@@ -200,18 +200,23 @@ namespace CocosSharp.Extensions.SneakyJoystick
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
         }
 
-
-        protected override void RunningOnNewWindow(CCSize windowSize)
+        protected override void VisibleBoundsChanged ()
         {
-            base.RunningOnNewWindow(windowSize);
+            base.VisibleBoundsChanged ();
 
-			wSize = windowSize;
 
-			//Joystick Init
+            wSize = Layer.VisibleBoundsWorldspace.Size;
+
+            //Joystick Init
             InitializeJoyStick();
 
             //Buttons init
             InitializeButtons(Buttons.Capacity);
+        }
+
+        protected override void AddedToNewScene()
+        {
+            base.AddedToNewScene();
 
             Opacity = DEFAULT_TRANSPARENCY;
 
