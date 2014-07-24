@@ -8,6 +8,7 @@ namespace SneakyJoystickExample.Windows
     public class AppDelegate : CCApplicationDelegate
     {
 
+
         int preferredWidth;
         int preferredHeight;
 
@@ -33,17 +34,19 @@ namespace SneakyJoystickExample.Windows
             application.ContentSearchPaths.Add("SD");
 
             CCRect boundsRect = new CCRect(0.0f, 0.0f, 960, 640);
+			//CCRect boundsRect = new CCRect(0.0f, 0.0f, 1, 1);
 
-            CCViewport viewport = new CCViewport(new CCRect (0.0f, 0.0f, 1.0f, 1.0f));
+            CCViewport viewport = new CCViewport(new CCRect (0f, 0f, 1.0f, 1.0f));
             CCWindow window = application.MainWindow;
-            CCCamera camera = new CCCamera(boundsRect.Size, new CCPoint3(boundsRect.Center, 100.0f), new CCPoint3(boundsRect.Center, 0.0f));
-            CCDirector director = new CCDirector();
+			CCCamera camera = new CCCamera(boundsRect.Size, new CCPoint3(boundsRect.Center , 100.0f), new CCPoint3(boundsRect.Center, 0.0f));
+
+            var director = new CCDirector();
 
             window.AddSceneDirector(director);
 
             CCScene scene = new CCScene(window, viewport, director);
+			scene.Camera = camera;
             CCLayer layer = new IntroLayer();
-            layer.Camera = camera;
 
             scene.AddChild(layer);
 

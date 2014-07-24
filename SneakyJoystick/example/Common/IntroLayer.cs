@@ -26,29 +26,20 @@ namespace SneakyJoystickExample.Common
 
         private bool IsWalking = false;
 
-        public IntroLayer()
-        {
-
-            InitializeJoyPanel();
-
-            InitializeMonkey();
-
-            JoyPanel.Player = avitar;
-
-        }
-
-        protected override void VisibleBoundsChanged ()
-        {
-            base.VisibleBoundsChanged();
-
-            winSize = VisibleBoundsWorldspace.Size;
-
-            avitar.Position = winSize.Center;
-        }
+		public IntroLayer() : base(CCColor4B.AliceBlue)
+        {   }
 
         protected override void AddedToNewScene ()
         {
             base.AddedToNewScene();
+
+			InitializeJoyPanel();
+
+			InitializeMonkey();
+
+			JoyPanel.Player = avitar;
+
+			avitar.Position = VisibleBoundsWorldspace.Center;
 
             JoyPanel.Orientation = ButtonsOrientation.Vertical;
 

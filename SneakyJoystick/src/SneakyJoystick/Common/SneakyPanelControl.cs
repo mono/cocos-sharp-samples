@@ -198,20 +198,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
 
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
-        }
 
-        protected override void VisibleBoundsChanged ()
-        {
-            base.VisibleBoundsChanged ();
-
-
-            wSize = Layer.VisibleBoundsWorldspace.Size;
-
-            //Joystick Init
-            InitializeJoyStick();
-
-            //Buttons init
-            InitializeButtons(Buttons.Capacity);
         }
 
         protected override void AddedToNewScene()
@@ -219,6 +206,14 @@ namespace CocosSharp.Extensions.SneakyJoystick
             base.AddedToNewScene();
 
             Opacity = DEFAULT_TRANSPARENCY;
+
+			wSize = Layer.VisibleBoundsWorldspace.Size;
+
+			//Joystick Init
+			InitializeJoyStick();
+
+			//Buttons init
+			InitializeButtons(Buttons.Capacity);
 
             if (!IsListenerDisabled)
             {
@@ -339,7 +334,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public CCPoint GetPlayerPosition(float dt, CCSize wSize)
         {
-            if (Player != null)
+			if (JoyControl != null && Player != null)
                 return JoyControl.GetNextPositionFromImage(Player, dt, wSize);
 
             Console.WriteLine("SNEAKYCONTROL > GETPLAYERPOSITION() : ERROR. NOT PLAYER ASSIGNED");

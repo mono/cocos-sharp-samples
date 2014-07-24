@@ -131,8 +131,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-                if (StickDirection == null)
-                    return false;
                 return StickDirection.Y == 1;
             }
         }
@@ -140,9 +138,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-                if (StickDirection == null)
-                    return false;
-
                 return StickDirection.X == 1;
             }
         }
@@ -150,8 +145,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-                if (StickDirection == null)
-                    return false;
                 return StickDirection.X == -1;
             }
         }
@@ -159,8 +152,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-                if (StickDirection == null)
-                    return false;
                 return StickDirection.Y == -1;
             }
         }
@@ -168,8 +159,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-                if (StickDirection == null)
-                    return false;
                 return StickDirection.Y == 1 && StickDirection.X == -1;
             }
         }
@@ -177,8 +166,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-                if (StickDirection == null)
-                    return false;
                 return StickDirection.Y == 1 && StickDirection.X == 1;
             }
         }
@@ -186,8 +173,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-                if (StickDirection == null)
-                    return false;
                 return StickDirection.Y == -1 && StickDirection.X == -1;
             }
         }
@@ -195,8 +180,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-                if (StickDirection == null)
-                    return false;
                 return StickDirection.Y == 1 && StickDirection.X == 1;
             }
         }
@@ -221,20 +204,24 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             AnchorPoint = CCPoint.AnchorMiddle;
 
-            ControlSize = rect;
+			ControlSize = rect;
 
         }
 
-        protected override void VisibleBoundsChanged ()
-        {
-            var rect = ControlSize;
+		protected override void AddedToNewScene()
+		{
+			base.AddedToNewScene();
 
-            ContentSize = rect.Size;
-            Position = rect.Center;
+			var rect = ControlSize;
 
-            StickPosition = new CCPoint(ContentSize.Width / 2, ContentSize.Height / 2);
-            Center = ContentSize.Center;
-        }
+			ContentSize = rect.Size;
+			Position = rect.Center;
+
+			StickPosition = ContentSize.Center;
+			Center = ContentSize.Center;
+		}
+
+
 
         public virtual void UpdateVelocity(CCPoint point)
         {
@@ -279,7 +266,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             Degrees = CCMathHelper.ToDegrees(angle);
 
             // Update the thumb's position
-            StickPosition = new CCPoint(dx + ContentSize.Width / 2, dy + ContentSize.Height / 2);
+			var newLoc = new CCPoint(dx + ContentSize.Width / 2, dy + ContentSize.Height / 2);
+			StickPosition = newLoc;
 
         }
 
@@ -287,12 +275,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public virtual void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
 
-            //base.TouchesBegan(touches, touchEvent);
-
             CCTouch touch = touches.First();
 
-            CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
-            location = WorldToParentspace(location);
+			var location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
+			location = WorldToParentspace(location);
 
             //Do a fast rect check before doing a circle hit check:
             if (location.X - joystickRadius < -joystickRadius || location.X - joystickRadius > joystickRadius || location.Y - joystickRadius < -joystickRadius || location.Y - joystickRadius > joystickRadius)
@@ -302,11 +288,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
             else
             {
                 float dSq = (location.X - joystickRadius) * (location.X - joystickRadius) + (location.Y - joystickRadius) * (location.Y - joystickRadius);
-                if (JoystickRadiusSq > dSq)
+				if (JoystickRadiusSq > dSq)
                 {
                     isMoving = true;
 
-                    //[self updateVelocity:location];
                     UpdateVelocity(location);
 
                     joystickEvent.UserData = new SneakyJoystickEventResponse(SneakyJoystickMovementStatus.Start, null);
@@ -387,7 +372,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public void ForceCenter()
         {
-            StickPosition = new CCPoint(Center.X, Center.Y);
+            //StickPosition = new CCPoint(Center.X, Center.Y);
         }
 
         public CCPoint GetNextPositionFromImage(CCNode node, float dt, CCSize wSize)
@@ -452,17 +437,17 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             CCRect rect = new CCRect(0, 0, ContentSize.Width, ContentSize.Height);
 
-            CCPoint[] vertices = new CCPoint[] {
-        new CCPoint(rect.Origin.X,rect.Origin.Y),
-        new CCPoint(rect.Origin.X+rect.Size.Width,rect.Origin.Y),
-        new CCPoint(rect.Origin.X+rect.Size.Width,rect.Origin.Y+rect.Size.Height),
-        new CCPoint(rect.Origin.X,rect.Origin.Y+rect.Size.Height),
-    };
-
-            CCDrawingPrimitives.Begin();
-            CCDrawingPrimitives.DrawCircle(AnchorPointInPoints, 10, 0, 8, true, CCColor4B.Blue);
-            CCDrawingPrimitives.DrawSolidPoly(vertices, 4, CCColor4B.Red, true);
-            CCDrawingPrimitives.End();
+//            CCPoint[] vertices = new CCPoint[] {
+//        new CCPoint(rect.Origin.X,rect.Origin.Y),
+//        new CCPoint(rect.Origin.X+rect.Size.Width,rect.Origin.Y),
+//        new CCPoint(rect.Origin.X+rect.Size.Width,rect.Origin.Y+rect.Size.Height),
+//        new CCPoint(rect.Origin.X,rect.Origin.Y+rect.Size.Height),
+//    };
+//
+//            CCDrawingPrimitives.Begin();
+//            CCDrawingPrimitives.DrawCircle(AnchorPointInPoints, 10, 0, 8, true, CCColor4B.Blue);
+//            CCDrawingPrimitives.DrawSolidPoly(vertices, 4, CCColor4B.Red, true);
+//            CCDrawingPrimitives.End();
 
         }
 

@@ -69,6 +69,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
             location = WorldToParentspace(location);
+			//Console.WriteLine(location + " radius: " + radius);
             //Do a fast rect check before doing a circle hit check:
             if (location.X < -radius || location.X > radius || location.Y < -radius || location.Y > radius)
             {
@@ -78,6 +79,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             {
 
                 float dSq = location.X * location.X + location.Y * location.Y;
+				Console.WriteLine(location + " radius: " + radius + " distanceSquared: " + dSq);
+
                 if (radiusSq > dSq)
                 {
                     active = true;
@@ -117,7 +120,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
             location = WorldToParentspace(location);
-
+			Console.WriteLine("Moved: " + location + " radius: " + radius);
+			//Console.WriteLine(location);
             //Do a fast rect check before doing a circle hit check:
             if (location.X < -radius || location.X > radius || location.Y < -radius || location.Y > radius)
             {
