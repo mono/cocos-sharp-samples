@@ -5,55 +5,49 @@ using CocosSharp;
 
 namespace AngryNinjas
 {
-    public class IntroLayer : CCLayer
-    {
-        public override void OnEnter()
-        {
-            base.OnEnter();
+	public class IntroLayer : CCLayer
+	{
 
-            // ask director for the window size
-            var size = Director.WindowSizeInPixels;
+		CCSize _screenSize;
 
-            var background = new CCSprite("IntroLayer");
+		public IntroLayer(CCSize size)
+			: base(size)
+		{
 
-            background.Position = new CCPoint(size.Width / 2, size.Height / 2);
+		}
 
-            // add the background as a child to this Layer
-            AddChild(background);
+		protected override void AddedToNewScene()
+		{
+			base.AddedToNewScene();
 
-            // Wait a little and then transition to the new scene
-            ScheduleOnce(MakeTransition, 2);
-        }
+			//get screen size
+			_screenSize = Window.WindowSizeInPixels; //CCDirector::sharedDirector()->getWinSize();
 
 
-        public void MakeTransition(float dt)
-        {
-            CCLog.Log("Make Transition to Level");
-            // CCDirector.SharedDirector.ReplaceScene(new CCTransitionFade(1, TheLevel.Scene, CCColor3B.White));
+			var background = new CCSprite("IntroLayer");
 
-            Director.ReplaceScene(TheLevel.Scene);
+			background.Position = new CCPoint(_screenSize.Width / 2, _screenSize.Height / 2);
 
+			// add the background as a child to this Layer
+			AddChild(background);
 
-        }
-
-        public static CCScene Scene
-        {
-
-            get
-            {
-                CCScene scene = new CCScene();
-
-                IntroLayer layer = new IntroLayer();
-
-                // add layer as a child to scene
-                scene.AddChild(layer);
-
-                // return the scene
-                return scene;
-            }
-        }
+			// Wait a little and then transition to the new scene
+			ScheduleOnce(MakeTransition, 2);
+		}
 
 
-    }
+		public void MakeTransition(float dt)
+		{
+			CCLog.Log("Make Transition to Level");
+			// CCDirector.SharedDirector.ReplaceScene(new CCTransitionFade(1, TheLevel.Scene, CCColor3B.White));
+
+			Director.ReplaceScene(TheLevel.GetScene(Window));
+
+
+		}
+
+
+
+	}
 }
 
