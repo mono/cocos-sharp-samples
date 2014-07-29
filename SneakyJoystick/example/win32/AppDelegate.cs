@@ -5,21 +5,60 @@ using CocosSharp;
 
 namespace SneakyJoystickExample
 {
-    public class AppDelegate : CCApplicationDelegate
-    {
-        public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
-        {
-            application.ContentRootDirectory = "Content";
-            application.ContentSearchPaths.Add("SD");
+	public class AppDelegate : CCApplicationDelegate
+	{
+		float preferredWidth;
+		float preferredHeight;
 
-            CCSize visibleBoundsDimension = new CCSize(960, 640);
+		/// <summary>
+		///  Implement CCDirector and CCScene init code here.
+		/// </summary>
+		/// <returns>
+		///  true  Initialize success, app continue.
+		///  false Initialize failed, app terminate.
+		/// </returns>
+		public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
+		{
 
-            CCScene scene = new CCScene(mainWindow);
-            CCLayer layer = new IntroLayer(visibleBoundsDimension);
+			preferredWidth = application.MainWindow.WindowSizeInPixels.Width;
+			preferredHeight = application.MainWindow.WindowSizeInPixels.Height;
 
-            scene.AddChild(layer);
+			application.ContentRootDirectory = "Content";
+			application.ContentSearchPaths.Add("SD");
 
-            mainWindow.RunWithScene(scene);
-        }
-    }
+			CCScene scene = new CCScene(mainWindow);
+			CCLayer layer = new IntroLayer(new CCSize(preferredWidth, preferredHeight));
+
+			scene.AddChild(layer);
+
+			mainWindow.RunWithScene(scene);
+
+		}
+
+
+
+		/// <summary>
+		/// The function be called when the application enters the background
+		/// </summary>
+		//		public override void ApplicationDidEnterBackground()
+		//		{
+		//			// stop all of the animation actions that are running.
+		//			CCDirector.SharedDirector.Pause();
+		//
+		//			// if you use SimpleAudioEngine, your music must be paused
+		//			//CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = true;
+		//		}
+
+		/// <summary>
+		/// The function be called when the application enter foreground  
+		/// </summary>
+		//		public override void ApplicationWillEnterForeground()
+		//		{
+		//			CCDirector.SharedDirector.Resume();
+		//
+		//			// if you use SimpleAudioEngine, your background music track must resume here. 
+		//			//CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = false;
+		//
+		//		}
+	}
 }
