@@ -7,7 +7,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 {
 
 
-    public class SneakyJoystickControl : CCLayer
+    public class SneakyJoystickControl : CCNode
     {
 
 
@@ -186,7 +186,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #endregion
 
-        public SneakyJoystickControl(CCRect rect)
+        public SneakyJoystickControl(CCRect rect) : base()
         {
 
             Degrees = 0.0f;

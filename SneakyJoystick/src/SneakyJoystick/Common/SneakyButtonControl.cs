@@ -69,6 +69,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
             CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
             location = WorldToParentspace(location);
+
+            // Adjust the location to be relative to the button's origin
+            location -= BoundingBox.Origin;
 			//Console.WriteLine(location + " radius: " + radius);
             //Do a fast rect check before doing a circle hit check:
             if (location.X < -radius || location.X > radius || location.Y < -radius || location.Y > radius)

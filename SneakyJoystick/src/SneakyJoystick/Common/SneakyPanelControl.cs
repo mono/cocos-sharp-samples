@@ -60,7 +60,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public List<SneakyButtonControlSkinnedBase> Buttons { get; set; }
 
         public CCNode Player { get; set; }
-        CCSize wSize { get; set; }
 
         CCEventListenerTouchAllAtOnce tListener { get; set; }
         public bool IsListenerDisabled { get; set; }
@@ -194,9 +193,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
         }
 
 
-        public SneakyPanelControl(int buttons)
+        public SneakyPanelControl(CCSize visibleBoundsSize, int buttons) : base(visibleBoundsSize)
         {
-
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
 
         }
@@ -206,8 +204,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             base.AddedToNewScene();
 
             Opacity = DEFAULT_TRANSPARENCY;
-
-			wSize = Layer.VisibleBoundsWorldspace.Size;
 
 			//Joystick Init
 			InitializeJoyStick();
@@ -228,12 +224,13 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public void InitializeJoyStick()
         {
+            CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
 
             JoyControl = new SneakyJoystickControlSkinnedBase();
 
             JoyControl.Position = new CCPoint(
-               wSize.Width * 0.08f,
-               wSize.Height * 0.08f
+                visibleBoundsSize.Width * 0.08f,
+                visibleBoundsSize.Height * 0.08f
                );
 
             AddChild(JoyControl, JOY_Z);
@@ -289,6 +286,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
         private void ReorderButtons()
         {
             float x, y;
+            CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
+
             if (Orientation == ButtonsOrientation.Vertical)
             {
                 y = 0.03f;
@@ -300,7 +299,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                     if (i % 2 == 0)
                         y += 0.12f;
 
-                    Buttons[i].Position = new CCPoint(wSize.Width * x, wSize.Height * y);
+                    Buttons[i].Position = new CCPoint(visibleBoundsSize.Width * x, visibleBoundsSize.Height * y);
 					Buttons[i].AnchorPoint = CCPoint.AnchorLowerLeft;
                 }
 
@@ -308,16 +307,13 @@ namespace CocosSharp.Extensions.SneakyJoystick
             else
             {
                 y = .15f;
-                x = wSize.Width;
+                x = visibleBoundsSize.Width;
                 for (int i = 0; i < Buttons.Count; i++)
                 {
 
-                    Buttons[i].Position = new CCPoint(x, wSize.Height * y);
+                    Buttons[i].Position = new CCPoint(x, visibleBoundsSize.Height * y);
 					Buttons[i].AnchorPoint = CCPoint.AnchorLowerRight;
 					x -= (Buttons[i].DefaultSprite.BoundingBox.Size.Width + 20f);
-
-
-
                 }
 
             }
@@ -343,11 +339,12 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         protected override void Draw()
         {
+            CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
 
             if (IsDebug)
             {
                 CCDrawingPrimitives.Begin();
-                CCDrawingPrimitives.DrawRect(new CCRect(0, 0, this.ContentSize.Width, this.ContentSize.Height), CCColor4B.Blue);
+                CCDrawingPrimitives.DrawRect(new CCRect(0, 0, visibleBoundsSize.Width, visibleBoundsSize.Height), CCColor4B.Blue);
                 CCDrawingPrimitives.End();
             }
         }

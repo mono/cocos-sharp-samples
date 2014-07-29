@@ -11,40 +11,112 @@ namespace SneakyJoystickExample.Common
 {
     public class IntroLayer : CCLayerColor
     {
+        const int JOYSTICK_Z_ORDER = 9999;
 
         CCEventListenerCustom joystickListener;
         CCEventListenerCustom buttonListener;
 
+        bool isWalking = false;
 
-        SneakyPanelControl JoyPanel;
+        CCAction bearAction;
+        CCAction monkeyAction;
+        CCAction currentAction;
 
-        CCSize winSize;
-        CCAnimation walkAnim;
-        CCAction action;
+        CCSprite bearSprite;
+        CCSprite monkeySprite;
+        CCSprite currentSprite;
 
-        CCSprite avitar;
+        SneakyPanelControl joystickPanel;
 
-        private bool IsWalking = false;
+        #region Properties
 
-		public IntroLayer() : base(CCColor4B.AliceBlue)
-        {   }
+        public CCSprite CurrentSprite
+        {
+            get { return currentSprite; }
+            set
+            {
+                if (currentSprite != value)
+                {
+                    CCSprite previousSprite = currentSprite;
 
-        protected override void AddedToNewScene ()
+                    currentSprite = value;
+
+                    if (currentSprite == monkeySprite)
+                    {
+                        currentAction = monkeyAction;
+                    }
+                    else if (currentSprite == bearSprite)
+                    {
+                        currentAction = bearAction;
+                    }
+
+                    RemoveChild(previousSprite);
+                    AddChild(currentSprite);
+                }
+            }
+        }
+
+        #endregion Properties
+
+
+        #region Initialization
+
+        public IntroLayer(CCSize visibleBoundsDimension) 
+            : base(visibleBoundsDimension, CCColor4B.AliceBlue)
+        {
+        }
+
+        public void InitializeJoystick()
+        {
+            joystickPanel = new SneakyPanelControl(LayerSizeInPixels, 2);
+            joystickPanel.Position = CCPoint.Zero;
+            joystickPanel.Orientation = ButtonsOrientation.Vertical;
+
+            AddChild(joystickPanel,  JOYSTICK_Z_ORDER);
+        }
+
+        public void InitializeBear()
+        {
+            var spriteSheet = new CCSpriteSheet("animations/AnimBear.plist");
+            var walkAnimation = new CCAnimation(spriteSheet.Frames, 0.1f);
+            bearAction = new CCRepeatForever(new CCAnimate(walkAnimation));
+
+            bearSprite = new CCSprite(spriteSheet.Frames.First()) { Name = "Bear" };
+        }
+
+        public void InitializeMonkey()
+        {
+            var spriteSheet = new CCSpriteSheet("animations/monkey.plist");
+            var walkAnimation = new CCAnimation(spriteSheet.Frames, 0.1f);
+            monkeyAction = new CCRepeatForever(new CCAnimate(walkAnimation));
+
+            // Load the frames using the Frames property which
+            var animationFrames = spriteSheet.Frames.FindAll((x) =>
+                {
+                    return x.TextureFilename.StartsWith("frame");
+                });
+
+            monkeySprite = new CCSprite(animationFrames.First()) { Name = "Monkey" };
+            monkeySprite.Scale = 0.5f;
+        }
+
+        #endregion Initialization
+
+
+        protected override void AddedToNewScene()
         {
             base.AddedToNewScene();
 
-			InitializeJoyPanel();
-
+			InitializeJoystick();
 			InitializeMonkey();
+            InitializeBear();
 
-			JoyPanel.Player = avitar;
+            CurrentSprite = monkeySprite;
+            joystickPanel.Player = CurrentSprite;
 
-			avitar.Position = VisibleBoundsWorldspace.Center;
-
-            JoyPanel.Orientation = ButtonsOrientation.Vertical;
+            CurrentSprite.Position = VisibleBoundsWorldspace.Center;
 
             CCSimpleAudioEngine.SharedEngine.PreloadEffect("sound_oso");
-
 
             joystickListener = new CCEventListenerCustom(SneakyPanelControl.JOY_LISTENER_ID, (customEvent) =>
                 {
@@ -55,11 +127,11 @@ namespace SneakyJoystickExample.Common
                         switch (response.ResponseType)
                         {
                             case SneakyJoystickMovementStatus.Start:
-                                IsWalking = true;
+                                isWalking = true;
                                 Console.WriteLine("Start walk.");
                                 break;
                             case SneakyJoystickMovementStatus.End:
-                                IsWalking = false;
+                                isWalking = false;
                                 Console.WriteLine("Stop walk.");
                                 break;
                             default:
@@ -80,9 +152,9 @@ namespace SneakyJoystickExample.Common
                             CCSimpleAudioEngine.SharedEngine.PlayEffect("sound_oso");
 
                         if (response.ID == 0 && response.ResponseType == SneakyButtonStatus.Release)
-                            SwitchAvitar();
+                            SwitchSprite();
 
-                        Console.WriteLine("BUTTON {0} {1}", response.ID, response.ResponseType == SneakyButtonStatus.Press ? "PRESED" : "UNPRESSED");
+                        Console.WriteLine("BUTTON {0} {1}", response.ID, response.ResponseType == SneakyButtonStatus.Press ? "PRESSED" : "UNPRESSED");
                     }
                 });
 
@@ -91,69 +163,22 @@ namespace SneakyJoystickExample.Common
             Schedule();
         }
 
-
-        public void InitializeBear()
+        void SwitchSprite()
         {
-            //var spriteSheet = new CCSpriteSheet("magic-beard.plist");
-            var spriteSheet = new CCSpriteSheet("animations/AnimBear.plist");
-
-            walkAnim = new CCAnimation(spriteSheet.Frames, 0.1f);
-            action = new CCRepeatForever(new CCAnimate(walkAnim));
-            avitar = new CCSprite(spriteSheet.Frames.First()) { Name = "Bear" };
-
-            AddChild(avitar);
-        }
-
-        public void InitializeMonkey()
-        {
-
-            var spriteSheet = new CCSpriteSheet("animations/monkey.plist");
-
-            // Load the frames using the Frames property which
-            var animationFrames = spriteSheet.Frames.FindAll((x) =>
-                {
-                    return x.TextureFilename.StartsWith("frame");
-                });
-
-            walkAnim = new CCAnimation(animationFrames, 0.1f);
-            action = new CCRepeatForever(new CCAnimate(walkAnim));
-            avitar = new CCSprite(animationFrames.First()) { Name = "Monkey" };
-            avitar.Scale = 0.5f;
-
-            AddChild(avitar);
-        }
-
-
-        void SwitchAvitar()
-        {
-            if (avitar != null)
+            if (currentSprite != null)
             {
-                var position = avitar.Position;
-                var flipX = avitar.FlipX;
+                var position = currentSprite.Position;
+                var flipX = currentSprite.FlipX;
 
-                RemoveChild(avitar, true);
-                if (avitar.Name == "Monkey")
-                {
-                    InitializeBear();
-                }
+                if(CurrentSprite == monkeySprite)
+                    CurrentSprite = bearSprite;
                 else
-                {
-                    InitializeMonkey();
-                }
-                avitar.Position = position;
-                avitar.FlipX = flipX;
-                JoyPanel.Player = avitar;
+                    CurrentSprite = monkeySprite;
+
+                currentSprite.Position = position;
+                currentSprite.FlipX = flipX;
+                joystickPanel.Player = currentSprite;
             }
-
-        }
-
-
-        public void InitializeJoyPanel()
-        {
-
-            JoyPanel = new SneakyPanelControl(2);
-            AddChild(JoyPanel, 9999);
-
         }
 
         public override void Update(float dt)
@@ -161,22 +186,20 @@ namespace SneakyJoystickExample.Common
 
             base.Update(dt);
 
-            if (JoyPanel != null)
+            if (joystickPanel != null)
             {
-                avitar.Position = JoyPanel.GetPlayerPosition(dt, VisibleBoundsWorldspace.Size);
+                currentSprite.Position = joystickPanel.GetPlayerPosition(dt, VisibleBoundsWorldspace.Size);
 
-                if (JoyPanel.HasAnyDirection)
+                if (joystickPanel.HasAnyDirection)
                 {
-                    avitar.FlipX = (JoyPanel.JoyControl.IsRight);
+                    currentSprite.FlipX = (joystickPanel.JoyControl.IsRight);
                 }
 
-                if (IsWalking && avitar.NumberOfRunningActions == 0)
-                    avitar.RunAction(action);
+                if (isWalking && currentSprite.NumberOfRunningActions == 0)
+                    currentSprite.RunAction(currentAction);
 
-                if (!IsWalking && avitar.NumberOfRunningActions > 0)
-                    avitar.StopAllActions();
-
-
+                if (!isWalking && currentSprite.NumberOfRunningActions > 0)
+                    currentSprite.StopAllActions();
             }
 
         }
@@ -187,7 +210,6 @@ namespace SneakyJoystickExample.Common
 
             RemoveEventListener(joystickListener);
             RemoveEventListener(buttonListener);
-
         }
     }
 }
