@@ -9,8 +9,9 @@ namespace SkyDefense.Windows
 	public class AppDelegate : CCApplicationDelegate
 	{
 
-		int preferredWidth;
-		int preferredHeight;
+		public static CCWindow SharedWindow { get; set; }
+
+		public static CCSize DefaultResolution;
 
 
 		/// <summary>
@@ -24,20 +25,15 @@ namespace SkyDefense.Windows
 		{
 
 
-			//1280 x 768
-#if WINDOWS_PHONE
-            preferredWidth = 1280;
-            preferredHeight = 768;
-#else
-			preferredWidth = 1280;
-			preferredHeight = 768;
-#endif
+			DefaultResolution = new CCSize(
+						application.MainWindow.WindowSizeInPixels.Width,
+						application.MainWindow.WindowSizeInPixels.Height);
 
 			application.ContentRootDirectory = "Content";
 			application.ContentSearchPaths.Add("SD");
 
 			CCScene scene = new CCScene(mainWindow);
-			CCLayer layer = new IntroLayer(new CCSize(preferredWidth, preferredHeight));
+			CCLayer layer = new IntroLayer(DefaultResolution);
 
 			scene.AddChild(layer);
 

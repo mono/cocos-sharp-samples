@@ -84,9 +84,11 @@ namespace RocketThrought.Common
 
 		}
 
-		protected override void AddedToNewScene()
+		CCEventListenerTouchAllAtOnce lTouch;
+
+		protected override void AddedToScene()
 		{
-			base.AddedToNewScene();
+			base.AddedToScene();
 
 			//init game values
 			_screenSize = Window.WindowSizeInPixels; //CCDirector::sharedDirector()->getWinSize();
@@ -108,17 +110,23 @@ namespace RocketThrought.Common
 			createStarGrid();
 
 			//listen for touches
-			CCEventListenerTouchAllAtOnce lTouch = new CCEventListenerTouchAllAtOnce();
+			lTouch = new CCEventListenerTouchAllAtOnce();
 			lTouch.OnTouchesBegan = TouchesBegan;
 			lTouch.OnTouchesEnded = TouchesEnded;
 			lTouch.OnTouchesMoved = TouchesMoved;
 
-			EventDispatcher.AddEventListener(lTouch, this);
+			this.AddEventListener(lTouch, this);
 
 
 			//create main loop
 			//this->schedule(schedule_selector(GameLayer::update));
-			Schedule(Update);
+			Schedule();
+		}
+
+		public override void OnExit()
+		{
+			base.OnExit();
+			RemoveEventListener(lTouch);
 		}
 
 		public override void Update(float dt)
@@ -665,7 +673,7 @@ namespace RocketThrought.Common
 				{
 					_paused.Visible = true;
 					_state = gamestates.kGamePaused;
-				//	_pauseBtn.DisplayFrame = CCApplication.SharedApplication.SpriteFrameCache["btn_pause_on.png"]; // CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName ("btn_pause_on.png"));
+					//	_pauseBtn.DisplayFrame = CCApplication.SharedApplication.SpriteFrameCache["btn_pause_on.png"]; // CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName ("btn_pause_on.png"));
 					_running = false;
 					return;
 				}
@@ -764,7 +772,7 @@ namespace RocketThrought.Common
 
 		}
 
-	
+
 
 
 	}

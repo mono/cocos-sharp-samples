@@ -93,9 +93,9 @@ namespace SkyDefense.Common
 
 		}
 
-		protected override void AddedToNewScene()
+		protected override void AddedToScene()
 		{
-			base.AddedToNewScene();
+			base.AddedToScene();
 
 
 			//get screen size
