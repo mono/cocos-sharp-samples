@@ -65,9 +65,9 @@ namespace AngryNinjas
 
 		}
 
-		protected override void AddedToNewScene()
+		protected override void AddedToScene()
 		{
-			base.AddedToNewScene();
+			base.AddedToScene();
 
 			screenSize = Window.WindowSizeInPixels;
 

@@ -8,11 +8,10 @@ namespace AngryNinjas
 	public class AppDelegate : CCApplicationDelegate
 	{
 
+		public static CCWindow SharedWindow { get; set; }
 
+		public static CCSize DefaultResolution;
 
-
-		int preferredWidth;
-		int preferredHeight;
 
 		/// <summary>
 		///  Implement CCDirector and CCScene init code here.
@@ -23,20 +22,18 @@ namespace AngryNinjas
 		/// </returns>
 		public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
 		{
-			//1280 x 768
-#if WINDOWS_PHONE
-            preferredWidth = 1280;
-            preferredHeight = 768;
-#else
-			preferredWidth = 1280;
-			preferredHeight = 768;
-#endif
+
+			SharedWindow = mainWindow;
+
+			DefaultResolution = new CCSize(
+				application.MainWindow.WindowSizeInPixels.Width,
+				application.MainWindow.WindowSizeInPixels.Height);
 
 			application.ContentRootDirectory = "Content";
 			application.ContentSearchPaths.Add("SD");
 
 			CCScene scene = new CCScene(mainWindow);
-			CCLayer layer = new IntroLayer(new CCSize(preferredWidth, preferredHeight));
+			CCLayer layer = new IntroLayer(DefaultResolution);
 
 			scene.AddChild(layer);
 

@@ -16,9 +16,9 @@ namespace AngryNinjas
 
 		}
 
-		protected override void AddedToNewScene()
+		protected override void AddedToScene()
 		{
-			base.AddedToNewScene();
+			base.AddedToScene();
 
 			//get screen size
 			_screenSize = Window.WindowSizeInPixels; //CCDirector::sharedDirector()->getWinSize();
