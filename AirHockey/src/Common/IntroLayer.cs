@@ -32,9 +32,10 @@ namespace AirHockey.Common
 
 		}
 
-		protected override void AddedToNewScene()
+	
+		protected override void AddedToScene()
 		{
-			base.AddedToNewScene();
+			base.AddedToScene();
 
 			//Init Game Elements
 			_player1Score = 0;
