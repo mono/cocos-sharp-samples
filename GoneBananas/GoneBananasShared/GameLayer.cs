@@ -215,9 +215,6 @@ namespace GoneBananas
             var gameOverScene = GameOverLayer.SceneWithScore (Window, hitBananas.Count);
             var transitionToGameOver = new CCTransitionMoveInR (0.3f, gameOverScene);
             Director.ReplaceScene (transitionToGameOver);
-
-            //work-around bug that creates an infinite loop resulting in repeated transitionToGameOver calls
-            this.UnscheduleAll ();
         }
 
         void Explode (CCPoint pt)
