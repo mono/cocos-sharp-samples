@@ -4,7 +4,7 @@ This tutorial shows how to build a game using CocosSharp, a game framework that 
 
 ## Getting CocosSharp
 
-CocosSharp is available as PCL in NuGet [TODO: add link]. Additionally, the CocosSharp source can be pulled from github [here](https://github.com/xamarin/CocosSharp). 
+CocosSharp is available as PCL in NuGet. Additionally, the CocosSharp source can be pulled from github [here](https://github.com/xamarin/CocosSharp). 
 
 ## Game Walkthrough
 
@@ -16,7 +16,7 @@ We're going to create a game for iOS and Android in this tutorial. However, Coco
 
 In the first part of the tutorial we'll cover some basics such as setting up the game, working with sprites and transitioning between screens. Then, we'll show how to work with more advanced concepts such as particle systems and physics. Let's get started by creating a new application called **GoneBananas** using the **iOS** > **iPhone Empty Project** template.
 
-After creating the project, we need to add CocosSharp and its dependencies to the solution. Simply add the CocosSharp package from NuGet. [TODO: add link to NuGet once published]
+After creating the project, we need to add CocosSharp and its dependencies to the solution. Simply add the CocosSharp package from NuGet.
 
 Also add a new Android project named GoneBananasAndroid using the **Android** > **Ice Cream Sandwich Application** template, and add the CocosSharp NuGet package there as well.
 
@@ -77,7 +77,7 @@ Add a new class named GoneBananasApplicationDelegate with the following implemen
         }
     }
 
-In the GoneBananasApplicationDelegate ApplicationFinishedLaunching method, we initialized the mainWindow so that the game will run in portrait for this example. When then preload an audio effect, and run the initial scene.
+In the GoneBananasApplicationDelegate ApplicationFinishedLaunching method, we initialize the mainWindow so that the game will run in portrait for this example. We then preload an audio effect, and run the initial scene.
 
 ### Content Folder
 
@@ -85,7 +85,7 @@ In the GoneBananasApplicationDelegate class we set the application.ContentRootDi
 
 ### CCApplication Class
 
-The CCApplication class is used to start the game. we'll need to create this in the platform specific project. This is the only code that will be needed in the platform specific projects.
+The CCApplication class is used to start the game. We'll need to create this in the platform specific project. This is the only code that will be needed in the platform specific projects.
 
 On iOS, add the the following code in the AppDelegate:
 
@@ -133,7 +133,7 @@ Now that we have implemented the CCApplication, we can create an instance of it 
 
 ### Creating the First Scene
 
-In the GoneBananasApplication class, we created an instance of the first scene for the director to run using this line:
+In the GoneBananasApplication class, we created an instance of the first scene to run using this line:
 
     CCScene scene = GameStartLayer.GameStartLayerScene(mainWindow);
 
@@ -187,7 +187,7 @@ To implement the GameStartLayer, add a class with the following code:
         }
     }
 
-We use a CCLayerColor for the base class so we can set the layer's background color. The code displays a label and transitions the user to the GameLayer's scene when the screen is tapped. The label uses a arial font that is included in the project's **fonts** folder that we created earlier when we copied in the Content folder.
+We use a CCLayerColor for the base class so we can set the layer's background color. The code displays a label and transitions the user to the GameLayer's scene when the screen is tapped. The label uses a arial font that is included in the project's **fonts** folder that we created earlier when we copied in the **Content** folder.
 
 The following screenshot shows the completed scene:
 
@@ -195,13 +195,13 @@ The following screenshot shows the completed scene:
 
 ### Transitioning to the GameLayer's Scene
 
-Calling Window.DefaultDirector.ReplaceScene, passing it the scene you want to display, does the actual transitioning between scenes. In this case, it transitions to the GameLayer's scene with the following line:
+Calling Window.DefaultDirector.ReplaceScene, passing it the scene to display, does the actual transitioning between scenes. In this case, it transitions to the GameLayer's scene with the following line:
 
     Window.DefaultDirector.ReplaceScene (GameLayer.GameScene (Window));
 
 ### Implementing the GameLayer
 
-For the GameLayer, create a class named GameLayer, which again inherits from CCLayerColor. W'll be using a vbariety of dclass variables throughout htis tutorial, so let's go ahead and create them here:
+For the GameLayer, create a class named GameLayer, which again inherits from CCLayerColor. We'll be using a variety of class variables throughout this tutorial, so let's go ahead and create them here:
 
     public class GameLayer : CCLayerColor
     {
@@ -487,7 +487,7 @@ We also need to initialize several of the things we've implemented, such as init
         monkey.Position = VisibleBoundsWorldspace.Center;
 
         var b = VisibleBoundsWorldspace;
-        sun.Position = b.UpperRight.Offset (-100, -100); //BUG: doesn't appear in visible area on Nexus 7 device
+        sun.Position = b.UpperRight.Offset (-100, -100);
 
         circleNode.Position = sun.Position;
 
@@ -644,7 +644,7 @@ Add a new class named GameOverLayer with the following implementation:
 
         string scoreMessage = string.Empty;
 
-        public GameOverLayer (int score) //: base(new CCSize (640, 1136))
+        public GameOverLayer (int score)
         {
 
             var touchListener = new CCEventListenerTouchAllAtOnce ();
