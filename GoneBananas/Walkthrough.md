@@ -4,27 +4,23 @@ This tutorial shows how to build a game using CocosSharp, a game framework that 
 
 ## Getting CocosSharp
 
-CocosSharp is available as PCL in NuGet (TODO: add link). Additionally, the CocosSharp source can be pulled from github [here](https://github.com/xamarin/CocosSharp). 
+CocosSharp is available as PCL in NuGet [TODO: add link]. Additionally, the CocosSharp source can be pulled from github [here](https://github.com/xamarin/CocosSharp). 
 
 ## Game Walkthrough
 
 In this tutorial we're going to build a game called _GoneBananas_. The object of the game is to move a monkey around the screen to capture as many falling bananas as possible. A screenshot of the game is shown below:
 
-[image]
+![GoneBananas](screenshots/GoneBananas.png?raw=true "Gone Bananas")
 
 We're going to create a game for iOS and Android in this tutorial. However, CocosSharp runs on many other platforms as well. See the CocosSharp repo for the full list of supported platforms. 
 
 In the first part of the tutorial we'll cover some basics such as setting up the game, working with sprites and transitioning between screens. Then, we'll show how to work with more advanced concepts such as particle systems and physics. Let's get started by creating a new application called **GoneBananas** using the **iOS** > **iPhone Empty Project** template.
 
-After creating the project, we need to add CocosSharp and its dependencies to the solution. Simply add the CocosSharp package from NuGet (TODO: link to NuGet).
-
-[TODO: screenshot from NuGet]
+After creating the project, we need to add CocosSharp and its dependencies to the solution. Simply add the CocosSharp package from NuGet. [TODO: add link to NuGet once published]
 
 Also add a new Android project named GoneBananasAndroid using the **Android** > **Ice Cream Sandwich Application** template, and add the CocosSharp NuGet package there as well.
 
-We're going to do the majority of the work here within a shared project, so that the game logic will be reusable across platforms. Add a new shared project to the solution named GoneBananasShared:
-
-[image]
+We're going to do the majority of the work here within a shared project, so that the game logic will be reusable across platforms. Add a new shared project to the solution named GoneBananasShared.
 
 With the projects created and CocosSharp added, we are now ready to create the game.
 
@@ -195,7 +191,7 @@ We use a CCLayerColor for the base class so we can set the layer's background co
 
 The following screenshot shows the completed scene:
 
- [image]
+![GameStart](screenshots/GameStart.png?raw=true "Game Start")
 
 ### Transitioning to the GameLayer's Scene
 
@@ -514,7 +510,7 @@ We need to provide a way for the layer to return its scene, just like we did ear
 
 #### Adding Physics
 
-Let's spruc eup the game a bit by adding a fetaure that uses physics. We'll be using the C3port of Bx 2D in this case to add bouncing balls to the game. The object is to avoid the bouncing balls while collecting bananas.
+Let's spruc eup the game a bit by adding a fetaure that uses physics. We'll be using the C# port of Box 2D in this case to add bouncing balls to the game. The object is to avoid the bouncing balls while collecting bananas.
 
 We'll need a couple class variables for the physics world and ball sprites respectively:
 
@@ -532,7 +528,7 @@ We can then add code to create the batch node for the ball sprites in the constr
         ballTexture = ballsBatch.Texture;
         AddChild (ballsBatch, 1, 1);
 
-A CCSpriteBatchNode is renders all its sprites together, which is more effecticient for the GPU.
+A CCSpriteBatchNode renders all its sprites together, which is more effecticient for the GPU.
 
 Next, add the following code to initialize the physics world and add the ball sprites:
 
@@ -634,9 +630,8 @@ Finally, we need to call AddBall in the scheduler that we added earlier to add b
         }
     });
 
-Running the game now dmeonstrates the game play as shown below:
+Running the game now demonstrates the game play.
 
-[image]
 
 ### Implementing the Game Over Layer
 
@@ -721,7 +716,7 @@ Add a new class named GameOverLayer with the following implementation:
 
 The final scene showing the GameOverLayer is shown below:
 
-[image]
+![GameOver](screenshots/GameOver.png?raw=true "Game Over")
 
 You can now run the game and play it on either the simulator or a device. Congratulations, you created your first game using CocosSharp!
 
