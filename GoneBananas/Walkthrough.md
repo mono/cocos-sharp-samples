@@ -519,19 +519,19 @@ Let's spruc eup the game a bit by adding a fetaure that uses physics. We'll be u
 
 We'll need a couple class variables for the physics world and ball sprites respectively:
 
-        // physics world
-        b2World world;
-        
-        // balls sprite batch
-        CCSpriteBatchNode ballsBatch;
-        CCTexture2D ballTexture;
+    // physics world
+    b2World world;
+    
+    // balls sprite batch
+    CCSpriteBatchNode ballsBatch;
+    CCTexture2D ballTexture;
 
 We can then add code to create the batch node for the ball sprites in the constructor.
 
-        // batch node for physics balls
-        ballsBatch = new CCSpriteBatchNode ("balls", 100);
-        ballTexture = ballsBatch.Texture;
-        AddChild (ballsBatch, 1, 1);
+    // batch node for physics balls
+    ballsBatch = new CCSpriteBatchNode ("balls", 100);
+    ballTexture = ballsBatch.Texture;
+    AddChild (ballsBatch, 1, 1);
 
 A CCSpriteBatchNode renders all its sprites together, which is more effecticient for the GPU.
 
