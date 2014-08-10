@@ -206,7 +206,7 @@ For the GameLayer, create a class named GameLayer, which again inherits from CCL
     public class GameLayer : CCLayerColor
     {
         const float MONKEY_SPEED = 350.0f;
-        const float GAME_DURATION = 6.0f; // game ends after 60 seconds or when the monkey hits a ball, whihcever comes first
+        const float GAME_DURATION = 60.0f; // game ends after 60 seconds or when the monkey hits a ball, whichever comes first
 
         // point to meter ratio for physics
         const int PTM_RATIO = 32;
@@ -407,7 +407,12 @@ To play a sound effect, we use the CCSimpleAudioEngine class. Add the following 
 
 #### Adding Game Ending Logic
 
-We also need some way to end the game. For this example, we'll simply end the game after 20 seconds using the following code:
+We also need some way to end the game. For this example, we'll simply end the game after 60 seconds using the following code:
+
+    bool ShouldEndGame ()
+    {
+        return elapsedTime > GAME_DURATION;
+    }
 
     void EndGame ()
     {
@@ -620,7 +625,7 @@ Finally, we need to call AddBall in the scheduler that we added earlier to add b
         world.Step (t, 8, 1);
 
         foreach (CCPhysicsSprite sprite in ballsBatch.Children) {
-            if (sprite.Visible && sprite.PhysicsBody.Position.x < 0f || sprite.PhysicsBody.Position.x * PTM_RATIO > ContentSize.Width) { //or should it be Layer.VisibleBoundsWorldspace.Size.Width
+            if (sprite.Visible && sprite.PhysicsBody.Position.x < 0f || sprite.PhysicsBody.Position.x * PTM_RATIO > ContentSize.Width) {
                 world.DestroyBody (sprite.PhysicsBody);
                 sprite.Visible = false;
                 sprite.RemoveFromParent ();
