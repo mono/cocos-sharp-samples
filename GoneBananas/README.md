@@ -1,7 +1,7 @@
 Gone Bananas
 ============
 
-Sample game to accompany the getting started walkthrough.
+Sample game to accompany the [walkthrough](Walkthrough.md "Gone Bananas Walkthrough").
 
 ![GoneBananas](screenshots/GoneBananas.png?raw=true "Gone Bananas")
 
