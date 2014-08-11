@@ -4,7 +4,7 @@ This tutorial shows how to build a game using CocosSharp, a game framework that 
 
 ## Getting CocosSharp
 
-CocosSharp is available as PCL in NuGet. Additionally, the CocosSharp source can be pulled from github [here](https://github.com/xamarin/CocosSharp). 
+CocosSharp is available as a PCL in [NuGet](https://github.com/mono/CocosSharp/wiki/NuGet-Packages). Additionally, the CocosSharp source can be pulled from github [here](https://github.com/mono/CocosSharp).
 
 ## Game Walkthrough
 
