@@ -114,26 +114,9 @@ Similarly, for Android, add code to create the application in the MainActivity:
         }
     }
 
-#### Creating the Application
-
-Now that we have implemented the CCApplication, we can create an instance of it and call its Run method in the AppDelegate class as shown below:
-
-    [Register ("AppDelegate")]
-    public partial class AppDelegate : UIApplicationDelegate
-    {
-        GoneBananasGame game;
-
-        public override void FinishedLaunching (UIApplication app)
-        {
-            game = new GoneBananasGame();
-
-            game.Run();
-        }
-    }
-
 ### Creating the First Scene
 
-In the GoneBananasApplication class, we created an instance of the first scene to run using this line:
+In the GoneBananasApplicationDelegate class, we created an instance of the first scene to run using this line:
 
     CCScene scene = GameStartLayer.GameStartLayerScene(mainWindow);
 
