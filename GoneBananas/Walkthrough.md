@@ -69,7 +69,6 @@ Add a new class named GoneBananasApplicationDelegate with the following implemen
             public override void ApplicationWillEnterForeground (CCApplication application)
             {
                 application.Paused = false;
-
     			
                 // if you use SimpleAudioEngine, your background music track must resume here. 
                 CCSimpleAudioEngine.SharedEngine.ResumeBackgroundMusic ();
