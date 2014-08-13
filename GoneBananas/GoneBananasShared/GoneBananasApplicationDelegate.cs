@@ -24,17 +24,16 @@ namespace GoneBananas
         public override void ApplicationDidEnterBackground (CCApplication application)
         {
             // stop all of the animation actions that are running.
-            application.PauseGame ();
-			
+            application.Paused = true;
+
             // if you use SimpleAudioEngine, your music must be paused
             CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic ();
         }
 
         public override void ApplicationWillEnterForeground (CCApplication application)
         {
-            application.ResumeGame ();
+            application.Paused = false;
 
-			
             // if you use SimpleAudioEngine, your background music track must resume here. 
             CCSimpleAudioEngine.SharedEngine.ResumeBackgroundMusic ();
         }
