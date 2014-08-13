@@ -35,9 +35,6 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\CocosSharp\Extensions\Box2D\CCDraw.cs">
-      <Link>Extensions\CCDraw.cs</Link>
-    </Compile>
     <Compile Include="..\common\custom\Constants.cs">
       <Link>Custom\Constants.cs</Link>
     </Compile>
@@ -84,6 +81,7 @@
       <Link>Listeners\ContactListener.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Extensions\CCDraw.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
