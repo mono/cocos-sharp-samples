@@ -35,6 +35,9 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Common\AppDelegate.cs">
+      <Link>AppDelegate.cs</Link>
+    </Compile>
     <Compile Include="..\common\custom\Constants.cs">
       <Link>Custom\Constants.cs</Link>
     </Compile>
@@ -80,9 +83,10 @@
     <Compile Include="..\common\listeners\ContactListener.cs">
       <Link>Listeners\ContactListener.cs</Link>
     </Compile>
-    <Compile Include="AppDelegate.cs" />
+    <Compile Include="..\Common\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
     <Compile Include="Extensions\CCDraw.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
