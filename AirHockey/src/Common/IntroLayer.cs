@@ -221,7 +221,7 @@ namespace AirHockey.Common
 			CCPoint ballNextPosition = _ball.NextPosition;
 			CCPoint ballVector = _ball.Vector;
 
-			ballVector = CCPointExHelper.ccpMult(ballVector, 0.98f);
+			ballVector = ballVector *  0.98f;
 
 			ballNextPosition.X += ballVector.X;
 			ballNextPosition.Y += ballVector.Y;
@@ -246,25 +246,25 @@ namespace AirHockey.Common
 				float diffx = ballNextPosition.X - player.PositionX;
 				float diffy = ballNextPosition.Y - player.PositionY;
 
-				float distance1 = CCMathExHelper.pow(diffx, 2) + CCMathExHelper.pow(diffy, 2);
+				float distance1 = (float) ( Math.Pow(diffx, 2) + Math.Pow(diffy, 2));
 
-				float distance2 = CCMathExHelper.pow(_ball.PositionX - playerNextPosition.X, 2) +
-					CCMathExHelper.pow(_ball.PositionY - playerNextPosition.Y, 2);
+				float distance2 = (float) (Math.Pow(_ball.PositionX - playerNextPosition.X, 2) +
+					Math.Pow(_ball.PositionY - playerNextPosition.Y, 2));
 
 				if (distance1 <= squared_radii || distance2 <= squared_radii)
 				{
 
-					float mag_ball = CCMathExHelper.pow(ballVector.X, 2) + CCMathExHelper.pow(ballVector.Y, 2);
-					float mag_player = CCMathExHelper.pow(playerVector.X, 2) + CCMathExHelper.pow(playerVector.Y, 2);
+					float mag_ball = (float)(Math.Pow(ballVector.X, 2) + Math.Pow(ballVector.Y, 2));
+					float mag_player = (float) (Math.Pow(playerVector.X, 2) + Math.Pow(playerVector.Y, 2));
 
-					float force = CCMathExHelper.sqrt(mag_ball + mag_player);
-					float angle = CCMathExHelper.atan2(diffy, diffx);
+					float force =(float) Math.Sqrt(mag_ball + mag_player);
+					float angle = (float) Math.Atan2(diffy, diffx);
 
-					ballVector.X = force * CCMathExHelper.cos(angle);
-					ballVector.Y = (force * CCMathExHelper.sin(angle));
+					ballVector.X = (float) (force * Math.Cos(angle));
+					ballVector.Y = (float)(force * Math.Sin(angle));
 
-					ballNextPosition.X = playerNextPosition.X + (player.radius + _ball.radius + force) * CCMathExHelper.cos(angle);
-					ballNextPosition.Y = playerNextPosition.Y + (player.radius + _ball.radius + force) * CCMathExHelper.sin(angle);
+					ballNextPosition.X = (float)( playerNextPosition.X + (player.radius + _ball.radius + force) *  Math.Cos(angle));
+					ballNextPosition.Y = (float) ( playerNextPosition.Y + (player.radius + _ball.radius + force) *  Math.Sin(angle));
 
 					PlayHit(); //CCSimpleAudioEngine.SharedEngine.PlayEffect("hit");
 				}
