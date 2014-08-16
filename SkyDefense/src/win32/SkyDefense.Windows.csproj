@@ -35,12 +35,6 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\csextensions\helpers\src\CCMathExHelper.cs">
-      <Link>Helpers\CCMathExHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\csextensions\helpers\src\CCPointExHelper.cs">
-      <Link>Helpers\CCPointExHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Common\IntroLayer.cs">
       <Link>Layers\IntroLayer.cs</Link>
     </Compile>

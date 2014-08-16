@@ -189,7 +189,7 @@ namespace SkyDefense.Common
 					sprite = (CCSprite)_fallingObjects[i];
 					diffx = _shockWave.PositionX - sprite.PositionX;
 					diffy = _shockWave.PositionY - sprite.PositionY;
-					if (CCMathExHelper.pow(diffx, 2) + CCMathExHelper.pow(diffy, 2) <= CCMathExHelper.pow(_shockWave.BoundingBox.Size.Width * 0.5f, 2))
+					if (Math.Pow(diffx, 2) + Math.Pow(diffy, 2) <= Math.Pow(_shockWave.BoundingBox.Size.Width * 0.5f, 2))
 					{
 						sprite.StopAllActions();
 						sprite.RunAction(_explosion);
