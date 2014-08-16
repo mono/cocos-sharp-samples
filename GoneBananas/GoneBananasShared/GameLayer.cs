@@ -74,6 +74,11 @@ namespace GoneBananas
             AddSun ();
             AddMonkey ();
 
+            StartScheduling();
+        }
+
+        void StartScheduling()
+        {
             Schedule (t => {
                 visibleBananas.Add (AddBanana ());
                 elapsedTime += t;
@@ -212,8 +217,12 @@ namespace GoneBananas
 
         void EndGame ()
         {
+            // Stop scheduled events as we transition to game over scene
+            UnscheduleAll();
+
             var gameOverScene = GameOverLayer.SceneWithScore (Window, hitBananas.Count);
             var transitionToGameOver = new CCTransitionMoveInR (0.3f, gameOverScene);
+
             Director.ReplaceScene (transitionToGameOver);
         }
 
