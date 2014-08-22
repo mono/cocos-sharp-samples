@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4FC03CC4-FB1B-4D1A-8AA4-6808B2CA7914}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SpineCocosSharp</RootNamespace>
+    <AssemblyName>SpineCocosSharp</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <NuGetPackageImportStamp>dfefb7c3</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\SpineCocosSharp\spine-cocossharp\CCMeshBatcher.cs">
+      <Link>spine-cocossharp\CCMeshBatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-cocossharp\CCSkeleton.cs">
+      <Link>spine-cocossharp\CCSkeleton.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-cocossharp\CCSkeletonAnimation.cs">
+      <Link>spine-cocossharp\CCSkeletonAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-cocossharp\CocosSharpTextureLoader.cs">
+      <Link>spine-cocossharp\CocosSharpTextureLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-cocossharp\MonoTextureLoader.cs">
+      <Link>spine-cocossharp\MonoTextureLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Animation.cs">
+      <Link>spine-csharp\Animation.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\AnimationState.cs">
+      <Link>spine-csharp\AnimationState.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\AnimationStateData.cs">
+      <Link>spine-csharp\AnimationStateData.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Atlas.cs">
+      <Link>spine-csharp\Atlas.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Attachments\AtlasAttachmentLoader.cs">
+      <Link>spine-csharp\Attachments\AtlasAttachmentLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Attachments\Attachment.cs">
+      <Link>spine-csharp\Attachments\Attachment.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Attachments\AttachmentLoader.cs">
+      <Link>spine-csharp\Attachments\AttachmentLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Attachments\AttachmentType.cs">
+      <Link>spine-csharp\Attachments\AttachmentType.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Attachments\BoundingBoxAttachment.cs">
+      <Link>spine-csharp\Attachments\BoundingBoxAttachment.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Attachments\MeshAttachment.cs">
+      <Link>spine-csharp\Attachments\MeshAttachment.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Attachments\RegionAttachment.cs">
+      <Link>spine-csharp\Attachments\RegionAttachment.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Attachments\SkinnedMeshAttachment.cs">
+      <Link>spine-csharp\Attachments\SkinnedMeshAttachment.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Bone.cs">
+      <Link>spine-csharp\Bone.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\BoneData.cs">
+      <Link>spine-csharp\BoneData.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Event.cs">
+      <Link>spine-csharp\Event.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\EventData.cs">
+      <Link>spine-csharp\EventData.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Json.cs">
+      <Link>spine-csharp\Json.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Skeleton.cs">
+      <Link>spine-csharp\Skeleton.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\SkeletonBounds.cs">
+      <Link>spine-csharp\SkeletonBounds.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\SkeletonData.cs">
+      <Link>spine-csharp\SkeletonData.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\SkeletonJson.cs">
+      <Link>spine-csharp\SkeletonJson.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Skin.cs">
+      <Link>spine-csharp\Skin.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\Slot.cs">
+      <Link>spine-csharp\Slot.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-csharp\src\SlotData.cs">
+      <Link>spine-csharp\SlotData.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-xna\src\MeshBatcher.cs">
+      <Link>spine-xna\MeshBatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-xna\src\RegionBatcher.cs">
+      <Link>spine-xna\RegionBatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-xna\src\SkeletonMeshRenderer.cs">
+      <Link>spine-xna\SkeletonMeshRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-xna\src\SkeletonRegionRenderer.cs">
+      <Link>spine-xna\SkeletonRegionRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-xna\src\Util.cs">
+      <Link>spine-xna\Util.cs</Link>
+    </Compile>
+    <Compile Include="..\SpineCocosSharp\spine-xna\src\XnaTextureLoader.cs">
+      <Link>spine-xna\XnaTextureLoader.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <Import Project="..\packages\CocosSharp.PCL.Shared.1.0.0.0\build\wp8\CocosSharp.PCL.Shared.targets" Condition="Exists('..\packages\CocosSharp.PCL.Shared.1.0.0.0\build\wp8\CocosSharp.PCL.Shared.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\CocosSharp.PCL.Shared.1.0.0.0\build\wp8\CocosSharp.PCL.Shared.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CocosSharp.PCL.Shared.1.0.0.0\build\wp8\CocosSharp.PCL.Shared.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
