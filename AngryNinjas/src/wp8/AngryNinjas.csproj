@@ -1,0 +1,1435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">ARM</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{72778D87-238A-4F25-AD7F-10098E8377EB}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AngryNinjas</RootNamespace>
+    <AssemblyName>AngryNinjas</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>EmptyProject_$(Configuration)_$(Platform).xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>AngryNinjas.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <NuGetPackageImportStamp>4f4554f7</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\WindowsPhone8\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\WindowsPhone8\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\WindowsPhone8\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\WindowsPhone8\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\common\custom\Constants.cs">
+      <Link>Custom\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\common\custom\CustomAnimation.cs">
+      <Link>Custom\CustomAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\common\custom\GameData.cs">
+      <Link>Custom\GameData.cs</Link>
+    </Compile>
+    <Compile Include="..\common\custom\GameSounds.cs">
+      <Link>Custom\GameSounds.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\BodyNode.cs">
+      <Link>Entities\BodyNode.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\Enemy.cs">
+      <Link>Entities\Enemy.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\Ninja.cs">
+      <Link>Entities\Ninja.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\StackObject.cs">
+      <Link>Entities\StackObject.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\StartPlatform.cs">
+      <Link>Entities\StartPlatform.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\TheStack.cs">
+      <Link>Entities\TheStack.cs</Link>
+    </Compile>
+    <Compile Include="..\common\layers\GroundPlane.cs">
+      <Link>Layers\GroundPlane.cs</Link>
+    </Compile>
+    <Compile Include="..\common\layers\TheMenu.cs">
+      <Link>Layers\TheMenu.cs</Link>
+    </Compile>
+    <Compile Include="..\common\levels\IntroLayer.cs">
+      <Link>Levels\IntroLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\common\levels\TheLevel.cs">
+      <Link>Levels\TheLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\common\listeners\ContactListener.cs">
+      <Link>Listeners\ContactListener.cs</Link>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Extensions\CCDraw.cs" />
+    <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Resources\wp8\Sounds\birds.wma">
+      <Link>Content\Sounds\birds.wma</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\frogs.wma">
+      <Link>Content\Sounds\frogs.wma</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\10000points-hd.xnb">
+      <Link>Content\10000points-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\10000points.xnb">
+      <Link>Content\10000points.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\1000points-hd.xnb">
+      <Link>Content\1000points-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\1000points.xnb">
+      <Link>Content\1000points.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\100points-hd.xnb">
+      <Link>Content\100points-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\100points.xnb">
+      <Link>Content\100points.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\5000points-hd.xnb">
+      <Link>Content\5000points-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\5000points.xnb">
+      <Link>Content\5000points.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\500points-hd.xnb">
+      <Link>Content\500points-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\500points.xnb">
+      <Link>Content\500points.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ambientFX-hd.xnb">
+      <Link>Content\ambientFX-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ambientFX-ipad-hd.xnb">
+      <Link>Content\ambientFX-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ambientFX-ipad.xnb">
+      <Link>Content\ambientFX-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ambientFX.xnb">
+      <Link>Content\ambientFX.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ambientFX_dim-hd.xnb">
+      <Link>Content\ambientFX_dim-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ambientFX_dim-ipad-hd.xnb">
+      <Link>Content\ambientFX_dim-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ambientFX_dim-ipad.xnb">
+      <Link>Content\ambientFX_dim-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ambientFX_dim.xnb">
+      <Link>Content\ambientFX_dim.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\background_clouds-hd.xnb">
+      <Link>Content\background_clouds-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\background_clouds.xnb">
+      <Link>Content\background_clouds.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\background_hills-hd.xnb">
+      <Link>Content\background_hills-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\background_hills.xnb">
+      <Link>Content\background_hills.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\blocks-ipad.xnb">
+      <Link>Content\blocks-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\blocks.xnb">
+      <Link>Content\blocks.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\circle-hd.xnb">
+      <Link>Content\circle-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\circle.xnb">
+      <Link>Content\circle.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\circleShape-hd.xnb">
+      <Link>Content\circleShape-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\circleShape.xnb">
+      <Link>Content\circleShape.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Default-Landscape~ipad.xnb">
+      <Link>Content\Default-Landscape~ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Default.xnb">
+      <Link>Content\Default.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Default_hd.xnb">
+      <Link>Content\Default_hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Default_ipad.xnb">
+      <Link>Content\Default_ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Emulogic-10.xnb">
+      <Link>Content\Emulogic-10.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Emulogic-15.xnb">
+      <Link>Content\Emulogic-15.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Emulogic-20.xnb">
+      <Link>Content\Emulogic-20.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Emulogic-25.xnb">
+      <Link>Content\Emulogic-25.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Emulogic-30.xnb">
+      <Link>Content\Emulogic-30.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0001-hd.xnb">
+      <Link>Content\explosion_0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0001.xnb">
+      <Link>Content\explosion_0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0002-hd.xnb">
+      <Link>Content\explosion_0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0002.xnb">
+      <Link>Content\explosion_0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0003-hd.xnb">
+      <Link>Content\explosion_0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0003.xnb">
+      <Link>Content\explosion_0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0004-hd.xnb">
+      <Link>Content\explosion_0004-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0004.xnb">
+      <Link>Content\explosion_0004.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0005-hd.xnb">
+      <Link>Content\explosion_0005-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0005.xnb">
+      <Link>Content\explosion_0005.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0006-hd.xnb">
+      <Link>Content\explosion_0006-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0006.xnb">
+      <Link>Content\explosion_0006.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0007-hd.xnb">
+      <Link>Content\explosion_0007-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0007.xnb">
+      <Link>Content\explosion_0007.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0008-hd.xnb">
+      <Link>Content\explosion_0008-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0008.xnb">
+      <Link>Content\explosion_0008.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0009-hd.xnb">
+      <Link>Content\explosion_0009-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0009.xnb">
+      <Link>Content\explosion_0009.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0010-hd.xnb">
+      <Link>Content\explosion_0010-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0010.xnb">
+      <Link>Content\explosion_0010.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0011-hd.xnb">
+      <Link>Content\explosion_0011-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\explosion_0011.xnb">
+      <Link>Content\explosion_0011.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\fire.xnb">
+      <Link>Content\fire.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\fps_images-hd.xnb">
+      <Link>Content\fps_images-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\fps_images-ipadhd.xnb">
+      <Link>Content\fps_images-ipadhd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\fps_images.xnb">
+      <Link>Content\fps_images.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\gameMenu-hd.xnb">
+      <Link>Content\gameMenu-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\gameMenu-ipad.xnb">
+      <Link>Content\gameMenu-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\gameMenu.xnb">
+      <Link>Content\gameMenu.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\grid_example.xnb">
+      <Link>Content\grid_example.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ground_plane-hd.xnb">
+      <Link>Content\ground_plane-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ground_plane.xnb">
+      <Link>Content\ground_plane.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\hexagonShape-hd.xnb">
+      <Link>Content\hexagonShape-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\hexagonShape.xnb">
+      <Link>Content\hexagonShape.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\hexagonShape2-hd.xnb">
+      <Link>Content\hexagonShape2-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\hexagonShape2.xnb">
+      <Link>Content\hexagonShape2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Icon%402x.xnb">
+      <Link>Content\Icon%402x.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Icon-144.xnb">
+      <Link>Content\Icon-144.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Icon-72.xnb">
+      <Link>Content\Icon-72.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Icon-Small%402x.xnb">
+      <Link>Content\Icon-Small%402x.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Icon-Small-50.xnb">
+      <Link>Content\Icon-Small-50.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Icon-Small.xnb">
+      <Link>Content\Icon-Small.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Icon.xnb">
+      <Link>Content\Icon.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\IntroLayer-hd.xnb">
+      <Link>Content\IntroLayer-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\IntroLayer-ipad.xnb">
+      <Link>Content\IntroLayer-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\IntroLayer-ipadhd.xnb">
+      <Link>Content\IntroLayer-ipadhd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\IntroLayer.xnb">
+      <Link>Content\IntroLayer.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton1-hd.xnb">
+      <Link>Content\levelButton1-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton1-ipad-hd.xnb">
+      <Link>Content\levelButton1-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton1-ipad.xnb">
+      <Link>Content\levelButton1-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton1.xnb">
+      <Link>Content\levelButton1.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton10-hd.xnb">
+      <Link>Content\levelButton10-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton10-ipad-hd.xnb">
+      <Link>Content\levelButton10-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton10-ipad.xnb">
+      <Link>Content\levelButton10-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton10.xnb">
+      <Link>Content\levelButton10.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton10_locked-hd.xnb">
+      <Link>Content\levelButton10_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton10_locked-ipad-hd.xnb">
+      <Link>Content\levelButton10_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton10_locked-ipad.xnb">
+      <Link>Content\levelButton10_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton10_locked.xnb">
+      <Link>Content\levelButton10_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton2-hd.xnb">
+      <Link>Content\levelButton2-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton2-ipad-hd.xnb">
+      <Link>Content\levelButton2-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton2-ipad.xnb">
+      <Link>Content\levelButton2-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton2.xnb">
+      <Link>Content\levelButton2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton2_locked-hd.xnb">
+      <Link>Content\levelButton2_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton2_locked-ipad-hd.xnb">
+      <Link>Content\levelButton2_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton2_locked-ipad.xnb">
+      <Link>Content\levelButton2_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton2_locked.xnb">
+      <Link>Content\levelButton2_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton3-hd.xnb">
+      <Link>Content\levelButton3-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton3-ipad-hd.xnb">
+      <Link>Content\levelButton3-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton3-ipad.xnb">
+      <Link>Content\levelButton3-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton3.xnb">
+      <Link>Content\levelButton3.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton3_locked-hd.xnb">
+      <Link>Content\levelButton3_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton3_locked-ipad-hd.xnb">
+      <Link>Content\levelButton3_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton3_locked-ipad.xnb">
+      <Link>Content\levelButton3_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton3_locked.xnb">
+      <Link>Content\levelButton3_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton4-hd.xnb">
+      <Link>Content\levelButton4-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton4-ipad-hd.xnb">
+      <Link>Content\levelButton4-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton4-ipad.xnb">
+      <Link>Content\levelButton4-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton4.xnb">
+      <Link>Content\levelButton4.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton4_locked-hd.xnb">
+      <Link>Content\levelButton4_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton4_locked-ipad-hd.xnb">
+      <Link>Content\levelButton4_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton4_locked-ipad.xnb">
+      <Link>Content\levelButton4_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton4_locked.xnb">
+      <Link>Content\levelButton4_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton5-hd.xnb">
+      <Link>Content\levelButton5-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton5-ipad-hd.xnb">
+      <Link>Content\levelButton5-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton5-ipad.xnb">
+      <Link>Content\levelButton5-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton5.xnb">
+      <Link>Content\levelButton5.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton5_locked-hd.xnb">
+      <Link>Content\levelButton5_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton5_locked-ipad-hd.xnb">
+      <Link>Content\levelButton5_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton5_locked-ipad.xnb">
+      <Link>Content\levelButton5_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton5_locked.xnb">
+      <Link>Content\levelButton5_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton6-hd.xnb">
+      <Link>Content\levelButton6-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton6-ipad-hd.xnb">
+      <Link>Content\levelButton6-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton6-ipad.xnb">
+      <Link>Content\levelButton6-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton6.xnb">
+      <Link>Content\levelButton6.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton6_locked-hd.xnb">
+      <Link>Content\levelButton6_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton6_locked-ipad-hd.xnb">
+      <Link>Content\levelButton6_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton6_locked-ipad.xnb">
+      <Link>Content\levelButton6_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton6_locked.xnb">
+      <Link>Content\levelButton6_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton7-hd.xnb">
+      <Link>Content\levelButton7-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton7-ipad-hd.xnb">
+      <Link>Content\levelButton7-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton7-ipad.xnb">
+      <Link>Content\levelButton7-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton7.xnb">
+      <Link>Content\levelButton7.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton7_locked-hd.xnb">
+      <Link>Content\levelButton7_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton7_locked-ipad-hd.xnb">
+      <Link>Content\levelButton7_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton7_locked-ipad.xnb">
+      <Link>Content\levelButton7_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton7_locked.xnb">
+      <Link>Content\levelButton7_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton8-hd.xnb">
+      <Link>Content\levelButton8-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton8-ipad-hd.xnb">
+      <Link>Content\levelButton8-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton8-ipad.xnb">
+      <Link>Content\levelButton8-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton8.xnb">
+      <Link>Content\levelButton8.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton8_locked-hd.xnb">
+      <Link>Content\levelButton8_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton8_locked-ipad-hd.xnb">
+      <Link>Content\levelButton8_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton8_locked-ipad.xnb">
+      <Link>Content\levelButton8_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton8_locked.xnb">
+      <Link>Content\levelButton8_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton9-hd.xnb">
+      <Link>Content\levelButton9-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton9-ipad-hd.xnb">
+      <Link>Content\levelButton9-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton9-ipad.xnb">
+      <Link>Content\levelButton9-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton9.xnb">
+      <Link>Content\levelButton9.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton9_locked-hd.xnb">
+      <Link>Content\levelButton9_locked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton9_locked-ipad-hd.xnb">
+      <Link>Content\levelButton9_locked-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton9_locked-ipad.xnb">
+      <Link>Content\levelButton9_locked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelButton9_locked.xnb">
+      <Link>Content\levelButton9_locked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelLocked-hd.xnb">
+      <Link>Content\levelLocked-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelLocked-ipad.xnb">
+      <Link>Content\levelLocked-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\levelLocked.xnb">
+      <Link>Content\levelLocked.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\marbleSquare-hd.xnb">
+      <Link>Content\marbleSquare-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\marbleSquare.xnb">
+      <Link>Content\marbleSquare.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\menu_background-hd.xnb">
+      <Link>Content\menu_background-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\menu_background-ipad-hd.xnb">
+      <Link>Content\menu_background-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\menu_background-ipad.xnb">
+      <Link>Content\menu_background-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\menu_background.xnb">
+      <Link>Content\menu_background.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper-hd.xnb">
+      <Link>Content\mutantPepper-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper.xnb">
+      <Link>Content\mutantPepper.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_blink-hd.xnb">
+      <Link>Content\mutantPepper_blink-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_blink.xnb">
+      <Link>Content\mutantPepper_blink.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0001-hd.xnb">
+      <Link>Content\mutantPepper_break0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0001.xnb">
+      <Link>Content\mutantPepper_break0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0002-hd.xnb">
+      <Link>Content\mutantPepper_break0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0002.xnb">
+      <Link>Content\mutantPepper_break0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0003-hd.xnb">
+      <Link>Content\mutantPepper_break0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0003.xnb">
+      <Link>Content\mutantPepper_break0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0004-hd.xnb">
+      <Link>Content\mutantPepper_break0004-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0004.xnb">
+      <Link>Content\mutantPepper_break0004.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0005-hd.xnb">
+      <Link>Content\mutantPepper_break0005-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0005.xnb">
+      <Link>Content\mutantPepper_break0005.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0006-hd.xnb">
+      <Link>Content\mutantPepper_break0006-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0006.xnb">
+      <Link>Content\mutantPepper_break0006.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0007-hd.xnb">
+      <Link>Content\mutantPepper_break0007-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0007.xnb">
+      <Link>Content\mutantPepper_break0007.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0008-hd.xnb">
+      <Link>Content\mutantPepper_break0008-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0008.xnb">
+      <Link>Content\mutantPepper_break0008.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0009-hd.xnb">
+      <Link>Content\mutantPepper_break0009-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0009.xnb">
+      <Link>Content\mutantPepper_break0009.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0010-hd.xnb">
+      <Link>Content\mutantPepper_break0010-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_break0010.xnb">
+      <Link>Content\mutantPepper_break0010.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_damage1-hd.xnb">
+      <Link>Content\mutantPepper_damage1-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_damage1.xnb">
+      <Link>Content\mutantPepper_damage1.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_damage2-hd.xnb">
+      <Link>Content\mutantPepper_damage2-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_damage2.xnb">
+      <Link>Content\mutantPepper_damage2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_damage3-hd.xnb">
+      <Link>Content\mutantPepper_damage3-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\mutantPepper_damage3.xnb">
+      <Link>Content\mutantPepper_damage3.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_air-hd.xnb">
+      <Link>Content\ninjaBlue_air-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_air.xnb">
+      <Link>Content\ninjaBlue_air.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_blink-hd.xnb">
+      <Link>Content\ninjaBlue_blink-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_blink.xnb">
+      <Link>Content\ninjaBlue_blink.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_in_sling-hd.xnb">
+      <Link>Content\ninjaBlue_in_sling-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_in_sling.xnb">
+      <Link>Content\ninjaBlue_in_sling.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_on_ground-hd.xnb">
+      <Link>Content\ninjaBlue_on_ground-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_on_ground.xnb">
+      <Link>Content\ninjaBlue_on_ground.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_roll-hd.xnb">
+      <Link>Content\ninjaBlue_roll-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_roll.xnb">
+      <Link>Content\ninjaBlue_roll.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_roll0001-hd.xnb">
+      <Link>Content\ninjaBlue_roll0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_roll0001.xnb">
+      <Link>Content\ninjaBlue_roll0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_roll0002-hd.xnb">
+      <Link>Content\ninjaBlue_roll0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_roll0002.xnb">
+      <Link>Content\ninjaBlue_roll0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_roll0003-hd.xnb">
+      <Link>Content\ninjaBlue_roll0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_roll0003.xnb">
+      <Link>Content\ninjaBlue_roll0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_standing-hd.xnb">
+      <Link>Content\ninjaBlue_standing-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBlue_standing.xnb">
+      <Link>Content\ninjaBlue_standing.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_air-hd.xnb">
+      <Link>Content\ninjaBrown_air-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_air.xnb">
+      <Link>Content\ninjaBrown_air.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_blink-hd.xnb">
+      <Link>Content\ninjaBrown_blink-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_blink.xnb">
+      <Link>Content\ninjaBrown_blink.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_in_sling-hd.xnb">
+      <Link>Content\ninjaBrown_in_sling-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_in_sling.xnb">
+      <Link>Content\ninjaBrown_in_sling.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_on_ground-hd.xnb">
+      <Link>Content\ninjaBrown_on_ground-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_on_ground.xnb">
+      <Link>Content\ninjaBrown_on_ground.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_roll-hd.xnb">
+      <Link>Content\ninjaBrown_roll-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_roll.xnb">
+      <Link>Content\ninjaBrown_roll.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_roll0001-hd.xnb">
+      <Link>Content\ninjaBrown_roll0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_roll0001.xnb">
+      <Link>Content\ninjaBrown_roll0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_roll0002-hd.xnb">
+      <Link>Content\ninjaBrown_roll0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_roll0002.xnb">
+      <Link>Content\ninjaBrown_roll0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_roll0003-hd.xnb">
+      <Link>Content\ninjaBrown_roll0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_roll0003.xnb">
+      <Link>Content\ninjaBrown_roll0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_standing-hd.xnb">
+      <Link>Content\ninjaBrown_standing-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaBrown_standing.xnb">
+      <Link>Content\ninjaBrown_standing.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_air-hd.xnb">
+      <Link>Content\ninjaGreen_air-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_air.xnb">
+      <Link>Content\ninjaGreen_air.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_blink-hd.xnb">
+      <Link>Content\ninjaGreen_blink-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_blink.xnb">
+      <Link>Content\ninjaGreen_blink.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_in_sling-hd.xnb">
+      <Link>Content\ninjaGreen_in_sling-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_in_sling.xnb">
+      <Link>Content\ninjaGreen_in_sling.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_on_ground-hd.xnb">
+      <Link>Content\ninjaGreen_on_ground-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_on_ground.xnb">
+      <Link>Content\ninjaGreen_on_ground.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_roll-hd.xnb">
+      <Link>Content\ninjaGreen_roll-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_roll.xnb">
+      <Link>Content\ninjaGreen_roll.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_roll0001-hd.xnb">
+      <Link>Content\ninjaGreen_roll0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_roll0001.xnb">
+      <Link>Content\ninjaGreen_roll0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_roll0002-hd.xnb">
+      <Link>Content\ninjaGreen_roll0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_roll0002.xnb">
+      <Link>Content\ninjaGreen_roll0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_roll0003-hd.xnb">
+      <Link>Content\ninjaGreen_roll0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_roll0003.xnb">
+      <Link>Content\ninjaGreen_roll0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_standing-hd.xnb">
+      <Link>Content\ninjaGreen_standing-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaGreen_standing.xnb">
+      <Link>Content\ninjaGreen_standing.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_air-hd.xnb">
+      <Link>Content\ninjaRed_air-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_air.xnb">
+      <Link>Content\ninjaRed_air.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_blink-hd.xnb">
+      <Link>Content\ninjaRed_blink-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_blink.xnb">
+      <Link>Content\ninjaRed_blink.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_in_sling-hd.xnb">
+      <Link>Content\ninjaRed_in_sling-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_in_sling.xnb">
+      <Link>Content\ninjaRed_in_sling.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_on_ground-hd.xnb">
+      <Link>Content\ninjaRed_on_ground-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_on_ground.xnb">
+      <Link>Content\ninjaRed_on_ground.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_roll-hd.xnb">
+      <Link>Content\ninjaRed_roll-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_roll.xnb">
+      <Link>Content\ninjaRed_roll.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_roll0001-hd.xnb">
+      <Link>Content\ninjaRed_roll0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_roll0001.xnb">
+      <Link>Content\ninjaRed_roll0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_roll0002-hd.xnb">
+      <Link>Content\ninjaRed_roll0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_roll0002.xnb">
+      <Link>Content\ninjaRed_roll0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_roll0003-hd.xnb">
+      <Link>Content\ninjaRed_roll0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_roll0003.xnb">
+      <Link>Content\ninjaRed_roll0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_standing-hd.xnb">
+      <Link>Content\ninjaRed_standing-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninjaRed_standing.xnb">
+      <Link>Content\ninjaRed_standing.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_air-hd.xnb">
+      <Link>Content\ninja_air-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_air.xnb">
+      <Link>Content\ninja_air.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_blink-hd.xnb">
+      <Link>Content\ninja_blink-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_blink.xnb">
+      <Link>Content\ninja_blink.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_in_sling-hd.xnb">
+      <Link>Content\ninja_in_sling-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_in_sling.xnb">
+      <Link>Content\ninja_in_sling.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_on_ground-hd.xnb">
+      <Link>Content\ninja_on_ground-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_on_ground.xnb">
+      <Link>Content\ninja_on_ground.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_roll-hd.xnb">
+      <Link>Content\ninja_roll-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_roll.xnb">
+      <Link>Content\ninja_roll.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_roll0001-hd.xnb">
+      <Link>Content\ninja_roll0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_roll0001.xnb">
+      <Link>Content\ninja_roll0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_roll0002-hd.xnb">
+      <Link>Content\ninja_roll0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_roll0002.xnb">
+      <Link>Content\ninja_roll0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_roll0003-hd.xnb">
+      <Link>Content\ninja_roll0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_roll0003.xnb">
+      <Link>Content\ninja_roll0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_standing-hd.xnb">
+      <Link>Content\ninja_standing-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\ninja_standing.xnb">
+      <Link>Content\ninja_standing.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\octogonShape-hd.xnb">
+      <Link>Content\octogonShape-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\octogonShape.xnb">
+      <Link>Content\octogonShape.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\parallelogram-hd.xnb">
+      <Link>Content\parallelogram-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\parallelogram.xnb">
+      <Link>Content\parallelogram.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\parallelogram2-hd.xnb">
+      <Link>Content\parallelogram2-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\parallelogram2.xnb">
+      <Link>Content\parallelogram2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\pentagon-hd.xnb">
+      <Link>Content\pentagon-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\pentagon.xnb">
+      <Link>Content\pentagon.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\platform-hd.xnb">
+      <Link>Content\platform-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\platform.xnb">
+      <Link>Content\platform.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0001-hd.xnb">
+      <Link>Content\puffs_0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0001.xnb">
+      <Link>Content\puffs_0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0002-hd.xnb">
+      <Link>Content\puffs_0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0002.xnb">
+      <Link>Content\puffs_0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0003-hd.xnb">
+      <Link>Content\puffs_0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0003.xnb">
+      <Link>Content\puffs_0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0004-hd.xnb">
+      <Link>Content\puffs_0004-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0004.xnb">
+      <Link>Content\puffs_0004.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0005-hd.xnb">
+      <Link>Content\puffs_0005-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0005.xnb">
+      <Link>Content\puffs_0005.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0006-hd.xnb">
+      <Link>Content\puffs_0006-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0006.xnb">
+      <Link>Content\puffs_0006.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0007-hd.xnb">
+      <Link>Content\puffs_0007-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\puffs_0007.xnb">
+      <Link>Content\puffs_0007.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\slingshot_front-hd.xnb">
+      <Link>Content\slingshot_front-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\slingshot_front.xnb">
+      <Link>Content\slingshot_front.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\soundFX-hd.xnb">
+      <Link>Content\soundFX-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\soundFX-ipad-hd.xnb">
+      <Link>Content\soundFX-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\soundFX-ipad.xnb">
+      <Link>Content\soundFX-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\soundFX.xnb">
+      <Link>Content\soundFX.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\soundFX_dim-hd.xnb">
+      <Link>Content\soundFX_dim-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\soundFX_dim-ipad-hd.xnb">
+      <Link>Content\soundFX_dim-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\soundFX_dim-ipad.xnb">
+      <Link>Content\soundFX_dim-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\soundFX_dim.xnb">
+      <Link>Content\soundFX_dim.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\stonePillar-hd.xnb">
+      <Link>Content\stonePillar-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\stonePillar.xnb">
+      <Link>Content\stonePillar.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\strap-hd.xnb">
+      <Link>Content\strap-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\strap.xnb">
+      <Link>Content\strap.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\strapBack-hd.xnb">
+      <Link>Content\strapBack-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\strapBack.xnb">
+      <Link>Content\strapBack.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\strapEmpty-hd.xnb">
+      <Link>Content\strapEmpty-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\strapEmpty.xnb">
+      <Link>Content\strapEmpty.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\trapezoid-hd.xnb">
+      <Link>Content\trapezoid-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\trapezoid.xnb">
+      <Link>Content\trapezoid.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\trapezoid2-hd.xnb">
+      <Link>Content\trapezoid2-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\trapezoid2.xnb">
+      <Link>Content\trapezoid2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleLarge-hd.xnb">
+      <Link>Content\triangleLarge-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleLarge.xnb">
+      <Link>Content\triangleLarge.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleMedium-hd.xnb">
+      <Link>Content\triangleMedium-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleMedium.xnb">
+      <Link>Content\triangleMedium.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleRightAngle-hd.xnb">
+      <Link>Content\triangleRightAngle-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleRightAngle.xnb">
+      <Link>Content\triangleRightAngle.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleSmall-hd.xnb">
+      <Link>Content\triangleSmall-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleSmall.xnb">
+      <Link>Content\triangleSmall.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleTall-hd.xnb">
+      <Link>Content\triangleTall-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\triangleTall.xnb">
+      <Link>Content\triangleTall.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\voiceFX-hd.xnb">
+      <Link>Content\voiceFX-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\voiceFX-ipad-hd.xnb">
+      <Link>Content\voiceFX-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\voiceFX-ipad.xnb">
+      <Link>Content\voiceFX-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\voiceFX.xnb">
+      <Link>Content\voiceFX.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\voiceFX_dim-hd.xnb">
+      <Link>Content\voiceFX_dim-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\voiceFX_dim-ipad-hd.xnb">
+      <Link>Content\voiceFX_dim-ipad-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\voiceFX_dim-ipad.xnb">
+      <Link>Content\voiceFX_dim-ipad.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\voiceFX_dim.xnb">
+      <Link>Content\voiceFX_dim.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1-hd.xnb">
+      <Link>Content\woodShape1-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1.xnb">
+      <Link>Content\woodShape1.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0001-hd.xnb">
+      <Link>Content\woodShape1_0001-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0001.xnb">
+      <Link>Content\woodShape1_0001.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0002-hd.xnb">
+      <Link>Content\woodShape1_0002-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0002.xnb">
+      <Link>Content\woodShape1_0002.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0003-hd.xnb">
+      <Link>Content\woodShape1_0003-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0003.xnb">
+      <Link>Content\woodShape1_0003.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0004-hd.xnb">
+      <Link>Content\woodShape1_0004-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0004.xnb">
+      <Link>Content\woodShape1_0004.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0005-hd.xnb">
+      <Link>Content\woodShape1_0005-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0005.xnb">
+      <Link>Content\woodShape1_0005.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0006-hd.xnb">
+      <Link>Content\woodShape1_0006-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0006.xnb">
+      <Link>Content\woodShape1_0006.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0007-hd.xnb">
+      <Link>Content\woodShape1_0007-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0007.xnb">
+      <Link>Content\woodShape1_0007.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0008-hd.xnb">
+      <Link>Content\woodShape1_0008-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0008.xnb">
+      <Link>Content\woodShape1_0008.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0009-hd.xnb">
+      <Link>Content\woodShape1_0009-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0009.xnb">
+      <Link>Content\woodShape1_0009.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0010-hd.xnb">
+      <Link>Content\woodShape1_0010-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape1_0010.xnb">
+      <Link>Content\woodShape1_0010.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape2-hd.xnb">
+      <Link>Content\woodShape2-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape2.xnb">
+      <Link>Content\woodShape2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape3-hd.xnb">
+      <Link>Content\woodShape3-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape3.xnb">
+      <Link>Content\woodShape3.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape4-hd.xnb">
+      <Link>Content\woodShape4-hd.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\woodShape4.xnb">
+      <Link>Content\woodShape4.xnb</Link>
+    </Content>
+    <None Include="..\Resources\wp8\fonts\MarkerFelt-16.xnb">
+      <Link>Content\fonts\MarkerFelt-16.xnb</Link>
+    </None>
+    <None Include="..\Resources\wp8\fonts\MarkerFelt-18.xnb">
+      <Link>Content\fonts\MarkerFelt-18.xnb</Link>
+    </None>
+    <Content Include="..\Resources\wp8\Sounds\birds.xnb">
+      <Link>Content\Sounds\birds.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\bloop.xnb">
+      <Link>Content\Sounds\bloop.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\break1.xnb">
+      <Link>Content\Sounds\break1.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\break2.xnb">
+      <Link>Content\Sounds\break2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\break3.xnb">
+      <Link>Content\Sounds\break3.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\drums.xnb">
+      <Link>Content\Sounds\drums.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\frogs.xnb">
+      <Link>Content\Sounds\frogs.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\gong.xnb">
+      <Link>Content\Sounds\gong.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\grunt1.xnb">
+      <Link>Content\Sounds\grunt1.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\grunt2.xnb">
+      <Link>Content\Sounds\grunt2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\grunt3.xnb">
+      <Link>Content\Sounds\grunt3.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\grunt4.xnb">
+      <Link>Content\Sounds\grunt4.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\grunt5.xnb">
+      <Link>Content\Sounds\grunt5.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\grunt6.xnb">
+      <Link>Content\Sounds\grunt6.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\grunt7.xnb">
+      <Link>Content\Sounds\grunt7.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\grunt8.xnb">
+      <Link>Content\Sounds\grunt8.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\impact1.xnb">
+      <Link>Content\Sounds\impact1.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\impact2.xnb">
+      <Link>Content\Sounds\impact2.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\impact3.xnb">
+      <Link>Content\Sounds\impact3.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\impact4.xnb">
+      <Link>Content\Sounds\impact4.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\impact5.xnb">
+      <Link>Content\Sounds\impact5.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\Sounds\whoosh.xnb">
+      <Link>Content\Sounds\whoosh.xnb</Link>
+    </Content>
+    <Content Include="..\Resources\wp8\fonts\MarkerFelt-22.xnb">
+      <Link>Content\fonts\MarkerFelt-22.xnb</Link>
+    </Content>
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\AlignmentGrid.png" />
+    <Content Include="Assets\ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileMedium.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\FlipCycleTileSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Tiles\IconicTileSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="box2d" Condition=" $(Platform) != 'x86'">
+      <HintPath>..\packages\Cocos2D-XNA.WindowsPhone8.1.3.0.2\lib\WindowsPhone8\ARM\box2d.dll</HintPath>
+    </Reference>
+    <Reference Include="cocos2d-xna" Condition=" $(Platform) != 'x86'">
+      <HintPath>..\packages\Cocos2D-XNA.WindowsPhone8.1.3.0.2\lib\WindowsPhone8\ARM\cocos2d-xna.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib" Condition=" $(Platform) != 'x86'">
+      <HintPath>..\packages\Cocos2D-XNA.WindowsPhone8.1.3.0.2\lib\WindowsPhone8\ARM\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework" Condition=" $(Platform) != 'x86'">
+      <HintPath>..\packages\Cocos2D-XNA.WindowsPhone8.1.3.0.2\lib\WindowsPhone8\ARM\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <Target Name="MonoGame_RemoveXnaAssemblies" AfterTargets="ImplicitlyExpandTargetFramework">
+    <Message Text="MonoGame - Removing XNA Assembly references!" Importance="normal" />
+    <ItemGroup>
+      <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.dll'" />
+      <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.GamerServices.dll'" />
+      <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.GamerServicesExtensions.dll'" />
+      <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.Input.Touch.dll'" />
+      <ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Microsoft.Xna.Framework.MediaLibraryExtensions.dll'" />
+    </ItemGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+</Project>
