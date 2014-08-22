@@ -5,7 +5,6 @@ using CocosDenshion;
 using System.Linq;
 using CocosSharp;
 using CocosSharp.Extensions.SneakyJoystick;
-using SneakyJoystickExample.Windows;
 
 namespace SneakyJoystickExample.Common
 {
@@ -103,9 +102,9 @@ namespace SneakyJoystickExample.Common
         #endregion Initialization
 
 
-        protected override void AddedToNewScene()
+        protected override void AddedToScene()
         {
-            base.AddedToNewScene();
+            base.AddedToScene();
 
 			InitializeJoystick();
 			InitializeMonkey();
@@ -114,7 +113,7 @@ namespace SneakyJoystickExample.Common
             CurrentSprite = monkeySprite;
             joystickPanel.Player = CurrentSprite;
 
-            CurrentSprite.Position = VisibleBoundsWorldspace.Center;
+            CurrentSprite.Position = Window.WindowSizeInPixels.Center;
 
             CCSimpleAudioEngine.SharedEngine.PreloadEffect("sound_oso");
 

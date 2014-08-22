@@ -18,7 +18,7 @@
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <NuGetPackageImportStamp>90bcf0af</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>7f20a0ae</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -84,12 +84,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\helpers\src\CCMathExHelper.cs">
-      <Link>Helpers\CCMathExHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\helpers\src\CCPointExHelper.cs">
-      <Link>Helpers\CCPointExHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Common\ColoredCircleSprite.cs">
       <Link>ColoredCircleSprite.cs</Link>
     </Compile>
@@ -114,12 +108,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
   <Import Project="..\packages\CocosSharp.PCL.Shared.1.0.0.0\build\wp8\CocosSharp.PCL.Shared.targets" Condition="Exists('..\packages\CocosSharp.PCL.Shared.1.0.0.0\build\wp8\CocosSharp.PCL.Shared.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\CocosSharp.PCL.Shared.1.0.0.0\build\wp8\CocosSharp.PCL.Shared.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CocosSharp.PCL.Shared.1.0.0.0\build\wp8\CocosSharp.PCL.Shared.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

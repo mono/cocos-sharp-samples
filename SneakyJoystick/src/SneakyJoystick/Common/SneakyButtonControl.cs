@@ -177,13 +177,15 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         }
 
-        public void Draw()
+        protected override void Draw()
         {
             base.Draw();
             CCDrawingPrimitives.Begin();
             CCDrawingPrimitives.DrawRect(new CCRect(0, 0, this.ContentSize.Width, this.ContentSize.Height), CCColor4B.Blue);
             CCDrawingPrimitives.End();
         }
+
+     
 
 
     }

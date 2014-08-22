@@ -208,9 +208,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         }
 
-		protected override void AddedToNewScene()
+		protected override void AddedToScene()
 		{
-			base.AddedToNewScene();
+            base.AddedToScene();
 
 			var rect = ControlSize;
 
