@@ -103,8 +103,8 @@ namespace AirHockey.Common
 				if (touch != null)
 				{
 					//get location in OpenGL view
-					tap = touch.LocationOnScreen; ; ; //??¿¿?¿?
-					tap.Y = Window.WindowSizeInPixels.Height - tap.Y;
+					tap = touch.Location; //??¿¿?¿?
+					//tap.Y = Window.WindowSizeInPixels.Height - tap.Y;
 					//CCPoint.Rotate()
 					//tap = CCPoint.RotateByAngle(touch.Location, new CCPoint(0,0)  , 90);// ;  (touch.Location, touch.Location, 90);
 					//loop through players and check to see if touch is landing on one of them
@@ -137,8 +137,8 @@ namespace AirHockey.Common
 
 				if (touch != null)
 				{
-					tap = touch.LocationOnScreen;
-					tap.Y = Window.WindowSizeInPixels.Height - tap.Y;
+					tap = touch.Location;
+					//tap.Y = Window.WindowSizeInPixels.Height - tap.Y;
 
 					for (int p = 0; p < _players.Length; p++)
 					{

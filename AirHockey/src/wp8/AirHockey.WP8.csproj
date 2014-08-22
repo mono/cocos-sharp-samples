@@ -25,7 +25,7 @@
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <NuGetPackageImportStamp>24862616</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>903c55fa</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,12 +70,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\CSExtensions\Helpers\src\CCMathExHelper.cs">
-      <Link>Helpers\CCMathExHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\CSExtensions\Helpers\src\CCPointExHelper.cs">
-      <Link>Helpers\CCPointExHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Common\GameSprite.cs">
       <Link>GameSprite.cs</Link>
     </Compile>
@@ -90,7 +84,6 @@
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
