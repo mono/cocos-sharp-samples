@@ -6,94 +6,37 @@ using CocosSharp;
 
 namespace RocketThrought.WP8
 {
-    public class AppDelegate : CCApplication
+    public class AppDelegate : CCApplicationDelegate
     {
 
-        int preferredWidth = 800;
-        int preferredHeight = 480;
+        static CCWindow sharedWindow;
 
-        public AppDelegate(Game game, GraphicsDeviceManager graphics)
-            : base(game, graphics)
+        public static CCWindow SharedWindow
         {
-
-            // disable the automatic media restore so we don't get a deadlock when the game
-            // first starts.
-            HandleMediaStateAutomatically = false;
-
-            // set the render viewport size
-            graphics.PreferredBackBufferWidth = preferredWidth;
-            graphics.PreferredBackBufferHeight = preferredHeight;
-
-            // this controls anti-aliasing
-            graphics.PreferMultiSampling = false;
-
+            get { return sharedWindow; }
         }
 
-        /// <summary>
-        /// Implement for initialize OpenGL instance, set source path, etc...
-        /// </summary>
-        public override bool InitInstance()
+        public static CCSize DefaultResolution;
+
+        public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
         {
-            return base.InitInstance();
+            application.ContentRootDirectory = "Content";
+            sharedWindow = mainWindow;
+            DefaultResolution = new CCSize(
+            application.MainWindow.WindowSizeInPixels.Width,
+            application.MainWindow.WindowSizeInPixels.Height);
+
+            //mainWindow.SetDesignResolutionSize(960, 640, CCSceneResolutionPolicy.ShowAll);
+            //application.HandleMediaStateAutomatically = false;
+            //mainWindow.DisplayStats = true;
+
+            CCScene scene = new CCScene(sharedWindow);
+            CCLayer layer = new IntroLayer(DefaultResolution);
+
+            scene.AddChild(layer);
+            sharedWindow.RunWithScene(scene);
         }
 
-        /// <summary>
-        ///  Implement CCDirector and CCScene init code here.
-        /// </summary>
-        /// <returns>
-        ///  true  Initialize success, app continue.
-        ///  false Initialize failed, app terminate.
-        /// </returns>
-        public override bool ApplicationDidFinishLaunching()
-        {
-            //initialize director
-            CCDirector pDirector = CCDirector.SharedDirector;
-            pDirector.SetOpenGlView();
-
-
-            // 2D projection
-            pDirector.Projection = CCDirectorProjection.Projection2D;
-
-            var resPolicy = CCResolutionPolicy.ShowAll; // This will letterbox your game
-
-            CCDrawManager.SetDesignResolutionSize(preferredWidth,
-                                                  preferredHeight,
-                                                  resPolicy);
-
-            // turn on display FPS
-            //pDirector.DisplayStats = true;
-
-            // set FPS. the default value is 1.0/60 if you don't call this
-            pDirector.AnimationInterval = 1.0 / 60;
-
-            CCScene pScene = IntroLayer.Scene;
-
-            pDirector.RunWithScene(pScene);
-            return true;
-        }
-
-        /// <summary>
-        /// The function be called when the application enters the background
-        /// </summary>
-        public override void ApplicationDidEnterBackground()
-        {
-            // stop all of the animation actions that are running.
-            CCDirector.SharedDirector.Pause();
-
-            // if you use SimpleAudioEngine, your music must be paused
-            // CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = true;
-        }
-
-        /// <summary>
-        /// The function be called when the application enter foreground  
-        /// </summary>
-        public override void ApplicationWillEnterForeground()
-        {
-            CCDirector.SharedDirector.Resume();
-
-            // if you use SimpleAudioEngine, your background music track must resume here. 
-            //CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = false;
-
-        }
+     
     }
 }
