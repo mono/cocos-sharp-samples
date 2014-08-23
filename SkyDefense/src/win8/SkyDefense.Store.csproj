@@ -111,7 +111,6 @@
     </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Game1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +128,7 @@
     </Content>
     <Content Include="..\Content\common\sprite_sheet.png">
       <Link>Content\sprite_sheet.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\fonts\MarkerFelt-22.xnb" />
     <None Include="..\Content\common\music\background.xnb">
