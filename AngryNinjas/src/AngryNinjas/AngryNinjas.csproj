@@ -1,0 +1,1784 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D86AB7A9-B63C-493D-A911-5AC71BE7C59C}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AngryNinjas</RootNamespace>
+    <AssemblyName>AngryNinjas</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>Spine.Store_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Windows8\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Windows8\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Windows8\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\Windows8\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Windows8\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\Windows8\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Windows8\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Windows8\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\common\custom\Constants.cs">
+      <Link>Custom\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\common\custom\CustomAnimation.cs">
+      <Link>Custom\CustomAnimation.cs</Link>
+    </Compile>
+    <Compile Include="..\common\custom\GameData.cs">
+      <Link>Custom\GameData.cs</Link>
+    </Compile>
+    <Compile Include="..\common\custom\GameSounds.cs">
+      <Link>Custom\GameSounds.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\BodyNode.cs">
+      <Link>Entities\BodyNode.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\Enemy.cs">
+      <Link>Entities\Enemy.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\Ninja.cs">
+      <Link>Entities\Ninja.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\StackObject.cs">
+      <Link>Entities\StackObject.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\StartPlatform.cs">
+      <Link>Entities\StartPlatform.cs</Link>
+    </Compile>
+    <Compile Include="..\common\entities\TheStack.cs">
+      <Link>Entities\TheStack.cs</Link>
+    </Compile>
+    <Compile Include="..\common\layers\GroundPlane.cs">
+      <Link>Layers\GroundPlane.cs</Link>
+    </Compile>
+    <Compile Include="..\common\layers\TheMenu.cs">
+      <Link>Layers\TheMenu.cs</Link>
+    </Compile>
+    <Compile Include="..\common\levels\IntroLayer.cs">
+      <Link>Levels\IntroLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\common\levels\TheLevel.cs">
+      <Link>Levels\TheLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\common\listeners\ContactListener.cs">
+      <Link>Listeners\ContactListener.cs</Link>
+    </Compile>
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Extensions\CCDraw.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="..\Resources\win32\10000points-hd.png">
+      <Link>Content\10000points-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\10000points.png">
+      <Link>Content\10000points.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\1000points-hd.png">
+      <Link>Content\1000points-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\1000points.png">
+      <Link>Content\1000points.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\100points-hd.png">
+      <Link>Content\100points-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\100points.png">
+      <Link>Content\100points.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\5000points-hd.png">
+      <Link>Content\5000points-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\5000points.png">
+      <Link>Content\5000points.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\500points-hd.png">
+      <Link>Content\500points-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\500points.png">
+      <Link>Content\500points.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ambientFX-hd.png">
+      <Link>Content\ambientFX-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ambientFX-ipad-hd.png">
+      <Link>Content\ambientFX-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ambientFX-ipad.png">
+      <Link>Content\ambientFX-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ambientFX.png">
+      <Link>Content\ambientFX.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ambientFX_dim-hd.png">
+      <Link>Content\ambientFX_dim-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ambientFX_dim-ipad-hd.png">
+      <Link>Content\ambientFX_dim-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ambientFX_dim-ipad.png">
+      <Link>Content\ambientFX_dim-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ambientFX_dim.png">
+      <Link>Content\ambientFX_dim.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\background_clouds-hd.png">
+      <Link>Content\background_clouds-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\background_clouds.png">
+      <Link>Content\background_clouds.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\background_hills-hd.png">
+      <Link>Content\background_hills-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\background_hills.png">
+      <Link>Content\background_hills.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\blocks-ipad.png">
+      <Link>Content\blocks-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\blocks.png">
+      <Link>Content\blocks.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\circle-hd.png">
+      <Link>Content\circle-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\circle.png">
+      <Link>Content\circle.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\circleShape-hd.png">
+      <Link>Content\circleShape-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\circleShape.png">
+      <Link>Content\circleShape.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Default-Landscape~ipad.png">
+      <Link>Content\Default-Landscape~ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Default.png">
+      <Link>Content\Default.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Default_hd.png">
+      <Link>Content\Default_hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Default_ipad.png">
+      <Link>Content\Default_ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0001-hd.png">
+      <Link>Content\explosion_0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0001.png">
+      <Link>Content\explosion_0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0002-hd.png">
+      <Link>Content\explosion_0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0002.png">
+      <Link>Content\explosion_0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0003-hd.png">
+      <Link>Content\explosion_0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0003.png">
+      <Link>Content\explosion_0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0004-hd.png">
+      <Link>Content\explosion_0004-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0004.png">
+      <Link>Content\explosion_0004.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0005-hd.png">
+      <Link>Content\explosion_0005-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0005.png">
+      <Link>Content\explosion_0005.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0006-hd.png">
+      <Link>Content\explosion_0006-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0006.png">
+      <Link>Content\explosion_0006.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0007-hd.png">
+      <Link>Content\explosion_0007-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0007.png">
+      <Link>Content\explosion_0007.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0008-hd.png">
+      <Link>Content\explosion_0008-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0008.png">
+      <Link>Content\explosion_0008.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0009-hd.png">
+      <Link>Content\explosion_0009-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0009.png">
+      <Link>Content\explosion_0009.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0010-hd.png">
+      <Link>Content\explosion_0010-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0010.png">
+      <Link>Content\explosion_0010.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0011-hd.png">
+      <Link>Content\explosion_0011-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\explosion_0011.png">
+      <Link>Content\explosion_0011.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\fire.png">
+      <Link>Content\fire.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="..\resources\win32\fonts\MarkerFelt-16.xnb">
+      <Link>Content\fonts\MarkerFelt-16.xnb</Link>
+    </Content>
+    <Content Include="..\resources\win32\fonts\MarkerFelt-18.xnb">
+      <Link>Content\fonts\MarkerFelt-18.xnb</Link>
+    </Content>
+    <None Include="..\Resources\win32\fps_images-hd.png">
+      <Link>Content\fps_images-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\fps_images-ipadhd.png">
+      <Link>Content\fps_images-ipadhd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\fps_images.png">
+      <Link>Content\fps_images.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\gameMenu-hd.png">
+      <Link>Content\gameMenu-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\gameMenu-ipad.png">
+      <Link>Content\gameMenu-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\gameMenu.png">
+      <Link>Content\gameMenu.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\grid_example.png">
+      <Link>Content\grid_example.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ground_plane-hd.png">
+      <Link>Content\ground_plane-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ground_plane.png">
+      <Link>Content\ground_plane.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\hexagonShape-hd.png">
+      <Link>Content\hexagonShape-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\hexagonShape.png">
+      <Link>Content\hexagonShape.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\hexagonShape2-hd.png">
+      <Link>Content\hexagonShape2-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\hexagonShape2.png">
+      <Link>Content\hexagonShape2.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Icon%402x.png">
+      <Link>Content\Icon%402x.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Icon-144.png">
+      <Link>Content\Icon-144.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Icon-72.png">
+      <Link>Content\Icon-72.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Icon-Small%402x.png">
+      <Link>Content\Icon-Small%402x.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Icon-Small-50.png">
+      <Link>Content\Icon-Small-50.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Icon-Small.png">
+      <Link>Content\Icon-Small.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\Icon.png">
+      <Link>Content\Icon.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\IntroLayer-hd.png">
+      <Link>Content\IntroLayer-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\IntroLayer-ipad.png">
+      <Link>Content\IntroLayer-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\IntroLayer-ipadhd.png">
+      <Link>Content\IntroLayer-ipadhd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\IntroLayer.png">
+      <Link>Content\IntroLayer.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton1-hd.png">
+      <Link>Content\levelButton1-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton1-ipad-hd.png">
+      <Link>Content\levelButton1-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton1-ipad.png">
+      <Link>Content\levelButton1-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton1.png">
+      <Link>Content\levelButton1.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton10-hd.png">
+      <Link>Content\levelButton10-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton10-ipad-hd.png">
+      <Link>Content\levelButton10-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton10-ipad.png">
+      <Link>Content\levelButton10-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton10.png">
+      <Link>Content\levelButton10.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton10_locked-hd.png">
+      <Link>Content\levelButton10_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton10_locked-ipad-hd.png">
+      <Link>Content\levelButton10_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton10_locked-ipad.png">
+      <Link>Content\levelButton10_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton10_locked.png">
+      <Link>Content\levelButton10_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton2-hd.png">
+      <Link>Content\levelButton2-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton2-ipad-hd.png">
+      <Link>Content\levelButton2-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton2-ipad.png">
+      <Link>Content\levelButton2-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton2.png">
+      <Link>Content\levelButton2.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton2_locked-hd.png">
+      <Link>Content\levelButton2_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton2_locked-ipad-hd.png">
+      <Link>Content\levelButton2_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton2_locked-ipad.png">
+      <Link>Content\levelButton2_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton2_locked.png">
+      <Link>Content\levelButton2_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton3-hd.png">
+      <Link>Content\levelButton3-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton3-ipad-hd.png">
+      <Link>Content\levelButton3-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton3-ipad.png">
+      <Link>Content\levelButton3-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton3.png">
+      <Link>Content\levelButton3.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton3_locked-hd.png">
+      <Link>Content\levelButton3_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton3_locked-ipad-hd.png">
+      <Link>Content\levelButton3_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton3_locked-ipad.png">
+      <Link>Content\levelButton3_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton3_locked.png">
+      <Link>Content\levelButton3_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton4-hd.png">
+      <Link>Content\levelButton4-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton4-ipad-hd.png">
+      <Link>Content\levelButton4-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton4-ipad.png">
+      <Link>Content\levelButton4-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton4.png">
+      <Link>Content\levelButton4.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton4_locked-hd.png">
+      <Link>Content\levelButton4_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton4_locked-ipad-hd.png">
+      <Link>Content\levelButton4_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton4_locked-ipad.png">
+      <Link>Content\levelButton4_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton4_locked.png">
+      <Link>Content\levelButton4_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton5-hd.png">
+      <Link>Content\levelButton5-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton5-ipad-hd.png">
+      <Link>Content\levelButton5-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton5-ipad.png">
+      <Link>Content\levelButton5-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton5.png">
+      <Link>Content\levelButton5.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton5_locked-hd.png">
+      <Link>Content\levelButton5_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton5_locked-ipad-hd.png">
+      <Link>Content\levelButton5_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton5_locked-ipad.png">
+      <Link>Content\levelButton5_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton5_locked.png">
+      <Link>Content\levelButton5_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton6-hd.png">
+      <Link>Content\levelButton6-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton6-ipad-hd.png">
+      <Link>Content\levelButton6-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton6-ipad.png">
+      <Link>Content\levelButton6-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton6.png">
+      <Link>Content\levelButton6.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton6_locked-hd.png">
+      <Link>Content\levelButton6_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton6_locked-ipad-hd.png">
+      <Link>Content\levelButton6_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton6_locked-ipad.png">
+      <Link>Content\levelButton6_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton6_locked.png">
+      <Link>Content\levelButton6_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton7-hd.png">
+      <Link>Content\levelButton7-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton7-ipad-hd.png">
+      <Link>Content\levelButton7-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton7-ipad.png">
+      <Link>Content\levelButton7-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton7.png">
+      <Link>Content\levelButton7.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton7_locked-hd.png">
+      <Link>Content\levelButton7_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton7_locked-ipad-hd.png">
+      <Link>Content\levelButton7_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton7_locked-ipad.png">
+      <Link>Content\levelButton7_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton7_locked.png">
+      <Link>Content\levelButton7_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton8-hd.png">
+      <Link>Content\levelButton8-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton8-ipad-hd.png">
+      <Link>Content\levelButton8-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton8-ipad.png">
+      <Link>Content\levelButton8-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton8.png">
+      <Link>Content\levelButton8.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton8_locked-hd.png">
+      <Link>Content\levelButton8_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton8_locked-ipad-hd.png">
+      <Link>Content\levelButton8_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton8_locked-ipad.png">
+      <Link>Content\levelButton8_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton8_locked.png">
+      <Link>Content\levelButton8_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton9-hd.png">
+      <Link>Content\levelButton9-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton9-ipad-hd.png">
+      <Link>Content\levelButton9-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton9-ipad.png">
+      <Link>Content\levelButton9-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton9.png">
+      <Link>Content\levelButton9.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton9_locked-hd.png">
+      <Link>Content\levelButton9_locked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton9_locked-ipad-hd.png">
+      <Link>Content\levelButton9_locked-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton9_locked-ipad.png">
+      <Link>Content\levelButton9_locked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelButton9_locked.png">
+      <Link>Content\levelButton9_locked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelLocked-hd.png">
+      <Link>Content\levelLocked-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelLocked-ipad.png">
+      <Link>Content\levelLocked-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\levelLocked.png">
+      <Link>Content\levelLocked.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\marbleSquare-hd.png">
+      <Link>Content\marbleSquare-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\marbleSquare.png">
+      <Link>Content\marbleSquare.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\menu_background-hd.png">
+      <Link>Content\menu_background-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\menu_background-ipad-hd.png">
+      <Link>Content\menu_background-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\menu_background-ipad.png">
+      <Link>Content\menu_background-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\menu_background.png">
+      <Link>Content\menu_background.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper-hd.png">
+      <Link>Content\mutantPepper-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper.png">
+      <Link>Content\mutantPepper.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_blink-hd.png">
+      <Link>Content\mutantPepper_blink-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_blink.png">
+      <Link>Content\mutantPepper_blink.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0001-hd.png">
+      <Link>Content\mutantPepper_break0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0001.png">
+      <Link>Content\mutantPepper_break0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0002-hd.png">
+      <Link>Content\mutantPepper_break0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0002.png">
+      <Link>Content\mutantPepper_break0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0003-hd.png">
+      <Link>Content\mutantPepper_break0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0003.png">
+      <Link>Content\mutantPepper_break0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0004-hd.png">
+      <Link>Content\mutantPepper_break0004-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0004.png">
+      <Link>Content\mutantPepper_break0004.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0005-hd.png">
+      <Link>Content\mutantPepper_break0005-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0005.png">
+      <Link>Content\mutantPepper_break0005.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0006-hd.png">
+      <Link>Content\mutantPepper_break0006-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0006.png">
+      <Link>Content\mutantPepper_break0006.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0007-hd.png">
+      <Link>Content\mutantPepper_break0007-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0007.png">
+      <Link>Content\mutantPepper_break0007.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0008-hd.png">
+      <Link>Content\mutantPepper_break0008-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0008.png">
+      <Link>Content\mutantPepper_break0008.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0009-hd.png">
+      <Link>Content\mutantPepper_break0009-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0009.png">
+      <Link>Content\mutantPepper_break0009.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0010-hd.png">
+      <Link>Content\mutantPepper_break0010-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_break0010.png">
+      <Link>Content\mutantPepper_break0010.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_damage1-hd.png">
+      <Link>Content\mutantPepper_damage1-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_damage1.png">
+      <Link>Content\mutantPepper_damage1.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_damage2-hd.png">
+      <Link>Content\mutantPepper_damage2-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_damage2.png">
+      <Link>Content\mutantPepper_damage2.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_damage3-hd.png">
+      <Link>Content\mutantPepper_damage3-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\mutantPepper_damage3.png">
+      <Link>Content\mutantPepper_damage3.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_air-hd.png">
+      <Link>Content\ninjaBlue_air-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_air.png">
+      <Link>Content\ninjaBlue_air.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_blink-hd.png">
+      <Link>Content\ninjaBlue_blink-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_blink.png">
+      <Link>Content\ninjaBlue_blink.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_in_sling-hd.png">
+      <Link>Content\ninjaBlue_in_sling-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_in_sling.png">
+      <Link>Content\ninjaBlue_in_sling.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_on_ground-hd.png">
+      <Link>Content\ninjaBlue_on_ground-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_on_ground.png">
+      <Link>Content\ninjaBlue_on_ground.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_roll-hd.png">
+      <Link>Content\ninjaBlue_roll-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_roll.png">
+      <Link>Content\ninjaBlue_roll.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_roll0001-hd.png">
+      <Link>Content\ninjaBlue_roll0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_roll0001.png">
+      <Link>Content\ninjaBlue_roll0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_roll0002-hd.png">
+      <Link>Content\ninjaBlue_roll0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_roll0002.png">
+      <Link>Content\ninjaBlue_roll0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_roll0003-hd.png">
+      <Link>Content\ninjaBlue_roll0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_roll0003.png">
+      <Link>Content\ninjaBlue_roll0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_standing-hd.png">
+      <Link>Content\ninjaBlue_standing-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBlue_standing.png">
+      <Link>Content\ninjaBlue_standing.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_air-hd.png">
+      <Link>Content\ninjaBrown_air-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_air.png">
+      <Link>Content\ninjaBrown_air.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_blink-hd.png">
+      <Link>Content\ninjaBrown_blink-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_blink.png">
+      <Link>Content\ninjaBrown_blink.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_in_sling-hd.png">
+      <Link>Content\ninjaBrown_in_sling-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_in_sling.png">
+      <Link>Content\ninjaBrown_in_sling.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_on_ground-hd.png">
+      <Link>Content\ninjaBrown_on_ground-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_on_ground.png">
+      <Link>Content\ninjaBrown_on_ground.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_roll-hd.png">
+      <Link>Content\ninjaBrown_roll-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_roll.png">
+      <Link>Content\ninjaBrown_roll.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_roll0001-hd.png">
+      <Link>Content\ninjaBrown_roll0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_roll0001.png">
+      <Link>Content\ninjaBrown_roll0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_roll0002-hd.png">
+      <Link>Content\ninjaBrown_roll0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_roll0002.png">
+      <Link>Content\ninjaBrown_roll0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_roll0003-hd.png">
+      <Link>Content\ninjaBrown_roll0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_roll0003.png">
+      <Link>Content\ninjaBrown_roll0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_standing-hd.png">
+      <Link>Content\ninjaBrown_standing-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaBrown_standing.png">
+      <Link>Content\ninjaBrown_standing.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_air-hd.png">
+      <Link>Content\ninjaGreen_air-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_air.png">
+      <Link>Content\ninjaGreen_air.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_blink-hd.png">
+      <Link>Content\ninjaGreen_blink-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_blink.png">
+      <Link>Content\ninjaGreen_blink.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_in_sling-hd.png">
+      <Link>Content\ninjaGreen_in_sling-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_in_sling.png">
+      <Link>Content\ninjaGreen_in_sling.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_on_ground-hd.png">
+      <Link>Content\ninjaGreen_on_ground-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_on_ground.png">
+      <Link>Content\ninjaGreen_on_ground.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_roll-hd.png">
+      <Link>Content\ninjaGreen_roll-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_roll.png">
+      <Link>Content\ninjaGreen_roll.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_roll0001-hd.png">
+      <Link>Content\ninjaGreen_roll0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_roll0001.png">
+      <Link>Content\ninjaGreen_roll0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_roll0002-hd.png">
+      <Link>Content\ninjaGreen_roll0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_roll0002.png">
+      <Link>Content\ninjaGreen_roll0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_roll0003-hd.png">
+      <Link>Content\ninjaGreen_roll0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_roll0003.png">
+      <Link>Content\ninjaGreen_roll0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_standing-hd.png">
+      <Link>Content\ninjaGreen_standing-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaGreen_standing.png">
+      <Link>Content\ninjaGreen_standing.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_air-hd.png">
+      <Link>Content\ninjaRed_air-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_air.png">
+      <Link>Content\ninjaRed_air.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_blink-hd.png">
+      <Link>Content\ninjaRed_blink-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_blink.png">
+      <Link>Content\ninjaRed_blink.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_in_sling-hd.png">
+      <Link>Content\ninjaRed_in_sling-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_in_sling.png">
+      <Link>Content\ninjaRed_in_sling.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_on_ground-hd.png">
+      <Link>Content\ninjaRed_on_ground-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_on_ground.png">
+      <Link>Content\ninjaRed_on_ground.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_roll-hd.png">
+      <Link>Content\ninjaRed_roll-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_roll.png">
+      <Link>Content\ninjaRed_roll.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_roll0001-hd.png">
+      <Link>Content\ninjaRed_roll0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_roll0001.png">
+      <Link>Content\ninjaRed_roll0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_roll0002-hd.png">
+      <Link>Content\ninjaRed_roll0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_roll0002.png">
+      <Link>Content\ninjaRed_roll0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_roll0003-hd.png">
+      <Link>Content\ninjaRed_roll0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_roll0003.png">
+      <Link>Content\ninjaRed_roll0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_standing-hd.png">
+      <Link>Content\ninjaRed_standing-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninjaRed_standing.png">
+      <Link>Content\ninjaRed_standing.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_air-hd.png">
+      <Link>Content\ninja_air-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_air.png">
+      <Link>Content\ninja_air.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_blink-hd.png">
+      <Link>Content\ninja_blink-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_blink.png">
+      <Link>Content\ninja_blink.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_in_sling-hd.png">
+      <Link>Content\ninja_in_sling-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_in_sling.png">
+      <Link>Content\ninja_in_sling.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_on_ground-hd.png">
+      <Link>Content\ninja_on_ground-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_on_ground.png">
+      <Link>Content\ninja_on_ground.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_roll-hd.png">
+      <Link>Content\ninja_roll-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_roll.png">
+      <Link>Content\ninja_roll.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_roll0001-hd.png">
+      <Link>Content\ninja_roll0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_roll0001.png">
+      <Link>Content\ninja_roll0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_roll0002-hd.png">
+      <Link>Content\ninja_roll0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_roll0002.png">
+      <Link>Content\ninja_roll0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_roll0003-hd.png">
+      <Link>Content\ninja_roll0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_roll0003.png">
+      <Link>Content\ninja_roll0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_standing-hd.png">
+      <Link>Content\ninja_standing-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\ninja_standing.png">
+      <Link>Content\ninja_standing.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\octogonShape-hd.png">
+      <Link>Content\octogonShape-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\octogonShape.png">
+      <Link>Content\octogonShape.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\parallelogram-hd.png">
+      <Link>Content\parallelogram-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\parallelogram.png">
+      <Link>Content\parallelogram.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\parallelogram2-hd.png">
+      <Link>Content\parallelogram2-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\parallelogram2.png">
+      <Link>Content\parallelogram2.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\pentagon-hd.png">
+      <Link>Content\pentagon-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\pentagon.png">
+      <Link>Content\pentagon.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\platform-hd.png">
+      <Link>Content\platform-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\platform.png">
+      <Link>Content\platform.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0001-hd.png">
+      <Link>Content\puffs_0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0001.png">
+      <Link>Content\puffs_0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0002-hd.png">
+      <Link>Content\puffs_0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0002.png">
+      <Link>Content\puffs_0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0003-hd.png">
+      <Link>Content\puffs_0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0003.png">
+      <Link>Content\puffs_0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0004-hd.png">
+      <Link>Content\puffs_0004-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0004.png">
+      <Link>Content\puffs_0004.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0005-hd.png">
+      <Link>Content\puffs_0005-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0005.png">
+      <Link>Content\puffs_0005.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0006-hd.png">
+      <Link>Content\puffs_0006-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0006.png">
+      <Link>Content\puffs_0006.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0007-hd.png">
+      <Link>Content\puffs_0007-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\puffs_0007.png">
+      <Link>Content\puffs_0007.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\slingshot_front-hd.png">
+      <Link>Content\slingshot_front-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\slingshot_front.png">
+      <Link>Content\slingshot_front.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\soundFX-hd.png">
+      <Link>Content\soundFX-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\soundFX-ipad-hd.png">
+      <Link>Content\soundFX-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\soundFX-ipad.png">
+      <Link>Content\soundFX-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\soundFX.png">
+      <Link>Content\soundFX.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\soundFX_dim-hd.png">
+      <Link>Content\soundFX_dim-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\soundFX_dim-ipad-hd.png">
+      <Link>Content\soundFX_dim-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\soundFX_dim-ipad.png">
+      <Link>Content\soundFX_dim-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\soundFX_dim.png">
+      <Link>Content\soundFX_dim.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="..\resources\win32\sounds\birds.wma">
+      <Link>Content\Sounds\birds.wma</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\resources\win32\sounds\frogs.wma">
+      <Link>Content\Sounds\frogs.wma</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="..\Resources\win32\stonePillar-hd.png">
+      <Link>Content\stonePillar-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\stonePillar.png">
+      <Link>Content\stonePillar.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\strap-hd.png">
+      <Link>Content\strap-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\strap.png">
+      <Link>Content\strap.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\strapBack-hd.png">
+      <Link>Content\strapBack-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\strapBack.png">
+      <Link>Content\strapBack.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\strapEmpty-hd.png">
+      <Link>Content\strapEmpty-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\strapEmpty.png">
+      <Link>Content\strapEmpty.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\trapezoid-hd.png">
+      <Link>Content\trapezoid-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\trapezoid.png">
+      <Link>Content\trapezoid.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\trapezoid2-hd.png">
+      <Link>Content\trapezoid2-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\trapezoid2.png">
+      <Link>Content\trapezoid2.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleLarge-hd.png">
+      <Link>Content\triangleLarge-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleLarge.png">
+      <Link>Content\triangleLarge.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleMedium-hd.png">
+      <Link>Content\triangleMedium-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleMedium.png">
+      <Link>Content\triangleMedium.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleRightAngle-hd.png">
+      <Link>Content\triangleRightAngle-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleRightAngle.png">
+      <Link>Content\triangleRightAngle.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleSmall-hd.png">
+      <Link>Content\triangleSmall-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleSmall.png">
+      <Link>Content\triangleSmall.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleTall-hd.png">
+      <Link>Content\triangleTall-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\triangleTall.png">
+      <Link>Content\triangleTall.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\voiceFX-hd.png">
+      <Link>Content\voiceFX-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\voiceFX-ipad-hd.png">
+      <Link>Content\voiceFX-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\voiceFX-ipad.png">
+      <Link>Content\voiceFX-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\voiceFX.png">
+      <Link>Content\voiceFX.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\voiceFX_dim-hd.png">
+      <Link>Content\voiceFX_dim-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\voiceFX_dim-ipad-hd.png">
+      <Link>Content\voiceFX_dim-ipad-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\voiceFX_dim-ipad.png">
+      <Link>Content\voiceFX_dim-ipad.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\voiceFX_dim.png">
+      <Link>Content\voiceFX_dim.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1-hd.png">
+      <Link>Content\woodShape1-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1.png">
+      <Link>Content\woodShape1.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0001-hd.png">
+      <Link>Content\woodShape1_0001-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0001.png">
+      <Link>Content\woodShape1_0001.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0002-hd.png">
+      <Link>Content\woodShape1_0002-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0002.png">
+      <Link>Content\woodShape1_0002.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0003-hd.png">
+      <Link>Content\woodShape1_0003-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0003.png">
+      <Link>Content\woodShape1_0003.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0004-hd.png">
+      <Link>Content\woodShape1_0004-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0004.png">
+      <Link>Content\woodShape1_0004.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0005-hd.png">
+      <Link>Content\woodShape1_0005-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0005.png">
+      <Link>Content\woodShape1_0005.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0006-hd.png">
+      <Link>Content\woodShape1_0006-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0006.png">
+      <Link>Content\woodShape1_0006.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0007-hd.png">
+      <Link>Content\woodShape1_0007-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0007.png">
+      <Link>Content\woodShape1_0007.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0008-hd.png">
+      <Link>Content\woodShape1_0008-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0008.png">
+      <Link>Content\woodShape1_0008.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0009-hd.png">
+      <Link>Content\woodShape1_0009-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0009.png">
+      <Link>Content\woodShape1_0009.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0010-hd.png">
+      <Link>Content\woodShape1_0010-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape1_0010.png">
+      <Link>Content\woodShape1_0010.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape2-hd.png">
+      <Link>Content\woodShape2-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape2.png">
+      <Link>Content\woodShape2.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape3-hd.png">
+      <Link>Content\woodShape3-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape3.png">
+      <Link>Content\woodShape3.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape4-hd.png">
+      <Link>Content\woodShape4-hd.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Resources\win32\woodShape4.png">
+      <Link>Content\woodShape4.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Content\fonts\MarkerFelt-22.xnb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\SmallLogo.png" />
+    <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\StoreLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\resources\win32\sounds\birds.xnb">
+      <Link>Content\Sounds\birds.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\bloop.xnb">
+      <Link>Content\Sounds\bloop.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\break1.xnb">
+      <Link>Content\Sounds\break1.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\break2.xnb">
+      <Link>Content\Sounds\break2.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\break3.xnb">
+      <Link>Content\Sounds\break3.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\drums.xnb">
+      <Link>Content\Sounds\drums.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\frogs.xnb">
+      <Link>Content\Sounds\frogs.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\gong.xnb">
+      <Link>Content\Sounds\gong.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\grunt1.xnb">
+      <Link>Content\Sounds\grunt1.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\grunt2.xnb">
+      <Link>Content\Sounds\grunt2.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\grunt3.xnb">
+      <Link>Content\Sounds\grunt3.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\grunt4.xnb">
+      <Link>Content\Sounds\grunt4.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\grunt5.xnb">
+      <Link>Content\Sounds\grunt5.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\grunt6.xnb">
+      <Link>Content\Sounds\grunt6.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\grunt7.xnb">
+      <Link>Content\Sounds\grunt7.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\grunt8.xnb">
+      <Link>Content\Sounds\grunt8.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\impact1.xnb">
+      <Link>Content\Sounds\impact1.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\impact2.xnb">
+      <Link>Content\Sounds\impact2.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\impact3.xnb">
+      <Link>Content\Sounds\impact3.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\impact4.xnb">
+      <Link>Content\Sounds\impact4.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\impact5.xnb">
+      <Link>Content\Sounds\impact5.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\resources\win32\sounds\whoosh.xnb">
+      <Link>Content\Sounds\whoosh.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
+    <VisualStudioVersion>11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

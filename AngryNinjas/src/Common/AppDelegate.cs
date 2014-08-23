@@ -40,54 +40,7 @@ namespace AngryNinjas
 			mainWindow.RunWithScene(scene);
 		}
 
-
-
-		/// <summary>
-		/// The function be called when the application enters the background
-		/// </summary>
-		//		public override void ApplicationDidEnterBackground()
-		//		{
-		//			// stop all of the animation actions that are running.
-		//			CCDirector.SharedDirector.Pause();
-		//
-		//			// if you use SimpleAudioEngine, your music must be paused
-		//			//CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = true;
-		//		}
-
-		/// <summary>
-		/// The function be called when the application enter foreground  
-		/// </summary>
-		//		public override void ApplicationWillEnterForeground()
-		//		{
-		//			CCDirector.SharedDirector.Resume();
-		//
-		//			// if you use SimpleAudioEngine, your background music track must resume here. 
-		//			//CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = false;
-		//
-		//		}
 	}
 
-	/// <summary>
-	/// The function be called when the application enters the background
-	/// </summary>
-	//		public override void ApplicationDidEnterBackground()
-	//		{
-	//			// stop all of the animation actions that are running.
-	//			CCDirector.SharedDirector.Pause();
-	//
-	//			// if you use SimpleAudioEngine, your music must be paused
-	//			//CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = true;
-	//		}
-
-	/// <summary>
-	/// The function be called when the application enter foreground  
-	/// </summary>
-	//		public override void ApplicationWillEnterForeground()
-	//		{
-	//			CCDirector.SharedDirector.Resume();
-	//
-	//			// if you use SimpleAudioEngine, your background music track must resume here. 
-	//			//CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = false;
-	//
-	//		}
+	
 }
