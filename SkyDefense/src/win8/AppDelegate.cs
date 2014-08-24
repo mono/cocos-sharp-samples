@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using CocosDenshion;
 using SkyDefense.Common;
 using CocosSharp;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace SkyDefense.Store
 {
@@ -27,6 +28,11 @@ namespace SkyDefense.Store
 		application.MainWindow.WindowSizeInPixels.Width,
 		application.MainWindow.WindowSizeInPixels.Height);
 
+#if NETFX_CORE
+			TouchPanel.EnableMouseTouchPoint = true;
+			TouchPanel.EnableMouseGestures = true;
+			application.Game.IsMouseVisible = true;
+#endif
 			CCScene scene = new CCScene(sharedWindow);
 			CCLayer layer = new IntroLayer(DefaultResolution);
 
