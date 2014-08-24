@@ -100,12 +100,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\CSExtensions\Helpers\src\CCMathExHelper.cs">
-      <Link>Helpers\CCMathExHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\CSExtensions\Helpers\src\CCPointExHelper.cs">
-      <Link>Helpers\CCPointExHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Common\IntroLayer.cs">
       <Link>IntroLayer.cs</Link>
     </Compile>
