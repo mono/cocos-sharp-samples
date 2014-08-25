@@ -4,6 +4,10 @@ using CocosDenshion;
 using CocosSharp;
 using System.Linq;
 
+#if NETFX_CORE
+
+#endif
+
 using Box2D.Common;
 using Box2D.Dynamics;
 using Box2D.Collision.Shapes;
@@ -196,17 +200,40 @@ namespace GoneBananas
 
         void CheckCollision ()
         {
+            
+#if !NETFX_CORE
             visibleBananas.ForEach (banana => {
-                bool hit = banana.BoundingBoxTransformedToParent.IntersectsRect (monkey.BoundingBoxTransformedToParent);
-                if (hit) {
-                    hitBananas.Add (banana);
-                    CCSimpleAudioEngine.SharedEngine.PlayEffect ("Sounds/tap");
-                    Explode (banana.Position);
-                    banana.RemoveFromParent ();
+#else
+            foreach (var banana in visibleBananas)
+            {
+#endif
+                bool hit = banana.BoundingBoxTransformedToParent.IntersectsRect(monkey.BoundingBoxTransformedToParent);
+                if (hit)
+                {
+                    hitBananas.Add(banana);
+                    CCSimpleAudioEngine.SharedEngine.PlayEffect("Sounds/tap");
+                    Explode(banana.Position);
+                    banana.RemoveFromParent();
                 }
+#if !NETFX_CORE
             });
+#else
+            }
+#endif
 
-            hitBananas.ForEach (banana => visibleBananas.Remove (banana));
+#if !NETFX_CORE
+            hitBananas.ForEach (banana => {
+            #else
+            foreach (var banana in hitBananas)
+            {
+#endif
+                visibleBananas.Remove(banana);
+
+#if !NETFX_CORE
+            });
+#else
+            }
+#endif
 
             int ballHitCount = ballsBatch.Children.Count (ball => ball.BoundingBoxTransformedToParent.IntersectsRect (monkey.BoundingBoxTransformedToParent));
 
@@ -329,7 +356,11 @@ namespace GoneBananas
 
             sprite.PhysicsBody = body;
 
+#if !NETFX_CORE
             Console.WriteLine ("sprite batch node count = {0}", ballsBatch.ChildrenCount);
+#else
+
+#endif
         }
 
         public override void OnEnter ()
