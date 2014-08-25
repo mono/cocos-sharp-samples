@@ -1,14 +1,12 @@
 using System.Reflection;
 using Microsoft.Xna.Framework;
 using CocosDenshion;
-using AirHockey.Common;
 using CocosSharp;
 
-namespace AirHockey.Store
+namespace AngryNinjas
 {
-    public class AppDelegate : CCApplicationDelegate
-    {
-
+	public class AppDelegate : CCApplicationDelegate
+	{
 		static CCWindow sharedWindow;
 
 		public static CCWindow SharedWindow
@@ -45,5 +43,5 @@ namespace AirHockey.Store
 			application.Paused = false;
 		}
 
-    }
+	}
 }

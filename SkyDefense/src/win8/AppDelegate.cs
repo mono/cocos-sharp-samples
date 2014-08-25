@@ -3,88 +3,51 @@ using Microsoft.Xna.Framework;
 using CocosDenshion;
 using SkyDefense.Common;
 using CocosSharp;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace SkyDefense.Store
 {
-    public class AppDelegate : CCApplication
+    public class AppDelegate : CCApplicationDelegate
     {
+		static CCWindow sharedWindow;
 
-        int preferredWidth;
-        int preferredHeight;
+		public static CCWindow SharedWindow
+		{
+			get { return sharedWindow; }
+		}
 
-        public AppDelegate(Game game, GraphicsDeviceManager graphics)
-            : base(game, graphics)
-        {
+		public static CCSize DefaultResolution;
 
+		public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
+		{
+			application.ContentRootDirectory = "Content";
 
-            graphics.PreferMultiSampling = false;
+			sharedWindow = mainWindow;
 
-        }
+			DefaultResolution = new CCSize(
+		application.MainWindow.WindowSizeInPixels.Width,
+		application.MainWindow.WindowSizeInPixels.Height);
 
-        /// <summary>
-        /// Implement for initialize OpenGL instance, set source path, etc...
-        /// </summary>
-        public override bool InitInstance()
-        {
-            return base.InitInstance();
-        }
+#if NETFX_CORE
+			TouchPanel.EnableMouseTouchPoint = true;
+			TouchPanel.EnableMouseGestures = true;
+			application.Game.IsMouseVisible = true;
+#endif
+			CCScene scene = new CCScene(sharedWindow);
+			CCLayer layer = new IntroLayer(DefaultResolution);
 
-        /// <summary>
-        ///  Implement CCDirector and CCScene init code here.
-        /// </summary>
-        /// <returns>
-        ///  true  Initialize success, app continue.
-        ///  false Initialize failed, app terminate.
-        /// </returns>
-        public override bool ApplicationDidFinishLaunching()
-        {
-            //initialize director
-            CCDirector pDirector = CCDirector.SharedDirector;
-            pDirector.SetOpenGlView();
+			scene.AddChild(layer);
+			sharedWindow.RunWithScene(scene);
+		}
 
+		public override void ApplicationDidEnterBackground(CCApplication application)
+		{
+			application.Paused = true;
+		}
 
-            // 2D projection
-            pDirector.Projection = CCDirectorProjection.Projection2D;
-
-            var resPolicy = CCResolutionPolicy.ExactFit; // This will stretch out your game
-            CCDrawManager.SetDesignResolutionSize(preferredWidth,
-                                                  preferredHeight,
-                                                  resPolicy);
-
-            // turn on display FPS
-            //pDirector.DisplayStats = true;
-
-            // set FPS. the default value is 1.0/60 if you don't call this
-            pDirector.AnimationInterval = 1.0 / 60;
-
-            CCScene pScene = IntroLayer.Scene;
-
-            pDirector.RunWithScene(pScene);
-            return true;
-        }
-
-        /// <summary>
-        /// The function be called when the application enters the background
-        /// </summary>
-        public override void ApplicationDidEnterBackground()
-        {
-            // stop all of the animation actions that are running.
-            CCDirector.SharedDirector.Pause();
-
-            // if you use SimpleAudioEngine, your music must be paused
-            //CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = true;
-        }
-
-        /// <summary>
-        /// The function be called when the application enter foreground  
-        /// </summary>
-        public override void ApplicationWillEnterForeground()
-        {
-            CCDirector.SharedDirector.Resume();
-
-            // if you use SimpleAudioEngine, your background music track must resume here. 
-            //CCSimpleAudioEngine.SharedEngine.PauseBackgroundMusic = false;
-
-        }
+		public override void ApplicationWillEnterForeground(CCApplication application)
+		{
+			application.Paused = false;
+		}
     }
 }

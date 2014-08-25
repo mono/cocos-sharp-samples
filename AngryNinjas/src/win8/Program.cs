@@ -1,5 +1,4 @@
-﻿using CocosSharp;
-using System;
+﻿using System;
 
 namespace SkyDefense.Store
 {
@@ -13,7 +12,8 @@ namespace SkyDefense.Store
         /// </summary>
         static void Main()
         {
-			CCApplication.Create(new AppDelegate());
+            var factory = new MonoGame.Framework.GameFrameworkViewSource<Game1>();
+            Windows.ApplicationModel.Core.CoreApplication.Run(factory);
         }
     }
 }

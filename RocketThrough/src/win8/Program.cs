@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CocosSharp;
+using System;
 
 namespace RocketThrought.Store
 {
@@ -12,8 +13,7 @@ namespace RocketThrought.Store
         /// </summary>
         static void Main()
         {
-            var factory = new MonoGame.Framework.GameFrameworkViewSource<Game1>();
-            Windows.ApplicationModel.Core.CoreApplication.Run(factory);
+			CCApplication.Create(new AppDelegate());
         }
     }
 }

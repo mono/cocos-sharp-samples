@@ -100,11 +100,18 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\CSExtensions\Helpers\src\CCMathExHelper.cs">
+      <Link>Helpers\CCMathExHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\CSExtensions\Helpers\src\CCPointExHelper.cs">
+      <Link>Helpers\CCPointExHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Common\IntroLayer.cs">
       <Link>IntroLayer.cs</Link>
     </Compile>
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Game1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,49 +120,46 @@
     </AppxManifest>
     <Content Include="..\Content\common\bg.png">
       <Link>Content\bg.png</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\Content\common\font.png">
       <Link>Content\font.png</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\Content\common\music\background.wma">
       <Link>Content\music\background.wma</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\Content\common\sprite_sheet.png">
       <Link>Content\sprite_sheet.png</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\fonts\MarkerFelt-22.xnb" />
-    <Content Include="..\Content\common\music\background.xnb">
+    <None Include="..\Content\common\music\background.xnb">
       <Link>Content\music\background.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Content\common\music\bombFail.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\common\music\bombFail.xnb">
       <Link>Content\music\bombFail.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Content\common\music\bombRelease.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\common\music\bombRelease.xnb">
       <Link>Content\music\bombRelease.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Content\common\music\boom.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\common\music\boom.xnb">
       <Link>Content\music\boom.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Content\common\music\fire_truck.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\common\music\fire_truck.xnb">
       <Link>Content\music\fire_truck.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Content\common\music\health.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\common\music\health.xnb">
       <Link>Content\music\health.xnb</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Content\common\sprite_sheet.plist">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\common\sprite_sheet.plist">
       <Link>Content\sprite_sheet.plist</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SkyDefense.Store_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
