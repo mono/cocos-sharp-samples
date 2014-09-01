@@ -103,7 +103,7 @@ namespace GoneBananas
                         sprite.Visible = false;
                         sprite.RemoveFromParent ();
                     } else {
-                        sprite.UpdateTransformedSpriteTextureQuads ();
+                        sprite.UpdateBallTransform();
                     }
                 }
             });
@@ -341,17 +341,18 @@ namespace GoneBananas
 
             var def = new b2BodyDef ();
             def.position = new b2Vec2 (p.X / PTM_RATIO, p.Y / PTM_RATIO);
+            def.linearVelocity = new b2Vec2(0.0f, - 1.0f);
             def.type = b2BodyType.b2_dynamicBody;
             b2Body body = world.CreateBody (def);
 
             var circle = new b2CircleShape ();
-            circle.Radius = 0.5f;
+            circle.Radius = 0.3f;
 
             var fd = new b2FixtureDef ();
             fd.shape = circle;
             fd.density = 1f;
             fd.restitution = 0.85f;
-            fd.friction = 0.3f;
+            fd.friction = 0f;
             body.CreateFixture (fd);
 
             sprite.PhysicsBody = body;
