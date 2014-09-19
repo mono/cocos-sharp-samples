@@ -66,6 +66,7 @@ namespace AngryNinjas
 
 
 		b2World world;
+        CCBox2dDraw debugDraw;
 		ContactListener contactListener;
 
 		//the entire stack
@@ -613,6 +614,9 @@ namespace AngryNinjas
 
 			// Always do this last.
 			this.Schedule(Tick);
+
+            // Uncomment this if you want to see box2d objects
+            // EnableDebugMode();
 		}
 
 		#region GAME PAD SUPPORT
@@ -765,7 +769,7 @@ namespace AngryNinjas
 
 		void EnableDebugMode()
 		{
-			CCBox2dDraw debugDraw = new CCBox2dDraw("fonts/arial-12");
+            debugDraw = new CCBox2dDraw("fonts/MarkerFelt-16", Constants.PTM_RATIO);
 			world.SetDebugDraw(debugDraw);
 			debugDraw.AppendFlags(b2DrawFlags.e_shapeBit);
 
@@ -780,9 +784,9 @@ namespace AngryNinjas
 			//
 			base.Draw();
 
-			CCDrawingPrimitives.Begin();
+            debugDraw.Begin();
 			world.DrawDebugData();
-			CCDrawingPrimitives.End();
+            debugDraw.End();
 
 		}
 
