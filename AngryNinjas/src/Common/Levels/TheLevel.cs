@@ -66,7 +66,7 @@ namespace AngryNinjas
 
 
 		b2World world;
-        CCBox2dDraw debugDraw;
+		CCBox2dDraw debugDraw;
 		ContactListener contactListener;
 
 		//the entire stack
@@ -178,10 +178,10 @@ namespace AngryNinjas
 			//INITIAL VARIABLES.... (D O N T    E D I T )
 
 			// enable touches
-#if XBOX || OUYA
-            TouchEnabled = false;
-            GamePadEnabled = true;
-#else
+			#if XBOX || OUYA
+			TouchEnabled = false;
+			GamePadEnabled = true;
+			#else
 			//TouchEnabled = true;
 
 			CCEventListenerTouchAllAtOnce tListener = new CCEventListenerTouchAllAtOnce();
@@ -193,23 +193,23 @@ namespace AngryNinjas
 
 			AddEventListener(tListener, this);
 
-#endif
+			#endif
 
 
 			// enable accelerometer
 			//AccelerometerEnabled = false;
 
-#if iPHONE || iOS
+			#if iPHONE || iOS
 			IS_IPAD = MonoTouch.UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom 
-				== MonoTouch.UIKit.UIUserInterfaceIdiom.Pad;
+			== MonoTouch.UIKit.UIUserInterfaceIdiom.Pad;
 
 			IS_RETINA = MonoTouch.UIKit.UIScreen.MainScreen.Bounds.Height 
-				* MonoTouch.UIKit.UIScreen.MainScreen.Scale >= 1136;
-#endif
-#if WINDOWS || MACOS || MONOMAC || LINUX || OUYA || XBOX
+			* MonoTouch.UIKit.UIScreen.MainScreen.Scale >= 1136;
+			#endif
+			#if WINDOWS || MACOS || MONOMAC || LINUX || OUYA || XBOX
 			IS_IPAD = true;
 			IS_RETINA = true;
-#endif
+			#endif
 
 			IS_IPHONE = !IS_IPAD;
 
@@ -615,8 +615,8 @@ namespace AngryNinjas
 			// Always do this last.
 			this.Schedule(Tick);
 
-            // Uncomment this if you want to see box2d objects
-            // EnableDebugMode();
+			// Uncomment this if you want to see box2d objects
+			// EnableDebugMode();
 		}
 
 		#region GAME PAD SUPPORT
@@ -769,7 +769,7 @@ namespace AngryNinjas
 
 		void EnableDebugMode()
 		{
-            debugDraw = new CCBox2dDraw("fonts/MarkerFelt-16", Constants.PTM_RATIO);
+			debugDraw = new CCBox2dDraw("fonts/MarkerFelt-16", Constants.PTM_RATIO);
 			world.SetDebugDraw(debugDraw);
 			debugDraw.AppendFlags(b2DrawFlags.e_shapeBit);
 
@@ -784,10 +784,12 @@ namespace AngryNinjas
 			//
 			base.Draw();
 
-            debugDraw.Begin();
-			world.DrawDebugData();
-            debugDraw.End();
-
+			if (debugDraw != null)
+			{
+				debugDraw.Begin();
+				world.DrawDebugData();
+				debugDraw.End();
+			}
 		}
 
 		void SetUpParticleSystemSun()
@@ -1460,7 +1462,7 @@ namespace AngryNinjas
 
 			// 
 			if (throwCount % 2 == 0)
-			//if (throwCount % 2 != 0)
+				//if (throwCount % 2 != 0)
 			{  //odd numbered turn..
 
 
@@ -1833,14 +1835,14 @@ namespace AngryNinjas
 				CCLog.Log("Play Smoke Puffs on Score");
 
 				CustomAnimation smokeFX = new CustomAnimation("puffs",
-															   1,
-															   7,
-															   (int)positionToShowScore.X,
-															   (int)positionToShowScore.Y,
-															   false,
-															   false,
-															   false,
-															   false);
+					1,
+					7,
+					(int)positionToShowScore.X,
+					(int)positionToShowScore.Y,
+					false,
+					false,
+					false,
+					false);
 				AddChild(smokeFX, Constants.DepthVisualFx);
 
 			}
@@ -1852,14 +1854,14 @@ namespace AngryNinjas
 				CCLog.Log("Play explosion on Score");
 
 				CustomAnimation smokeFX = new CustomAnimation("explosion",
-															   1,
-															   11,
-															   (int)positionToShowScore.X,
-															   (int)positionToShowScore.Y,
-															   false,
-															   false,
-															   false,
-															   false);
+					1,
+					11,
+					(int)positionToShowScore.X,
+					(int)positionToShowScore.Y,
+					false,
+					false,
+					false,
+					false);
 				AddChild(smokeFX, Constants.DepthVisualFx);
 
 			}
@@ -1939,8 +1941,8 @@ namespace AngryNinjas
 			scoreLabel.RunAction(moveAction);
 
 			CCSequence seq = new CCSequence(
-							   new CCFadeTo(1.5f, 20),
-							   new CCCallFuncN(RemoveThisChild));
+				new CCFadeTo(1.5f, 20),
+				new CCCallFuncN(RemoveThisChild));
 
 			scoreLabel.RunAction(seq);
 
@@ -2146,10 +2148,10 @@ namespace AngryNinjas
 
 
 			CCSequence seq = new CCSequence(
-							   new CCScaleTo(2.0f, 2.0f),
-							   new CCFadeTo(1.0f, 0),
-							   new CCCallFuncN(RemoveBoardMessage)  //NOTE: CCCallFuncN  works, CCCallFunc does not.
-				);
+				new CCScaleTo(2.0f, 2.0f),
+				new CCFadeTo(1.0f, 0),
+				new CCCallFuncN(RemoveBoardMessage)  //NOTE: CCCallFuncN  works, CCCallFunc does not.
+			);
 
 			boardMessage.RunAction(seq);
 
