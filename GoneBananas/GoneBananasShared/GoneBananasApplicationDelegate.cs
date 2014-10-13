@@ -11,11 +11,13 @@ namespace GoneBananas
             application.PreferMultiSampling = false;
             application.ContentRootDirectory = "Content";
 
-            mainWindow.SupportedDisplayOrientations = CCDisplayOrientation.Portrait;
-
             application.ContentSearchPaths.Add("hd");
 
             CCSimpleAudioEngine.SharedEngine.PreloadEffect ("Sounds/tap");
+            CCSize winSize = mainWindow.WindowSizeInPixels;
+            mainWindow.SetDesignResolutionSize(winSize.Width, winSize.Height, CCSceneResolutionPolicy.ExactFit);
+
+
 
             CCScene scene = GameStartLayer.GameStartLayerScene(mainWindow);
             mainWindow.RunWithScene (scene);
