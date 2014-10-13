@@ -59,7 +59,6 @@ namespace GoneBananas
                 HorizontalAlignment = CCTextAlignment.Center,
                 VerticalAlignment = CCVerticalTextAlignment.Center,
                 AnchorPoint = CCPoint.AnchorMiddle,
-                Dimensions = ContentSize
             };
 
             AddChild (playAgainLabel);
