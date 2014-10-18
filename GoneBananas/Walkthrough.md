@@ -562,7 +562,7 @@ Next, add the following code to initialize the physics world and add the ball sp
         b2Body body = world.CreateBody (def);
 
         var circle = new b2CircleShape ();
-        circle.Radius = 0.3f;
+        circle.Radius = 0.5f;
 
         var fd = new b2FixtureDef ();
         fd.shape = circle;
