@@ -44,6 +44,21 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="CocosSharp">
+      <HintPath>..\packages\CocosSharp.PCL.Shared.MacOS.1.1.0.0\lib\MonoAndroid10\CocosSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\CocosSharp.PCL.Shared.MacOS.1.1.0.0\lib\MonoAndroid10\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network">
+      <HintPath>..\packages\CocosSharp.PCL.Shared.MacOS.1.1.0.0\lib\MonoAndroid10\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\packages\CocosSharp.PCL.Shared.MacOS.1.1.0.0\lib\MonoAndroid10\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="box2d">
+      <HintPath>..\packages\CocosSharp.PCL.Shared.MacOS.1.1.0.0\lib\MonoAndroid10\box2d.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -54,6 +69,7 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -77,5 +93,6 @@
     <AndroidAsset Include="Assets\Content\hd\cloud.png" />
     <AndroidAsset Include="Assets\Content\hd\grass.png" />
     <AndroidAsset Include="Assets\Content\hd\balls.png" />
+    <AndroidAsset Include="Assets\Content\Sounds\backgroundMusic.mp3" />
   </ItemGroup>
 </Project>

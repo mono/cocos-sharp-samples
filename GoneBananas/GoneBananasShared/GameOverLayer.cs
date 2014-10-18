@@ -9,7 +9,7 @@ namespace GoneBananas
 
         string scoreMessage = string.Empty;
 
-        public GameOverLayer (int score) //: base(new CCSize (640, 1136))
+        public GameOverLayer (int score)
         {
 
             var touchListener = new CCEventListenerTouchAllAtOnce ();

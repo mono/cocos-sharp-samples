@@ -4,10 +4,6 @@ using CocosDenshion;
 using CocosSharp;
 using System.Linq;
 
-#if NETFX_CORE
-
-#endif
-
 using Box2D.Common;
 using Box2D.Dynamics;
 using Box2D.Collision.Shapes;
@@ -18,6 +14,7 @@ namespace GoneBananas
     {
         const float MONKEY_SPEED = 350.0f;
         const float GAME_DURATION = 60.0f; // game ends after 60 seconds or when the monkey hits a ball, whichever comes first
+        const int MAX_NUM_BALLS = 10;
 
         // point to meter ratio for physics
         const int PTM_RATIO = 32;
@@ -79,6 +76,8 @@ namespace GoneBananas
             AddMonkey ();
 
             StartScheduling();
+
+            CCSimpleAudioEngine.SharedEngine.PlayBackgroundMusic ("Sounds/backgroundMusic", true);
         }
 
         void StartScheduling()
@@ -200,13 +199,9 @@ namespace GoneBananas
 
         void CheckCollision ()
         {
-            
-#if !NETFX_CORE
-            visibleBananas.ForEach (banana => {
-#else
+
             foreach (var banana in visibleBananas)
             {
-#endif
                 bool hit = banana.BoundingBoxTransformedToParent.IntersectsRect(monkey.BoundingBoxTransformedToParent);
                 if (hit)
                 {
@@ -215,25 +210,12 @@ namespace GoneBananas
                     Explode(banana.Position);
                     banana.RemoveFromParent();
                 }
-#if !NETFX_CORE
-            });
-#else
             }
-#endif
 
-#if !NETFX_CORE
-            hitBananas.ForEach (banana => {
-            #else
             foreach (var banana in hitBananas)
             {
-#endif
                 visibleBananas.Remove(banana);
-
-#if !NETFX_CORE
-            });
-#else
             }
-#endif
 
             int ballHitCount = ballsBatch.Children.Count (ball => ball.BoundingBoxTransformedToParent.IntersectsRect (monkey.BoundingBoxTransformedToParent));
 
@@ -329,39 +311,35 @@ namespace GoneBananas
 
         void AddBall ()
         {
-            int idx = (CCRandom.Float_0_1 () > .5 ? 0 : 1);
-            int idy = (CCRandom.Float_0_1 () > .5 ? 0 : 1);
-            var sprite = new CCPhysicsSprite (ballTexture, new CCRect (32 * idx, 32 * idy, 32, 32), PTM_RATIO);
+            if (ballsBatch.ChildrenCount < MAX_NUM_BALLS) {
+                int idx = (CCRandom.Float_0_1 () > .5 ? 0 : 1);
+                int idy = (CCRandom.Float_0_1 () > .5 ? 0 : 1);
+                var sprite = new CCPhysicsSprite (ballTexture, new CCRect (32 * idx, 32 * idy, 32, 32), PTM_RATIO);
 
-            ballsBatch.AddChild (sprite);
+                ballsBatch.AddChild (sprite);
 
-            CCPoint p = GetRandomPosition (sprite.ContentSize);
+                CCPoint p = GetRandomPosition (sprite.ContentSize);
 
-            sprite.Position = new CCPoint (p.X, p.Y);
+                sprite.Position = new CCPoint (p.X, p.Y);
 
-            var def = new b2BodyDef ();
-            def.position = new b2Vec2 (p.X / PTM_RATIO, p.Y / PTM_RATIO);
-            def.linearVelocity = new b2Vec2(0.0f, - 1.0f);
-            def.type = b2BodyType.b2_dynamicBody;
-            b2Body body = world.CreateBody (def);
+                var def = new b2BodyDef ();
+                def.position = new b2Vec2 (p.X / PTM_RATIO, p.Y / PTM_RATIO);
+                def.linearVelocity = new b2Vec2 (0.0f, -1.0f);
+                def.type = b2BodyType.b2_dynamicBody;
+                b2Body body = world.CreateBody (def);
 
-            var circle = new b2CircleShape ();
-            circle.Radius = 0.3f;
+                var circle = new b2CircleShape ();
+                circle.Radius = 0.5f;
 
-            var fd = new b2FixtureDef ();
-            fd.shape = circle;
-            fd.density = 1f;
-            fd.restitution = 0.85f;
-            fd.friction = 0f;
-            body.CreateFixture (fd);
+                var fd = new b2FixtureDef ();
+                fd.shape = circle;
+                fd.density = 1f;
+                fd.restitution = 0.85f;
+                fd.friction = 0f;
+                body.CreateFixture (fd);
 
-            sprite.PhysicsBody = body;
-
-#if !NETFX_CORE
-            Console.WriteLine ("sprite batch node count = {0}", ballsBatch.ChildrenCount);
-#else
-
-#endif
+                sprite.PhysicsBody = body;
+            }
         }
 
         public override void OnEnter ()

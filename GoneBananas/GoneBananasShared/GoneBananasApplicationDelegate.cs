@@ -14,10 +14,9 @@ namespace GoneBananas
             application.ContentSearchPaths.Add("hd");
 
             CCSimpleAudioEngine.SharedEngine.PreloadEffect ("Sounds/tap");
+            CCSimpleAudioEngine.SharedEngine.PreloadBackgroundMusic ("Sounds/backgroundMusic");
             CCSize winSize = mainWindow.WindowSizeInPixels;
             mainWindow.SetDesignResolutionSize(winSize.Width, winSize.Height, CCSceneResolutionPolicy.ExactFit);
-
-
 
             CCScene scene = GameStartLayer.GameStartLayerScene(mainWindow);
             mainWindow.RunWithScene (scene);
