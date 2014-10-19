@@ -25,7 +25,7 @@
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <NuGetPackageImportStamp>dc8b69f1</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>7a53fcf2</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -82,9 +82,6 @@
     <Compile Include="..\gonebananasshared\GameStartLayer.cs">
       <Link>Layers\GameStartLayer.cs</Link>
     </Compile>
-    <Compile Include="..\GoneBananasShared\GoneBananasApplicationDelegate.cs">
-      <Link>GoneBananasApplicationDelegate.cs</Link>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -110,14 +107,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\MarkerFelt-22.xnb" />
     <Content Include="Content\fonts\arial-22.xnb" />
+    <Content Include="Content\Sounds\backgroundMusic.wma" />
     <Content Include="Content\Sounds\tap.xnb" />
     <Content Include="Content\hd\animations\monkey.plist" />
     <Content Include="Content\hd\animations\monkey.xnb" />
     <Content Include="Content\hd\balls.xnb" />
     <Content Include="Content\hd\cloud.xnb" />
     <Content Include="Content\hd\grass.xnb" />
+    <Content Include="Content\Sounds\backgroundMusic.xnb" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
@@ -150,24 +148,7 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="box2d, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\CocosSharp\src\Bin\WindowsPhone\x86\Release\box2d.dll</HintPath>
-    </Reference>
-    <Reference Include="CocosSharp, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\CocosSharp\src\Bin\WindowsPhone\x86\Release\CocosSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\CocosSharp\src\Bin\WindowsPhone\x86\Release\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\CocosSharp\src\Bin\WindowsPhone\x86\Release\MonoGame.Framework.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+  <Import Project="..\GoneBananasShared\GoneBananasShared.projitems" Label="Shared" Condition="Exists('..\GoneBananasShared\GoneBananasShared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <Target Name="MonoGame_RemoveXnaAssemblies" AfterTargets="ImplicitlyExpandTargetFramework">
