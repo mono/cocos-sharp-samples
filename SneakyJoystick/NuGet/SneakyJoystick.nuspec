@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CocosSharp.SneakyJoystick</id>
+    <version>1.0.0.0</version>
+    <title>SneakyJoystick for CocosSharp</title>
+    <authors>Jose Medrano(@netonjm)</authors>
+    <owners>Xamarin</owners>
+    <licenseUrl>https://raw.githubusercontent.com/netonjm/SneakyJoystick/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/netonjm/SneakyJoystick</projectUrl>
+    <iconUrl>http://imagizer.imageshack.us/v2/150x100q90/538/zi8t2q.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>SneakyJoystick for CocosSharp</description>
+    <copyright>Jose Medrano</copyright>
+    <tags>visualization enginedirectx desktop windows</tags>
+  </metadata>
+
+  <files>
+   
+    <file src="../src/SneakyJoystick/win32/bin/Release/SneakyJoystick.dll" target="lib/net40" />
+   
+
+  </files>
+
+</package>
