@@ -1,4 +1,4 @@
-Ported to CocosSharp by Jose Mendez.
+Ported to CocosSharp by Jose Medrano.
 
 The examples come from the book : Cocos2d-X by Example Beginner's Guide
 
