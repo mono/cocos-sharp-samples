@@ -36,10 +36,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         }
         public CCSprite BackgroundSprite
         {
-            get
-            {
-                return _backgroundSprite;
-            }
+            get { return _backgroundSprite; }
             set
             {
                 if (_backgroundSprite != null)
@@ -73,10 +70,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         //OVERRIDE PROPERTIES =================================================
         public override CCPoint Position
         {
-            get
-            {
-                return base.Position;
-            }
+            get { return base.Position; }
             set
             {
                 base.Position = value;
@@ -87,10 +81,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public override CCSize ContentSize
         {
-            get
-            {
-                return base.ContentSize;
-            }
+            get { return base.ContentSize; }
             set
             {
                 if (_backgroundSprite != null)
@@ -141,7 +132,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public void RefreshThumbSpritePosition()
         {
 			_thumbSprite.Position = ContentSize.Center;
-
             ThumbRadius = _thumbSprite.ContentSize.Width / 2;
         }
 

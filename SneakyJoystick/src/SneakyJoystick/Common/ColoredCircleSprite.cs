@@ -26,7 +26,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             PreInit();
         }
 
-
         public void PreInit()
         {
             Radius = 10.0f;
@@ -48,17 +47,11 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public float Radius
         {
-            get
-            {
-                return radius_;
-            }
-
+            get { return radius_; }
             set
             {
                 radius_ = value;
-
                 float theta_inc = 2.0f * 3.14159265359f / numberOfSegments;
-
                 float theta = 0.0f;
 
                 for (int i = 0; i < numberOfSegments; i++)
@@ -75,22 +68,16 @@ namespace CocosSharp.Extensions.SneakyJoystick
                     float k = radius_ * CCMathHelper.Sin(theta) + Position.Y;
                     //        float k = radius_ * sinf(theta) + self.position.y;
                     circleVertices[i] = new CCPoint(j, k);
-
                     theta += theta_inc;
                 }
 
                 updateContentSize();
-
             }
         }
 
         public override CCSize ContentSize
         {
-            get
-            {
-
-                return base.ContentSize;
-            }
+            get { return base.ContentSize; }
             set
             {
                 radius_ = value.Width / 2;
@@ -106,7 +93,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         protected override void Draw()
         {
             base.Draw();
-
             CCDrawingPrimitives.Begin();
             CCDrawingPrimitives.DrawSolidPoly(circleVertices, numberOfSegments, new CCColor4B(Color.R, Color.G, Color.B));
             CCDrawingPrimitives.End();
@@ -120,7 +106,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
         }
 
-
         public bool containsPoint(CCPoint point)
         {
             float dSq = point.X * point.X + point.Y * point.Y;
@@ -132,7 +117,5 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             return String.Format(@"<%@ = {0} | Tag = {3} | Color = {1} | Radius ={2}>", GetType().ToString(), Color.ToString(), Opacity, radius_);
         }
-
-
     }
 }

@@ -221,7 +221,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
             CCTouch touch = touches.First();
 
 			var location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
-			location = WorldToParentspace(location);
+			location = WorldToParentspace(location); 
 
             //Do a fast rect check before doing a circle hit check:
             if (location.X - joystickRadius < -joystickRadius || location.X - joystickRadius > joystickRadius || location.Y - joystickRadius < -joystickRadius || location.Y - joystickRadius > joystickRadius)
@@ -232,14 +232,12 @@ namespace CocosSharp.Extensions.SneakyJoystick
 				if (JoystickRadiusSq > dSq)
                 {
                     isMoving = true;
-
                     UpdateVelocity(location);
 
                     joystickEvent.UserData = new SneakyJoystickEventResponse(SneakyJoystickMovementStatus.Start, null);
 
                     // Fire off our event to notify that movement was started
                     DispatchEvent(joystickEvent);
-
                     return;
                 }
             }
@@ -247,7 +245,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public virtual void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
-            //base.TouchesMoved(touches, touchEvent);
             if (!isMoving)
                 return;
 
@@ -272,13 +269,11 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public virtual void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
         {
-            //base.TouchesCancelled(touches, touchEvent);
             OnTouchesEnded(touches, touchEvent);
         }
 
         public virtual void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
-            //base.TouchesEnded(touches, touchEvent);
             if (!isMoving)
                 return;
 
@@ -337,30 +332,22 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public static CCPoint GetPositionFromVelocity(CCPoint velocity, CCPoint actualPosition, float Width, float Height, float maxWindowWidth, float maxWindowHeight, float dt)
         {
-
             CCPoint scaledVelocity = velocity * 240;
 			CCPoint newPosition = new CCPoint(actualPosition.X + scaledVelocity.X * dt, actualPosition.Y + scaledVelocity.Y * dt);
 
             if (newPosition.Y > maxWindowHeight - Height / 2)
-            {
                 newPosition.Y = maxWindowHeight - Height / 2;
-            }
+
             if (newPosition.Y < (0 + Height / 2))
-            {
                 newPosition.Y = (0 + Height / 2);
-            }
 
             if (newPosition.X > maxWindowWidth - Width / 2)
-            {
                 newPosition.X = maxWindowWidth - Width / 2;
-            }
+
             if (newPosition.X < (0 + Width / 2))
-            {
                 newPosition.X = (0 + Width / 2);
-            }
 
             return newPosition;
-
         }
 
 		protected override void Draw()
@@ -371,7 +358,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 				return;
 
 			CCDrawingPrimitives.Begin();
-			CCDrawingPrimitives.DrawRect(new CCRect(-this.ContentSize.Width*.5f, -this.ContentSize.Height*.5f, this.ContentSize.Width*.5f, this.ContentSize.Height*.5f), CCColor4B.Blue);
+			CCDrawingPrimitives.DrawRect(new CCRect(0, 0, this.ContentSize.Width, this.ContentSize.Height), CCColor4B.Blue);
 			CCDrawingPrimitives.End();
 		}
 

@@ -77,89 +77,93 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
         }
 
-        //DIRECTION =====================================
-        private ButtonsOrientation _orientation { get; set; }
-        public ButtonsOrientation Orientation
-        {
-            get { return _orientation; }
-            set
-            {
-                _orientation = value;
-                ReorderButtons();
-            }
-        }
+		#region Directions
 
-        public bool HasPlayer { get { return Player != null; } }
-        public bool HasAnyDirection
-        {
-            get 
+		private ButtonsOrientation _orientation { get; set; }
+		public ButtonsOrientation Orientation
+		{
+			get { return _orientation; }
+			set
 			{
-                return JoyControl.HasAnyDirection;
-            }
-        }
+				_orientation = value;
+				ReorderButtons();
+			}
+		}
 
-        public bool IsRight
-        {
-            get
-            {
-                return JoyControl.IsRight;
-            }
-        }
+		public bool HasPlayer { get { return Player != null; } }
+		public bool HasAnyDirection
+		{
+			get 
+			{
+				return JoyControl.HasAnyDirection;
+			}
+		}
 
-        public bool IsLeft
-        {
-            get
-            {
-                return JoyControl.IsLeft;
-            }
-        }
+		public bool IsRight
+		{
+			get
+			{
+				return JoyControl.IsRight;
+			}
+		}
 
-        public bool IsDown
-        {
-            get
-            {
-                return JoyControl.IsDown;
-            }
-        }
+		public bool IsLeft
+		{
+			get
+			{
+				return JoyControl.IsLeft;
+			}
+		}
 
-        public bool IsUp
-        {
-            get
-            {
-                return JoyControl.IsUp;
-            }
-        }
+		public bool IsDown
+		{
+			get
+			{
+				return JoyControl.IsDown;
+			}
+		}
 
-        public bool IsUpLeft
-        {
-            get
-            {
-                return JoyControl.IsUpLeft;
-            }
-        }
-        public bool IsUpRight
-        {
-            get
-            {
-                return JoyControl.IsUpRight;
-            }
-        }
+		public bool IsUp
+		{
+			get
+			{
+				return JoyControl.IsUp;
+			}
+		}
 
-        public bool IsDownLeft
-        {
-            get
-            {
-                return JoyControl.IsDownLeft;
-            }
-        }
+		public bool IsUpLeft
+		{
+			get
+			{
+				return JoyControl.IsUpLeft;
+			}
+		}
 
-        public bool IsDownRight
-        {
-            get
-            {
-                return JoyControl.IsDownRight;
-            }
-        }
+		public bool IsUpRight
+		{
+			get
+			{
+				return JoyControl.IsUpRight;
+			}
+		}
+
+		public bool IsDownLeft
+		{
+			get
+			{
+				return JoyControl.IsDownLeft;
+			}
+		}
+
+		public bool IsDownRight
+		{
+			get
+			{
+				return JoyControl.IsDownRight;
+			}
+		}
+
+		#endregion
 
         public SneakyPanelControl(CCSize visibleBoundsSize, int buttons) : base(visibleBoundsSize)
         {
@@ -171,15 +175,24 @@ namespace CocosSharp.Extensions.SneakyJoystick
             base.AddedToScene();
             Opacity = DEFAULT_TRANSPARENCY;
 
-			#if DEBUG
-			IsDebug = true;
-			#endif
+			//Joystick initialization
+			CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
+			JoyControl = new SneakyJoystickControlSkinnedBase();
+			AddChild(JoyControl, JOY_Z);
+			JoyControl.Position = new CCPoint (visibleBoundsSize.Width * 0.09f, visibleBoundsSize.Width * 0.09f);
 
-			//Joystick Init
-			InitializeJoyStick();
+			//Buttons initialization
+			SneakyButtonControlSkinnedBase tmp = null;
+			for (int i = 0; i < Buttons.Capacity; i++)
+			{
+				tmp = new SneakyButtonControlSkinnedBase(i);
+				AddChild(tmp, JOY_Z);
+				Buttons.Add(tmp);
+			}
 
-			//Buttons init
-			InitializeButtons(Buttons.Capacity);
+			Orientation = ButtonsOrientation.Horizontal;
+
+			//Listeners
 
             if (!IsListenerDisabled)
             {
@@ -190,32 +203,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 tListener.OnTouchesEnded = OnTouchesEnded;
                 AddEventListener(tListener, this);
             }
-        }
 
-        public void InitializeJoyStick()
-        {
-            CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
-            JoyControl = new SneakyJoystickControlSkinnedBase();
-
-            JoyControl.Position = new CCPoint(
-                visibleBoundsSize.Width * 0.08f,
-                visibleBoundsSize.Height * 0.08f
-               );
-
-            AddChild(JoyControl, JOY_Z);
-        }
-
-        public void InitializeButtons(int buttons)
-        {
-            SneakyButtonControlSkinnedBase tmp = null;
-            for (int i = 0; i < buttons; i++)
-            {
-                tmp = new SneakyButtonControlSkinnedBase(i);
-                AddChild(tmp, JOY_Z);
-                Buttons.Add(tmp);
-            }
-
-            Orientation = ButtonsOrientation.Horizontal;
+			#if DEBUG
+			IsDebug = true;
+			#endif
         }
 
         public void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
