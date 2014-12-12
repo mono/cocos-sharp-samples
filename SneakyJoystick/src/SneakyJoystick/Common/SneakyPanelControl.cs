@@ -5,14 +5,6 @@ using System.Text;
 
 namespace CocosSharp.Extensions.SneakyJoystick
 {
-
-
-
-    //public enum ButtonType
-    //{
-    //    Button1 = 1, Button2 = 2, Button3 = 3, Button4 = 4
-    //}
-
     public enum SneakyJoystickMovementStatus
     {
         Start = 1,
@@ -34,27 +26,14 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
     public class SneakyPanelControl : CCLayer
     {
-
-        #region Constants
-
         const int JOY_Z = 100;
         const int BUTTON_Z = 101;
         const int DEFAULT_TRANSPARENCY = 90;
 
-        #endregion
-
-        #region Custom Events
-
         public const string JOY_LISTENER_ID = "SneakyJoystick_JOY_LISTENER";
         public const string BUTTON_LISTENER_ID = "SneakyJoystick_BUTTON_LISTENER";
 
-        #endregion
-
-        #region Private properties
-
         private byte _opacity;
-
-        #endregion
 
         public SneakyJoystickControlSkinnedBase JoyControl { get; set; }
         public List<SneakyButtonControlSkinnedBase> Buttons { get; set; }
@@ -64,7 +43,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         CCEventListenerTouchAllAtOnce tListener { get; set; }
         public bool IsListenerDisabled { get; set; }
 
-
         public bool IsDebug
         {
             get
@@ -73,47 +51,34 @@ namespace CocosSharp.Extensions.SneakyJoystick
                     return JoyControl.IsDebug;
                 return false;
             }
-
             set
             {
-
                 if (JoyControl != null)
                     JoyControl.IsDebug = value;
-
                 foreach (var item in Buttons)
                 {
                     item.IsDebug = value;
                 }
-
             }
-
         }
 
         public byte Opacity
         {
-            get
-            {
-                return _opacity;
-            }
-
+            get { return _opacity; }
             set
             {
                 if (JoyControl != null)
                     JoyControl.Opacity = value;
 
                 foreach (var item in Buttons)
-                {
                     item.Opacity = value;
-                }
 
                 _opacity = value;
             }
         }
 
         //DIRECTION =====================================
-
         private ButtonsOrientation _orientation { get; set; }
-
         public ButtonsOrientation Orientation
         {
             get { return _orientation; }
@@ -124,13 +89,11 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
         }
 
-
         public bool HasPlayer { get { return Player != null; } }
-
         public bool HasAnyDirection
         {
-            get
-            {
+            get 
+			{
                 return JoyControl.HasAnyDirection;
             }
         }
@@ -142,6 +105,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 return JoyControl.IsRight;
             }
         }
+
         public bool IsLeft
         {
             get
@@ -149,6 +113,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 return JoyControl.IsLeft;
             }
         }
+
         public bool IsDown
         {
             get
@@ -156,6 +121,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 return JoyControl.IsDown;
             }
         }
+
         public bool IsUp
         {
             get
@@ -163,6 +129,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 return JoyControl.IsUp;
             }
         }
+
         public bool IsUpLeft
         {
             get
@@ -177,6 +144,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 return JoyControl.IsUpRight;
             }
         }
+
         public bool IsDownLeft
         {
             get
@@ -184,6 +152,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 return JoyControl.IsDownLeft;
             }
         }
+
         public bool IsDownRight
         {
             get
@@ -192,18 +161,19 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
         }
 
-
         public SneakyPanelControl(CCSize visibleBoundsSize, int buttons) : base(visibleBoundsSize)
         {
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
-
         }
 
         protected override void AddedToScene()
         {
             base.AddedToScene();
-
             Opacity = DEFAULT_TRANSPARENCY;
+
+			#if DEBUG
+			IsDebug = true;
+			#endif
 
 			//Joystick Init
 			InitializeJoyStick();
@@ -225,7 +195,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public void InitializeJoyStick()
         {
             CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
-
             JoyControl = new SneakyJoystickControlSkinnedBase();
 
             JoyControl.Position = new CCPoint(
@@ -249,7 +218,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             Orientation = ButtonsOrientation.Horizontal;
         }
 
-
         public void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             JoyControl.OnTouchesEnded(touches, touchEvent);
@@ -261,7 +229,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
         {
             JoyControl.OnTouchesCancelled(touches, touchEvent);
-
             foreach (var button in Buttons)
                 button.OnTouchesCancelled(touches, touchEvent);
         }
@@ -269,7 +236,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
             JoyControl.OnTouchesMoved(touches, touchEvent);
-
             foreach (var button in Buttons)
                 button.OnTouchesMoved(touches, touchEvent);
         }
@@ -278,7 +244,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             if (JoyControl != null)
                 JoyControl.OnTouchesBegan(touches, touchEvent);
-
             foreach (var button in Buttons)
                 button.OnTouchesBegan(touches, touchEvent);
         }
@@ -293,7 +258,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 y = 0.03f;
                 for (int i = 0; i < Buttons.Count; i++)
                 {
-
                     x = (i % 2 == 0) ? 0.8f : 0.9f;
 
                     if (i % 2 == 0)
@@ -302,7 +266,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
                     Buttons[i].Position = new CCPoint(visibleBoundsSize.Width * x, visibleBoundsSize.Height * y);
 					Buttons[i].AnchorPoint = CCPoint.AnchorLowerLeft;
                 }
-
             }
             else
             {
@@ -310,12 +273,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 x = visibleBoundsSize.Width;
                 for (int i = 0; i < Buttons.Count; i++)
                 {
-
                     Buttons[i].Position = new CCPoint(x, visibleBoundsSize.Height * y);
 					Buttons[i].AnchorPoint = CCPoint.AnchorLowerRight;
 					x -= (Buttons[i].DefaultSprite.BoundingBox.Size.Width + 20f);
                 }
-
             }
         }
 
@@ -323,16 +284,13 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             if (player != null)
                 return SneakyJoystickControl.GetPositionFromVelocity(SneakyJoystickControl.Velocity, player, dt, wSize);
-
             return CCPoint.Zero;
         }
-
 
         public CCPoint GetPlayerPosition(float dt, CCSize wSize)
         {
 			if (JoyControl != null && Player != null)
                 return JoyControl.GetNextPositionFromImage(Player, dt, wSize);
-
             Console.WriteLine("SNEAKYCONTROL > GETPLAYERPOSITION() : ERROR. NOT PLAYER ASSIGNED");
             return CCPoint.Zero;
         }
@@ -340,7 +298,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         protected override void Draw()
         {
             CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
-
             if (IsDebug)
             {
                 CCDrawingPrimitives.Begin();
@@ -349,21 +306,14 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
         }
 
-
         public override void OnExit()
         {
             base.OnExit();
-
             if (!IsListenerDisabled)
                 RemoveEventListener(tListener);
-
         }
-
     }
 
-
-
-    #region RESPONSE CLASSES
     public class SneakyJoystickEventResponse
     {
         public SneakyJoystickMovementStatus ResponseType;
@@ -378,9 +328,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
     public class SneakyButtonEventResponse
     {
         public SneakyButtonStatus ResponseType;
-
         public int ID;
-
         public object UserData;
 
         public SneakyButtonEventResponse(SneakyButtonStatus responseType, int id, object userData)
@@ -388,59 +336,4 @@ namespace CocosSharp.Extensions.SneakyJoystick
             ResponseType = responseType; UserData = userData; ID = id;
         }
     }
-
-    #endregion
-
-
-
 }
-
-//public void Update(float dt)
-//{
-//    if (Player!=null)
-//        Player.Position = DSJoyStickHelper.GetVelocity(leftJoystick.velocity, Player.Position, Player.ContentSize, CCDirector.SharedDirector.WinSize, dt);
-//}
-
-//public void InitializeButton(int id)
-//{
-
-//    SneakyButtonControlSkinnedBase tmp = null;
-//    tmp = new SneakyButtonControlSkinnedBase(id);
-//    tmp.Position = new CCPoint(wSize.Width * 0.9f, wSize.Height * 0.18f);
-//    Button1 = tmp;
-
-//    switch (button)
-//    {
-//        case ButtonType.Button1:
-
-
-
-//            break;
-//        case ButtonType.Button2:
-//            tmp = new SneakyButtonControlSkinnedBase(2);
-//            tmp.Position = new CCPoint(wSize.Width * 0.8f, wSize.Height * 0.18f);
-//            Button2 = tmp;
-//            break;
-//        case ButtonType.Button3:
-//            tmp = new SneakyButtonControlSkinnedBase(3);
-//            tmp.Position = new CCPoint(wSize.Width * 0.9f, wSize.Height * 0.30f);
-//            Button3 = tmp;
-//            break;
-//        case ButtonType.Button4:
-//            tmp = new SneakyButtonControlSkinnedBase(4);
-//            tmp.Position = new CCPoint(wSize.Width * 0.8f, wSize.Height * 0.30f);
-//            Button4 = tmp;
-//            break;
-//        default:
-//            break;
-//    }
-
-//    if (tmp != null)
-//    {
-//        AddChild(tmp, JOY_Z);
-//        Buttons.Add(tmp);
-//        tmp = null;
-//    }
-
-
-//}

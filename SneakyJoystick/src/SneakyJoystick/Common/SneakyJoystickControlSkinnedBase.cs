@@ -8,29 +8,16 @@ namespace CocosSharp.Extensions.SneakyJoystick
     public class SneakyJoystickControlSkinnedBase : SneakyJoystickControl
     {
 
-        #region Static properties
-
         public static string DEFAULT_IMAGE_BACKGROUND { get { return "control/joystick_background"; } }
         public static string DEFAULT_IMAGE_THUMB { get { return "control/joystick_thumb"; } }
 
-        #endregion
-
-        #region Private properties
-
-        private CCSprite _backgroundSprite;
+		private CCSprite _backgroundSprite;
         private CCSprite _thumbSprite;
         private byte _opacity;
 
-        #endregion
-
-        #region Public properties
-
         public CCSprite ThumbSprite
         {
-            get
-            {
-                return _thumbSprite;
-            }
+            get { return _thumbSprite; }
             set
             {
                 if (_thumbSprite != null)
@@ -40,16 +27,11 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 }
 
                 _thumbSprite = value;
-
                 if (value != null)
                 {
-
                     AddChild(_thumbSprite, 1);
-
                     RefreshThumbSpritePosition();
-
                 }
-
             }
         }
         public CCSprite BackgroundSprite
@@ -60,7 +42,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
             set
             {
-
                 if (_backgroundSprite != null)
                 {
                     if (_backgroundSprite.Parent != null)
@@ -74,7 +55,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
                     RefreshBackgroundSpritePosition();
                 }
-
             }
         }
         public byte Opacity
@@ -82,14 +62,11 @@ namespace CocosSharp.Extensions.SneakyJoystick
             get { return _opacity; }
             set
             {
-
                 _opacity = value;
-
                 if (_backgroundSprite != null)
                     _backgroundSprite.Opacity = value;
                 if (_thumbSprite != null)
                     _thumbSprite.Opacity = value;
-
             }
         }
 
@@ -98,13 +75,11 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             get
             {
-
                 return base.Position;
             }
             set
             {
                 base.Position = value;
-
                 //Reposicionamos todo
                 RefreshAllPosition();
             }
@@ -118,7 +93,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
             set
             {
-
                 if (_backgroundSprite != null)
                 {
                     _backgroundSprite.ContentSize = value;
@@ -132,12 +106,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 }
 
                 JoystickRadius = value.Width / 2;
-
                 base.ContentSize = value;
             }
         }
-
-        #endregion
 
 		#region Constructors
         public SneakyJoystickControlSkinnedBase()
@@ -179,6 +150,5 @@ namespace CocosSharp.Extensions.SneakyJoystick
             RefreshBackgroundSpritePosition();
             RefreshThumbSpritePosition();
         }
-
     }
 }
