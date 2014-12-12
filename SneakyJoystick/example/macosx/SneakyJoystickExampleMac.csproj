@@ -11,7 +11,7 @@
     <RootNamespace>SneakyJoystickExample</RootNamespace>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
     <AssemblyName>SneakyJoystickExample</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <StartupObject>SneakyJoystickExample.Windows.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,8 +31,7 @@
     <CreatePackage>false</CreatePackage>
     <StartupObject>PCLTest.Program</StartupObject>
     <PackageSigningKey>Developer ID Installer</PackageSigningKey>
-    <I18n>
-    </I18n>
+    <UseRefCounting>false</UseRefCounting>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -46,9 +45,11 @@
     <IncludeMonoRuntime>true</IncludeMonoRuntime>
     <EnablePackageSigning>false</EnablePackageSigning>
     <CodeSigningKey>Developer ID Application</CodeSigningKey>
-    <EnableCodeSigning>true</EnableCodeSigning>
+    <EnableCodeSigning>false</EnableCodeSigning>
     <CreatePackage>true</CreatePackage>
     <StartupObject>PCLTest.Program</StartupObject>
+    <UseRefCounting>false</UseRefCounting>
+    <PackageSigningKey>Developer ID Installer</PackageSigningKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -66,6 +67,7 @@
     <EnableCodeSigning>true</EnableCodeSigning>
     <EnablePackageSigning>true</EnablePackageSigning>
     <StartupObject>PCLTest.Program</StartupObject>
+    <UseRefCounting>false</UseRefCounting>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -73,7 +75,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
-    <Reference Include="XamMac" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -93,12 +94,6 @@
     <Folder Include="Content\control\" />
     <Folder Include="Content\HD\" />
     <Folder Include="Content\SD\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\SneakyJoystick\win32\SneakyJoystick.csproj">
-      <Project>{BE0688C9-5AA3-43A9-8E1D-D32C0313C8AB}</Project>
-      <Name>SneakyJoystick</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\Content\magic-beard.plist">
@@ -149,5 +144,11 @@
     <Content Include="..\Content\sound_oso.mp3">
       <Link>Content\sound_oso.mp3</Link>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SneakyJoystick\win32\SneakyJoystick.csproj">
+      <Project>{BE0688C9-5AA3-43A9-8E1D-D32C0313C8AB}</Project>
+      <Name>SneakyJoystick</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
