@@ -9,18 +9,12 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
     public class SneakyButtonControl : CCNode
     {
-
         #region Custom Events
-
         CCEventCustom buttonEvent;
-
         #endregion
 
-
         public int ID { get; set; }
-
         public bool IsDebug { get; set; }
-
         public float radiusSq;
 
         //public CCRect bounds;
@@ -108,10 +102,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             return false;
         }
 
-
         public virtual void CheckSelf()
         {
-
         }
 
         public virtual void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
@@ -159,7 +151,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
             // Fire off our event to notify that movement was started
             buttonEvent.UserData = new SneakyButtonEventResponse(SneakyButtonStatus.Release, ID, this);
             DispatchEvent(buttonEvent);
-
         }
 
         public virtual void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
@@ -168,25 +159,17 @@ namespace CocosSharp.Extensions.SneakyJoystick
             OnTouchesEnded(touches, touchEvent);
         }
 
-
         public override void OnExit()
         {
             base.OnExit();
-
-
-
         }
 
         protected override void Draw()
         {
             base.Draw();
             CCDrawingPrimitives.Begin();
-            CCDrawingPrimitives.DrawRect(new CCRect(0, 0, this.ContentSize.Width, this.ContentSize.Height), CCColor4B.Blue);
+			CCDrawingPrimitives.DrawRect(new CCRect(-this.ContentSize.Width*.5f, -this.ContentSize.Height*.5f, this.ContentSize.Width*.5f, this.ContentSize.Height*.5f), CCColor4B.Blue);
             CCDrawingPrimitives.End();
         }
-
-     
-
-
     }
 }
