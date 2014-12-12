@@ -19,7 +19,6 @@ namespace SneakyJoystickExample.Windows
 				NSApplication.SharedApplication.Delegate = new Program();
 				NSApplication.Main(args);
 			}
-
 		}
 
 		public override void FinishedLaunching (NSObject notification)
