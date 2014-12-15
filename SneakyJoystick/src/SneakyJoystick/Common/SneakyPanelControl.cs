@@ -168,6 +168,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public SneakyPanelControl(CCSize visibleBoundsSize, int buttons) : base(visibleBoundsSize)
         {
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
+			ContentSize = visibleBoundsSize;
         }
 
         protected override void AddedToScene()
@@ -176,10 +177,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
             Opacity = DEFAULT_TRANSPARENCY;
 
 			//Joystick initialization
-			CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
 			JoyControl = new SneakyJoystickControlSkinnedBase();
 			AddChild(JoyControl, JOY_Z);
-			JoyControl.Position = new CCPoint (visibleBoundsSize.Width * 0.09f, visibleBoundsSize.Width * 0.09f);
+			JoyControl.Position = new CCPoint (ContentSize.Width * 0.09f, ContentSize.Width * 0.09f);
 
 			//Buttons initialization
 			SneakyButtonControlSkinnedBase tmp = null;
@@ -191,7 +191,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
 			}
 
 			Orientation = ButtonsOrientation.Horizontal;
-
 			//Listeners
 
             if (!IsListenerDisabled)
