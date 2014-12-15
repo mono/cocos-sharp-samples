@@ -9,9 +9,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
     public class SneakyButtonControl : CCNode
     {
-        #region Custom Events
+
         CCEventCustom buttonEvent;
-        #endregion
 
         public int ID { get; set; }
         public bool IsDebug { get; set; }
@@ -39,9 +38,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
             rateLimit = 1.0f / 120.0f;
             Position = rect.Origin;
             ID = id;
-
             buttonEvent = new CCEventCustom(SneakyPanelControl.BUTTON_LISTENER_ID);
-
         }
 
         void limiter(float delta)
@@ -69,12 +66,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
 			//Console.WriteLine(location + " radius: " + radius);
             //Do a fast rect check before doing a circle hit check:
             if (location.X < -radius || location.X > radius || location.Y < -radius || location.Y > radius)
-            {
                 return false;
-            }
             else
             {
-
                 float dSq = location.X * location.X + location.Y * location.Y;
 				Console.WriteLine(location + " radius: " + radius + " distanceSquared: " + dSq);
 
@@ -86,16 +80,16 @@ namespace CocosSharp.Extensions.SneakyJoystick
                         value = true;
                         //Schedule(limiter, rateLimit);
                     }
-                    if (isHoldable) value = true;
-                    if (isToggleable) value = !value;
+                    if (isHoldable) 
+						value = true;
+                    if (isToggleable) 
+						value = !value;
 
                     CheckSelf();
-
 
                     // Fire off our event to notify that movement was started
                     buttonEvent.UserData = new SneakyButtonEventResponse(SneakyButtonStatus.Press, ID, this);
                     DispatchEvent(buttonEvent);
-
                     return true;
                 }
             }
@@ -111,7 +105,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             //base.TouchMoved(touch, touchEvent);
             CCTouch touch = touches.FirstOrDefault();
 
-            if (!active) return;
+            if (!active) 
+				return;
 
             CCPoint location = Layer.ScreenToWorldspace(touch.LocationOnScreen);
             location = WorldToParentspace(location);
@@ -127,14 +122,15 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 float dSq = location.X * location.X + location.Y * location.Y;
                 if (radiusSq > dSq)
                 {
-                    if (isHoldable) value = true;
+                    if (isHoldable) 
+						value = true;
                 }
                 else
                 {
-                    if (isHoldable) value = false; active = false;
+                    if (isHoldable) 
+						value = false; active = false;
                 }
             }
-
             CheckSelf();
         }
 
@@ -142,9 +138,12 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             CCTouch touch = touches.FirstOrDefault();
 
-            if (!active) return;
-            if (isHoldable) value = false;
-            if (isHoldable || isToggleable) active = false;
+            if (!active) 
+				return;
+            if (isHoldable) 
+				value = false;
+            if (isHoldable || isToggleable) 
+				active = false;
 
             CheckSelf();
 
@@ -155,7 +154,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public virtual void OnTouchesCancelled(List<CCTouch> touches, CCEvent touchEvent)
         {
-
             OnTouchesEnded(touches, touchEvent);
         }
 
