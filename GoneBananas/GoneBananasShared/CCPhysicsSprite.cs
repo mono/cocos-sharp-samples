@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Box2D.Common;
 using Box2D.Dynamics;
 using CocosSharp;

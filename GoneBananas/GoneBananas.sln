@@ -42,7 +42,4 @@ Global
 		{7B89D990-03EA-4FF4-8392-376C08E37161}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{7B89D990-03EA-4FF4-8392-376C08E37161}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = GoneBananasiOS\GoneBananasiOS.csproj
-	EndGlobalSection
 EndGlobal
