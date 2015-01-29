@@ -12,23 +12,16 @@ namespace CocosSharp.Spine
 		{
 		}
 
-		Texture2D texture;
+		CCTexture2D texture;
 
 		public void Load (AtlasPage page, String path) 
 		{
 			var ccTexture = CCTextureCache.SharedTextureCache.AddImage(path);
-
-            if (texture == null)
-                using (Stream stream = CCFileUtils.GetFileStream(path))
-                {
-                    texture = Util.LoadTexture(CCDrawManager.GraphicsDevice, stream);
-                }
-            else
-                texture = ccTexture.XNATexture;
+            texture = ccTexture;
 
             page.rendererObject = texture;
-            page.width = texture.Width;
-            page.height = texture.Height;
+            page.width = (int)texture.ContentSizeInPixels.Width;
+            page.height = (int)texture.ContentSizeInPixels.Height;
 		}
 
 		public void Unload (Object texture) {

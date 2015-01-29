@@ -6,7 +6,7 @@ using Spine;
 
 namespace spine_cocossharp
 {
-    class GoblinLayer : CCNode
+    class GoblinLayer : CCLayer
     {
 
         CCSkeletonAnimation skeletonNode;
@@ -50,7 +50,7 @@ namespace spine_cocossharp
 
             skeletonNode.SetSkin("goblin");
 
-            var wt = skeletonNode.NodeToWorldTransform;
+            //var wt = skeletonNode.NodeToWorldTransform;
             skeletonNode.SetSlotsToSetupPose();
             skeletonNode.UpdateWorldTransform();
 
@@ -118,7 +118,7 @@ namespace spine_cocossharp
                             }
                             break;
                         case CCKeys.P:
-							Director.ReplaceScene(SpineBoyLayer.Scene);
+							Director.ReplaceScene(SpineBoyLayer.Scene(Window));
                             break;
                     }
 
@@ -126,9 +126,11 @@ namespace spine_cocossharp
 			AddEventListener(keyListener, this);
         }
 
-		protected override void RunningOnNewWindow(CCSize windowSize)
-		{
-			base.RunningOnNewWindow(windowSize);
+        protected override void AddedToScene()
+        {
+            base.AddedToScene();
+        
+            var windowSize = VisibleBoundsWorldspace.Size;
 
 			labelBones.Position = new CCPoint(15, windowSize.Height - 10);
 			labelSlots.Position = new CCPoint(15, windowSize.Height - 25);
@@ -167,23 +169,19 @@ namespace spine_cocossharp
             CCLog.Log(trackIndex + " " + state.GetCurrent(trackIndex) + ": event " + e);
         }
 
-        public static CCScene Scene
+        public static CCScene Scene(CCWindow window)
         {
-            get
-            {
-                // 'scene' is an autorelease object.
-                var scene = new CCScene();
+            // 'scene' is an autorelease object.
+            var scene = new CCScene(window);
 
-                // 'layer' is an autorelease object.
-                var layer = new GoblinLayer();
+            // 'layer' is an autorelease object.
+            var layer = new GoblinLayer();
 
-                // add layer as a child to scene
-                scene.AddChild(layer);
+            // add layer as a child to scene
+            scene.AddChild(layer);
 
-                // return the scene
-                return scene;
-
-            }
+            // return the scene
+            return scene;
 
         }
 

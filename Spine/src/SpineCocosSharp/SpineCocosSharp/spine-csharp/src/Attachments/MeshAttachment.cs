@@ -105,5 +105,26 @@ namespace Spine {
 				worldVertices[i + 1] = vx * m10 + vy * m11 + y;
 			}
 		}
+
+        public Microsoft.Xna.Framework.Matrix GetWorldTransform(float x, float y, Slot slot, float[] worldVertices)
+        {
+            Microsoft.Xna.Framework.Matrix mat = Microsoft.Xna.Framework.Matrix.Identity;
+
+            Bone bone = slot.bone;
+            x += bone.worldX;
+            y += bone.worldY;
+            float m00 = bone.m00, m01 = bone.m01, m10 = bone.m10, m11 = bone.m11;
+            return mat;
+//            float[] vertices = this.vertices;
+//            int verticesCount = vertices.Length;
+//            if (slot.attachmentVerticesCount == verticesCount) vertices = slot.AttachmentVertices;
+//            for (int i = 0; i < verticesCount; i += 2) {
+//                float vx = vertices[i];
+//                float vy = vertices[i + 1];
+//                worldVertices[i] = vx * m00 + vy * m01 + x;
+//                worldVertices[i + 1] = vx * m10 + vy * m11 + y;
+//            }
+
+        }
 	}
 }

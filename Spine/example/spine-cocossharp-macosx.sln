@@ -17,6 +17,8 @@ Global
 		Release|iPhone = Release|iPhone
 		Ad-Hoc|iPhone = Ad-Hoc|iPhone
 		AppStore|iPhone = AppStore|iPhone
+		DebugPhysics|Any CPU = DebugPhysics|Any CPU
+		ReleasePhysics|Any CPU = ReleasePhysics|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
@@ -31,6 +33,8 @@ Global
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.DebugPhysics|Any CPU.ActiveCfg = Debug|Any CPU
+		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.DebugPhysics|Any CPU.Build.0 = Debug|Any CPU
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Distribution|Any CPU.ActiveCfg = Debug|Any CPU
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Distribution|Any CPU.Build.0 = Debug|Any CPU
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +43,8 @@ Global
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|iPhone.Build.0 = Release|Any CPU
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.ReleasePhysics|Any CPU.ActiveCfg = Debug|Any CPU
+		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.ReleasePhysics|Any CPU.Build.0 = Debug|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.AppStore|Any CPU.ActiveCfg = AppStore|Any CPU
@@ -51,6 +57,8 @@ Global
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C976AEE3-940E-4658-BCDD-80A581E4C696}.DebugPhysics|Any CPU.ActiveCfg = Debug|Any CPU
+		{C976AEE3-940E-4658-BCDD-80A581E4C696}.DebugPhysics|Any CPU.Build.0 = Debug|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Distribution|Any CPU.ActiveCfg = Debug|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Distribution|Any CPU.Build.0 = Debug|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,8 +67,7 @@ Global
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Release|iPhone.Build.0 = Release|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{C976AEE3-940E-4658-BCDD-80A581E4C696}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = macosx\spine-cocossharp-macosx.csproj
+		{C976AEE3-940E-4658-BCDD-80A581E4C696}.ReleasePhysics|Any CPU.ActiveCfg = Debug|Any CPU
+		{C976AEE3-940E-4658-BCDD-80A581E4C696}.ReleasePhysics|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

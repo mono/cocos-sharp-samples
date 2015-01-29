@@ -25,16 +25,16 @@ namespace spine_cocossharp
 
 		public override void FinishedLaunching (NSObject notification)
 		{
-			CCApplication sharedApp = CCApplication.SharedApplication;
-			sharedApp.ApplicationDelegate = new AppDelegate();
+            CCApplication application = new CCApplication(false, new CCSize(1024f, 768f));
+            application.ApplicationDelegate = new AppDelegate();
 
-			CCApplication.SharedApplication.StartGame();
-		}
+            application.StartGame();
+        }
 
-		public override bool ApplicationShouldTerminateAfterLastWindowClosed (NSApplication sender)
-		{
-			return true;
-		}
+        public override bool ApplicationShouldTerminateAfterLastWindowClosed(NSApplication sender)
+        {
+            return true;
+        }
 	}
 }
 

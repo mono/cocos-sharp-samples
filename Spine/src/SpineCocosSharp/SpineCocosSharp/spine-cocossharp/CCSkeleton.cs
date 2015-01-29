@@ -55,7 +55,7 @@ namespace CocosSharp.Spine
         public static int ATTACHMENT_BOUNDING_BOX = 2;
 
         public Skeleton Skeleton { get; private set; }
-        public CCMeshBatcher batcher;
+        public CCGeometryBatch batcher;
 
         public bool DebugSlots { get; set; }
         public CCColor4B DebugSlotColor { get; set; }
@@ -97,7 +97,8 @@ namespace CocosSharp.Spine
         public CCSkeleton(string skeletonDataFile, Atlas atlas, float scale = 0)
         {
             var json = new SkeletonJson(atlas);
-			json.Scale = scale == 0 ? (1 / Director.ContentScaleFactor) : scale;
+			//json.Scale = scale == 0 ? (1 / Director.ContentScaleFactor) : scale;
+            json.Scale = scale == 0 ? (1 / 1) : scale;
             SkeletonData skeletonData = json.ReadSkeletonData(skeletonDataFile);
             SetSkeletonData(skeletonData, true);
         }
@@ -114,7 +115,8 @@ namespace CocosSharp.Spine
 
             SkeletonJson json = new SkeletonJson(atlas);
 
-            json.Scale = scale == 0 ? (1 / Director.ContentScaleFactor) : scale;
+            //json.Scale = scale == 0 ? (1 / Director.ContentScaleFactor) : scale;
+            json.Scale = scale == 0 ? (1 / 1) : scale;
 
             using (StreamReader skeletonDataStream = new StreamReader(CCFileUtils.GetFileStream(skeletonDataFile)))
             {
@@ -134,7 +136,7 @@ namespace CocosSharp.Spine
             DebugSlotColor = CCColor4B.Magenta;
             DebugBoneColor = CCColor4B.Blue;
             DebugJointColor = CCColor4B.Red;
-            batcher = new CCMeshBatcher(CCDrawManager.GraphicsDevice);
+            batcher = new CCGeometryBatch ();
             OpacityModifyRGB = true;
 
             Schedule();
@@ -157,6 +159,9 @@ namespace CocosSharp.Spine
 			base.Update(dt);
         }
 
+
+
+
         protected override void Draw()
         {
             defaultBlendState = PremultipliedAlpha ? BlendState.AlphaBlend : BlendState.NonPremultiplied;
@@ -172,8 +177,6 @@ namespace CocosSharp.Spine
             float skeletonB = color3b.B / 255f;
             float skeletonA = Opacity / 255f;
 
-            batcher.BlendState = defaultBlendState;
-
             batcher.Begin();
             
             for (int i = 0, n = drawOrder.Count; i < n; i++)
@@ -184,66 +187,61 @@ namespace CocosSharp.Spine
                 {
                     RegionAttachment regionAttachment = (RegionAttachment)attachment;
                     BlendState blend = slot.Data.AdditiveBlending ? BlendState.Additive : defaultBlendState;
-                    //batcher.BlendState = blend;
 
-                    if (CCDrawManager.GraphicsDevice.BlendState != blend)
-                    {
-                        batcher.End();
-                        batcher.BlendState = blend;
-                        batcher.Begin();
-                    }
+                    var item = batcher.CreateGeometryInstance(4, 6);
 
-                    MeshItem item = batcher.NextItem(4, 6);
-                    item.triangles = quadTriangles;
-                    VertexPositionColorTexture[] itemVertices = item.vertices;
+                    item.InstanceAttributes.BlendState = blend;
+                    item.GeometryPacket.Indicies = quadTriangles;
+
+                    var itemVertices = item.GeometryPacket.Vertices;
 
                     AtlasRegion region = (AtlasRegion)regionAttachment.RendererObject;
-                    item.texture = (Texture2D)region.page.rendererObject;
+                    item.GeometryPacket.Texture = (CCTexture2D)region.page.rendererObject;
 
-                    Color color;
+                    CCColor4B color;
                     float a = skeletonA * slot.A * regionAttachment.A;
                     if (PremultipliedAlpha)
                     {
-                        color = new Color(
+                        color = new CCColor4B(
                                 skeletonR * slot.R * regionAttachment.R * a,
                                 skeletonG * slot.G * regionAttachment.G * a,
                                 skeletonB * slot.B * regionAttachment.B * a, a);
                     }
                     else
                     {
-                        color = new Color(
+                        color = new CCColor4B(
                                 skeletonR * slot.R * regionAttachment.R,
                                 skeletonG * slot.G * regionAttachment.G,
                                 skeletonB * slot.B * regionAttachment.B, a);
                     }
-                    itemVertices[TL].Color = color;
-                    itemVertices[BL].Color = color;
-                    itemVertices[BR].Color = color;
-                    itemVertices[TR].Color = color;
+                    itemVertices[TL].Colors = color;
+                    itemVertices[BL].Colors = color;
+                    itemVertices[BR].Colors = color;
+                    itemVertices[TR].Colors = color;
 
                     regionAttachment.ComputeWorldVertices(x, y, slot.Bone, vertices);
-                    itemVertices[TL].Position.X = vertices[RegionAttachment.X1];
-                    itemVertices[TL].Position.Y = vertices[RegionAttachment.Y1];
-                    itemVertices[TL].Position.Z = 0;
-                    itemVertices[BL].Position.X = vertices[RegionAttachment.X2];
-                    itemVertices[BL].Position.Y = vertices[RegionAttachment.Y2];
-                    itemVertices[BL].Position.Z = 0;
-                    itemVertices[BR].Position.X = vertices[RegionAttachment.X3];
-                    itemVertices[BR].Position.Y = vertices[RegionAttachment.Y3];
-                    itemVertices[BR].Position.Z = 0;
-                    itemVertices[TR].Position.X = vertices[RegionAttachment.X4];
-                    itemVertices[TR].Position.Y = vertices[RegionAttachment.Y4];
-                    itemVertices[TR].Position.Z = 0;
+                    itemVertices[TL].Vertices.X = vertices[RegionAttachment.X1];
+                    itemVertices[TL].Vertices.Y = vertices[RegionAttachment.Y1];
+                    itemVertices[TL].Vertices.Z = 0;
+                    itemVertices[BL].Vertices.X = vertices[RegionAttachment.X2];
+                    itemVertices[BL].Vertices.Y = vertices[RegionAttachment.Y2];
+                    itemVertices[BL].Vertices.Z = 0;
+                    itemVertices[BR].Vertices.X = vertices[RegionAttachment.X3];
+                    itemVertices[BR].Vertices.Y = vertices[RegionAttachment.Y3];
+                    itemVertices[BR].Vertices.Z = 0;
+                    itemVertices[TR].Vertices.X = vertices[RegionAttachment.X4];
+                    itemVertices[TR].Vertices.Y = vertices[RegionAttachment.Y4];
+                    itemVertices[TR].Vertices.Z = 0;
 
                     float[] uvs = regionAttachment.UVs;
-                    itemVertices[TL].TextureCoordinate.X = uvs[RegionAttachment.X1];
-                    itemVertices[TL].TextureCoordinate.Y = uvs[RegionAttachment.Y1];
-                    itemVertices[BL].TextureCoordinate.X = uvs[RegionAttachment.X2];
-                    itemVertices[BL].TextureCoordinate.Y = uvs[RegionAttachment.Y2];
-                    itemVertices[BR].TextureCoordinate.X = uvs[RegionAttachment.X3];
-                    itemVertices[BR].TextureCoordinate.Y = uvs[RegionAttachment.Y3];
-                    itemVertices[TR].TextureCoordinate.X = uvs[RegionAttachment.X4];
-                    itemVertices[TR].TextureCoordinate.Y = uvs[RegionAttachment.Y4];
+                    itemVertices[TL].TexCoords.U = uvs[RegionAttachment.X1];
+                    itemVertices[TL].TexCoords.V = uvs[RegionAttachment.Y1];
+                    itemVertices[BL].TexCoords.U = uvs[RegionAttachment.X2];
+                    itemVertices[BL].TexCoords.V = uvs[RegionAttachment.Y2];
+                    itemVertices[BR].TexCoords.U = uvs[RegionAttachment.X3];
+                    itemVertices[BR].TexCoords.V = uvs[RegionAttachment.Y3];
+                    itemVertices[TR].TexCoords.U = uvs[RegionAttachment.X4];
+                    itemVertices[TR].TexCoords.V = uvs[RegionAttachment.Y4];
                 }
                 else if (attachment is MeshAttachment)
                 {
@@ -253,39 +251,39 @@ namespace CocosSharp.Spine
                     mesh.ComputeWorldVertices(x, y, slot, vertices);
 
                     int[] triangles = mesh.Triangles;
-                    MeshItem item = batcher.NextItem(vertexCount, triangles.Length);
-                    item.triangles = triangles;
+                    var item = batcher.CreateGeometryInstance(vertexCount, triangles.Length);
+                    item.GeometryPacket.Indicies = triangles;
 
                     AtlasRegion region = (AtlasRegion)mesh.RendererObject;
-                    item.texture = (Texture2D)region.page.rendererObject;
+                    item.GeometryPacket.Texture = (CCTexture2D)region.page.rendererObject;
 
-                    Color color;
+                    CCColor4B color;
                     float a = skeletonA * slot.A * mesh.A;
                     if (PremultipliedAlpha)
                     {
-                        color = new Color(
+                        color = new CCColor4B(
                                 skeletonR * slot.R * mesh.R * a,
                                 skeletonG * slot.G * mesh.G * a,
                                 skeletonB * slot.B * mesh.B * a, a);
                     }
                     else
                     {
-                        color = new Color(
+                        color = new CCColor4B(
                                 skeletonR * slot.R * mesh.R,
                                 skeletonG * slot.G * mesh.G,
                                 skeletonB * slot.B * mesh.B, a);
                     }
 
                     float[] uvs = mesh.UVs;
-                    VertexPositionColorTexture[] itemVertices = item.vertices;
+                    var itemVertices = item.GeometryPacket.Vertices;
                     for (int ii = 0, v = 0; v < vertexCount; ii++, v += 2)
                     {
-                        itemVertices[ii].Color = color;
-                        itemVertices[ii].Position.X = vertices[v];
-                        itemVertices[ii].Position.Y = vertices[v + 1];
-                        itemVertices[ii].Position.Z = 0;
-                        itemVertices[ii].TextureCoordinate.X = uvs[v];
-                        itemVertices[ii].TextureCoordinate.Y = uvs[v + 1];
+                        itemVertices[ii].Colors = color;
+                        itemVertices[ii].Vertices.X = vertices[v];
+                        itemVertices[ii].Vertices.Y = vertices[v + 1];
+                        itemVertices[ii].Vertices.Z = 0;
+                        itemVertices[ii].TexCoords.U = uvs[v];
+                        itemVertices[ii].TexCoords.V = uvs[v + 1];
                     }
                 }
                 else if (attachment is SkinnedMeshAttachment)
@@ -296,39 +294,39 @@ namespace CocosSharp.Spine
                     mesh.ComputeWorldVertices(x, y, slot, vertices);
 
                     int[] triangles = mesh.Triangles;
-                    MeshItem item = batcher.NextItem(vertexCount, triangles.Length);
-                    item.triangles = triangles;
+                    var item = batcher.CreateGeometryInstance(vertexCount, triangles.Length);
+                    item.GeometryPacket.Indicies = triangles;
 
                     AtlasRegion region = (AtlasRegion)mesh.RendererObject;
-                    item.texture = (Texture2D)region.page.rendererObject;
+                    item.GeometryPacket.Texture = (CCTexture2D)region.page.rendererObject;
 
-                    Color color;
+                    CCColor4B color;
                     float a = skeletonA * slot.A * mesh.A;
                     if (PremultipliedAlpha)
                     {
-                        color = new Color(
+                        color = new CCColor4B(
                                 skeletonR * slot.R * mesh.R * a,
                                 skeletonG * slot.G * mesh.G * a,
                                 skeletonB * slot.B * mesh.B * a, a);
                     }
                     else
                     {
-                        color = new Color(
+                        color = new CCColor4B(
                                 skeletonR * slot.R * mesh.R,
                                 skeletonG * slot.G * mesh.G,
                                 skeletonB * slot.B * mesh.B, a);
                     }
 
                     float[] uvs = mesh.UVs;
-                    VertexPositionColorTexture[] itemVertices = item.vertices;
+                    var itemVertices = item.GeometryPacket.Vertices;
                     for (int ii = 0, v = 0; v < vertexCount; ii++, v += 2)
                     {
-                        itemVertices[ii].Color = color;
-                        itemVertices[ii].Position.X = vertices[v];
-                        itemVertices[ii].Position.Y = vertices[v + 1];
-                        itemVertices[ii].Position.Z = 0;
-                        itemVertices[ii].TextureCoordinate.X = uvs[v];
-                        itemVertices[ii].TextureCoordinate.Y = uvs[v + 1];
+                        itemVertices[ii].Colors = color;
+                        itemVertices[ii].Vertices.X = vertices[v];
+                        itemVertices[ii].Vertices.Y = vertices[v + 1];
+                        itemVertices[ii].Vertices.Z = 0;
+                        itemVertices[ii].TexCoords.U = uvs[v];
+                        itemVertices[ii].TexCoords.V = uvs[v + 1];
                     }
                 }
             }

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SpineCocosSharp</RootNamespace>
     <AssemblyName>SpineCocosSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -39,14 +39,36 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ChipmunkSharp">
+      <HintPath>..\..\..\example\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\ChipmunkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CocosSharp">
+      <HintPath>..\..\..\example\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\CocosSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\example\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network">
+      <HintPath>..\..\..\example\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework.Net">
+      <HintPath>..\..\..\example\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\MonoGame.Framework.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\..\example\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <HintPath>..\..\..\example\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\Tao.Sdl.dll</HintPath>
+    </Reference>
+    <Reference Include="box2d">
+      <HintPath>..\..\..\example\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\box2d.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="spine-cocossharp\CCMeshBatcher.cs" />
     <Compile Include="spine-cocossharp\CCSkeleton.cs" />
     <Compile Include="spine-cocossharp\CCSkeletonAnimation.cs" />
     <Compile Include="spine-cocossharp\CocosSharpTextureLoader.cs" />
-    <Compile Include="spine-cocossharp\MonoTextureLoader.cs" />
     <Compile Include="spine-csharp\src\Animation.cs" />
     <Compile Include="spine-csharp\src\AnimationState.cs" />
     <Compile Include="spine-csharp\src\AnimationStateData.cs" />
@@ -71,12 +93,6 @@
     <Compile Include="spine-csharp\src\Skin.cs" />
     <Compile Include="spine-csharp\src\Slot.cs" />
     <Compile Include="spine-csharp\src\SlotData.cs" />
-    <Compile Include="spine-xna\src\MeshBatcher.cs" />
-    <Compile Include="spine-xna\src\RegionBatcher.cs" />
-    <Compile Include="spine-xna\src\SkeletonMeshRenderer.cs" />
-    <Compile Include="spine-xna\src\SkeletonRegionRenderer.cs" />
-    <Compile Include="spine-xna\src\Util.cs" />
-    <Compile Include="spine-xna\src\XnaTextureLoader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -86,4 +102,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>
