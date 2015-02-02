@@ -30,3 +30,19 @@
 /processor:TMXProcessor
 /build:tilemaps/iso-test-zorder.tmx
 
+#begin tilemaps/grass-tiles-2-small.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:tilemaps/grass-tiles-2-small.png
+
+#begin tilemaps/test.tmx
+/importer:TMXImporter
+/processor:TMXProcessor
+/build:tilemaps/test.tmx
+

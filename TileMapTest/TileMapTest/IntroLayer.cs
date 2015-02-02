@@ -33,6 +33,9 @@ namespace TileMapTest
             var bounds = VisibleBoundsWorldspace;
 
             var tilemap = new CCTileMap("tilemaps/iso-test-zorder");
+            // Load user submitted tilemap
+            //var tilemap = new CCTileMap("tilemaps/test");
+
             AddChild(tilemap);
             // position the label on the center of the screen
             label.Position = bounds.Center;
