@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{F5AD393B-3D2C-4407-A03C-7BF4351EC1EC}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>DynamicTextures.Content</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\images\Noise.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\images\Noise-hd.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\images\Noise-iphone5hd.png" />
+  </ItemGroup>
+</Project>
