@@ -11,6 +11,10 @@ namespace TileMapTest.iOS
         public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
         {
             application.ContentRootDirectory = "Content";
+
+            // See comment in IntroLayer.cs module when loading a tilemap from a StreamReader
+            application.ContentSearchPaths.Add("tilemaps");
+
             var windowSize = mainWindow.WindowSizeInPixels;
 
             var desiredWidth = 1024.0f;
