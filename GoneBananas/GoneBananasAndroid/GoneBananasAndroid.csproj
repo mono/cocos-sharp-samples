@@ -88,11 +88,11 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\hd\animations\monkey.plist" />
     <AndroidAsset Include="Assets\Content\hd\animations\monkey.png" />
-    <AndroidAsset Include="Assets\Content\Sounds\tap.mp3" />
     <AndroidAsset Include="Assets\Content\fonts\arial-22.xnb" />
     <AndroidAsset Include="Assets\Content\hd\cloud.png" />
     <AndroidAsset Include="Assets\Content\hd\grass.png" />
     <AndroidAsset Include="Assets\Content\hd\balls.png" />
     <AndroidAsset Include="Assets\Content\Sounds\backgroundMusic.mp3" />
+    <AndroidAsset Include="Assets\Content\Sounds\tap.wav" />
   </ItemGroup>
 </Project>
