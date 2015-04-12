@@ -4,6 +4,8 @@ Here you will find Samples using CocosSharp, an easy to use library for simple g
 
 CocosSharp can be found here: https://github.com/xamarin/CocosSharp
 
+There are some F# samples from TalBeno here: https://github.com/TalBeno/cocos-sharp-samples-fsharp
+
 This library is MIT licensed.
 
 License
