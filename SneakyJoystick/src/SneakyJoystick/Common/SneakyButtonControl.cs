@@ -9,7 +9,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
     public class SneakyButtonControl : CCNode
     {
-
+        protected CCDrawNode drawNode;
         CCEventCustom buttonEvent;
 
         public int ID { get; set; }
@@ -27,8 +27,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
         //Optimizations (keep Squared values of all radii for faster calculations) (updated internally when changing radii)
         float radius;
 
-        public SneakyButtonControl(CCRect rect, int id)
+        public SneakyButtonControl(CCRect rect, int id, CCDrawNode drawNode )
         {
+            this.drawNode = drawNode;
             status = true; //defaults to enabled
             value = false;
             active = false;
@@ -162,16 +163,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
             base.OnExit();
         }
 
-        protected override void Draw()
+        public void Draw()
         {
-            base.Draw();
-
-			if (!IsDebug)
-				return;
-
-            CCDrawingPrimitives.Begin();
-			CCDrawingPrimitives.DrawRect(new CCRect(-this.ContentSize.Width*.5f, -this.ContentSize.Height*.5f, this.ContentSize.Width*.5f, this.ContentSize.Height*.5f), CCColor4B.Blue);
-            CCDrawingPrimitives.End();
+            if (drawNode != null)
+                drawNode.DrawRect(new CCRect(-this.ContentSize.Width*.5f, -this.ContentSize.Height*.5f, this.ContentSize.Width*.5f, this.ContentSize.Height*.5f), CCColor4B.Blue);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
     public class SneakyJoystickControl : CCNode
     {
         CCEventCustom joystickEvent = new CCEventCustom(SneakyPanelControl.JOY_LISTENER_ID);
+        protected CCDrawNode drawNode;
 
 		bool isDPad;
 		float joystickRadius;
@@ -19,13 +20,11 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public CCPoint StickPosition { get; set; }
         public CCPoint StickDirection { get; set; }
         public CCPoint Center { get; set; }
-
         public CCPoint StickPreviousPosition { get; set; }
         public static CCPoint Velocity { get; set; }
         public float Degrees { get; set; }
         public bool AutoCenter { get; set; }
         public float JoystickRadiusSq { get; set; } //Optimizations (keep Squared values of all radii for faster calculations) (updated internally when changing joy/thumb radii)
-
         public float JoystickRadius
         {
             get { return joystickRadius; }
@@ -35,7 +34,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 joystickRadius = value;
             }
         }
-
         public float ThumbRadius
         {
             get { return thumbRadius; }
@@ -45,7 +43,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 thumbRadius = value;
             }
         }
-
         public float ThumbRadiusSq { get; set; }
 		public float DeadRadiusSq { get; set; }
 		public bool IsDebug;
@@ -75,7 +72,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 }
             }
         }
-
         public bool HasDeadzone { get; set; } //Turns Deadzone on/off for joystick, always YES if ifDpad == YES
         public int NumberOfDirections { get; set; } //Used only when isDpad == YES
 
@@ -87,7 +83,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
 				return (IsDown || IsLeft || IsUp || IsRight); 
 			}
         }
-
         public bool IsUp
         {
             get
@@ -145,8 +140,9 @@ namespace CocosSharp.Extensions.SneakyJoystick
             }
         }
 
-        public SneakyJoystickControl(CCRect rect) : base()
+        public SneakyJoystickControl(CCRect rect, CCDrawNode drawNode) : base()
         {
+            this.drawNode = drawNode;
             Degrees = 0.0f;
             Velocity = CCPoint.Zero;
             AutoCenter = true;
@@ -350,16 +346,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
             return newPosition;
         }
 
-		protected override void Draw()
+        public void Draw()
 		{
-			base.Draw();
-
-			if (!IsDebug)
-				return;
-
-			CCDrawingPrimitives.Begin();
-			CCDrawingPrimitives.DrawRect(new CCRect(0, 0, this.ContentSize.Width, this.ContentSize.Height), CCColor4B.Blue);
-			CCDrawingPrimitives.End();
+            if (drawNode != null)
+                drawNode.DrawRect(new CCRect(0, 0, this.ContentSize.Width, this.ContentSize.Height), CCColor4B.Blue);
 		}
 
         #endregion

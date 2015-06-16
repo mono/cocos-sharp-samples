@@ -33,7 +33,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public const string JOY_LISTENER_ID = "SneakyJoystick_JOY_LISTENER";
         public const string BUTTON_LISTENER_ID = "SneakyJoystick_BUTTON_LISTENER";
 
-        private byte _opacity;
+        byte _opacity;
+        CCDrawNode drawNode;
 
         public SneakyJoystickControlSkinnedBase JoyControl { get; set; }
         public List<SneakyButtonControlSkinnedBase> Buttons { get; set; }
@@ -167,6 +168,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         public SneakyPanelControl(CCSize visibleBoundsSize, int buttons) : base(visibleBoundsSize)
         {
+            drawNode = new CCDrawNode();
             Buttons = new List<SneakyButtonControlSkinnedBase>(buttons);
 			ContentSize = visibleBoundsSize;
         }
@@ -177,7 +179,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
             Opacity = DEFAULT_TRANSPARENCY;
 
 			//Joystick initialization
-			JoyControl = new SneakyJoystickControlSkinnedBase();
+			JoyControl = new SneakyJoystickControlSkinnedBase(drawNode);
 			AddChild(JoyControl, JOY_Z);
 			JoyControl.Position = new CCPoint (ContentSize.Width * 0.09f, ContentSize.Width * 0.09f);
 
@@ -185,7 +187,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 			SneakyButtonControlSkinnedBase tmp = null;
 			for (int i = 0; i < Buttons.Capacity; i++)
 			{
-				tmp = new SneakyButtonControlSkinnedBase(i);
+				tmp = new SneakyButtonControlSkinnedBase(i, drawNode);
 				AddChild(tmp, JOY_Z);
 				Buttons.Add(tmp);
 			}
@@ -211,7 +213,6 @@ namespace CocosSharp.Extensions.SneakyJoystick
         public void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             JoyControl.OnTouchesEnded(touches, touchEvent);
-
             foreach (var button in Buttons)
                 button.OnTouchesEnded(touches, touchEvent);
         }
@@ -249,10 +250,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
                 for (int i = 0; i < Buttons.Count; i++)
                 {
                     x = (i % 2 == 0) ? 0.8f : 0.9f;
-
                     if (i % 2 == 0)
                         y += 0.12f;
-
                     Buttons[i].Position = new CCPoint(visibleBoundsSize.Width * x, visibleBoundsSize.Height * y);
 					Buttons[i].AnchorPoint = CCPoint.AnchorLowerLeft;
                 }
@@ -285,14 +284,16 @@ namespace CocosSharp.Extensions.SneakyJoystick
             return CCPoint.Zero;
         }
 
-        protected override void Draw()
+        public void Draw()
         {
-            CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
             if (IsDebug)
             {
-                CCDrawingPrimitives.Begin();
-                CCDrawingPrimitives.DrawRect(new CCRect(0, 0, visibleBoundsSize.Width, visibleBoundsSize.Height), CCColor4B.Blue);
-                CCDrawingPrimitives.End();
+                CCSize visibleBoundsSize = VisibleBoundsWorldspace.Size;
+                drawNode.DrawRect(new CCRect(0, 0, visibleBoundsSize.Width, visibleBoundsSize.Height), CCColor4B.Blue);
+                if (JoyControl != null)
+                    JoyControl.Draw();
+                foreach (var button in Buttons)
+                    button.Draw();
             }
         }
 

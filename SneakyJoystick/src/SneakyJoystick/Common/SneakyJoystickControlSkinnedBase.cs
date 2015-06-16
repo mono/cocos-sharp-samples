@@ -102,13 +102,13 @@ namespace CocosSharp.Extensions.SneakyJoystick
         }
 
 		#region Constructors
-        public SneakyJoystickControlSkinnedBase()
-			: this(new CCRect(0, 0, 128, 128))
+        public SneakyJoystickControlSkinnedBase(CCDrawNode drawNode)
+			: this(new CCRect(0, 0, 128, 128), drawNode)
         {
         }
 
-		public SneakyJoystickControlSkinnedBase(CCRect size)
-			: base(size)
+        public SneakyJoystickControlSkinnedBase(CCRect size, CCDrawNode drawNode)
+			: base(size, drawNode)
 		{
 			BackgroundSprite = new CCSprite(DEFAULT_IMAGE_BACKGROUND);  //new ColoredCircleSprite( CCColor4B.Red, 100f);
 			ThumbSprite = new CCSprite(DEFAULT_IMAGE_THUMB);  //new ColoredCircleSprite(CCColor4B.Blue,30f);

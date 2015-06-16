@@ -162,18 +162,18 @@ namespace CocosSharp.Extensions.SneakyJoystick
 
         #region Contructor
 
-        public SneakyButtonControlSkinnedBase(int ID)
-            : this(new CCRect(0, 0, 64, 64), ID)
+        public SneakyButtonControlSkinnedBase(int ID, CCDrawNode drawNode)
+            : this(new CCRect(0, 0, 64, 64), ID, drawNode)
         {
 		}
 
-        public SneakyButtonControlSkinnedBase(CCRect size, int ID)
-            : this(size, "control/button_release.png", "control/button_pressed.png", "control/button_pressed.png", ID)
+        public SneakyButtonControlSkinnedBase(CCRect size, int ID, CCDrawNode drawNode)
+            : this(size, "control/button_release.png", "control/button_pressed.png", "control/button_pressed.png", ID, drawNode)
         { 
 		}
 
-        public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite, string disabledSprite, int ID)
-            : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite), new CCSprite(disabledSprite), ID)
+        public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite, string disabledSprite, int ID, CCDrawNode drawNode)
+            : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite), new CCSprite(disabledSprite), ID, drawNode)
         { 
 		}
 
@@ -181,8 +181,10 @@ namespace CocosSharp.Extensions.SneakyJoystick
             CCSprite defaultSprite,
             CCSprite activatedSprite,
             CCSprite pressSprite,
-            CCSprite disabledSprite, int ID)
-            : base(rect, ID)
+            CCSprite disabledSprite, 
+            int ID, 
+            CCDrawNode drawNode)
+            : base(rect, ID, drawNode)
         {
             DefaultSprite = defaultSprite;
             ActivatedSprite = activatedSprite;
@@ -191,18 +193,17 @@ namespace CocosSharp.Extensions.SneakyJoystick
             CheckSelf();
         }
 
-        public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite, int ID)
-            : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite), ID)
+        public SneakyButtonControlSkinnedBase(CCRect rect, string defaultSprite, string activatedSprite, string pressSprite, int ID, CCDrawNode drawNode)
+            : this(rect, new CCSprite(defaultSprite), new CCSprite(activatedSprite), new CCSprite(pressSprite), ID, drawNode)
         {
         }
 
-        public SneakyButtonControlSkinnedBase(CCRect rect, CCSprite defaultSprite, CCSprite activatedSprite, CCSprite pressSprite, int ID)
-            : base(rect, ID)
+        public SneakyButtonControlSkinnedBase(CCRect rect, CCSprite defaultSprite, CCSprite activatedSprite, CCSprite pressSprite, int ID, CCDrawNode drawNode)
+            : base(rect, ID, drawNode)
         {
             DefaultSprite = defaultSprite;
             ActivatedSprite = activatedSprite;
             PressSprite = pressSprite;
-
             CheckSelf();
         }
 

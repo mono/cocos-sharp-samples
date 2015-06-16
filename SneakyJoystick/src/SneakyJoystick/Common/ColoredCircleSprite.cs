@@ -7,9 +7,7 @@ namespace CocosSharp.Extensions.SneakyJoystick
 {
     public class ColoredCircleSprite : CCSprite
     {
-
         public float radius_;
-
         public int numberOfSegments;
         public CCPoint[] circleVertices;
 
@@ -30,19 +28,12 @@ namespace CocosSharp.Extensions.SneakyJoystick
         {
             Radius = 10.0f;
             numberOfSegments = 36;
-
-            //self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
-            // default blend function
-            //blendFunc = new CCBlendFunc( CCOGLES. CCDrawManager.BlendState.ColorSourceBlend, ;  //new CCBlendFunc( CC_BLEND_SRC, CC_BLEND_DST };
-            //var tmpColor = ;
             Color = new CCColor3B(CCColor4B.White);
-            //Opacity = tmpColor.A;
 
-            circleVertices = new CCPoint[numberOfSegments]; // new CCPoint( malloc(sizeof(CGPoint)*(numberOfSegments));
+            circleVertices = new CCPoint[numberOfSegments];
 
             if (circleVertices.Count() == 0)
                 Console.WriteLine(@"Ack!! malloc in colored circle failed");
-
         }
 
         public float Radius
@@ -90,9 +81,8 @@ namespace CocosSharp.Extensions.SneakyJoystick
             base.ContentSize = new CCSize(radius_ * 2, radius_ * 2);
         }
 
-        protected override void Draw()
+        protected void Draw()
         {
-            base.Draw();
             CCDrawingPrimitives.Begin();
             CCDrawingPrimitives.DrawSolidPoly(circleVertices, numberOfSegments, new CCColor4B(Color.R, Color.G, Color.B));
             CCDrawingPrimitives.End();
