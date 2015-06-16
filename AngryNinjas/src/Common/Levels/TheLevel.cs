@@ -39,15 +39,10 @@ namespace AngryNinjas
 		int maxStretchOfSlingShot;
 
 		bool openWithMenuInsteadOfGame;
-
 		bool topRightTouchEnablesDebugMode;
-
 		bool stackIsNowDynamic;
-
 		bool areWeOnTheIPad;
-
 		bool useImagesForPointScoreLabels;
-
 		bool somethingJustScored;
 		bool dottingOn;
 		bool areWeInTheStartingPosition;
@@ -58,38 +53,28 @@ namespace AngryNinjas
 		bool panningTowardSling;
 		bool continuePanningScreenOnFingerRelease;
 		bool autoReverseOn;
-
 		float multipyThrowPower;
-
 		float yAxisGravity;
 		bool gravityOn;
 
-
 		b2World world;
-		CCBox2dDraw debugDraw;
+        CCDrawNode debugDraw;
 		ContactListener contactListener;
 
 		//the entire stack
-
 		TheStack stack;
 
-
 		//background art
-
 		CCSprite backgroundLayerClouds;
 		CCSprite backgroundLayerHills;
 		CCParticleSystem system;
-
 
 		CCPoint cloudLayerStartPosition;
 		CCPoint hillsLayerStartPosition;
 		CCPoint particleSystemStartPosition;
 		CCPoint labelStartingPoint;
 
-
-
 		//sling art
-
 		CCSprite slingShotFront;
 
 		CCSprite strapFront;
@@ -124,7 +109,6 @@ namespace AngryNinjas
 		CCPoint slingShotCenterPosition;
 		CCPoint positionInSling;
 
-
 		//white dots
 
 		int dotCount;
@@ -154,9 +138,7 @@ namespace AngryNinjas
 		int ninjasToTossThisLevel;
 		int ninjaBeingThrown;
 
-
 		CCSize screenSize;
-
 
 		public TheLevel(CCSize size)
 			: base(size)
@@ -167,16 +149,10 @@ namespace AngryNinjas
 		protected override void AddedToScene()
 		{
 			base.AddedToScene();
-
 			layerInstance = this;
-
 			//get screen size
 			screenSize = Window.WindowSizeInPixels; //CCDirector::sharedDirector()->getWinSize();
-
-
-
 			//INITIAL VARIABLES.... (D O N T    E D I T )
-
 			// enable touches
 			#if XBOX || OUYA
 			TouchEnabled = false;
@@ -185,20 +161,15 @@ namespace AngryNinjas
 			//TouchEnabled = true;
 
 			CCEventListenerTouchAllAtOnce tListener = new CCEventListenerTouchAllAtOnce();
-
 			tListener.OnTouchesBegan = TouchesBegan;
 			//tListener.OnTouchesCancelled = TouchesCancelled;
 			tListener.OnTouchesEnded = TouchesEnded;
 			tListener.OnTouchesMoved = TouchesMoved;
-
 			AddEventListener(tListener, this);
 
 			#endif
-
-
 			// enable accelerometer
 			//AccelerometerEnabled = false;
-
 			#if iPHONE || iOS
 			IS_IPAD = MonoTouch.UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom 
 			== MonoTouch.UIKit.UIUserInterfaceIdiom.Pad;
@@ -216,16 +187,12 @@ namespace AngryNinjas
 			// ask director for the window size
 			screenWidth = (int)screenSize.Width;
 			screenHeight = (int)screenSize.Height;
-
 			throwInProgress = false; //is a throw currently in progress, as in, is a ninja in midair (mostly used to prevent tossing two ninjas, one right after another)
 			areWeInTheStartingPosition = true;  //is the world back at 0 on the X axis (if yes, then we can put a ninja in the sling)
-
 			throwCount = 0;
 			dotTotalOnOddNumberedTurn = 0;
 			dotTotalOnEvenNumberedTurn = 0;
-
 			currentLevel = GameData.SharedData.Level;  // use currentLevel =  0 for testing new shapes, will call [self buildLevelWithAllShapes];
-
 			pointTotalThisRound = 0;
 			pointsToPassLevel = GameData.SharedData.PointsToPassLevel;
 			bonusPerExtraNinja = GameData.SharedData.BonusPerExtraNinja;
@@ -235,14 +202,12 @@ namespace AngryNinjas
 			//PREFERENCE VARIABLES....
 
 			openWithMenuInsteadOfGame = false; // start with the menu opening the game
-
 			continuePanningScreenOnFingerRelease = true; // if the screen panning is midway between either the sling or targets, when you release your finger the screen will continue panning the last direction it moved (jumpy on iPhone if set to NO)
 			reverseHowFingerPansScreen = false; //switch to yes to reverse. 
 			topRightTouchEnablesDebugMode = true;  //SET TO NO IN FINAL BUILD
 			useImagesForPointScoreLabels = true; //IF NO, means you use Marker Felt text for scores
 
 			//set up background art
-
 			backgroundLayerClouds = new CCSprite(GameData.SharedData.BackgroundCloudsFileName);  // will return the background clouds file for a particular level
 			AddChild(backgroundLayerClouds, Constants.DepthClouds);
 
@@ -256,30 +221,23 @@ namespace AngryNinjas
 			strapFront = new CCSprite("strap");
 			AddChild(strapFront, Constants.DepthStrapFront);
 
-
 			strapBack = new CCSprite("strapBack");
 			AddChild(strapBack, Constants.DepthStrapBack);
 
 			strapEmpty = new CCSprite("strapEmpty");
 			AddChild(strapEmpty, Constants.DepthStrapBack);
 
-
 			strapBack.Visible = false;  //visible only when stretching
 			strapFront.Visible = false; //visible only when stretching
-
-
 
 			//setup positions and variables for iPad devices or iPhones
 
 			if (IS_IPAD)
 			{
 				areWeOnTheIPad = true;
-
 				//vars 
-
 				maxStretchOfSlingShot = 75; //best to leave as is, since this value ties in closely to the image size of strap.png. (should be 1/4 the size of the source image)
 				multipyThrowPower = 1; // fine tune how powerful the sling shot is. Range is probably best between .5 to 1.5, currently for the iPad 1.0 is good
-
 				worldMaxHorizontalShift = -(screenWidth);  // This determines how far the user can slide left or right to see the entire board. Always a negative number. 
 				maxScaleDownValue = 1.0f; //dont change
 				scaleAmount = 0; // increment to change the scale of the entire world when panning  
@@ -288,61 +246,44 @@ namespace AngryNinjas
 				adjustY = 0; // best to leave at 0 for iPad (moves the world down when panning)
 
 				//background stuff
-
 				backgroundLayerClouds.Position = new CCPoint(screenWidth, screenHeight / 2);
 				backgroundLayerHills.Position = new CCPoint(screenWidth, screenHeight / 2);
 
-				if (!IS_RETINA)
+				if (IS_RETINA)
 				{
-
-
-					//non retina adjustment
-
-
-				}
-				else
-				{
-
 					//retina adjustment
-
 					backgroundLayerClouds.Scale = 2.0f;
 					backgroundLayerHills.Scale = 2.0f;
 				}
-
 
 				menuStartPosition = new CCPoint(130, screenSize.Height - 24);
 				currentScoreLabelStartPosition = new CCPoint(200, screenSize.Height - 60);
 				highScoreLabelStartPosition = new CCPoint(200, screenSize.Height - 80);
 
 				fontSizeForScore = 22;
-
-				//ground plane and platform
-
+				
+                //ground plane and platform
 				groundPlaneStartPosition = new CCPoint(screenWidth, 50);
 				platformStartPosition = new CCPoint(340, 190);
 
 				//sling shot
 				slingShotCenterPosition = new CCPoint(370, 255);
-
 				slingShotFront.Position = new CCPoint(374, 240);
 				strapFront.Position = new CCPoint(slingShotCenterPosition.X, slingShotCenterPosition.Y);
 				strapBack.Position = new CCPoint(slingShotCenterPosition.X + 33, slingShotCenterPosition.Y - 10);
 				strapEmpty.Position = new CCPoint(378, 235);
 
 				//ninja
-
 				ninjaStartPosition1 = new CCPoint(380, 250);
 				ninjaStartPosition2 = new CCPoint(300, 155);
 				ninjaStartPosition3 = new CCPoint(260, 155);
 				ninjaStartPosition4 = new CCPoint(200, 120);
 				ninjaStartPosition5 = new CCPoint(160, 120);
-
 			}
 
 			else if (IS_IPHONE)
 			{
 				//CCLOG (@"this is an iphone");
-
 				areWeOnTheIPad = false;
 
 				//vars 
@@ -359,13 +300,9 @@ namespace AngryNinjas
 
 				//background stuff
 
-
-
 				if (!IS_RETINA)
 				{
-
 					//non retina adjustment
-
 					backgroundLayerClouds.Position = new CCPoint(screenWidth, 192);
 					backgroundLayerClouds.Scale = .7f;
 					backgroundLayerHills.Position = new CCPoint(screenWidth, 245);
@@ -374,16 +311,12 @@ namespace AngryNinjas
 				}
 				else
 				{
-
 					//retina adjustment
-
 					backgroundLayerClouds.Position = new CCPoint(screenWidth, 192);
 					backgroundLayerClouds.Scale = 1.7f;
 					backgroundLayerHills.Position = new CCPoint(screenWidth, 265);
 					backgroundLayerHills.Scale = 1.7f;
 				}
-
-
 
 				menuStartPosition = new CCPoint(70, screenSize.Height - 17);
 				currentScoreLabelStartPosition = new CCPoint(140, screenSize.Height - 50); //score label
@@ -410,43 +343,28 @@ namespace AngryNinjas
 				ninjaStartPosition3 = new CCPoint(65, 82);
 				ninjaStartPosition4 = new CCPoint(90, 65);
 				ninjaStartPosition5 = new CCPoint(43, 65);
-
-
-
 			}
 
 			SetUpParticleSystemSun();
 
 			CCMenuItemImage button1 = new CCMenuItemImage("gameMenu", "gameMenu", ShowMenu);
-
 			MenuButton = new CCMenu(button1);
 			MenuButton.Position = menuStartPosition;
 			AddChild(MenuButton, Constants.DepthScore);
 
-
-
 			// assign CCPoints to keep track of the starting positions of objects that move relative to the entire layer.
-
 			hillsLayerStartPosition = backgroundLayerHills.Position;
 			cloudLayerStartPosition = backgroundLayerClouds.Position;
 
 			// Define the gravity vector.
-
 			yAxisGravity = -9.81f;
-
 			b2Vec2 gravity = b2Vec2.Zero;
 			gravity.Set(0.0f, yAxisGravity);
 
-
 			// Construct a world object, which will hold and simulate the rigid bodies.
 			world = new b2World(gravity);
-
 			world.AllowSleep = false;
-
 			world.SetContinuousPhysics(true);
-
-			//EnableDebugMode();
-
 
 			// Define the ground body.
 			var groundBodyDef = new b2BodyDef();  // Make sure we call 
@@ -484,33 +402,24 @@ namespace AngryNinjas
 			world.SetContactListener(contactListener);
 
 			//Set up the ground plane
-
 			theGroundPlane = new GroundPlane(world, groundPlaneStartPosition, GameData.SharedData.GroundPlaneFileName);
 			AddChild(theGroundPlane, Constants.DepthFloor);
-
-
-			//Set up the starting platform
-
+			
+            //Set up the starting platform
 			thePlatform = new StartPlatform(world, platformStartPosition, "platform");
 			AddChild(thePlatform, Constants.DepthPlatform);
 
 			//Set up ninjas
-
 			ninjaBeingThrown = 1; //always starts at 1 (first ninja, then second ninja, and so on) 
 			ninjasToTossThisLevel = GameData.SharedData.NumberOfNinjasToTossThisLevel;  //total number of ninjas to toss for this level
 
-
-
 			ninja1 = new Ninja(world, ninjaStartPosition1, @"ninja");
 			AddChild(ninja1, Constants.DepthNinjas);
-
 			currentBodyNode = ninja1;
-
 			currentBodyNode.SpriteInSlingState();
 
 			if (ninjasToTossThisLevel >= 2)
 			{
-
 				ninja2 = new Ninja(world, ninjaStartPosition2, @"ninjaRed");
 				AddChild(ninja2, Constants.DepthNinjas);
 				ninja2.SpriteInStandingState();
@@ -539,10 +448,8 @@ namespace AngryNinjas
 			}
 
 			//Build the Stack. 
-
 			stack = new TheStack(world);
 			AddChild(stack, Constants.DepthStack);
-
 
 			//give the stack a moment to drop, then switches every pieces to static (locks it into position, until the first slingshot)...
 			ScheduleOnce(SwitchAllStackObjectsToStatic, 1.0f);
@@ -560,7 +467,6 @@ namespace AngryNinjas
 			highScoreLabel.Position = currentScoreLabel.Position - new CCPoint(0, highScoreLabel.ContentSize.Height);// highScoreLabelStartPosition;
 			highScoreLabel.AnchorPoint = new CCPoint(1, .5f);
 			highScoreLabelStartPosition = highScoreLabel.Position;
-
 
 			var levelString = string.Format("Level: {0}", currentLevel);
 			ShowBoardMessage(levelString);
@@ -587,23 +493,12 @@ namespace AngryNinjas
 			CCLog.Log("/////////////////////////////////////////////////////");
 			CCLog.Log(" ");
 			CCLog.Log(" ");
-
-
-
-
 			GameSounds.SharedGameSounds.IntroTag();
 
 			if (GameData.SharedData.Level == 1)
-			{
-
 				GameSounds.SharedGameSounds.PlayBackgroundMusic(AmbientFXSounds.Frogs);
-
-			}
 			else
-			{
-
 				GameSounds.SharedGameSounds.PlayBackgroundMusic(AmbientFXSounds.Insects);
-			}
 
 			if (GameData.SharedData.FirstRunEver && openWithMenuInsteadOfGame)
 			{
@@ -707,9 +602,7 @@ namespace AngryNinjas
 
 		void SwitchAllStackObjectsToStatic(float delay)
 		{
-
 			stackIsNowDynamic = false;
-
 			//Iterate over the bodies in the physics world
 			for (var b = world.BodyList; b != null; b = b.Next)
 			{
@@ -727,19 +620,13 @@ namespace AngryNinjas
 
 				}
 			}
-
 		}
-
 
 		void SwitchAllStackObjectsToDynamic(float delay)
 		{
-
-
 			if (!stackIsNowDynamic)
 			{
-
 				stackIsNowDynamic = true;
-
 				//Iterate over the bodies in the physics world
 				for (var b = world.BodyList; b != null; b = b.Next)
 				{
@@ -767,31 +654,23 @@ namespace AngryNinjas
 
 		}
 
+        bool DebugMode;
+
 		void EnableDebugMode()
 		{
-			debugDraw = new CCBox2dDraw("fonts/MarkerFelt-16");
-			world.SetDebugDraw(debugDraw);
-			debugDraw.AppendFlags(b2DrawFlags.e_shapeBit);
-
+            DebugMode = true;
 		}
 
-        //protected override void Draw()
-        //{
-        //    base.Draw();
-
-        //    if (debugDraw != null)
-        //    {
-        //        debugDraw.Begin();
-        //        world.DrawDebugData();
-        //        debugDraw.End();
-        //    }
-        //}
+        public override void Update(float dt)
+        {
+            base.Update(dt);
+            if (DebugMode)
+                world.DrawDebugData();
+        }
 
 		void SetUpParticleSystemSun()
 		{
-
 			//recommended for iPad only
-
 			system = new CCParticleSun(new CCPoint(240, 400));
 			// AddChild(system, Constants.depthParticles);
 			system.Scale = 3;
@@ -946,22 +825,15 @@ namespace AngryNinjas
 
 		internal void MakeNinjaStaticOnGround(float delta)
 		{
-
 			//optionally you can make the ninja a static body when it hits the ground (keeps it from rolling)
-
 			currentBodyNode.SpriteInGroundState();
-
-
-
 			currentBodyNode.Body.SetType(b2BodyType.b2_staticBody);
 			currentBodyNode.Body.SetTransform(currentBodyNode.Body.Position, CCMacros.CCDegreesToRadians(0));
-
 			Unschedule(MakeNinjaStaticOnGround);
 		}
 
 		void MoveScreen(int amountToShiftScreen)
 		{
-
 			this.Position = new CCPoint(this.PositionX - amountToShiftScreen, this.PositionY);
 
 			if (areWeOnTheIPad)
@@ -969,9 +841,7 @@ namespace AngryNinjas
 
 				MenuButton.PositionX = MenuButton.PositionX + amountToShiftScreen;
 				//MenuButton.PositionY = MenuButton.PositionY;
-
 				currentScoreLabel.PositionX = currentScoreLabel.PositionX + amountToShiftScreen;
-
 				highScoreLabel.PositionX = highScoreLabel.PositionX + amountToShiftScreen;
 			}
 
@@ -982,42 +852,28 @@ namespace AngryNinjas
 			if (system != null)
 				system.PositionX = system.PositionX + (amountToShiftScreen * .75f);
 
-
 			// deal with scaling and y positions...
-
 			if (amountToShiftScreen > 0)
 			{ //scaling down
 
 				if (this.ScaleX > maxScaleDownValue)
 				{
-
 					this.ScaleX -= scaleAmount;
 					this.ScaleY -= scaleAmount;
-
 				}
-
-
-
 			}
 			else
 			{ //or scaling up
-
 				if (ScaleX < 1)
 				{
-
 					this.ScaleX += scaleAmount;
-
 				}
-
 			}
-
 		}
 
 		void PutEverythingInStartingViewOfSlingShot()
 		{
-
 			this.Position = CCPoint.Zero;
-
 			MenuButton.Position = menuStartPosition;
 			currentScoreLabel.Position = currentScoreLabelStartPosition;
 			highScoreLabel.Position = highScoreLabelStartPosition;
@@ -1026,42 +882,28 @@ namespace AngryNinjas
 			backgroundLayerHills.Position = hillsLayerStartPosition;
 
 			this.Scale = 1;
-
 			areWeInTheStartingPosition = true;
-
 		}
 
 		void PutEverythingInViewOfTargets()
 		{
-
 			this.PositionX = worldMaxHorizontalShift;
 			this.PositionY = adjustY;
 
 			if (areWeOnTheIPad)
-			{  //I'm only keeping these labels in place on the iPad because it doesn't scale up or down 
-
+			{  
+                //I'm only keeping these labels in place on the iPad because it doesn't scale up or down 
 				MenuButton.PositionX = menuStartPosition.X - worldMaxHorizontalShift;
-
 				currentScoreLabel.PositionX = currentScoreLabelStartPosition.X - worldMaxHorizontalShift;
-
 				highScoreLabel.PositionX = highScoreLabelStartPosition.X - worldMaxHorizontalShift;
-
-
 			}
 
-
 			backgroundLayerHills.PositionX = hillsLayerStartPosition.X - (worldMaxHorizontalShift * .5f);
-
 			backgroundLayerClouds.PositionX = cloudLayerStartPosition.X - (worldMaxHorizontalShift * .75f);
-
 			system.PositionX = particleSystemStartPosition.X - (worldMaxHorizontalShift * .75f);
 
 			if (this.ScaleX < maxScaleDownValue)
-			{
-
 				this.Scale = maxScaleDownValue;
-
-			}
 
 			areWeInTheStartingPosition = false;
 		}
@@ -1070,9 +912,6 @@ namespace AngryNinjas
 
 		public void TouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
 		{
-
-			//base.TouchesBegan(touches, touchEvent);
-			//base.TouchesBegan (touches, event_);
 			foreach (var touch in touches)
 			{
 				var location = touch.LocationOnScreen; ; ; //??¿¿?¿?
@@ -1082,9 +921,7 @@ namespace AngryNinjas
 
 				if (!throwInProgress)
 				{
-
 					currentBodyNode.Body.SetType(b2BodyType.b2_staticBody);
-
 				}
 
 				if (topRightTouchEnablesDebugMode && location.X > screenWidth * .9f && location.Y > screenHeight * .9f)
@@ -1093,12 +930,7 @@ namespace AngryNinjas
 					EnableDebugMode();
 				}
 			}
-
-
-
 		}
-
-
 
 		/// <summary>
 		/// Cock the slingshot to the strech poing given in the pt parameter.
@@ -1109,7 +941,6 @@ namespace AngryNinjas
 			if ((this.CheckCircleCollision(pt, 2, slingShotCenterPosition, maxStretchOfSlingShot) || slingShotNinjaInHand)
 				&& !throwInProgress && areWeInTheStartingPosition)
 			{
-
 				if (!slingShotNinjaInHand)
 				{
 
@@ -1121,25 +952,19 @@ namespace AngryNinjas
 					strapEmpty.Visible = false;
 				}
 
-
 				float currentAngle = (int)currentBodyNode.Body.Angle;
-
-
 				float radius = maxStretchOfSlingShot; //radius of slingShot
-
 				float angle = CalculateAngle(pt.X, pt.Y, slingShotCenterPosition.X, slingShotCenterPosition.Y);  //angle from slingShot center to the location of the touch
 
 				// if the user is moving the ninja within the max stretch of the slingShot  (the radius)
 				if (this.CheckCircleCollision(pt, 2, slingShotCenterPosition, radius))
 				{
-
 					positionInSling.X = pt.X;
 					positionInSling.Y = pt.Y;
 
 					//tie the strap size into the location of the touch in relation to the distance from the slingshot center
 
 					float scaleStrap = (Math.Abs(slingShotCenterPosition.X - pt.X)) / radius;
-
 					scaleStrap = scaleStrap + 0.3f;  //add a little extra
 
 					if (scaleStrap > 1)
@@ -1160,22 +985,14 @@ namespace AngryNinjas
 
 					strapFront.ScaleX = 1;
 					strapBack.ScaleX = 1;
-
-
 				}
 
 				strapFront.Rotation = angle - 90;
 				AdjustBackStrap(angle);
 
-
 				//positions the box2D bodyNode of the ninja
-
 				b2Vec2 locationInMeters = new b2Vec2(positionInSling.X / Constants.PTM_RATIO, positionInSling.Y / Constants.PTM_RATIO);
-
 				currentBodyNode.Body.SetTransform(locationInMeters, CCMacros.CCDegreesToRadians(currentAngle));
-
-
-
 				currentBodyNode.SpriteInPulledBackSlingState();
 				return (true);
 			}
@@ -1188,31 +1005,22 @@ namespace AngryNinjas
 			int amountToShiftScreen;
 			amountToShiftScreen = ReturnAmountToShiftScreen(dx);  //just a method to prevent the screen from moving too wildly.
 
-
 			// pan the screen back and forth if there isn't a ninja in hand
-
 			if (this.PositionX <= 0 && this.PositionX >= worldMaxHorizontalShift && !slingShotNinjaInHand)
 			{
-
 				areWeInTheStartingPosition = false;
-
 				MoveScreen(amountToShiftScreen);
-
-
-				if (this.PositionX > 0)
-				{ // if we try to shift too far left, we reset to the starting position
-
+				
+                if (this.PositionX > 0)
+				{ 
+                    // if we try to shift too far left, we reset to the starting position
 					PutEverythingInStartingViewOfSlingShot();
-
-
 				}
 
 				else if (this.PositionX < worldMaxHorizontalShift)
-				{ // if we try to shift too far the other way, we keep everything at the max position
-
+				{ 
+                    // if we try to shift too far the other way, we keep everything at the max position
 					PutEverythingInViewOfTargets();
-
-
 				}
 			}
 		}
@@ -1225,16 +1033,11 @@ namespace AngryNinjas
 				this.CancelAutoPan();
 			}
 
-
-
 			//Move screen
-
 			foreach (var touch in touches)
 			{
 				var location = touch.LocationOnScreen; ; ; //??¿¿?¿?
 				location.Y = Window.WindowSizeInPixels.Height - location.Y;
-
-
 
 				/////////////////////////////////
 				// Move the ninja in the slingshot. IF the screen is in the starting position (this.PositionX == 0) and a throw isn't already in progress, AND our finger is touching around the sling shot
@@ -1244,8 +1047,6 @@ namespace AngryNinjas
 					int diff = (int)(location.X - previousTouchLocationX); //difference between the starting/previous touch location and current one
 					PanTheScreen(diff);
 				}
-
-
 				previousTouchLocationX = location.X;
 			}
 		}
@@ -1258,15 +1059,8 @@ namespace AngryNinjas
 			float distanceSqrd = (a * a) + (b * b);
 
 			if (distanceSqrd < (c * c))
-			{
-
 				return true;
-			}
-			else
-			{
-				return false;
-			}
-
+            return false;
 		}
 
 
@@ -1275,62 +1069,30 @@ namespace AngryNinjas
 		{
 			// DX
 			float x = x2 - x1;
-
 			// DY
 			float y = y2 - y1;
-
-
 			float angle = 180 + ((float)Math.Atan2(-x, -y) * (180 / (float)Math.PI));
-
 			return angle;  //degrees
 		}
 
 		int ReturnAmountToShiftScreen(int diff)
 		{
-
 			int amountToShiftScreen;
 
-
-
 			if (diff > 50)
-			{
-
 				amountToShiftScreen = 50;
-
-			}
 			else if (diff < -50)
-			{
-
 				amountToShiftScreen = -50;
-
-			}
 			else
-			{
-
 				amountToShiftScreen = diff;
-			}
 
 			if (!reverseHowFingerPansScreen)
-			{
-
 				amountToShiftScreen = amountToShiftScreen * -1;
 
-
-			}
-
 			if (amountToShiftScreen < 0)
-			{
-
 				panningTowardSling = true;
-
-			}
 			else
-			{
-
 				panningTowardSling = false;
-			}
-
-
 			return amountToShiftScreen;
 		}
 
@@ -1340,10 +1102,7 @@ namespace AngryNinjas
 		private void FireSlignshot(b2Vec2 dir)
 		{
 			GameSounds.SharedGameSounds.ReleaseSlingSounds();
-
 			SwitchAllStackObjectsToDynamic(0);
-
-
 			throwCount++;
 			dotCount = 0;
 
@@ -1358,17 +1117,10 @@ namespace AngryNinjas
 			strapFront.Visible = false;
 			strapEmpty.Visible = true;
 
-
 			// This determines the speed variance
-
 			speed = (float)(Math.Abs(slingShotCenterPosition.X - positionInSling.X)) + (float)(Math.Abs(slingShotCenterPosition.Y - positionInSling.Y));
-
 			speed = speed / 5;
-
 			speed = speed * multipyThrowPower;
-
-
-
 
 			// targetPosition is actually touch point
 			//b2Vec2 targetInWorld = new b2Vec2(location.X, location.Y);
@@ -1378,36 +1130,23 @@ namespace AngryNinjas
 			// This moves the body, and the key part is multiplication
 			// of 'speed' variable with direction. .
 			currentBodyNode.Body.LinearVelocity = speed * dir;
-
 			initialPanAmount = (int)(currentBodyNode.Body.LinearVelocity.x * 1.25f);
-
 			slingShotNinjaInHand = false;
-
 			currentBodyNode.SpriteInAirState();
 
-
 			// add dots following throw...
-
 			RemovePreviousDots();
-
 			dottingOn = true;  //dotting in progress
 
 			//Schedule(PlaceWhiteDots,1.0f/45.0f);  //increase or decrease frequency of dots with the interval
 			Schedule(PlaceWhiteDots, 1.0f / 45.0f);  //increase or decrease frequency of dots with the interval
-
 
 			//ensures throwInProgress is set to NO after 6 seconds
 			Unschedule(TimerAfterThrow);
 			Schedule(TimerAfterThrow, 6.0f);
 
 			if (dir.x > 0f) // fire direction is forward
-			{
-
 				StartScreenPanToTargetsWithAutoReverseOn();
-
-			}
-
-
 		}
 
 		#region TOUCHES ENDED
@@ -1415,7 +1154,6 @@ namespace AngryNinjas
 		public void TouchesEnded(System.Collections.Generic.List<CCTouch> touches, CCEvent touchEvent)
 		{
 			//base.TouchesEnded(touches, touchEvent);
-
 			foreach (var touch in touches)
 			{
 				var location = touch.LocationOnScreen; ; ; //??¿¿?¿?
@@ -1429,84 +1167,49 @@ namespace AngryNinjas
 
 				else if (continuePanningScreenOnFingerRelease)
 				{
-
 					if (panningTowardSling)
-					{
-
 						StartScreenPanToSling();
-
-					}
 					else
-					{
-
 						StartScreenPanToTargets();
-					}
-
 				}
-
-
-
 			}
 		}
 
 		void RemovePreviousDots()
 		{
-
 			int someNum = 0;
 
-
-			// 
 			if (throwCount % 2 == 0)
 				//if (throwCount % 2 != 0)
 			{  //odd numbered turn..
-
-
-
 				while (someNum <= dotTotalOnOddNumberedTurn)
 				{
-
 					RemoveChildByTag(Constants.TagForWhiteDotsOddNumberedTurn + someNum, false);
 					someNum++;
-
-
 				}
-
 				dotTotalOnOddNumberedTurn = 0;
-
 			}
 			else
 			{ //even numbered turn..
-
-
-
 				while (someNum <= dotTotalOnEvenNumberedTurn)
 				{
-
 					RemoveChildByTag(Constants.TagForWhiteDotsEvenNumberedTurn + someNum, false);
 					someNum++;
-
-
 				}
 
 				dotTotalOnEvenNumberedTurn = 0;
 			}
-
-
 		}
 
 		void RemoveAllDots()
 		{
-
 			// runs when the board is cleaned up...
-
 			int someNum = 0;
 
 			while (someNum <= dotTotalOnOddNumberedTurn)
 			{
-
 				RemoveChildByTag(Constants.TagForWhiteDotsOddNumberedTurn + someNum, false);
 				someNum++;
-
 			}
 
 			dotTotalOnOddNumberedTurn = 0;
@@ -1514,73 +1217,49 @@ namespace AngryNinjas
 
 			while (someNum <= dotTotalOnEvenNumberedTurn)
 			{
-
 				RemoveChildByTag(Constants.TagForWhiteDotsEvenNumberedTurn + someNum, false);
 				someNum++;
-
 			}
 
 			dotTotalOnEvenNumberedTurn = 0;
-
 		}
 
 		void PlaceWhiteDots(float delta)
 		{
-
-
-
 			if (dottingOn)
 			{
-
 				dotCount++;
-
 				CCSprite whiteDot = new CCSprite(@"circle");
 
 				if (throwCount % 2 != 0)
 				{  //odd number..
-
 					AddChild(whiteDot, Constants.DepthWhiteDots, Constants.TagForWhiteDotsOddNumberedTurn + dotCount);
 					dotTotalOnOddNumberedTurn = dotCount;
-
 				}
 				else
 				{
-
 					AddChild(whiteDot, Constants.DepthWhiteDots, Constants.TagForWhiteDotsEvenNumberedTurn + dotCount);
 					dotTotalOnEvenNumberedTurn = dotCount;
 				}
-
 
 				whiteDot.PositionX = currentBodyNode.PositionX;
 				whiteDot.PositionY = currentBodyNode.PositionY;
 
 				if (dotCount % 2 != 0)
-				{  //odd number..
-
 					whiteDot.Scale = .5f;
-
-				}
-
-
 			}
 			else
 			{
-
 				Unschedule(PlaceWhiteDots);
-
-
 			}
 
 		}
 
 		void TimerAfterThrow(float delta)
 		{
-
 			// this method will get cancelled if the ninja hits the ground. Which in most cases will happen. 
 			// BUT if the ninja were to get stuck on an stack object and never hit the ground, this method will get called
-
 			ProceedToNextTurn(currentBodyNode);
-
 			Unschedule(TimerAfterThrow);
 		}
 
@@ -1588,10 +1267,9 @@ namespace AngryNinjas
 		#endregion
 
 		#region SCREEN PANNING
-
-		void StartScreenPanToTargets()
+		
+        void StartScreenPanToTargets()
 		{
-
 			panAmount = initialPanAmount;
 
 			autoPanningInProgress = true;
@@ -1603,7 +1281,6 @@ namespace AngryNinjas
 
 			if (!areWeOnTheIPad)
 			{
-
 				Unschedule(MoveScreenUp);
 				Schedule(MoveScreenDown, 1.0f / 60.0f);
 			}
@@ -1612,9 +1289,7 @@ namespace AngryNinjas
 
 		void StartScreenPanToTargetsWithAutoReverseOn()
 		{
-
 			panAmount = initialPanAmount;
-
 			autoPanningInProgress = true;
 			autoReverseOn = true;
 			panningTowardSling = false;
@@ -1627,34 +1302,25 @@ namespace AngryNinjas
 				Unschedule(MoveScreenUp);
 				Schedule(MoveScreenDown, 1.0f / 60.0f);
 			}
-
 		}
 
 		void StartScreenPanToSlingIfScoringIsNotOccuring(float delta)
 		{
-
 			if (!somethingJustScored)
 			{
-
 				CCLog.Log(@"scoring done, auto move back");
-
 				StartScreenPanToSling();
 				Unschedule(StartScreenPanToSlingIfScoringIsNotOccuring);
 			}
 			else
 			{
-
 				CCLog.Log(@"something just scored, wait a bit longer to move screen back");
-
 			}
-
 		}
 
 		void StartScreenPanToSling()
 		{
-
 			panAmount = initialPanAmount + extraAmountOnPanBack;
-
 			autoPanningInProgress = true;
 			panningTowardSling = true;
 
@@ -1663,7 +1329,6 @@ namespace AngryNinjas
 
 			if (!areWeOnTheIPad)
 			{
-
 				Unschedule(MoveScreenDown);
 				Schedule(MoveScreenUp, 1.0f / 60.0f);
 			}
@@ -1672,147 +1337,91 @@ namespace AngryNinjas
 
 		void AutoScreenPanToTargets(float delta)
 		{
-
 			if (panAmount > 3)
-			{
-
 				panAmount = panAmount - .5f;
-
-			}
-
 
 			if (this.PositionX > worldMaxHorizontalShift)
 			{
-
-
 				if (this.PositionX > worldMaxHorizontalShift && this.PositionX < worldMaxHorizontalShift + 50)
 				{  //slows down panning when close to finishing
 
 					MoveScreen(3);
-
 				}
 				else
 				{
-
 					MoveScreen((int)panAmount);
 				}
-
-
-
 			}
 			else
 			{
-
 				Unschedule(AutoScreenPanToTargets);
 				PutEverythingInViewOfTargets();
 
 				if (autoReverseOn)
-				{
-
 					Schedule(StartScreenPanToSlingIfScoringIsNotOccuring, 2.0f);
-				}
 			}
-
 		}
 
 		void AutoScreenPanToSling(float delta)
 		{
-
 			if (panAmount > 3)
-			{
-
 				panAmount = panAmount - .5f;
-
-			}
 
 			if (this.PositionX < 0)
 			{
-
-
+                //slows down panning when close to finishing
 				if (this.PositionX < 0 && this.PositionX > -50)
-				{  //slows down panning when close to finishing
-
 					MoveScreen(-3);
-
-				}
 				else
-				{
-
 					MoveScreen((int)panAmount * -1);
-				}
-
-
-
 			}
 			else
 			{
-
 				Unschedule(AutoScreenPanToSling);
 				PutEverythingInStartingViewOfSlingShot();
-
-
 
 				autoPanningInProgress = false;
 				this.Scale = 1;
 			}
-
 		}
-
 
 		void CancelAutoPan()
 		{
-
 			autoPanningInProgress = false;
 			Unschedule(AutoScreenPanToSling);
 			Unschedule(AutoScreenPanToTargets);
 			Unschedule(StartScreenPanToSlingIfScoringIsNotOccuring);
 		}
-
-
-		void MoveScreenUp(float delta)
+		
+        void MoveScreenUp(float delta)
 		{
-
-
-
 			if (this.PositionY < 0)
 			{
-
 				//this.PositionX = this.Position.x;
 				this.PositionY += 2;
-
-
 			}
 			else
 			{
-
 				this.PositionX = this.PositionX;
 				this.PositionY = 0;
 
 				Unschedule(MoveScreenUp);
 			}
-
-
 		}
 
 		void MoveScreenDown(float delta)
 		{
-
 			if (this.PositionY > adjustY)
 			{
-
 				this.PositionX = this.PositionX;
 				this.PositionY -= 2;
-
-
 			}
 			else
 			{
-
 				this.PositionX = this.PositionX;
 				this.PositionY = adjustY;
 				Unschedule(MoveScreenDown);
 			}
-
 		}
 
 		#endregion
@@ -1821,14 +1430,10 @@ namespace AngryNinjas
 
 		void showSimpleVisualFX(CCPoint positionToShowScore, BreakEffect theSimpleScoreVisualFX)
 		{
-
 			if (theSimpleScoreVisualFX == BreakEffect.SmokePuffs)
 			{
-
 				GameSounds.SharedGameSounds.PlayBreakSound();
-
 				CCLog.Log("Play Smoke Puffs on Score");
-
 				CustomAnimation smokeFX = new CustomAnimation("puffs",
 					1,
 					7,
@@ -1839,15 +1444,11 @@ namespace AngryNinjas
 					false,
 					false);
 				AddChild(smokeFX, Constants.DepthVisualFx);
-
 			}
 			else if (theSimpleScoreVisualFX == BreakEffect.Explosion)
 			{
-
 				GameSounds.SharedGameSounds.PlayBreakSound();
-
 				CCLog.Log("Play explosion on Score");
-
 				CustomAnimation smokeFX = new CustomAnimation("explosion",
 					1,
 					11,
@@ -1858,108 +1459,67 @@ namespace AngryNinjas
 					false,
 					false);
 				AddChild(smokeFX, Constants.DepthVisualFx);
-
 			}
-
 		}
 
 
 		public void ShowPoints(int pointValue, CCPoint positionToShowScore, BreakEffect theSimpleScoreVisualFX)
 		{
-
 			pointTotalThisRound = pointTotalThisRound + pointValue;
 			UpdatePointsLabel();
-
 			//CCLog.Log("Point Value %i, total points is now %i", pointValue, pointTotalThisRound);
-
 			showSimpleVisualFX(positionToShowScore, theSimpleScoreVisualFX);
-
 			SomethingJustScoredVar();
 
 			if (useImagesForPointScoreLabels)
-			{
-
 				ShowPointsWithImagesForValue(pointValue, positionToShowScore);
-
-			}
 			else
-			{
 				ShowPointsWithFontLabelForValue(pointValue, positionToShowScore);
-			}
-
 		}
 
 		void ShowPointsWithImagesForValue(int pointValue, CCPoint positionToShowScore)
 		{
-
-
 			CCSprite scoreLabel;
 
 			if (pointValue == 100)
-			{
-
 				scoreLabel = new CCSprite("100points");
-			}
 			else if (pointValue == 500)
-			{
-
 				scoreLabel = new CCSprite("500points");
-			}
 			else if (pointValue == 1000)
-			{
-
 				scoreLabel = new CCSprite("1000points");
-			}
 			else if (pointValue == 5000)
-			{
-
 				scoreLabel = new CCSprite("5000points");
-			}
 			else if (pointValue == 10000)
-			{
-
 				scoreLabel = new CCSprite("10000points");
-			}
 			else
-			{ //default
-
 				scoreLabel = new CCSprite("100points");
-
-			}
 
 			AddChild(scoreLabel, Constants.DepthPointScore);
 			scoreLabel.Position = positionToShowScore;
 
-
 			CCMoveTo moveAction = new CCMoveTo(1.0f, new CCPoint(scoreLabel.Position.X, scoreLabel.Position.Y + 25));
-
 			scoreLabel.RunAction(moveAction);
-
 			CCSequence seq = new CCSequence(
 				new CCFadeTo(1.5f, 20),
 				new CCCallFuncN(RemoveThisChild));
 
 			scoreLabel.RunAction(seq);
-
 		}
 
 		void RemoveThisChild(object sender)
 		{
 			CCSprite theSprite = (CCSprite)sender;
-
 			RemoveChild(theSprite, true);
 		}
 
 		void ShowPointsWithFontLabelForValue(int pointValue, CCPoint positionToShowScore)
 		{
-
 			CCLabelTtf scoreLabel = new CCLabelTtf(string.Format("{0}", pointValue), "MarkerFelt", 22);
 			AddChild(scoreLabel, Constants.DepthPointScore);
 			scoreLabel.Color = new CCColor3B(255, 255, 255);
 			scoreLabel.Position = positionToShowScore;
 
 			CCMoveTo moveAction = new CCMoveTo(1.0f, new CCPoint(scoreLabel.Position.X, scoreLabel.Position.Y + 25));
-
 			scoreLabel.RunAction(moveAction);
 
 			CCSequence seq = new CCSequence(
@@ -1967,17 +1527,13 @@ namespace AngryNinjas
 				new CCCallFuncN(RemoveThisLabel));
 
 			scoreLabel.RunAction(seq);
-
 		}
 
 		void RemoveThisLabel(object sender)
 		{
 			CCLabelTtf theLabel = (CCLabelTtf)sender;
-
 			RemoveChild(theLabel, true);
-
 		}
-
 
 		#endregion
 
@@ -1985,71 +1541,52 @@ namespace AngryNinjas
 
 		void UpdatePointsLabel()
 		{
-
 			var updateLabel = String.Format("{0}/{1} ", pointTotalThisRound, pointsToPassLevel);
 			currentScoreLabel.Text = updateLabel;
-
 		}
 
 		void SomethingJustScoredVar()
 		{
-
-
 			somethingJustScored = true;
-
 			Unschedule(ResetSomethingJustScoredVar);
 			Schedule(ResetSomethingJustScoredVar, 3.0f);
-
 		}
+
 		void ResetSomethingJustScoredVar(float delta)
 		{
-
 			somethingJustScored = false;
 			Unschedule(ResetSomethingJustScoredVar);
 		}
 
 		#endregion
 
-
 		void AdjustBackStrap(float angle)
 		{
 			//CCLog.Log(" %f", angle );
-
 			if (angle < 30)
 			{
-
 				//CCLog.Log(" between 6 and 7 oclock");
-
 				strapBack.ScaleX = strapBack.ScaleX * 1.0f;
 				strapBack.RotationX = strapFront.RotationX * .8f;
 				strapBack.RotationY = strapFront.RotationY * .8f;
-
 			}
 			else if (angle < 60)
 			{
-
 				//CCLog.Log(" between 7 and 8 oclock");
-
 				strapBack.ScaleX = strapBack.ScaleX * 1.05f;
 				strapBack.RotationX = strapFront.RotationX * .80f;
 				strapBack.RotationY = strapFront.RotationY * .80f;
-
 			}
 			else if (angle < 90)
 			{
-
 				//CCLog.Log(" between 8 and 9 oclock");
-
 				strapBack.ScaleX = strapBack.ScaleX * 1.1f;
 				strapBack.RotationX = strapFront.RotationX * .85f;
 				strapBack.RotationY = strapFront.RotationY * .85f;
-
 			}
 			else if (angle < 120)
 			{
-
 				//CCLog.Log(" between 9 and 10 oclock");
-
 				strapBack.ScaleX = strapBack.ScaleX * 1.2f;
 				strapBack.RotationX = strapFront.RotationX * .95f;
 				strapBack.RotationY = strapFront.RotationY * .95f;
@@ -2057,33 +1594,24 @@ namespace AngryNinjas
 			}
 			else if (angle < 150)
 			{
-
 				//CCLog.Log(" between 10 and 11 oclock");
-
 				strapBack.ScaleX = strapBack.ScaleX * 1.2f;
 				strapBack.RotationX = strapFront.RotationX * .9f;
 				strapBack.RotationY = strapFront.RotationY * .9f;
-
 			}
-
 			else if (angle < 180)
 			{
 				//CCLog.Log(" between 11 and 12 oclock");
-
 				strapBack.ScaleX = strapBack.ScaleX * 1.10f;
 				strapBack.RotationX = strapFront.RotationX * .85f;
 				strapBack.RotationY = strapFront.RotationY * .85f;
-
-
 			}
 			else if (angle < 210)
 			{
 				//CCLog.Log(" between 12 and 1 oclock");
-
 				strapBack.ScaleX = strapBack.ScaleX * .95f;
 				strapBack.RotationX = strapFront.RotationX * .85f;
 				strapBack.RotationY = strapFront.RotationY * .85f;
-
 			}
 			else if (angle < 240)
 			{
@@ -2093,7 +1621,6 @@ namespace AngryNinjas
 				strapBack.RotationY = strapFront.RotationY * .85f;
 
 			}
-
 			else if (angle < 270)
 			{
 				//CCLog.Log(" between 2 and 3 oclock");
@@ -2102,7 +1629,6 @@ namespace AngryNinjas
 				strapBack.RotationY = strapFront.RotationY * .9f;
 
 			}
-
 			else if (angle < 300)
 			{
 				//CCLog.Log(" between 3 and 4 oclock");
@@ -2128,13 +1654,10 @@ namespace AngryNinjas
 				strapBack.RotationX = strapFront.RotationX * 1.1f;
 				strapBack.RotationY = strapFront.RotationY * 1.1f;
 			}
-
-
 		}
 
 		internal void ShowBoardMessage(string theMessage)
 		{
-
 			CCLabelTtf boardMessage = new CCLabelTtf(theMessage, "MarkerFelt", 22);
 			AddChild(boardMessage, Constants.DepthPointScore);
 			boardMessage.Color = new CCColor3B(255, 255, 255);
@@ -2149,107 +1672,69 @@ namespace AngryNinjas
 			);
 
 			boardMessage.RunAction(seq);
-
-
 		}
 
 		internal void RemoveBoardMessage(object sender)
 		{
-
-
 			CCLabelTtf boardMessage = (CCLabelTtf)sender;
-
 			RemoveChild(boardMessage, true);
-
 			//CCLog.Log("Removing Board Message");
-
 		}
 
 		void DoPointBonusForExtraNinjas()
 		{
-
-
 			int ninjasLeft = (ninjasToTossThisLevel - ninjaBeingThrown) + 1;
-
 			bonusThisRound = (bonusPerExtraNinja * ninjasLeft);
 			pointTotalThisRound = pointTotalThisRound + bonusThisRound;
-
 			UpdatePointsLabel();
-
 			CCLog.Log(@"Ninjas Left to Throw: %i", ninjasLeft);
 		}
 
 		internal void ResetOrAdvanceLevel(float delta)
 		{
-
-
-
 			if (pointTotalThisRound >= pointsToPassLevel)
 			{
-
 				//CCLog.Log("board passed");
-
 				DoPointBonusForExtraNinjas();
 
 				if (bonusThisRound > 0)
 				{ //if theres a bonus, show it in the level passed message
-
 					var bonusMessage = string.Format("Level Passed: {0} Bonus!", bonusThisRound);
 					ShowBoardMessage(bonusMessage);
-
 				}
 				else
 				{
-
 					ShowBoardMessage("Level Passed");
 				}
 
 				GameData.SharedData.HighScoreForLevel = pointTotalThisRound; //will check to see if there's a high score set
-
 				GameData.SharedData.AddToPointTotalForAllLevels(pointTotalThisRound);
-
 				GameData.SharedData.levelUp();  //level up
-
 			}
 			else
 			{
-
 				GameData.SharedData.HighScoreForLevel = pointTotalThisRound; //will check to see if there's a high score set even if you failed the round
-
 				ShowBoardMessage("Level Failed");
 				//CCLog.Log("not enough points to go up a level, will reset with the same board");
 			}
-
-
-
 			ScheduleOnce(TransitionOut, 3.0f);  //if you want to transition after a different amount of time, then change 3 to whatever
-
 		}
 
 		public void TransitionAfterMenuPop()
 		{
-
 			//transition upon coming back from the menu
-
 			CancelAutoPan();
 			StopDotting();
-
 			UnscheduleAll();
-
 			ScheduleOnce(TransitionOut, 0.1f);
-
 		}
 
 		void TransitionOut(float delta)
 		{
-
 			CleanupTheLevel();
-
 			// Too select a random transition comment the two lines below and uncomment the section below.
 			var transition = Transition2;
 			Director.ReplaceScene(transition);
-
-
 			// other transition options...
 
 			//		    int diceRoll = cocos2d.Random.Next(0,4); //0 to 4
@@ -2307,45 +1792,29 @@ namespace AngryNinjas
 
 		void CleanupTheLevel()
 		{
-
 			CancelAutoPan();
-
-
 			Pause();
-
 			//PauseSchedulerAndActions();
-
 			RemoveAllDots();
-
 			RemoveChild(backgroundLayerHills, false);
 			RemoveChild(backgroundLayerClouds, false);
-
 			RemoveChild(slingShotFront, false);
 			RemoveChild(strapFront, false);
 			RemoveChild(strapBack, false);
 			RemoveChild(strapEmpty, false);
 			RemoveChild(stack, false);
 
-
 			CCLog.Log("deleting body nodes");
 
 			//Iterate over the bodies in the physics world
 			for (var b = world.BodyList; b != null; b = b.Next)
 			{
-
 				CCLog.Log("nodes found");
-
 				var myNode = b.UserData as BodyNode;
 				if (myNode != null)
-				{
-
 					myNode.RemoveSpriteAndBody();
-
-				}
 			}
-
 		}
-
 	}
 }
 

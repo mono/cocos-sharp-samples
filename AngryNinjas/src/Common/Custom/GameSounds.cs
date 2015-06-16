@@ -1,5 +1,4 @@
 using System;
-
 using CocosDenshion;
 using CocosSharp;
 
@@ -10,13 +9,11 @@ namespace AngryNinjas
         bool soundFXTurnedOff;
         bool voiceFXTurnedOff;
         bool ambientFXTurnedOff; //ambient or background music
-
         string delayedSoundName;
-
+        
         AmbientFXSounds musicChoice;
 
         const string soundsFolder = "Sounds";
-
         static GameSounds sharedGameSounds;
 
         private GameSounds()
@@ -35,16 +32,13 @@ namespace AngryNinjas
             get
             {
                 if (sharedGameSounds == null)
-                {
                     sharedGameSounds = new GameSounds();
-                }
                 return sharedGameSounds;
             }
         }
 
         public void PreloadSounds()
         {
-
             CCSimpleAudioEngine.SharedEngine.PreloadEffect(FormatSoundFilePath("grunt1"));
             CCSimpleAudioEngine.SharedEngine.PreloadEffect(FormatSoundFilePath("grunt2"));
             CCSimpleAudioEngine.SharedEngine.PreloadEffect(FormatSoundFilePath("grunt3"));
@@ -69,13 +63,9 @@ namespace AngryNinjas
         {
             string sndfile = System.IO.Path.Combine(soundsFolder, sound);
             if (sndfile.IndexOf(".mp3") > -1)
-            {
                 sndfile = sndfile.Substring(0, sndfile.IndexOf(".mp3"));
-            }
             else if (sndfile.IndexOf(".wav") > -1)
-            {
                 sndfile = sndfile.Substring(0, sndfile.IndexOf(".wav"));
-            }
             return (sndfile);
         }
 
@@ -93,97 +83,50 @@ namespace AngryNinjas
 
         public void PlaySoundFX(string fileToPlay)
         {
-
             if (!soundFXTurnedOff)
-            {
-
                 CCSimpleAudioEngine.SharedEngine.PlayEffect(FormatSoundFilePath(fileToPlay));
-
-            }
-
         }
 
         public void PlayVoiceSoundFX(string fileToPlay)
         {
-
             if (!voiceFXTurnedOff)
-            {
-
                 CCSimpleAudioEngine.SharedEngine.PlayEffect(FormatSoundFilePath(fileToPlay));
-
-
-            }
-
         }
 
         public void PlaySoundFXWithDelay(string fileToPlay, float theDelay)
         {
-
             if (!soundFXTurnedOff)
             {
-
                 delayedSoundName = fileToPlay;
                 ScheduleOnce(PlayThisAfterDelay, theDelay);
-
-
             }
-
         }
-
 
         public void PlayVoiceSoundFXWithDelay(string fileToPlay, float theDelay)
         {
-
-
-
             if (!voiceFXTurnedOff)
             {
-
                 delayedSoundName = fileToPlay;
-
                 ScheduleOnce(PlayThisAfterDelay, theDelay);
-
             }
-
         }
 
         public void PlayThisAfterDelay(float delay)
         {
-
             CCSimpleAudioEngine.SharedEngine.PlayEffect(FormatSoundFilePath(delayedSoundName));
-
-
         }
-
-
-
-
 
         public void IntroTag()
         {
-
             if (!soundFXTurnedOff)
-            {
-
                 CCSimpleAudioEngine.SharedEngine.PlayEffect(FormatSoundFilePath("gong"));
-
-            }
-
-
         }
-
 
         public void PlayStackImpactSound()
         {
-
-
             if (!soundFXTurnedOff)
             {
-
-
                 int randomNum = CCRandom.Next(0, 4); //0 to 4
-
-
                 switch (randomNum)
                 {
                     case 0:
@@ -201,28 +144,16 @@ namespace AngryNinjas
                     case 4:
                         CCSimpleAudioEngine.SharedEngine.PlayEffect(FormatSoundFilePath("impact5"));
                         break;
-
-
-
                 }
-
             }
-
-
         }
-
 
         public void PlayBreakSound()
         {
-
-
             if (!soundFXTurnedOff)
             {
-
-
                 int randomNum = CCRandom.Next(0, 2); //0 to 2
-
-
+                
                 switch (randomNum)
                 {
                     case 0:
@@ -234,37 +165,19 @@ namespace AngryNinjas
                     case 2:
                         CCSimpleAudioEngine.SharedEngine.PlayEffect(FormatSoundFilePath("break3"));
                         break;
-
-
                 }
-
             }
-
-
         }
-
-
-
 
         public void ReleaseSlingSounds()
         {
-
-
             if (!soundFXTurnedOff)
-            {
-
                 CCSimpleAudioEngine.SharedEngine.PlayEffect(FormatSoundFilePath("whoosh"));
-
-            }
-
 
             if (!voiceFXTurnedOff)
             {
-
-
                 int randomNum = CCRandom.Next(0, 7); //0 to 7
-
-
+                
                 switch (randomNum)
                 {
                     case 0:
@@ -291,63 +204,36 @@ namespace AngryNinjas
                     case 7:
                         CCSimpleAudioEngine.SharedEngine.PlayEffect(FormatSoundFilePath("grunt8"));
                         break;
-
-
                 }
-
             }
-
-
         }
 
-
         public void PlayBackgroundMusic(AmbientFXSounds track)
-        {  //or AMBIENT SOUND FX
-
+        {  
+            //or AMBIENT SOUND FX
             musicChoice = track;
-
             CCSimpleAudioEngine.SharedEngine.StopBackgroundMusic();
 
             if (!ambientFXTurnedOff)
             {
-
                 if (musicChoice == AmbientFXSounds.Frogs)
-                {
                     CCSimpleAudioEngine.SharedEngine.PlayBackgroundMusic(FormatSoundFilePath("birds"), true);
-                }
                 else if (musicChoice == AmbientFXSounds.Insects)
-                {
                     CCSimpleAudioEngine.SharedEngine.PlayBackgroundMusic(FormatSoundFilePath("frogs"), true);
-                }
-
             }
-
-
         }
-
 
         public void StopBackgroundMusic()
         {
-
-
             CCSimpleAudioEngine.SharedEngine.StopBackgroundMusic();
-
             ambientFXTurnedOff = true;
-
-
-
         }
 
         public void RestartBackgroundMusic()
         {
-
             ambientFXTurnedOff = false;
             PlayBackgroundMusic(musicChoice);
         }
-
-
-
-
     }
 }
 

@@ -1,5 +1,4 @@
 using System;
-
 using Box2D;
 using Box2D.Collision;
 using Box2D.Collision.Shapes;
@@ -18,7 +17,6 @@ namespace AngryNinjas
         string baseImageName;
         string spriteImageName;
         CCPoint initialLocation;
-
 
         int breaksAfterHowMuchContact; //0 will break the enemy after first contact
         int damageLevel; //tracks how much damage has been done
@@ -100,44 +98,22 @@ namespace AngryNinjas
             this.currentFrame = 0;
             this.framesToAnimateOnBreak = numberOfFramesToAnimateOnBreak;  //will animate through breaks frames if this is more than 0, for example,  enemy_break0001.png, enemy_break0002.png
 
-
             this.theDensity = density;
             this.shapeCreationMethod = createHow;
-
             this.isRotationFixed = isTheRotationFixed;
-
             this.PointValue = points;
             this.SimpleScoreVisualFX = simpleScoreVisualFXType;
-
             this.DamagesFromDamageEnabledStackObjects = doesGetDamageFromDamageEnabledStackObjects;
-
-
-            if (damageLevel == breaksAfterHowMuchContact)
-            {
-                BreaksOnNextDamage = true;
-            }
-            else
-            {
-                BreaksOnNextDamage = false; //duh
-
-            }
-
-
+            BreaksOnNextDamage = damageLevel == breaksAfterHowMuchContact;
             CreateEnemy();
-
-
         }
 
         void CreateEnemy()
         {
-
-
             // Define the dynamic body.
             var bodyDef = new b2BodyDef();
             bodyDef.type = b2BodyType.b2_dynamicBody; //or you could use b2_staticBody
-
             bodyDef.fixedRotation = isRotationFixed;
-
             bodyDef.position.Set(initialLocation.X / Constants.PTM_RATIO, initialLocation.Y / Constants.PTM_RATIO);
 
             b2PolygonShape shape = new b2PolygonShape();
@@ -145,20 +121,13 @@ namespace AngryNinjas
 
             if (shapeCreationMethod == CreationMethod.DiameterOfImageForCircle)
             {
-
                 var tempSprite = new CCSprite(spriteImageName);
                 float radiusInMeters = (tempSprite.Texture.ContentSizeInPixels.Width / Constants.PTM_RATIO) * 0.5f;
-
                 shapeCircle.Radius = radiusInMeters;
-
             }
-
-
             else if (shapeCreationMethod == CreationMethod.ShapeOfSourceImage)
             {
-
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 4;
                 b2Vec2[] vertices = {
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO), //top left corner
@@ -170,9 +139,7 @@ namespace AngryNinjas
             }
             else if (shapeCreationMethod == CreationMethod.ShapeOfSourceImageButSlightlySmaller)
             {
-
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 4;
                 b2Vec2[] vertices = {
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -2 ) *.8f / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 )*.8f / Constants.PTM_RATIO), //top left corner
@@ -186,35 +153,30 @@ namespace AngryNinjas
             else if (shapeCreationMethod == CreationMethod.Triangle)
             {
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 3;
                 b2Vec2[] vertices = {
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / -2 ) / Constants.PTM_RATIO), //bottom left corner
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / 2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / -2 ) / Constants.PTM_RATIO), //bottom right corner
 					new b2Vec2( 0.0f / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 )/ Constants.PTM_RATIO) // top center of image
 				};
-
                 shape.Set(vertices, num);
             }
 
             else if (shapeCreationMethod == CreationMethod.TriangleRightAngle)
             {
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 3;
                 b2Vec2[] vertices = {
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / 2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO),  //top right corner
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO), //top left corner
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / -2 )/ Constants.PTM_RATIO) //bottom left corner
 				};
-
                 shape.Set(vertices, num);
             }
 
             else if (shapeCreationMethod == CreationMethod.Trapezoid)
             {
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 4;
                 b2Vec2[] vertices = {
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / 4 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO),  //top of image, 3/4's across
@@ -222,16 +184,11 @@ namespace AngryNinjas
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / -2 ) / Constants.PTM_RATIO), //bottom left corner
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / 2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / -2 ) / Constants.PTM_RATIO), //bottom right corner
 				};
-
                 shape.Set(vertices, num);
             }
-
-
             else if (shapeCreationMethod == CreationMethod.Hexagon)
             {
-
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 6;
                 b2Vec2[] vertices = {
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -4 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO), //top of image, 1/4 across
@@ -241,15 +198,12 @@ namespace AngryNinjas
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width /  2 ) / Constants.PTM_RATIO, 0.0f / Constants.PTM_RATIO), // right, center
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / 4 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO) //top of image, 3/4's across
 				};
-
                 shape.Set(vertices, num);
             }
 
             else if (shapeCreationMethod == CreationMethod.Pentagon)
             {
-
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 5;
                 b2Vec2[] vertices = {
 					new b2Vec2( 0 / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO), //top of image, center 
@@ -259,15 +213,12 @@ namespace AngryNinjas
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width /  2 ) / Constants.PTM_RATIO, 0.0f / Constants.PTM_RATIO), // right, center
 					
 				};
-
                 shape.Set(vertices, num);
             }
 
             else if (shapeCreationMethod == CreationMethod.Octagon)
             {
-
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 8;
                 b2Vec2[] vertices = {
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -6 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO), //use the source image octogonShape.png for reference
@@ -279,14 +230,11 @@ namespace AngryNinjas
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width /  2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 6 ) / Constants.PTM_RATIO), 
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / 6 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO) 
 				};
-
                 shape.Set(vertices, num);
             }
             else if (shapeCreationMethod == CreationMethod.Parallelogram)
             {
-
                 var tempSprite = new CCSprite(spriteImageName);
-
                 var num = 4;
                 b2Vec2[] vertices = {
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / -4 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO), //top of image, 1/4 across
@@ -294,13 +242,11 @@ namespace AngryNinjas
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / 4 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / -2 ) / Constants.PTM_RATIO), //bottom of image, 3/4's across
 					new b2Vec2( (tempSprite.Texture.ContentSizeInPixels.Width / 2 ) / Constants.PTM_RATIO, (tempSprite.Texture.ContentSizeInPixels.Height / 2 ) / Constants.PTM_RATIO) //top right corner
 				};
-
                 shape.Set(vertices, num);
             }
-
             else if (shapeCreationMethod == CreationMethod.CustomCoordinates1)
-            {  //use your own custom coordinates from a program like Vertex Helper Pro
-
+            {  
+                //use your own custom coordinates from a program like Vertex Helper Pro
                 var num = 4;
                 b2Vec2[] vertices = {
 					new b2Vec2(-64.0f / Constants.PTM_RATIO, 16.0f / Constants.PTM_RATIO),
@@ -310,159 +256,98 @@ namespace AngryNinjas
 				};
                 shape.Set(vertices, num);
             }
-
+            
             // Define the dynamic body fixture.
             var fixtureDef = new b2FixtureDef();
-
-            if (shapeCreationMethod == CreationMethod.DiameterOfImageForCircle)
-            {
-
-                fixtureDef.shape = shapeCircle;
-
-            }
-            else
-            {
-                fixtureDef.shape = shape;
-
-            }
-
+            fixtureDef.shape = shapeCreationMethod == CreationMethod.DiameterOfImageForCircle ? shapeCircle : (b2Shape)shape;
             fixtureDef.density = theDensity;
             fixtureDef.friction = 0.3f;
             fixtureDef.restitution = 0.1f; //how bouncy basically
 
             CreateBodyWithSpriteAndFixture(theWorld, bodyDef, fixtureDef, spriteImageName);
-
-
             var blinkInterval = CCRandom.Next(3, 8); // range 3 to 8
-
             Schedule(Blink, blinkInterval); //comment this out if you never want to show the blink
-
         }
 
         public void DamageEnemy()
         {
-
             Unschedule(Blink);
             Unschedule(OpenEyes);
 
             if (!enemyCantBeDamagedForShortInterval)
             {
-
                 damageLevel++;
                 enemyCantBeDamagedForShortInterval = true;
-
                 ScheduleOnce(EnemyCanBeDamagedAgain, 1.0f);
 
                 if (differentSpritesForDamage)
                 {
-
                     //GameSounds.SharedGameSounds.PlayVoiceSoundFX("enemyGrunt.mp3");  //that sound file doesn't exist
-
                     sprite.Texture = new CCSprite(String.Format("{0}_damage{1}", baseImageName, damageLevel)).Texture;
                 }
 
-
                 if (damageLevel == breaksAfterHowMuchContact)
-                {
-
                     BreaksOnNextDamage = true;
-                }
-
             }
-
-
         }
 
         void EnemyCanBeDamagedAgain(float delta)
         {
-
             enemyCantBeDamagedForShortInterval = false;
         }
 
-
         public void BreakEnemy()
         {
-
-
             Unschedule(Blink);
             Unschedule(OpenEyes);
-
             Schedule(StartBreakAnimation, 1.0f / 30.0f);
-
-
         }
 
         void StartBreakAnimation(float delta)
         {
-
             if (currentFrame == 0)
-            {
-
                 RemoveBody();
-            }
 
             currentFrame++; //adds 1 every frame
 
             if (currentFrame <= framesToAnimateOnBreak)
-            {  //if we included frames to show for breaking and the current frame is less than the max number of frames to play
-
+            {  
+                //if we included frames to show for breaking and the current frame is less than the max number of frames to play
                 if (currentFrame < 10)
-                {
-
                     sprite.Texture = new CCSprite(String.Format("{0}_break000{1}", baseImageName, currentFrame)).Texture;
-
-                }
                 else if (currentFrame < 100)
-                {
-
                     sprite.Texture = new CCSprite(String.Format("{0}_break00{1}", baseImageName, currentFrame)).Texture;
-                }
-
             }
-
+            
             if (currentFrame > framesToAnimateOnBreak)
             {
-
                 //if the currentFrame equals the number of frames to animate, we remove the sprite OR if
                 // the stackObject didn't include animated images for breaking
-
                 RemoveSprite();
                 Unschedule(StartBreakAnimation);
-
             }
-
-
         }
 
         void Blink(float delta)
         {
-
             sprite.Texture = new CCSprite(String.Format("{0}_blink", baseImageName)).Texture;
-
             Unschedule(Blink);
             Schedule(OpenEyes, 0.5f);
         }
 
         void OpenEyes(float delta)
         {
-
             sprite.Texture = new CCSprite(String.Format("{0}", baseImageName)).Texture;
-
             Unschedule(OpenEyes);
-
             var blinkInterval = CCRandom.Next(3, 8);//   random.Next(3,8); // range 3 to 8
             Schedule(Blink, blinkInterval);
         }
-
-
+        
         public void MakeUnScoreable()
         {
-
             PointValue = 0;
             CCLog.Log("points have been accumulated for this object");
         }
-
-
     }
 }
 

@@ -9,12 +9,10 @@ using Box2D.Dynamics.Contacts;
 using Box2D.Dynamics.Joints;
 using CocosSharp;
 
-
 namespace AngryNinjas
 {
 	public class GroundPlane : BodyNode
 	{
-		
 		b2World theWorld;
 		string spriteImageName;
 		CCPoint initialLocation;
@@ -29,7 +27,6 @@ namespace AngryNinjas
 			this.theWorld = world;
 			this.initialLocation = location;
 			this.spriteImageName = spriteFileName;
-			
 			CreateGround();
 		}
 
@@ -38,9 +35,7 @@ namespace AngryNinjas
 			// Define the dynamic body.
 			var bodyDef = new b2BodyDef();
 			bodyDef.type = b2BodyType.b2_staticBody; //or you could use b2_staticBody
-			
 			bodyDef.position.Set(initialLocation.X/Constants.PTM_RATIO, initialLocation.Y/Constants.PTM_RATIO);
-			
 			b2PolygonShape shape = new b2PolygonShape();
 			
 			int num = 4;
@@ -52,7 +47,6 @@ namespace AngryNinjas
 			};
 			
 			shape.Set(vertices, num);
-			
 			
 			// Define the dynamic body fixture.
 			var fixtureDef = new b2FixtureDef();
@@ -69,15 +63,11 @@ namespace AngryNinjas
 				sprite.ScaleX = 1.05f;
 				
 			} else {
-				
 				// retina adjustment
-				
 				sprite.ScaleX = 2.05f;
 				sprite.ScaleY = 2.0f;
 			}
-
 		}
-
 	}
 }
 

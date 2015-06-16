@@ -1,5 +1,4 @@
 using System;
-
 using Box2D;
 using Box2D.Collision;
 using Box2D.Collision.Shapes;
@@ -8,7 +7,6 @@ using Box2D.Dynamics;
 using Box2D.Dynamics.Contacts;
 using Box2D.Dynamics.Joints;
 using CocosSharp;
-
 
 namespace AngryNinjas
 {
@@ -36,16 +34,11 @@ namespace AngryNinjas
             body.UserData = this;
 
             if (fixtureDef != null)
-            {
-
                 body.CreateFixture(fixtureDef);
-            }
-
         }
 
         public void FadeThenRemove(float delta)
         {
-
             var seq = new CCSequence(
                                new CCFadeTo(1.0f, 0),
                                new CCCallFunc(RemoveSpriteAndBody));
@@ -55,48 +48,34 @@ namespace AngryNinjas
 
         public void MakeBodyStatic()
         {
-
             body.SetType(b2BodyType.b2_staticBody);
-
         }
 
         public void RemoveBody()
         {
-
             if (body != null)
             {
                 body.World.DestroyBody(body);
                 body = null;
-
             }
-
         }
-
 
         public void RemoveSprite()
         {
-
             if (sprite != null)
             {
-
                 RemoveFromParent(true);
                 sprite = null;
-
             }
-
         }
 
         public void RemoveSpriteAndBody()
         {
-
             CCLog.Log(@"removing sprite and body");
-
             RemoveSprite();
             RemoveBody();
             RemoveFromParent(true);
-
         }
-
     }
 }
 
