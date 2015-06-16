@@ -769,28 +769,23 @@ namespace AngryNinjas
 
 		void EnableDebugMode()
 		{
-			debugDraw = new CCBox2dDraw("fonts/MarkerFelt-16", Constants.PTM_RATIO);
+			debugDraw = new CCBox2dDraw("fonts/MarkerFelt-16");
 			world.SetDebugDraw(debugDraw);
 			debugDraw.AppendFlags(b2DrawFlags.e_shapeBit);
 
 		}
 
-		protected override void Draw()
-		{
-			//
-			// IMPORTANT:
-			// This is only for debug purposes
-			// It is recommend to disable it
-			//
-			base.Draw();
+        //protected override void Draw()
+        //{
+        //    base.Draw();
 
-			if (debugDraw != null)
-			{
-				debugDraw.Begin();
-				world.DrawDebugData();
-				debugDraw.End();
-			}
-		}
+        //    if (debugDraw != null)
+        //    {
+        //        debugDraw.Begin();
+        //        world.DrawDebugData();
+        //        debugDraw.End();
+        //    }
+        //}
 
 		void SetUpParticleSystemSun()
 		{

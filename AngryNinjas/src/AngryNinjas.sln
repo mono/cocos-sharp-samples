@@ -1,18 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngryNinjas", "win32\AngryNinjas.csproj", "{4923DD61-51D4-4D25-B91F-3184828D0DDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngryNinjas3", "win32\AngryNinjas3.csproj", "{4923DD61-51D4-4D25-B91F-3184828D0DDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Debug|Any CPU.Build.0 = Debug|x86
+		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Debug|ARM.ActiveCfg = Debug|x86
+		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Debug|x64.ActiveCfg = Debug|x86
 		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Debug|x86.ActiveCfg = Debug|x86
 		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Debug|x86.Build.0 = Debug|x86
+		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Release|Any CPU.ActiveCfg = Release|x86
+		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Release|ARM.ActiveCfg = Release|x86
+		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Release|x64.ActiveCfg = Release|x86
 		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Release|x86.ActiveCfg = Release|x86
 		{4923DD61-51D4-4D25-B91F-3184828D0DDB}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
