@@ -11,22 +11,24 @@ namespace spine_cocossharp
 		int preferredWidth;
 		int preferredHeight;
 
-		/// <summary>
-		///  Implement CCDirector and CCScene init code here.
-		/// </summary>
-		/// <returns>
-		///  true  Initialize success, app continue.
-		///  false Initialize failed, app terminate.
-		/// </returns>
+        /// <summary>
+        ///  Implement CCDirector and CCScene init code here.
+        /// </summary>
+        /// <returns>
+        ///  true  Initialize success, app continue.
+        ///  false Initialize failed, app terminate.
+        /// </returns>
+
+        // Custom log action
+        void DebugLogging(string format, params object[] args)
+        {
+            System.Diagnostics.Debug.WriteLine(format, args);
+        }
 
         public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
         {
 
-#if WINDOWS
-            CCLog.Logger = System.Console.WriteLine;
-#else
-            CCLog.Logger = System.Diagnostics.Debug.WriteLine;
-#endif
+            CCLog.Logger = DebugLogging;
 
             preferredWidth = 1024;
 			preferredHeight = 768;
