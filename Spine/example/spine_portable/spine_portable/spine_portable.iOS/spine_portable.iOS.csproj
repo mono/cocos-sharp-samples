@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{580CE29F-F3EE-4238-BD98-FE77E5C535B1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>spine_portable.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>spine_portable.iOS</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchProfiling>true</MtouchProfiling>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>i386</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchProfiling>true</MtouchProfiling>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="box2d">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\box2d.dll</HintPath>
+    </Reference>
+    <Reference Include="CocosSharp">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\CocosSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework.Net">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\MonoGame.Framework.Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\spine_portable.Common\spine_portable.Common.csproj">
+      <Project>{4AEA5B57-6DB8-4D5F-ACD2-E69397112C63}</Project>
+      <Name>spine_portable.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="..\..\..\Content\goblins-ffd.png">
+      <Link>Content\goblins-ffd.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\..\Content\goblins.png">
+      <Link>Content\goblins.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\..\Content\spineboy.png">
+      <Link>Content\spineboy.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\animations\" />
+    <Folder Include="Content\fonts\" />
+    <Folder Include="Content\images\hd\" />
+    <Folder Include="Content\images\ld\" />
+    <Folder Include="Content\sounds\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppDelegate.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <Content Include="..\..\..\Content\spineboy.xnb">
+      <Link>Content\spineboy.xnb</Link>
+    </Content>
+    <Content Include="..\..\..\Content\goblins-ffd.atlas">
+      <Link>Content\goblins-ffd.atlas</Link>
+    </Content>
+    <Content Include="..\..\..\Content\goblins-ffd.json">
+      <Link>Content\goblins-ffd.json</Link>
+    </Content>
+    <Content Include="..\..\..\Content\goblins-ffd.xnb">
+      <Link>Content\goblins-ffd.xnb</Link>
+    </Content>
+    <Content Include="..\..\..\Content\goblins.json">
+      <Link>Content\goblins.json</Link>
+    </Content>
+    <Content Include="..\..\..\Content\goblins.xnb">
+      <Link>Content\goblins.xnb</Link>
+    </Content>
+    <Content Include="..\..\..\Content\spineboy.atlas">
+      <Link>Content\spineboy.atlas</Link>
+    </Content>
+    <Content Include="..\..\..\Content\spineboy.json">
+      <Link>Content\spineboy.json</Link>
+    </Content>
+    <Content Include="..\..\..\Content\goblins.atlas">
+      <Link>Content\goblins.atlas</Link>
+    </Content>
+  </ItemGroup>
+</Project>

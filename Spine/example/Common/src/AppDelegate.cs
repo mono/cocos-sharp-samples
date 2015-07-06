@@ -22,6 +22,8 @@ namespace spine_cocossharp
         public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
         {
 
+            CCLog.Logger = System.Diagnostics.Debug.WriteLine;
+
             preferredWidth = 1024;
 			preferredHeight = 768;
 
@@ -46,7 +48,7 @@ namespace spine_cocossharp
 
 			// turn on display FPS
 			mainWindow.DisplayStats = true;
-            //mainWindow.StatsScale = 2;
+            mainWindow.StatsScale = 2;
 
             CCScene pScene = GoblinLayer.Scene(mainWindow);
 

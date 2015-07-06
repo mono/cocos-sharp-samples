@@ -14,34 +14,79 @@ namespace spine_cocossharp
         CCSequence skeletonMoveAction;
         bool isMoving;
 
-		CCLabelTtf labelBones, labelSlots, labelTimeScale, labelSkin, labelScene, labelJump, labelAction;
+        CCMenuItemFont labelBones, labelSlots, labelTimeScaleUp, labelTimeScaleDown, labelSkin, labelScene, labelAction;
+        CCMenu menu;
 
         public GoblinLayer()
         {
 
-            labelBones = new CCLabelTtf("B = Toggle Debug Bones", "arial", 12);
-            labelBones.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelBones);
+            CCMenuItemFont.FontName = "arial";
+            CCMenuItemFont.FontSize = 12;
 
-            labelSlots = new CCLabelTtf("M = Toggle Debug Slots", "arial", 12);
-            labelSlots.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelSlots);
+            labelBones = new CCMenuItemFont("B = Toggle Debug Bones", (obj) =>
+                {
+                    skeletonNode.DebugBones = !skeletonNode.DebugBones;
+                }
+            
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
 
-            labelSkin = new CCLabelTtf("S = Toggle Skin", "arial", 12);
-            labelSkin.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelSkin);
+            labelSlots = new CCMenuItemFont("M = Toggle Debug Slots", (obj) =>
+                {
+                    skeletonNode.DebugSlots = !skeletonNode.DebugSlots;
+                }
 
-            labelTimeScale = new CCLabelTtf("Up/Down = TimeScale +/-", "arial", 12);
-            labelTimeScale.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelTimeScale);
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
 
-            labelAction = new CCLabelTtf("A = Toggle Move Action", "arial", 12);
-            labelAction.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelAction);
+            labelSkin = new CCMenuItemFont("S = Toggle Skin", (obj) =>
+                {
+                    if (skeletonNode.Skeleton.Skin.Name == "goblin")
+                        skeletonNode.SetSkin("goblingirl");
+                    else
+                        skeletonNode.SetSkin("goblin");
+                }
 
-            labelScene = new CCLabelTtf("P = SpineBoy", "arial", 12);
-            labelScene.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelScene);
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            labelTimeScaleUp = new CCMenuItemFont("Up - TimeScale +", (obj) =>
+                {
+                    skeletonNode.TimeScale += 0.1f;
+                }
+
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            labelTimeScaleDown = new CCMenuItemFont("Down - TimeScale -", (obj) =>
+                {
+                    skeletonNode.TimeScale -= 0.1f;
+                }
+
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            labelAction = new CCMenuItemFont("A = Toggle Move Action", (obj) =>
+                {
+                    if (isMoving)
+                    {
+                        StopAction(skeletonActionState);
+                        isMoving = false;
+                    }
+                    else
+                    {
+                        skeletonActionState = skeletonNode.RepeatForever(skeletonMoveAction);
+                        isMoving = true;
+                    }
+                }
+
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            labelScene = new CCMenuItemFont("P = SpineBoy", (obj) =>
+                {
+                    Director.ReplaceScene(SpineBoyLayer.Scene(Window));
+                }
+
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            menu = new CCMenu(labelBones, labelSlots, labelSkin, labelTimeScaleUp, labelTimeScaleDown, labelAction, labelScene);
+            menu.AlignItemsVertically();
+            AddChild(menu);
 
             String name = @"goblins-ffd";
             //String name = @"goblins";
@@ -132,12 +177,13 @@ namespace spine_cocossharp
         
             var windowSize = VisibleBoundsWorldspace.Size;
 
-			labelBones.Position = new CCPoint(15, windowSize.Height - 10);
-			labelSlots.Position = new CCPoint(15, windowSize.Height - 25);
-			labelSkin.Position = new CCPoint(15, windowSize.Height - 40);
-			labelTimeScale.Position = new CCPoint(15, windowSize.Height - 70);
-			labelAction.Position = new CCPoint(15, windowSize.Height - 55);
-			labelScene.Position = new CCPoint(15, windowSize.Height - 85);
+            menu.Position = new CCPoint(15, windowSize.Height - 85);
+//			labelBones.Position = new CCPoint(15, windowSize.Height - 10);
+//			labelSlots.Position = new CCPoint(15, windowSize.Height - 25);
+//			labelSkin.Position = new CCPoint(15, windowSize.Height - 40);
+//			labelTimeScale.Position = new CCPoint(15, windowSize.Height - 70);
+//			labelAction.Position = new CCPoint(15, windowSize.Height - 55);
+//			labelScene.Position = new CCPoint(15, windowSize.Height - 85);
 
 			skeletonNode.Position = new CCPoint(windowSize.Center.X, skeletonNode.ContentSize.Height / 2);
 

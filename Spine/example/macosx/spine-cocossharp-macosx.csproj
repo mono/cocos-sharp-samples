@@ -77,34 +77,9 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="XamMac" />
-    <Reference Include="ChipmunkSharp">
-      <HintPath>..\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\ChipmunkSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CocosSharp">
-      <HintPath>..\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\CocosSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Lidgren.Network">
-      <HintPath>..\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\Lidgren.Network.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework.Net">
-      <HintPath>..\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\MonoGame.Framework.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Tao.Sdl">
-      <HintPath>..\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\Tao.Sdl.dll</HintPath>
-    </Reference>
-    <Reference Include="box2d">
-      <HintPath>..\packages\CocosSharp.MacOS.1.3.1.2\lib\net40\box2d.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

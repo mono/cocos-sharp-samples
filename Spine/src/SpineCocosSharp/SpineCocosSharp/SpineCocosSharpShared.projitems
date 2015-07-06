@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{75FC2D90-50A4-48AD-9B00-0867A291E082}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SpineCocosSharpShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)spine-cocossharp\" />
+    <Folder Include="$(MSBuildThisFileDirectory)spine-csharp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)spine-cocossharp\CCSkeleton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-cocossharp\CCSkeletonAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-cocossharp\CocosSharpTextureLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Animation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\AnimationState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\AnimationStateData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Atlas.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Bone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\BoneData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Event.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\EventData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Json.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Skeleton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\SkeletonBounds.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\SkeletonData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\SkeletonJson.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Skin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Slot.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\SlotData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Attachments\AtlasAttachmentLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Attachments\Attachment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Attachments\AttachmentLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Attachments\AttachmentType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Attachments\BoundingBoxAttachment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Attachments\MeshAttachment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Attachments\RegionAttachment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)spine-csharp\src\Attachments\SkinnedMeshAttachment.cs" />
+  </ItemGroup>
+</Project>

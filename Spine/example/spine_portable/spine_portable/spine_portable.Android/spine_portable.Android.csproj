@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{4AACF874-2847-42D8-893E-AADB6C711717}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>spine_portable.Android</RootNamespace>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AssemblyName>spine_portable.Android</AssemblyName>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="box2d">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\MonoAndroid10\box2d.dll</HintPath>
+    </Reference>
+    <Reference Include="CocosSharp">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\MonoAndroid10\CocosSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\MonoAndroid10\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\MonoAndroid10\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\spine_portable.Common\spine_portable.Common.csproj">
+      <Project>{4AEA5B57-6DB8-4D5F-ACD2-E69397112C63}</Project>
+      <Name>spine_portable.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Content\animations\" />
+    <Folder Include="Assets\Content\fonts\" />
+    <Folder Include="Assets\Content\images\hd\" />
+    <Folder Include="Assets\Content\images\ld\" />
+    <Folder Include="Assets\Content\sounds\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <AndroidAsset Include="..\..\..\Content\spineboy.xnb">
+      <Link>Assets\Content\spineboy.xnb</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Content\goblins-ffd.atlas">
+      <Link>Assets\Content\goblins-ffd.atlas</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Content\goblins-ffd.json">
+      <Link>Assets\Content\goblins-ffd.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Content\goblins-ffd.xnb">
+      <Link>Assets\Content\goblins-ffd.xnb</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Content\goblins.atlas">
+      <Link>Assets\Content\goblins.atlas</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Content\goblins.json">
+      <Link>Assets\Content\goblins.json</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Content\goblins.xnb">
+      <Link>Assets\Content\goblins.xnb</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Content\spineboy.atlas">
+      <Link>Assets\Content\spineboy.atlas</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\..\..\Content\spineboy.json">
+      <Link>Assets\Content\spineboy.json</Link>
+    </AndroidAsset>
+  </ItemGroup>
+</Project>

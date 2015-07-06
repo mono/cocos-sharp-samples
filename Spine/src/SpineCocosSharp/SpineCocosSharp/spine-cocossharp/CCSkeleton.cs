@@ -55,7 +55,8 @@ namespace CocosSharp.Spine
         public static int ATTACHMENT_BOUNDING_BOX = 2;
 
         public Skeleton Skeleton { get; private set; }
-        public CCGeometryBatch batcher;
+        public CCGeometryNode skeletonGeometry;
+        public CCDrawNode debugger = new CCDrawNode();
 
         public bool DebugSlots { get; set; }
         public CCColor4B DebugSlotColor { get; set; }
@@ -136,8 +137,11 @@ namespace CocosSharp.Spine
             DebugSlotColor = CCColor4B.Magenta;
             DebugBoneColor = CCColor4B.Blue;
             DebugJointColor = CCColor4B.Red;
-            batcher = new CCGeometryBatch ();
+            skeletonGeometry = new CCGeometryNode ();
             OpacityModifyRGB = true;
+            
+            AddChild(skeletonGeometry);
+            AddChild(debugger);
 
             Schedule();
         }
@@ -157,14 +161,14 @@ namespace CocosSharp.Spine
         public override void Update(float dt)
         {
 			base.Update(dt);
+            UpdateSkeletonGeometry();
         }
 
-
-
-
-        protected override void Draw()
+        protected void UpdateSkeletonGeometry()
         {
-            defaultBlendState = PremultipliedAlpha ? BlendState.AlphaBlend : BlendState.NonPremultiplied;
+
+            skeletonGeometry.ClearInstances();
+            //defaultBlendState = PremultipliedAlpha ? BlendState.AlphaBlend : BlendState.NonPremultiplied;
            
 
             float[] vertices = this.vertices;
@@ -177,8 +181,6 @@ namespace CocosSharp.Spine
             float skeletonB = color3b.B / 255f;
             float skeletonA = Opacity / 255f;
 
-            batcher.Begin();
-            
             for (int i = 0, n = drawOrder.Count; i < n; i++)
             {
                 Slot slot = drawOrder[i];
@@ -186,11 +188,12 @@ namespace CocosSharp.Spine
                 if (attachment is RegionAttachment)
                 {
                     RegionAttachment regionAttachment = (RegionAttachment)attachment;
-                    BlendState blend = slot.Data.AdditiveBlending ? BlendState.Additive : defaultBlendState;
+                    //BlendState blend = slot.Data.AdditiveBlending ? BlendState.Additive : defaultBlendState;
 
-                    var item = batcher.CreateGeometryInstance(4, 6);
+                    var item = skeletonGeometry.CreateGeometryInstance(4, 6);
 
-                    item.InstanceAttributes.BlendState = blend;
+                    //item.InstanceAttributes.BlendState = blend;
+                    //item.InstanceAttributes.AdditionalTransform = AffineWorldTransform;
                     item.GeometryPacket.Indicies = quadTriangles;
 
                     var itemVertices = item.GeometryPacket.Vertices;
@@ -251,7 +254,8 @@ namespace CocosSharp.Spine
                     mesh.ComputeWorldVertices(x, y, slot, vertices);
 
                     int[] triangles = mesh.Triangles;
-                    var item = batcher.CreateGeometryInstance(vertexCount, triangles.Length);
+                    var item = skeletonGeometry.CreateGeometryInstance(vertexCount, triangles.Length);
+                    //item.InstanceAttributes.AdditionalTransform = AffineWorldTransform;
                     item.GeometryPacket.Indicies = triangles;
 
                     AtlasRegion region = (AtlasRegion)mesh.RendererObject;
@@ -294,8 +298,9 @@ namespace CocosSharp.Spine
                     mesh.ComputeWorldVertices(x, y, slot, vertices);
 
                     int[] triangles = mesh.Triangles;
-                    var item = batcher.CreateGeometryInstance(vertexCount, triangles.Length);
+                    var item = skeletonGeometry.CreateGeometryInstance(vertexCount, triangles.Length);
                     item.GeometryPacket.Indicies = triangles;
+                    //item.InstanceAttributes.AdditionalTransform = AffineWorldTransform;
 
                     AtlasRegion region = (AtlasRegion)mesh.RendererObject;
                     item.GeometryPacket.Texture = (CCTexture2D)region.page.rendererObject;
@@ -331,10 +336,12 @@ namespace CocosSharp.Spine
                 }
             }
 
-            batcher.End();
+            debugger.Clear();
 
             if (DebugBones || DebugSlots)
             {
+
+
                 if (DebugSlots)
                 {
 
@@ -376,9 +383,7 @@ namespace CocosSharp.Spine
                             slotVertices[si].Y = worldVertices[ii + 1] * ScaleY;
                         }
 
-                        CCDrawingPrimitives.Begin();
-                        CCDrawingPrimitives.DrawPoly(slotVertices, verticesCount / 2, true, DebugSlotColor);
-                        CCDrawingPrimitives.End();
+                        debugger.DrawPolygon(slotVertices, verticesCount / 2, CCColor4B.Transparent, 1, DebugSlotColor);
 
                     }
 
@@ -394,18 +399,14 @@ namespace CocosSharp.Spine
                         x = bone.Data.Length * bone.M00 + bone.WorldX;
                         y = bone.Data.Length * bone.M10 + bone.WorldY;
 
-                        CCDrawingPrimitives.Begin();
-                        CCDrawingPrimitives.DrawLine(new CCPoint(bone.WorldX, bone.WorldY), new CCPoint(x, y), DebugJointColor);
-                        CCDrawingPrimitives.End();
+                        debugger.DrawLine(new CCPoint(bone.WorldX, bone.WorldY), new CCPoint(x, y), 1, DebugJointColor);
                     }
 
                     // Bone origins.
                     for (int i = 0; i < Skeleton.Bones.Count; i++)
                     {
                         Bone bone = Skeleton.Bones[i];
-                        CCDrawingPrimitives.Begin();
-                        CCDrawingPrimitives.DrawPoint(new CCPoint(bone.WorldX, bone.WorldY), 4, DebugBoneColor);
-                        CCDrawingPrimitives.End();
+                        debugger.DrawDot(new CCPoint(bone.WorldX, bone.WorldY), 3, DebugBoneColor);
 
                     }
                 }

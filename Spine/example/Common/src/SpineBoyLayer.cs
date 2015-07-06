@@ -11,30 +11,61 @@ namespace spine_cocossharp
 
         CCSkeletonAnimation skeletonNode;
 
-		CCLabelTtf labelBones, labelSlots, labelTimeScale, labelScene, labelJump;
+		CCMenuItemFont labelBones, labelSlots, labelTimeScaleUp, labelTimeScaleDown, labelScene, labelJump;
+        CCMenu menu;
 
         public SpineBoyLayer()
         {
+            CCMenuItemFont.FontName = "arial";
+            CCMenuItemFont.FontSize = 12;
 
-            labelBones = new CCLabelTtf("B = Toggle Debug Bones", "arial", 12);
-            labelBones.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelBones);
+            labelBones = new CCMenuItemFont("B = Toggle Debug Bones", (obj) =>
+                {
+                    skeletonNode.DebugBones = !skeletonNode.DebugBones;
+                }
 
-            labelSlots = new CCLabelTtf("M = Toggle Debug Slots", "arial", 12);
-            labelSlots.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelSlots);
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
 
-            labelTimeScale = new CCLabelTtf("Up/Down = TimeScale +/-", "arial", 12);
-            labelTimeScale.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelTimeScale);
+            labelSlots = new CCMenuItemFont("M = Toggle Debug Slots", (obj) =>
+                {
+                    skeletonNode.DebugSlots = !skeletonNode.DebugSlots;
+                }
 
-            labelScene = new CCLabelTtf("G = Goblins", "arial", 12);
-            labelScene.AnchorPoint = CCPoint.AnchorMiddleLeft;
-            AddChild(labelScene);
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
 
-			labelJump = new CCLabelTtf("J = Jump", "arial", 12);
-			labelJump.AnchorPoint = CCPoint.AnchorMiddleLeft;
-			AddChild(labelJump);
+            labelTimeScaleUp = new CCMenuItemFont("Up - TimeScale +", (obj) =>
+                {
+                    skeletonNode.TimeScale += 0.1f;
+                }
+
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            labelTimeScaleDown = new CCMenuItemFont("Down - TimeScale -", (obj) =>
+                {
+                    skeletonNode.TimeScale -= 0.1f;
+                }
+
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            labelScene = new CCMenuItemFont("G = Goblins", (obj) =>
+                {
+                    Director.ReplaceScene(GoblinLayer.Scene(Window));
+                }
+
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            labelJump = new CCMenuItemFont("J = Jump", (obj) =>
+                {
+                    // I truthfully do not know if this is how it is done or not
+                    skeletonNode.SetAnimation(0, "jump", false);
+                    skeletonNode.AddAnimation(0, "run", true);
+                }
+
+            ) { AnchorPoint = CCPoint.AnchorMiddleLeft };
+
+            menu = new CCMenu(labelBones, labelSlots, labelTimeScaleUp, labelTimeScaleDown, labelJump, labelScene);
+            menu.AlignItemsVertically();
+            AddChild(menu);
 
 			String name = @"spineboy";
             skeletonNode = new CCSkeletonAnimation(name + ".json", name + ".atlas", 0.25f);
@@ -102,11 +133,7 @@ namespace spine_cocossharp
 
             var windowSize = VisibleBoundsWorldspace.Size;
 
-			labelBones.Position = new CCPoint(15, windowSize.Height - 10);
-			labelSlots.Position = new CCPoint(15, windowSize.Height - 25);
-			labelTimeScale.Position = new CCPoint(15, windowSize.Height - 40);
-			labelScene.Position = new CCPoint(15, windowSize.Height - 55);
-			labelJump.Position = new CCPoint(15, windowSize.Height - 70);
+            menu.Position = new CCPoint(15, windowSize.Height - 70);
 
 			skeletonNode.Position = new CCPoint(windowSize.Center.X, 10);
 
