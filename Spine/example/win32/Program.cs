@@ -12,10 +12,10 @@ namespace spine_cocossharp
         /// </summary>
         static void Main(string[] args)
         {
-            CCApplication sharedApp = CCApplication.SharedApplication;
-            sharedApp.ApplicationDelegate = new AppDelegate();
-            CCApplication.SharedApplication.StartGame();
+            CCApplication application = new CCApplication(false, new CCSize(1024f, 768f));
+            application.ApplicationDelegate = new AppDelegate();
 
+            application.StartGame();
         }
     }
 

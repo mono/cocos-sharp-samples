@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpineCocosSharpExampleDX", "win32\SpineCocosSharpExampleDX.csproj", "{C2AA92EF-1C66-4100-B17B-613EA7CB7BCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpineCocosSharpDX", "..\src\SpineCocosSharp\SpineCocosSharp\SpineCocosSharpDX.csproj", "{6620AF56-53ED-49BE-80BE-108E3BE2867B}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SpineCocosSharpShared", "..\src\SpineCocosSharp\SpineCocosSharp\SpineCocosSharpShared.shproj", "{75FC2D90-50A4-48AD-9B00-0867A291E082}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\src\SpineCocosSharp\SpineCocosSharp\SpineCocosSharpShared.projitems*{c2aa92ef-1c66-4100-b17b-613ea7cb7bcc}*SharedItemsImports = 4
+		..\src\SpineCocosSharp\SpineCocosSharp\SpineCocosSharpShared.projitems*{75fc2d90-50a4-48ad-9b00-0867a291e082}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -25,16 +31,6 @@ Global
 		{C2AA92EF-1C66-4100-B17B-613EA7CB7BCC}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C2AA92EF-1C66-4100-B17B-613EA7CB7BCC}.Release|x86.ActiveCfg = Release|x86
 		{C2AA92EF-1C66-4100-B17B-613EA7CB7BCC}.Release|x86.Build.0 = Release|x86
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6620AF56-53ED-49BE-80BE-108E3BE2867B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

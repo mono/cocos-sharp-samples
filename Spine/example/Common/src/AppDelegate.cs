@@ -22,7 +22,11 @@ namespace spine_cocossharp
         public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
         {
 
+#if WINDOWS
+            CCLog.Logger = System.Console.WriteLine;
+#else
             CCLog.Logger = System.Diagnostics.Debug.WriteLine;
+#endif
 
             preferredWidth = 1024;
 			preferredHeight = 768;
