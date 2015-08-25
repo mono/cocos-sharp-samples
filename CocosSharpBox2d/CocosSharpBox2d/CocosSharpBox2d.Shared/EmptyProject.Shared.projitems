@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>7dae6848-f292-4513-885f-de52b1732bcd</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CocosSharpBox2d</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AppDelegate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Box2DDebug.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CCPhysicsSprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IntroLayer.cs" />
+  </ItemGroup>
+</Project>
