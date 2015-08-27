@@ -106,7 +106,7 @@ namespace CocosSharpBox2d.Shared
             var centr = center.ToCCPoint() * PTMRatio;
             var rad = radius * PTMRatio;
             DrawNode.DrawSolidCircle(centr, rad, colorFill);
-            DrawNode.DrawLine(centr, centr + (axis.ToCCPoint() * PTMRatio) * radius,3, color.ToCCColor4B(), CCLineCap.Round);
+            DrawNode.DrawLine(centr, centr + (axis.ToCCPoint() * PTMRatio) * radius,3, color.ToCCColor4B());
         }
 
         public override void DrawSegment(b2Vec2 p1, b2Vec2 p2, b2Color color)

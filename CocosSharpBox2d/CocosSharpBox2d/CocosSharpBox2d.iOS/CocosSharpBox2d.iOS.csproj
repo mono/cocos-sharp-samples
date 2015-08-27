@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{605BFAF1-7EAB-4081-B6C4-FD333007EE4F}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
@@ -79,6 +77,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <Content Include="..\CocosSharpBox2d.WP81\Content\hd\images\cloud.xnb">
+      <Link>Content\hd\images\cloud.xnb</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -96,30 +97,25 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="box2d, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\box2d.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CocosSharp, Version=1.5.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\CocosSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lidgren.Network, Version=2012.1.7.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\Lidgren.Network.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MonoGame.Framework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\MonoGame.Framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MonoGame.Framework.Net, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\MonoGame.Framework.Net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="box2d, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\box2d.dll</HintPath>
+    </Reference>
+    <Reference Include="CocosSharp, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\CocosSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network, Version=2012.1.7.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework.Net, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.5.0.1\lib\Xamarin.iOS10\MonoGame.Framework.Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="..\CocosSharpBox2d.Shared\EmptyProject.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

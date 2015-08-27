@@ -26,18 +26,26 @@ namespace CocosSharpBox2d.Shared
             if (desiredWidth < windowSize.Width)
             {
                 application.ContentSearchPaths.Add("hd");
-                CCSprite.DefaultTexelToContentSizeRatio = 2.0f;
             }
             else
             {
                 application.ContentSearchPaths.Add("ld");
-                CCSprite.DefaultTexelToContentSizeRatio = 1.0f;
             }
+
+            CCSprite.DefaultTexelToContentSizeRatio = 1.0f;
 
             var scene = new CCScene(mainWindow);
             var introLayer = new IntroLayer();
 
             mainWindow.DisplayStats = true;
+
+            #if ANDROID
+            var display = Game.Activity.WindowManager.DefaultDisplay;
+            var metrics = new Android.Util.DisplayMetrics();
+            display.GetMetrics(metrics);
+            mainWindow.StatsScale = (int)metrics.ScaledDensity ;
+            #endif
+
             scene.AddChild(introLayer);
 
             mainWindow.RunWithScene(scene);
