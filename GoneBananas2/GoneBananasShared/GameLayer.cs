@@ -334,10 +334,17 @@ namespace GoneBananas
 
 		void InitExplosionParticles ()
 		{
-			//BUG: the texture used in the particle system doesn't look correct on Android (probably due to premultiplied setting)
+			
 			explosion = new CCParticleSystemQuad ("ExplodingBanana.plist");
 			explosion.AutoRemoveOnFinish = false;
-			explosion.StopSystem ();
+            explosion.BlendFunc = CCBlendFunc.Opaque;
+#if ANDROID
+            //The texture used in the particle system doesn't look correct on Android (probably due to premultiplied setting)
+            // In the ExplodingBanana.plist configuration the Blending Funcion is set for Premulitplied Alpha so
+            // we will overrid it for Android.
+            explosion.BlendFunc = CCBlendFunc.NonPremultiplied;
+#endif
+            explosion.StopSystem ();
 			explosion.Visible = false;
 			AddChild (explosion);
 		}

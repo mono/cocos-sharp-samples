@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,26 +38,15 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
+    <DefineConstants>ANDROID</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="CocosSharp">
-      <HintPath>..\packages\CocosSharp.Android.1.4.0.0\lib\MonoAndroid10\CocosSharp.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\packages\CocosSharp.Android.1.4.0.0\lib\MonoAndroid10\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Lidgren.Network">
-      <HintPath>..\packages\CocosSharp.Android.1.4.0.0\lib\MonoAndroid10\Lidgren.Network.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\packages\CocosSharp.Android.1.4.0.0\lib\MonoAndroid10\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="box2d">
-      <HintPath>..\packages\CocosSharp.Android.1.4.0.0\lib\MonoAndroid10\box2d.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -69,7 +58,6 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -82,15 +70,7 @@
   <Import Project="..\GoneBananasShared\GoneBananasShared.projitems" Label="Shared" Condition="Exists('..\GoneBananasShared\GoneBananasShared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Assets\Content\" />
-    <Folder Include="Assets\Content\sounds\" />
-    <Folder Include="Assets\Content\images\" />
-    <Folder Include="Assets\Content\images\animations\" />
-    <Folder Include="Resources\drawable-mdpi\" />
-    <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Resources\drawable-xxhdpi\" />
-    <Folder Include="Resources\drawable-hdpi\" />
-    <Folder Include="Assets\Content\particles\" />
+    <Content Include="MonoGame.Framework.Net.Android.csproj" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\sounds\backgroundMusic.mp3" />
@@ -101,5 +81,23 @@
     <AndroidAsset Include="Assets\Content\images\balls.png" />
     <AndroidAsset Include="Assets\Content\images\cloud.xnb" />
     <AndroidAsset Include="Assets\Content\particles\ExplodingBanana.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CocosSharp\box2d\box2d.Android.csproj">
+      <Project>{b81b6701-7a78-4846-bf6f-04e0591f0f38}</Project>
+      <Name>box2d.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CocosSharp\MonoGame\MonoGame.Framework\MonoGame.Framework.Android.csproj">
+      <Project>{ba9476cf-99ba-4d03-92f2-73d2c5e58883}</Project>
+      <Name>MonoGame.Framework.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CocosSharp\MonoGame\ThirdParty\Lidgren.Network\Lidgren.Network.Android.csproj">
+      <Project>{565129e0-4ee5-4f6f-b403-c3484c9740be}</Project>
+      <Name>Lidgren.Network.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CocosSharp\src\CocosSharp.Android.csproj">
+      <Project>{64725c5b-a1bc-4974-8538-a1158babf572}</Project>
+      <Name>CocosSharp.Android</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

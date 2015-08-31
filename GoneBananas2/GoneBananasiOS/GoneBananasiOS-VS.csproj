@@ -84,6 +84,18 @@
     <AssemblyName>GoneBananas</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="box2d, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CocosSharp.PCL.Shared.1.5.0.0\lib\portable-net45+win+wpa81+wp80\box2d.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CocosSharp, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CocosSharp.PCL.Shared.1.5.0.0\lib\portable-net45+win+wpa81+wp80\CocosSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CocosSharp.PCL.Shared.1.5.0.0\lib\portable-net45+win+wpa81+wp80\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -95,6 +107,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <Compile Include="Main.cs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
