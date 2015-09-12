@@ -1,43 +1,45 @@
 ﻿using System;
 using CocosSharp;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DynamicTextures
 {
     public class SpriteWithColor : CCSprite
     {
 
-        public SpriteWithColor(CCColor4B bgColor, float textureWidth, float textureHeight) 
-            : this(bgColor, new CCSize(textureWidth, textureHeight))
+        public SpriteWithColor(CCColor4B bgColor, float contentWidth, float contentHeight) 
+            : this(bgColor, new CCSize(contentWidth, contentHeight))
 
         {
-
         }
 
-        public SpriteWithColor(CCColor4B bgColor, CCSize textureSizeInPixels) : base ()
+        public SpriteWithColor(CCColor4B bgColor, CCSize contentSize) : base ()
         {
-            // 1: Create new CCRenderTexture
-            CCRenderTexture rt = new CCRenderTexture(textureSizeInPixels, textureSizeInPixels);
 
-            // 2: Call CCRenderTexture:begin
+            CCRenderTexture rt = new CCRenderTexture(contentSize, contentSize);
+
             rt.BeginWithClear(bgColor);
 
-            // 3: Draw into the texture
-            // You'll add this later
-            GenerateGradient(textureSizeInPixels);
+            GenerateGradient(contentSize);
 
-
+            // Load our sprite. By default the content size of this sprite may not match our desired contentsize
+            // So let's change it
             var noise = new CCSprite("images/Noise.png");
+            noise.ContentSize = contentSize;
+
+            // Now the texture may be scaled to fit the content size so let's make sure that we're wrapping the texture instead
+            noise.Texture.SamplerState = SamplerState.LinearWrap;
+
             noise.AnchorPoint = CCPoint.AnchorLowerLeft;
             noise.Position = CCPoint.Zero;
             noise.BlendFunc = new CCBlendFunc(CCOGLES.GL_DST_COLOR, CCOGLES.GL_ZERO);
-            noise.Texture.SamplerState = Microsoft.Xna.Framework.Graphics.SamplerState.LinearWrap;
-            noise.TextureRectInPixels = new CCRect(0, 0, textureSizeInPixels.Width, textureSizeInPixels.Height);
             noise.Visit();
 
-            // 4: Call CCRenderTexture:end
             rt.End();
 
-            this.Texture = rt.Texture;
+            Texture = rt.Texture;
+            ContentSize = contentSize;
+            Texture.SamplerState = SamplerState.LinearWrap;
 
         }
 

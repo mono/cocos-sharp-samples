@@ -9,7 +9,7 @@ namespace DynamicTextures
         public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
         {
 
-            CCLog.CustomCCLog = new DynamicTexturesLogger();
+            //CCLog.CustomCCLog = new DynamicTexturesLogger();
 
             application.PreferMultiSampling = true;
 

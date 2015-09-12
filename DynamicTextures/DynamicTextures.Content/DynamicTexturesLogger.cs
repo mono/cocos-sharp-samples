@@ -3,7 +3,7 @@ using CocosSharp;
 
 namespace DynamicTextures
 {
-    public class DynamicTexturesLogger : ICCLog
+    public class DynamicTexturesLogger
     {
         public DynamicTexturesLogger()
         {

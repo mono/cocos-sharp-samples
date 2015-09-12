@@ -113,10 +113,10 @@ namespace DynamicTextures
 
             // MUST be power of 2 in order to create a continue effect.
             // eg: 32x64, 512x128, 256x1024, 64x64, etc..
-            var textureWidth = bounds.Size.Width.NextPOT();
-            var textureHeight = bounds.Size.Height.NextPOT();
+            var contentWidth = bounds.Size.Width.NextPOT();
+            var contentHeight = bounds.Size.Height.NextPOT();
 
-            backGround = new SpriteWithColor(RandomBrightColor(), textureWidth, textureHeight);
+            backGround = new SpriteWithColor(RandomBrightColor(), contentWidth, contentHeight);
 
             backGround.AnchorPoint = CCPoint.AnchorLowerLeft;
             backGround.Position = CCPoint.Zero;
@@ -153,7 +153,7 @@ namespace DynamicTextures
             var textureHeight = bounds.Size.Height.NextPOT();
 
             backGround.Texture.SamplerState = Microsoft.Xna.Framework.Graphics.SamplerState.LinearWrap;
-            backGround.TextureRectInPixels = new CCRect(0,0,textureWidth,textureHeight);
+            backGround.ContentSize = new CCSize(textureWidth,textureHeight);
 
             AddChild(backGround, -1);  
 
