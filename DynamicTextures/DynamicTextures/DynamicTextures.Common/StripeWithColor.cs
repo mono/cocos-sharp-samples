@@ -1,6 +1,5 @@
 ﻿using System;
 using CocosSharp;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DynamicTextures
 {
@@ -13,17 +12,17 @@ namespace DynamicTextures
 
         }
 
-        public StripeWithColor(CCColor4B c1, CCColor4B c2, CCSize contentSize, int nStripes) : base ()
+        public StripeWithColor(CCColor4B c1, CCColor4B c2, CCSize textureSizeInPixels, int nStripes) : base ()
         {
             // 1: Create new CCRenderTexture
-            CCRenderTexture rt = new CCRenderTexture(contentSize, contentSize);
+            CCRenderTexture rt = new CCRenderTexture(textureSizeInPixels, textureSizeInPixels);
 
             // 2: Call CCRenderTexture:begin
             rt.BeginWithClear(c1);
 
             // 3: Draw into the texture
             // You'll add this later
-            GenerateStripes(contentSize, c2, nStripes);
+            GenerateStripes(textureSizeInPixels, c2, nStripes);
 
             var noise = new CCSprite("images/Noise.png");
             noise.AnchorPoint = CCPoint.AnchorLowerLeft;
@@ -33,9 +32,7 @@ namespace DynamicTextures
             // 4: Call CCRenderTexture:end
             rt.End();
 
-            Texture = rt.Texture;
-            Texture.SamplerState = SamplerState.LinearWrap;
-            ContentSize = contentSize;
+            this.Texture = rt.Texture;
         }
 
         /*

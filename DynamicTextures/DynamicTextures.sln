@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicTextures.iOS", "Dyna
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicTextures.Android", "DynamicTextures\DynamicTextures.Android\DynamicTextures.Android.csproj", "{28B47686-0010-4690-998D-9D6489D6A9BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicTextures.Common", "DynamicTextures\DynamicTextures.Common\DynamicTextures.Common.csproj", "{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}"
+EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DynamicTextures.Content", "DynamicTextures.Content\DynamicTextures.Content.shproj", "{F5AD393B-3D2C-4407-A03C-7BF4351EC1EC}"
 EndProject
 Global
@@ -51,18 +53,21 @@ Global
 		{87EE4729-9E6B-4145-8693-A4602717CBFC}.Release|iPhone.Build.0 = Release|iPhone
 		{87EE4729-9E6B-4145-8693-A4602717CBFC}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{87EE4729-9E6B-4145-8693-A4602717CBFC}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		Policies = $0
-		$0.TextStylePolicy = $1
-		$1.FileWidth = 120
-		$1.inheritsSet = VisualStudio
-		$1.inheritsScope = text/plain
-		$1.scope = text/x-csharp
-		$0.CSharpFormattingPolicy = $2
-		$2.AfterDelegateDeclarationParameterComma = True
-		$2.inheritsSet = Mono
-		$2.inheritsScope = text/x-csharp
-		$2.scope = text/x-csharp
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Release|iPhone.Build.0 = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{EB0109D5-693F-44A5-B6A5-FF7DD7B465EF}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -13,12 +13,4 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\images\Noise-hd.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\images\Noise-iphone5hd.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)StripeWithColor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SpriteWithColor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameLayer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameAppDelegate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DynamicTexturesLogger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities.cs" />
-  </ItemGroup>
 </Project>

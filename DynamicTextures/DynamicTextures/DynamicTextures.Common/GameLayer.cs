@@ -15,18 +15,18 @@ namespace DynamicTextures
         public GameLayer()
         {
             // Select our Background generation
-            genBackground = new Action(() =>
-                {
-                    Unschedule();
-                    GradientBackground();
-                    Schedule();
-                });
-//            genBackground = new Action(() => 
+//            genBackground = new Action(() =>
 //                {
 //                    Unschedule();
-//                    StripedBackground();
+//                    GradientBackground();
 //                    Schedule();
 //                });
+            genBackground = new Action(() => 
+                {
+                    Unschedule();
+                    StripedBackground();
+                    Schedule();
+                });
 
             // Make any renderable node objects (e.g. sprites) children of this layer
 
@@ -113,10 +113,10 @@ namespace DynamicTextures
 
             // MUST be power of 2 in order to create a continue effect.
             // eg: 32x64, 512x128, 256x1024, 64x64, etc..
-            var contentWidth = bounds.Size.Width.NextPOT();
-            var contentHeight = bounds.Size.Height.NextPOT();
+            var textureWidth = bounds.Size.Width.NextPOT();
+            var textureHeight = bounds.Size.Height.NextPOT();
 
-            backGround = new SpriteWithColor(RandomBrightColor(), contentWidth, contentHeight);
+            backGround = new SpriteWithColor(RandomBrightColor(), textureWidth, textureHeight);
 
             backGround.AnchorPoint = CCPoint.AnchorLowerLeft;
             backGround.Position = CCPoint.Zero;
@@ -153,7 +153,10 @@ namespace DynamicTextures
             var textureHeight = bounds.Size.Height.NextPOT();
 
             backGround.Texture.SamplerState = Microsoft.Xna.Framework.Graphics.SamplerState.LinearWrap;
-            backGround.ContentSize = new CCSize(textureWidth,textureHeight);
+
+            // To get the linear wrap to work correctly we have to set the TextureRectInPixels as well as ContentSize
+            backGround.TextureRectInPixels = new CCRect(0,0,textureWidth,textureHeight);
+            backGround.ContentSize = backGround.TextureRectInPixels.Size;
 
             AddChild(backGround, -1);  
 

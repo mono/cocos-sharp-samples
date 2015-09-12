@@ -9,8 +9,8 @@ namespace DynamicTextures
         public override void ApplicationDidFinishLaunching(CCApplication application, CCWindow mainWindow)
         {
 
-            //CCLog.CustomCCLog = new DynamicTexturesLogger();
-
+            CCLog.Logger = System.Diagnostics.Debug.WriteLine;
+                
             application.PreferMultiSampling = true;
 
             application.ContentRootDirectory = "Content";
