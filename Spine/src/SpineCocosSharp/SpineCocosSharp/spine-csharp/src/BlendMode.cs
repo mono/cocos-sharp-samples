@@ -29,24 +29,8 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-using System;
-
 namespace Spine {
-	public class EventData {
-		internal String name;
-
-		public String Name { get { return name; } }
-		public int Int { get; set; }
-		public float Float { get; set; }
-		public String String { get; set; }
-
-		public EventData (String name) {
-			if (name == null) throw new ArgumentNullException("name cannot be null.");
-			this.name = name;
-		}
-
-		override public String ToString () {
-			return Name;
-		}
+	public enum BlendMode {
+		normal, additive, multiply, screen
 	}
 }
