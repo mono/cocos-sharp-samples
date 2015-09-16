@@ -6,7 +6,7 @@ Port of the excellent LilyPath library by Justin Aquadro to CocosSharp.  DrawBat
 
 ** Note ** This was a quick port, changing as little as possible of the Geometry generation code, so is not as efficient as it could be by implementing the Geometry Insances of the CCGeometryNode. 
 
-The port is offered as is with no guarantee that it works correctly or will be supported.  It is only meant as an example on how to use and extend CCGeometryNode.  Please submit Pull Requests for any added or requested features or fixes to the LilyPath source code itself.
+The port is offered as is with no guarantee that it works correctly or will be supported.  It is only meant as an example on how to use and extend CCGeometryNode.  Please submit Pull Requests for any added or requested features or fixes to the [Ported LilyPath source](https://github.com/mono/cocos-sharp-samples/tree/master/CSLilyPath/LilyPath) code itself.
 
 Port Features
 =============
