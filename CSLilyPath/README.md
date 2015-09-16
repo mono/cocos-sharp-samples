@@ -74,3 +74,9 @@ drawBatch.DrawClosedArc(new Pen(Color.Green, 15), origin, 150,
 
 Source code for the full image and other examples can be found in the included test project, [LilyPathDemo](https://github.com/jaquadro/LilyPath/tree/master/LilyPathDemo).
 
+Demo
+====
+Included is a [CocosSharp demo project](https://github.com/mono/cocos-sharp-samples/tree/master/CSLilyPath/CSLilyPath).
+
+To see the [different demos](https://github.com/mono/cocos-sharp-samples/tree/master/CSLilyPath/CSLilyPath/CSLilyPath/Demos) replace the [testLayer creation](https://github.com/mono/cocos-sharp-samples/blob/master/CSLilyPath/CSLilyPath/CSLilyPath/AppDelegate.cs#L48) with the specific demo you would like to see.
+
