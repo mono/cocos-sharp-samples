@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{1C763A55-45FB-41EB-8C92-BDDFC0627309}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CSLilyPath</RootNamespace>
+    <AssemblyName>CSLilyPath</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Demos\GridShape.cs" />
+    <Compile Include="Demos\TextureFill.cs" />
+    <Compile Include="Demos\WaterLilly.cs" />
+    <Compile Include="Demos\QuadraticBezier.cs" />
+    <Compile Include="Demos\PrimitiveShapes.cs" />
+    <Compile Include="Demos\PrimitiveEllipses.cs" />
+    <Compile Include="Demos\PrimitiveClosedArcs.cs" />
+    <Compile Include="Demos\PrimitiveArcs2.cs" />
+    <Compile Include="Demos\PrimitiveArcs1.cs" />
+    <Compile Include="Demos\PenAlignmentTest.cs" />
+    <Compile Include="Demos\OutlineShapes.cs" />
+    <Compile Include="Demos\Mystify.cs" />
+    <Compile Include="Demos\LineCaps.cs" />
+    <Compile Include="Demos\GraphicsPathOutline.cs" />
+    <Compile Include="Demos\GraphicsPathTest.cs" />
+    <Compile Include="Demos\GradientPensAlignment.cs" />
+    <Compile Include="Demos\GradientPens.cs" />
+    <Compile Include="Demos\FilledShapes.cs" />
+    <Compile Include="Demos\FilledEllipses.cs" />
+    <Compile Include="Demos\FilledArcs.cs" />
+    <Compile Include="Demos\Ellipses.cs" />
+    <Compile Include="Demos\CubicBezier.cs" />
+    <Compile Include="Demos\ClosedArcs.cs" />
+    <Compile Include="Demos\Arcs2.cs" />
+    <Compile Include="Demos\Arcs1.cs" />
+    <Compile Include="Demos\LilyPathLogo.cs" />
+    <Compile Include="TestLayer.cs" />
+    <Compile Include="IntroLayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="box2d, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\box2d.dll</HintPath>
+    </Reference>
+    <Reference Include="CocosSharp, Version=1.6.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\CocosSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LilyPath\LilyPath.csproj">
+      <Project>{5B297072-9E1D-4BA7-8643-5FAD71F24FBA}</Project>
+      <Name>LilyPath</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+</Project>

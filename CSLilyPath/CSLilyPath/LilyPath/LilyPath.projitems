@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a95d10cd-c01c-454d-a773-f164f5e7b26a</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>LilyPath</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Brush.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DrawBatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DrawCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LineCapInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PathBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SolidColorBrush.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextureBrush.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Triangulator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\Buffer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\PenWorkspace.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\Pool.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\Pools.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utility\ZeroList.cs" />
+  </ItemGroup>
+</Project>
