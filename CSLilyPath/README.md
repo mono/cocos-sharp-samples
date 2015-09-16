@@ -2,7 +2,7 @@ Purpose
 =======
 This sample shows how to use CCGeometryNode as a base to create your own geometry routines.  
 
-Port of the excellent LilyPath library by Justin Aquadro to CocosSharp.  DrawBatch extends CCGeometryNode.
+Port of the excellent [LilyPath library](https://github.com/jaquadro/LilyPath) by [Justin Aquadro](http://jaquadro.com/2013/08/lilypath/) to CocosSharp.  DrawBatch extends CCGeometryNode.
 
 ** Note ** This was a quick port, changing as little as possible of the Geometry generation code, so is not as efficient as it could be by implementing the Geometry Insances of the CCGeometryNode. 
 
