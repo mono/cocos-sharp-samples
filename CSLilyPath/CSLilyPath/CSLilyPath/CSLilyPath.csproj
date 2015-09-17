@@ -65,21 +65,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="box2d, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
-      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\box2d.dll</HintPath>
-    </Reference>
-    <Reference Include="CocosSharp, Version=1.6.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
-      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\CocosSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
-      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\MonoGame.Framework.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\LilyPath\LilyPath.csproj">
       <Project>{5B297072-9E1D-4BA7-8643-5FAD71F24FBA}</Project>
       <Name>LilyPath</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="box2d, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\box2d.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CocosSharp, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\CocosSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\portable-net45+win+wpa81+wp81\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

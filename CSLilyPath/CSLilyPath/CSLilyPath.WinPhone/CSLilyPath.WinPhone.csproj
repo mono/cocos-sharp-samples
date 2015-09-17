@@ -133,6 +133,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CSLilyPath\CSLilyPath.csproj">
+      <Project>{1c763a55-45fb-41eb-8c92-bddfc0627309}</Project>
+      <Name>CSLilyPath</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="box2d, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CocosSharp.PCL.Shared.1.6.0.0\lib\wpa81\box2d.dll</HintPath>
       <Private>True</Private>
@@ -176,12 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CSLilyPath\CSLilyPath.csproj">
-      <Project>{1c763a55-45fb-41eb-8c92-bddfc0627309}</Project>
-      <Name>CSLilyPath</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
