@@ -67,6 +67,11 @@
     <Compile Include="spine-csharp\src\Skin.cs" />
     <Compile Include="spine-csharp\src\Slot.cs" />
     <Compile Include="spine-csharp\src\SlotData.cs" />
+    <Compile Include="spine-csharp\src\BlendMode.cs" />
+    <Compile Include="spine-csharp\src\ExposedList.cs" />
+    <Compile Include="spine-csharp\src\IkConstraint.cs" />
+    <Compile Include="spine-csharp\src\IkConstraintData.cs" />
+    <Compile Include="spine-csharp\src\SkeletonBinary.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
