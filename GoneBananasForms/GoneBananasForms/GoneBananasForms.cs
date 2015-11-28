@@ -14,7 +14,8 @@ namespace GoneBananasForms
 
             var mainPage = new MasterDetailPage () {
                 Detail = navPage,
-                Master = new GameSettingsPage (gamePage)
+                Master = new GameSettingsPage (gamePage),
+                MasterBehavior = MasterBehavior.Popover
             };
             // The root page of your application
             MainPage = mainPage;
