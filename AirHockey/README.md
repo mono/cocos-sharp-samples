@@ -1,4 +1,5 @@
 Ported to CocosSharp by Jose Medrano.
+Updated sample by Rami Tabbara
 
 The examples come from the book : Cocos2d-X by Example Beginner's Guide
 
